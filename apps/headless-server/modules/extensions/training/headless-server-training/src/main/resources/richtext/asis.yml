@@ -1,0 +1,23 @@
+#!import file=includes/elements.yml
+#!import file=includes/classes.yml
+#!import file=includes/attributes.yml
+
+name: asis
+
+contexts:
+  - &root !RootContext
+    name: root
+    defaultHandler:
+      !Handler
+      outputHandler:
+        !ElementWriter
+        writeElement: true
+        writeCharacters: true
+        attributeTransformers:
+          - !PassStyles {styles: *headline_styles}
+          - !PassStyles {styles: *inline_styles}
+          - !PassStyles {styles: *align_styles}
+          - !PassStyles {styles: *float_styles}
+
+
+initialContext: *root

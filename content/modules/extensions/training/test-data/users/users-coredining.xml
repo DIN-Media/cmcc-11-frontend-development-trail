@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<repository xmlns="http://www.coremedia.com/2005/contentserver/userrepository">
+  <group name="developer" contentgroup="true" livegroup="false" id="developer">
+    <members>
+      <user id="dave-01" name="Dave 01" home="/Home/Dave 01"/>
+      <user id="dave-02" name="Dave 02" home="/Home/Dave 02"/>
+      <user id="dave-03" name="Dave 03" home="/Home/Dave 03"/>
+      <user id="dave-04" name="Dave 04" home="/Home/Dave 04"/>
+      <user id="dave-05" name="Dave 05" home="/Home/Dave 05"/>
+      <user id="dave-06" name="Dave 06" home="/Home/Dave 06"/>
+      <user id="dave-07" name="Dave 07" home="/Home/Dave 07"/>
+      <user id="dave-08" name="Dave 08" home="/Home/Dave 08"/>
+      <user id="dave-09" name="Dave 09" home="/Home/Dave 09"/>
+      <user id="dave-10" name="Dave 10" home="/Home/Dave 10"/>
+	  <user id="dave-11" name="Dave 11" home="/Home/Dave 11"/>
+      <user id="dave-12" name="Dave 12" home="/Home/Dave 12"/>
+      <user id="dave-13" name="Dave 13" home="/Home/Dave 13"/>
+      <user id="dave-14" name="Dave 14" home="/Home/Dave 14"/>
+      <user id="dave-15" name="Dave 15" home="/Home/Dave 15"/>
+      <user id="dave-16" name="Dave 16" home="/Home/Dave 16"/>
+      <user id="dave-17" name="Dave 17" home="/Home/Dave 17"/>
+      <user id="dave-18" name="Dave 18" home="/Home/Dave 18"/>
+      <user id="dave-19" name="Dave 19" home="/Home/Dave 19"/>
+      <user id="dave-20" name="Dave 20" home="/Home/Dave 20"/>
+    </members>
+  </group>
+</repository>

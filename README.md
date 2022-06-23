@@ -1,4 +1,23 @@
-# CoreMedia Blueprint
+# CoreMedia Enablement Training Workspace
+
+## Blueprint Version
+
+This training workspace is based on version **CMCC-11-2310.1 (AEP8)**.
+
+For more information see the [Distribution Overview](https://releases.coremedia.com/cmcc-11/overview/distributions/2310.1).
+
+## Required Software
+
+Make sure to install the following software in the given versions:
+
+* Java SDK 11 (minimun version: 11.0.13)
+* Apache Maven 3.8.6
+* Sencha Command 7.2.0.84 (backward compatible)
+* Node.js 18.x (LTS)
+* PNPM 8.1+
+
+For more information see [CMCC-11 Supported Environment](https://releases.coremedia.com/cmcc-11/artifacts/CMCC%2011%20-%20Supported%20Environments.pdf).
+
 
 ## Documentation
 

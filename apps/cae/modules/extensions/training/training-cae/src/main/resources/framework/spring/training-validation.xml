@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:customize="http://www.coremedia.com/2007/coremedia-spring-beans-customization"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.coremedia.com/2007/coremedia-spring-beans-customization
+                           http://www.coremedia.com/2007/coremedia-spring-beans-customization.xsd">
+
+  <description>
+    Extensions for the validation service.
+  </description>
+
+  <!-- Bean definitions -->
+
+<bean id="customValidator" class="com.coremedia.blueprint.training.validation.CustomValidator" />
+  <!-- Customizers -->
+
+  <customize:append id="trainingContentBeanValidatorListCustomizer" bean="contentbeanValidatorList">
+    <list>
+      <ref bean="customValidator" />
+    </list>
+  </customize:append>
+
+</beans>

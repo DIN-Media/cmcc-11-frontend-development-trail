@@ -14,6 +14,7 @@
     "@coremedia-blueprint/studio-client.main.lc-asset-studio": "1.0.0-SNAPSHOT",
     "@coremedia-blueprint/studio-client.main.lc-es-studio": "1.0.0-SNAPSHOT",
     "@coremedia-blueprint/studio-client.main.lc-studio": "1.0.0-SNAPSHOT",
+    "@coremedia-blueprint/studio-client.main.training-studio": "1.0.0-SNAPSHOT",
     "@coremedia-blueprint/studio-client.main.validators-studio": "1.0.0-SNAPSHOT"
   },
   "devDependencies": {

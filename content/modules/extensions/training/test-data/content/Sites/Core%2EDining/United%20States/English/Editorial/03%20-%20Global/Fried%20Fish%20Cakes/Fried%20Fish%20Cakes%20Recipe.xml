@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMArticle folder="/Sites/Core.Dining/United States/English/Editorial/03 - Global/Fried Fish Cakes" name="Fried Fish Cakes Recipe" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master>
+</master>
+<viewtype>
+</viewtype>
+<linkedSettings>
+</linkedSettings>
+<resourceBundles2>
+</resourceBundles2>
+<segment></segment>
+<title>Thai Fish Cakes – How to Make Tod Man Pla ทอดมันปลา</title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy>
+</subjectTaxonomy>
+<locationTaxonomy>
+</locationTaxonomy>
+<contexts>
+</contexts>
+<teaserTitle>Thai Fish Cakes</teaserTitle>
+<teaserText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>This is a recipe for classic Thai fish cakes as you will find on the streets of Bangkok as well as family restaurants and rice-curry shops. The post includes tips and tricks on how to make chewy, bouncy fish cakes using ingredients you can find in the US.</p><p/></div></teaserText>
+<detailText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>This is a recipe for classic Thai fish cakes as you will find on the streets of Bangkok as well as family restaurants and rice-curry shops. The post includes tips and tricks on how to make chewy, bouncy fish cakes using ingredients you can find in the US.</p><p>Author: Leela</p><p>Recipe type: Main Dish, Entree, Meat, Appetizer</p><p>Cuisine: Thai</p><p>Serves: Makes 30 two-inch fish cakes</p><p class="p--heading-2">INGREDIENTS</p><p>1.5-lb package prepared fish paste</p><p>2 large egg whites</p><p>One 4-oz can red curry paste (I use Maesri.)</p><p>1 cup thinly-sliced (crosswise) green beans or Chinese long beans</p><p>4 tablespoon chiffonade of fresh or frozen kaffir lime leaves (roll them up like a cigar and slice thinly crosswise)</p><p>Vegetable oil for deep-frying</p><p>One recipe of easy cucumber relish (see notes)</p><p class="p--heading-2">INSTRUCTIONS</p><p>Put the fish paste in a large mixing bowl. Add the egg whites and red curry paste and stir briskly with a wooden spoon until the mixture is homogeneous, thick, and sticky (you can also use a hand-held mixer or a heavy-duty stand mixer with the paddle attachment to mix the fish paste). This should take about 30 minutes by hand or 5-8 minutes on high with a machine.</p><p>Once the paste becomes very sticky, fold in the kaffir limes leaves and sliced long beans.</p><p>Heat up vegetable oil in a small wok. You want at least 2-3 inches of oil in depth.</p><p>Get yourself a bowl of water and place it close to the fish paste bowl. Your hands need to be wet — not just moist, but wet — in order to be able to form decent fish cakes without losing your sanity. The paste is very sticky.</p><p>Once the oil is hot, form ¼ inch-thick rounds with roughly 2 inches in diameter and gently slide them into the oil.</p><p>With a pair of wooden chopsticks or tongs, move the fish cakes around to allow for even browning. Once one side is golden brown (after 30-40 seconds), flip them. It should take a total of one minute or so to cook both sides. You know your fish cakes are done when you poke them lightly with the tips of the chopsticks and feel the bouncy resistance.</p><p>At that point, transfer the fish cakes from the wok to a paper towel-lined plate. Repeat the process until all the paste is gone.</p><p>Serve the fish cakes with cucumber relish as an appetizer or a main dish with rice.</p></div></detailText>
+<pictures>
+<link href="Fried%20Fish%20Cake%20Picture.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/03%20-%20Global/Fried%20Fish%20Cakes/Fried%20Fish%20Cake%20Picture"/>
+</pictures>
+<related>
+<link href="../Pad%20Thai/Pad%20Thai%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/03%20-%20Global/Pad%20Thai/Pad%20Thai%20Recipe"/>
+<link href="../../01%20-%20Ahead/Gulab%20Jamun/Gulab%20Jamun%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/01%20-%20Ahead/Gulab%20Jamun/Gulab%20Jamun%20Recipe"/>
+</related>
+<authors>
+</authors>
+</CMArticle>

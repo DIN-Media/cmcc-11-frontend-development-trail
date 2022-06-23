@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMFolderProperties folder="/Sites/Core.Dining/United States/English/Editorial/02 - Trusted" name="_folderProperties" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master>
+</master>
+<contexts>
+<link href="Trusted%20Page.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/02%20-%20Trusted/Trusted%20Page"/>
+</contexts>
+</CMFolderProperties>

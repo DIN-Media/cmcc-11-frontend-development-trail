@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMArticle folder="/Sites/Core.Dining/United States/English/Editorial/01 - Ahead/Gulab Jamun" name="Gulab Jamun Recipe" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master>
+</master>
+<viewtype>
+</viewtype>
+<linkedSettings>
+</linkedSettings>
+<resourceBundles2>
+</resourceBundles2>
+<segment></segment>
+<title>Gulab Jamun</title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy>
+</subjectTaxonomy>
+<locationTaxonomy>
+</locationTaxonomy>
+<contexts>
+</contexts>
+<teaserTitle></teaserTitle>
+<teaserText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>Gulab Jamun is a popular indian dessert of fried dumplings in rose scented sugar syrup.</p></div></teaserText>
+<detailText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>Gulab Jamun is a popular indian dessert of fried dumplings in rose scented sugar syrup.<br/></p><p class="p--heading-2">INGREDIENTS</p><p>for the gulab jamuns:</p><p>1 cup milk powder</p><p>¼ cup all purpose flour or maida</p><p>1 tsp oil or ½ tsp ghee</p><p>a pinch of salt (optional)</p><p>a pinch of baking soda</p><p>1 to 2 tbsp yogurt</p><p>a few blanched pistachio or almond slices for garnishing</p><p>for the sugar syrup:</p><p>2 cups water</p><p>1.5 cups sugar</p><p>3-4 green cardamoms, husked &amp; crushed or powdered</p><p>a pinch of saffron/kesar (optional)</p><p>1 tsp rose water (optional)</p><p class="p--heading-2">INSTRUCTIONS</p><p>preparing the sugar solution:</p><p>mix water, sugar, cardamom and saffron.</p><p>keep this sugar solution on fire and cook till you get a syrup consistency.</p><p>there should be no thread formation in the sugar solution.</p><p>stir in the rose water and keep aside.</p><p>preparing the jamuns:</p><p>first mix the milk powder, all purpose flour, soda in a bowl.</p><p>add oil or ghee and just 1 tbsp of yogurt.</p><p>mix and keep on adding little of the yogurt to get a soft sticky mixture.</p><p>the dough should not be crumbly or dry. if it is then add some yogurt.</p><p>make smooth small balls from the dough.</p><p>heat the oil and the reduce the flame to low.</p><p>add the balls and fry them stirring often to get even color.</p><p>when they become golden, remove from a slotted spoon and add them to the sugar syrup.</p><p>let them soak in the sugar syrup for atleast 1-2 hours.</p><p>gulab jamuns can be served warm or cold. if they are at room temperature, then warm in the microwave and serve gulab jamun topped with sugar syrup.</p></div></detailText>
+<pictures>
+<link href="Gulab%20Jamun%20Picture.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/01%20-%20Ahead/Gulab%20Jamun/Gulab%20Jamun%20Picture"/>
+</pictures>
+<related>
+<link href="../Pho%20Ga/Pho%20Ga%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/01%20-%20Ahead/Pho%20Ga/Pho%20Ga%20Recipe"/>
+<link href="../../03%20-%20Global/Pad%20Thai/Pad%20Thai%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/03%20-%20Global/Pad%20Thai/Pad%20Thai%20Recipe"/>
+</related>
+<authors>
+</authors>
+</CMArticle>

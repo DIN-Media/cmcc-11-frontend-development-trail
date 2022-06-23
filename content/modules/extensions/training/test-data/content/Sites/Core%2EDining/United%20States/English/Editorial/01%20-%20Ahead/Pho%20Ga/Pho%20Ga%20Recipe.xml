@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMArticle folder="/Sites/Core.Dining/United States/English/Editorial/01 - Ahead/Pho Ga" name="Pho Ga Recipe" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master>
+</master>
+<viewtype>
+</viewtype>
+<localSettings>
+<Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
+</Struct>
+</localSettings>
+<linkedSettings>
+</linkedSettings>
+<resourceBundles2>
+</resourceBundles2>
+<segment></segment>
+<title>Phở Gà - Vietnamese Chicken Noodle Soup</title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy>
+</subjectTaxonomy>
+<locationTaxonomy>
+</locationTaxonomy>
+<contexts>
+</contexts>
+<teaserTitle>Phở Gà - Vietnamese Chicken Noodle Soup</teaserTitle>
+<teaserText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>You can judge how good a Phở soup is by how much concentrated flavor is packed in the broth while still retaining a clean, uncloudy, clear broth. I like my Pho without Sriracha hot sauce or Hoisin sauce....I really enjoy the purity of the chicken broth without anything to hide its flavor and aroma.</p></div></teaserText>
+<detailText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>You can judge how good a Pho soup is by how much concentrated flavor is packed in the broth while still retaining a clean, uncloudy, clear broth. I like my Pho without Sriracha hot sauce or Hoisin sauce....I really enjoy the purity of the chicken broth without anything to hide its flavor and aroma.</p><p>There are 2 very important steps to a clear but intense broth - 1) parboiling the chicken to get rid of the impurities 2) charring the ginger and onion for a naturally sweet, robust flavor.</p><p>A note on fish sauce - I prefer the Three Crabs brand. Choose a fish sauce light in color...it should look like brewed tea. Anything darker than that (looking like Coca Cola) is inferior quality. Three Crabs fish sauce contains gluten, please check labels if you are making GF substitutions.</p><p class="p--heading-2">INGREDIENTS</p><p>1 whole organic chicken (4-5lbs)</p><p>1 whole onion, unpeeled and cut in half</p><p>3-inch chunk of ginger, unpeeled(A) Broth spices</p><p>2 tbl whole coriander seeds</p><p>4 whole cloves</p><p>2 whole star anise</p><p>2 tbl sugar (or rock sugar)</p><p>2 tbl fish sauce</p><p>small bunch of cilantro stems only, tied in bunch with twine(B) Accompaniments at table</p><p>1 lb dried rice noodles (about 1/4" wide)</p><p>2 cups bean sprouts, washed &amp; tails pinched off</p><p>cilantro tops - leaves and tender stems</p><p>1/2 cup shaved red onions</p><p>1/2 lime, cut into 4 wedges</p><p>Sriracha hot sauce</p><p>Hoisin sauce</p><p>sliced chili</p><p class="p--heading-2">INSTRUCTIONS</p><p>Place ginger and onion on a small baking sheet. The top of the onion should be about 4" from the oven's heating element. Set to broil on high for 15 minutes. Turn the onion and ginger occasionally, to get an even char. The skin should get dark and the onion/ginger should get soft. After cooling, rub to get the charred skin off the onion and use a butter knife to scrape the skin off the ginger. Slice ginger into thick slices.</p><p>In a large stockpot, fill with water and boil. With a sharp cleaver, carve the chicken breast meat off and reserve. With the rest of chicken whacking hard through the bones to get sections about 3" big. The more bone that is exposed, the more marrow that gets in the broth (translation: rich, flavorful). You can even whack several places along the bone just to expose more marrow. When the water boils, add chicken sections (not breast) and boil on high for 5 minutes. You'll see lots of foam and "stuff' come up to the surface. Drain, rinse your chicken of the scum and wash your pot thoroughly. Refill with about 4 quarts of clean, cold water.</p><p>Add chicken, chicken breast meat, onion, ginger and all of (A) in the pot and cover. Turn heat to high - let it come to boil, then immediately turn heat to low. Prop lid up so that steam can escape. After 15 minutes, remove the chicken breasts, shred with your fingers when cooled and set aside (you'll serve shredded chicken breast with the finished soup). With a large spoon, skim the surface of any impurities in the broth. Skimming every 20 minutes ensures a clear broth. Simmer a total of 1-1/2 hours. Taste and adjust seasoning with more fish sauce and or sugar.</p><p>Strain the broth, discard solids. Prepare noodles as per directions on package. Ladle broth, add shredded chicken breast and soft noodles in each bowl. Have (B) ingredients set at table for each person to add to their bowl.</p></div></detailText>
+<pictures>
+<link href="Pho%20Ga%20Picture.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/01%20-%20Ahead/Pho%20Ga/Pho%20Ga%20Picture"/>
+</pictures>
+<related>
+<link href="../Gulab%20Jamun/Gulab%20Jamun%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/01%20-%20Ahead/Gulab%20Jamun/Gulab%20Jamun%20Recipe"/>
+<link href="../../02%20-%20Trusted/Fresh%20Vietnamese%20Springrolls/Fresh%20Vietnamese%20Springrolls%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/02%20-%20Trusted/Fresh%20Vietnamese%20Springrolls/Fresh%20Vietnamese%20Springrolls%20Recipe"/>
+</related>
+<authors>
+</authors>
+</CMArticle>

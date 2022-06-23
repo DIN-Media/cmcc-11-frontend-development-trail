@@ -1,0 +1,28 @@
+# ---------------------------------------------------
+# Headless Server Training Extension - GraphQL Schema
+# ---------------------------------------------------
+
+extend type Query {
+  training: TrainingRoot!
+}
+
+type TrainingRoot {
+  tutorials: [CMVideoTutorial]
+  tutorial(id: String!): CMVideoTutorial @fetch(from: "getTutorial(#id)")
+}
+
+interface CMVideoTutorial @inherit(from: ["CMArticle"]) {
+  tutorialVideos: [CMVideo]
+  tutorialVideo: CMVideo
+  copyright: String
+  duration: String
+  productionInfo: RichText
+}
+
+type CMVideoTutorialImpl implements CMVideoTutorial @inherit(from: ["CMArticleImpl"]) {
+  tutorialVideos: [CMVideo] @fetch(from: "@genericLinkListAdapter.to(#root, 'video').list()")
+  tutorialVideo: CMVideo @fetch(from: "@genericLinkListAdapter.to(#root, 'video').first()")
+  copyright: String
+  duration: String @fetch(from: "'' + duration + ' min'")
+  productionInfo: RichText
+}

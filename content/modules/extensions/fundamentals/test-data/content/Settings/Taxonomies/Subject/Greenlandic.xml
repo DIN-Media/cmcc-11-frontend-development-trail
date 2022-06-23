@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMTaxonomy folder="/Settings/Taxonomies/Subject" name="Greenlandic" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<locale></locale>
+<master/>
+<viewtype/>
+<linkedSettings/>
+<resourceBundles2/>
+<segment></segment>
+<title></title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy/>
+<locationTaxonomy/>
+<contexts/>
+<teaserTitle></teaserTitle>
+<pictures/>
+<related/>
+<value>Greenlandic</value>
+<children/>
+<externalReference></externalReference>
+</CMTaxonomy>

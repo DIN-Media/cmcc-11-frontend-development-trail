@@ -15,6 +15,7 @@
     <module>catalog</module>
     <module>ec-augmentation</module>
     <module>p13n</module>
+    <module>training</module>
   </modules>
 
 </project>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMCollection folder="/Sites/Core.Dining/United States/English/Editorial/00 - Home" name="Secondary Homepage Collection" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master>
+</master>
+<viewtype>
+<link href="../../Options/Viewtypes/CMChannel/four-column.xml" path="/Sites/Core%2EDining/United%20States/English/Options/Viewtypes/CMChannel/four-column"/>
+</viewtype>
+<linkedSettings>
+</linkedSettings>
+<resourceBundles2>
+</resourceBundles2>
+<segment></segment>
+<title></title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy>
+</subjectTaxonomy>
+<locationTaxonomy>
+</locationTaxonomy>
+<contexts>
+</contexts>
+<teaserTitle>Secondary Home Page Collection</teaserTitle>
+<pictures>
+</pictures>
+<related>
+</related>
+<authors>
+</authors>
+<items>
+<link href="../01%20-%20Ahead/Gulab%20Jamun/Gulab%20Jamun%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/01%20-%20Ahead/Gulab%20Jamun/Gulab%20Jamun%20Recipe"/>
+<link href="../03%20-%20Global/Pad%20Thai/Pad%20Thai%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/03%20-%20Global/Pad%20Thai/Pad%20Thai%20Recipe"/>
+<link href="../01%20-%20Ahead/Pho%20Ga/Pho%20Ga%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/01%20-%20Ahead/Pho%20Ga/Pho%20Ga%20Recipe"/>
+<link href="../02%20-%20Trusted/Thai%20Stir%20Fried%20Noodles/Thai%20Stir%20Fried%20Noodles%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/02%20-%20Trusted/Thai%20Stir%20Fried%20Noodles/Thai%20Stir%20Fried%20Noodles%20Recipe"/>
+</items>
+</CMCollection>

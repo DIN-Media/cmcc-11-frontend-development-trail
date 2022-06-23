@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMPicture folder="/Sites/Chef Corp./United States/English/Editorial/Homepage/Recipes/English" name="English Classic Summer Pudding 2" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master/>
+<viewtype/>
+<localSettings><Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
+<StructProperty Name="isDefault">
+<Struct>
+<StringProperty Name="portrait_ratio1x1">false</StringProperty>
+<StringProperty Name="landscape_ratio4x3">false</StringProperty>
+</Struct>
+</StructProperty>
+<StructProperty Name="relative">
+<Struct>
+<StringProperty Name="portrait_ratio1x1">position;x1=0.2815126050420168;y1=0;x2=0.9480126050420168;y2=1</StringProperty>
+<StringProperty Name="landscape_ratio4x3">position;x1=0.11134453781512604;y1=0;x2=1;y2=0.9999873918059347</StringProperty>
+</Struct>
+</StructProperty>
+<StructProperty Name="transforms">
+<Struct>
+<StringProperty Name="portrait_ratio1x1">b;a=0;c=1/crop;x=1126;y=0;width=2666;height=2666</StringProperty>
+<StringProperty Name="landscape_ratio4x3">b;a=0;c=1/crop;x=445;y=0;width=3555;height=2666</StringProperty>
+<StringProperty Name="landscape_ratio16x9">b;a=0;c=1/crop;x=0;y=210;width=4000;height=2250</StringProperty>
+</Struct>
+</StructProperty>
+</Struct></localSettings>
+<linkedSettings/>
+<resourceBundles2/>
+<segment></segment>
+<title>English Classic Summer Pudding 2</title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy/>
+<locationTaxonomy/>
+<contexts/>
+<teaserTitle></teaserTitle>
+<pictures/>
+<related/>
+<authors/>
+<alt>English Classic Summer Pudding 2</alt>
+<copyright></copyright>
+<dataUrl></dataUrl>
+<width>4000</width>
+<height>2667</height>
+<data href="English%20Classic%20Summer%20Pudding%202.data.jpeg" mimetype="image/jpeg"/>
+<asset/>
+</CMPicture>

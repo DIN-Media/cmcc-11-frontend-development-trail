@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMTaxonomy folder="/Settings/Taxonomies/Subject" name="Recipes" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<locale></locale>
+<master/>
+<viewtype/>
+<linkedSettings/>
+<resourceBundles2/>
+<segment></segment>
+<title></title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy/>
+<locationTaxonomy/>
+<contexts/>
+<teaserTitle></teaserTitle>
+<pictures/>
+<related/>
+<value>Recipes</value>
+<children><link href="Greenlandic.xml" path="/Settings/Taxonomies/Subject/Greenlandic"/><link href="American.xml" path="/Settings/Taxonomies/Subject/American"/><link href="Australian.xml" path="/Settings/Taxonomies/Subject/Australian"/><link href="Chinese.xml" path="/Settings/Taxonomies/Subject/Chinese"/><link href="Danish.xml" path="/Settings/Taxonomies/Subject/Danish"/><link href="English.xml" path="/Settings/Taxonomies/Subject/English"/><link href="French.xml" path="/Settings/Taxonomies/Subject/French"/><link href="German.xml" path="/Settings/Taxonomies/Subject/German"/><link href="Greek.xml" path="/Settings/Taxonomies/Subject/Greek"/><link href="Indian.xml" path="/Settings/Taxonomies/Subject/Indian"/><link href="Italian.xml" path="/Settings/Taxonomies/Subject/Italian"/><link href="Norwegian.xml" path="/Settings/Taxonomies/Subject/Norwegian"/><link href="Russian.xml" path="/Settings/Taxonomies/Subject/Russian"/><link href="Spanish.xml" path="/Settings/Taxonomies/Subject/Spanish"/><link href="Thai.xml" path="/Settings/Taxonomies/Subject/Thai"/><link href="Turkish.xml" path="/Settings/Taxonomies/Subject/Turkish"/></children>
+<externalReference></externalReference>
+</CMTaxonomy>

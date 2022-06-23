@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <style type="text/css">
+    @media screen {
+    #small {
+    display: initial;
+    }
+    #medium, #large {
+    display: none;
+    }
+    }
+    @media screen and (min-width: 24px) {
+    #small {
+    display: none;
+    }
+    #medium {
+    display: initial;
+    }
+    }
+    @media screen and (min-width: 32px) {
+    #medium {
+    display: none;
+    }
+    #large {
+    display: initial;
+    }
+    }
+  </style>
+  <svg id="small" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       viewBox="0 0 16 16" enable-background="new 0 0 16 16">
+    <g>
+      <rect x="4" y="5" fill="#3D4242" width="1" height="1"/>
+      <rect x="6" y="5" fill="#3D4242" width="4" height="2"/>
+      <rect x="6" y="9" fill="#3D4242" width="4" height="2"/>
+      <rect x="4" y="7" fill="#3D4242" width="1" height="1"/>
+      <rect x="4" y="9" fill="#3D4242" width="1" height="1"/>
+      <rect x="11" y="7" fill="#3D4242" width="1" height="1"/>
+      <rect x="11" y="9" fill="#3D4242" width="1" height="1"/>
+      <path fill="#3D4242" d="M8,1C4.13,1,1,4.13,1,8s3.13,7,7,7s7-3.13,7-7S11.87,1,8,1z M3,12V4h10v8H3z"/>
+      <rect x="11" y="5" fill="#3D4242" width="1" height="1"/>
+    </g>
+  </svg>
+
+  <svg id="medium" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       viewBox="0 0 24 24" enable-background="new 0 0 24 24">
+    <g>
+      <rect x="7" y="7" fill="#3D4242" width="10" height="4"/>
+      <rect x="5" y="7" fill="#3D4242" width="1" height="1"/>
+      <rect x="5" y="10" fill="#3D4242" width="1" height="1"/>
+      <rect x="5" y="13" fill="#3D4242" width="1" height="1"/>
+      <rect x="5" y="16" fill="#3D4242" width="1" height="1"/>
+      <rect x="7" y="13" fill="#3D4242" width="10" height="4"/>
+      <rect x="18" y="7" fill="#3D4242" width="1" height="1"/>
+      <path fill="#3D4242" d="M12,1C5.92,1,1,5.92,1,12s4.92,11,11,11s11-4.92,11-11S18.08,1,12,1z M4,18V6h16v12H4z"/>
+      <rect x="18" y="16" fill="#3D4242" width="1" height="1"/>
+      <rect x="18" y="10" fill="#3D4242" width="1" height="1"/>
+      <rect x="18" y="13" fill="#3D4242" width="1" height="1"/>
+    </g>
+  </svg>
+  <svg id="large" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       viewBox="0 0 32 32" enable-background="new 0 0 32 32">
+    <g>
+      <rect x="6" y="13" fill="#3D4242" width="2" height="2"/>
+      <rect x="9" y="17" fill="#3D4242" width="14" height="6"/>
+      <rect x="9" y="9" fill="#3D4242" width="14" height="6"/>
+      <rect x="6" y="21" fill="#3D4242" width="2" height="2"/>
+      <rect x="6" y="17" fill="#3D4242" width="2" height="2"/>
+      <rect x="6" y="9" fill="#3D4242" width="2" height="2"/>
+      <rect x="24" y="21" fill="#3D4242" width="2" height="2"/>
+      <path fill="#3D4242" d="M16,1C7.72,1,1,7.72,1,16s6.72,15,15,15s15-6.72,15-15S24.28,1,16,1z M5,24V8h22v16H5z"/>
+      <rect x="24" y="9" fill="#3D4242" width="2" height="2"/>
+      <rect x="24" y="17" fill="#3D4242" width="2" height="2"/>
+      <rect x="24" y="13" fill="#3D4242" width="2" height="2"/>
+    </g>
+  </svg>
+</svg>

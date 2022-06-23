@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.coremedia.blueprint</groupId>
+    <artifactId>cae.training</artifactId>
+    <version>1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>training-cae</artifactId>
+
+  <properties>
+    <!-- Don't fail because of unused dependencies in the training modules -->
+    <failOnWarning>false</failOnWarning>
+    <coremedia.project.extension.for>cae</coremedia.project.extension.for>
+  </properties>
+
+  <dependencies>
+
+    <!-- Dependencies from apps/cae -->
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>cae-base-lib</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+
+    <!-- Other dependencies -->
+
+
+    <!--  Dependencies from Shared-->
+
+    <dependency>
+      <groupId>com.coremedia.blueprint</groupId>
+      <artifactId>catalog-content-services</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.coremedia.blueprint</groupId>
+      <artifactId>catalog-contentbeans-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.coremedia.blueprint</groupId>
+      <artifactId>contentbeans</artifactId>
+    </dependency>
+
+    <!-- CoreMedia Dependencies -->
+
+    <dependency>
+      <groupId>com.coremedia.cms</groupId>
+      <artifactId>cae-contentbeanservices</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.coremedia.cms</groupId>
+      <artifactId>cae-linkservices</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.coremedia.cms</groupId>
+      <artifactId>coremedia-spring</artifactId>
+    </dependency>
+
+    <!-- Spring framework dependencies -->
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-actuator-autoconfigure</artifactId>
+    </dependency>
+
+    <!-- Third party libraries -->
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.itextpdf</groupId>
+      <artifactId>itextpdf</artifactId>
+      <version>5.5.11</version>
+    </dependency>
+
+  </dependencies>
+
+
+</project>

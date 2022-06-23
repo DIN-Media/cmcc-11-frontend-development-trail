@@ -25,14 +25,6 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>commercetools-test-data</artifactId>
-      <version>${project.version}</version>
-      <classifier>content</classifier>
-      <type>zip</type>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
       <artifactId>corporate-test-data</artifactId>
       <version>${project.version}</version>
       <classifier>content</classifier>
@@ -49,7 +41,7 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>hybris-test-data</artifactId>
+      <artifactId>fundamentals-test-data</artifactId>
       <version>${project.version}</version>
       <classifier>content</classifier>
       <type>zip</type>
@@ -57,15 +49,7 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>lc-test-data</artifactId>
-      <version>${project.version}</version>
-      <classifier>content</classifier>
-      <type>zip</type>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>sfcc-test-data</artifactId>
+      <artifactId>training-test-data</artifactId>
       <version>${project.version}</version>
       <classifier>content</classifier>
       <type>zip</type>

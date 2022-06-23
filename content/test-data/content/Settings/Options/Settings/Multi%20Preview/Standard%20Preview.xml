@@ -12,6 +12,21 @@
 <StringProperty Name="displayName">CAE Preview</StringProperty>
 <BooleanProperty Name="enabled">false</BooleanProperty>
 </Struct>
+<Struct>
+<StringProperty Name="id">headlessPreview</StringProperty>
+<StringProperty Name="providerId">headlessPreviewProvider</StringProperty>
+<StringProperty Name="displayName">Headless Preview</StringProperty>
+<BooleanProperty Name="enabled">false</BooleanProperty>
+<StringListProperty Name="userGroupAllowList">
+<String>developer</String>
+</StringListProperty>
+<StructProperty Name="config">
+<Struct>
+<StringProperty Name="previewHost">https://headless-server-preview.cmXX.coremedia.training
+</StringProperty>
+</Struct>
+</StructProperty>
+</Struct>
 </StructListProperty>
 </Struct>
 </settings>

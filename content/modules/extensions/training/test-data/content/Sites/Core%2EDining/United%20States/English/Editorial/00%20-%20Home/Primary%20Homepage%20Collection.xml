@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMCollection folder="/Sites/Core.Dining/United States/English/Editorial/00 - Home" name="Primary Homepage Collection" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master>
+</master>
+<viewtype>
+<link href="../../Options/Viewtypes/CMChannel/two-column.xml" path="/Sites/Core%2EDining/United%20States/English/Options/Viewtypes/CMChannel/two-column"/>
+</viewtype>
+<linkedSettings>
+</linkedSettings>
+<resourceBundles2>
+</resourceBundles2>
+<segment></segment>
+<title></title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy>
+</subjectTaxonomy>
+<locationTaxonomy>
+</locationTaxonomy>
+<contexts>
+</contexts>
+<teaserTitle>Primary Home Page Collection</teaserTitle>
+<pictures>
+</pictures>
+<related>
+</related>
+<authors>
+</authors>
+<items>
+<link href="../02%20-%20Trusted/Fresh%20Vietnamese%20Springrolls/Fresh%20Vietnamese%20Springrolls%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/02%20-%20Trusted/Fresh%20Vietnamese%20Springrolls/Fresh%20Vietnamese%20Springrolls%20Recipe"/>
+<link href="../03%20-%20Global/Fried%20Fish%20Cakes/Fried%20Fish%20Cakes%20Recipe.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/03%20-%20Global/Fried%20Fish%20Cakes/Fried%20Fish%20Cakes%20Recipe"/>
+</items>
+</CMCollection>

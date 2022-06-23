@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMCategory folder="/Sites/Chef Corp./United States/English/Products/Ingredients Packs" name="Ingredients Packs" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master/>
+<viewtype/>
+<localSettings><Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
+<StructProperty Name="teaserSettings">
+<Struct>
+<BooleanProperty Name="renderLinkToDetailPage">true</BooleanProperty>
+</Struct>
+</StructProperty>
+<BooleanProperty Name="callToActionDisabled">false</BooleanProperty>
+</Struct></localSettings>
+<linkedSettings/>
+<resourceBundles2/>
+<segment></segment>
+<title>Ingredients Packs</title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy/>
+<locationTaxonomy/>
+<contexts/>
+<teaserTitle></teaserTitle>
+<detailText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p><br/></p></div></detailText>
+<pictures><link href="../../Editorial/Assets/Pictures/Products/Ingredients%20Packs/ingredients%20packs%20overview.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Editorial/Assets/Pictures/Products/Ingredients%20Packs/ingredients%20packs%20overview"/></pictures>
+<related/>
+<authors/>
+<children><link href="American/American.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/American/American"/><link href="Australian/Australian.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Australian/Australian"/><link href="Chinese/Chinese.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Chinese/Chinese"/><link href="Danish/Danish.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Danish/Danish"/><link href="English/English.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/English/English"/><link href="French/French.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/French/French"/><link href="German/German.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/German/German"/><link href="Greek/Greek.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Greek/Greek"/><link href="Greenlandic/Greenlandic.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Greenlandic/Greenlandic"/><link href="Indian/Indian.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Indian/Indian"/><link href="Italian/Italian.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Italian/Italian"/><link href="Norwegian/Norwegian.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Norwegian/Norwegian"/><link href="Russian/Russian.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Russian/Russian"/><link href="Spanish/Spanish.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Spanish/Spanish"/><link href="Thai/Thai.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Thai/Thai"/><link href="Turkish/Turkish.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Turkish/Turkish"/></children>
+<javaScript/>
+<css/>
+<theme/>
+<header/>
+<footer/>
+<categoryName></categoryName>
+<displayName></displayName>
+</CMCategory>

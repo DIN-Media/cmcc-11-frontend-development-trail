@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMPicture folder="/Sites/Chef Corp./United States/English/Editorial/Assets/Pictures/Products/Ingredients Packs" name="natural-ingredients-sticker-vector-illustration" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master/>
+<viewtype/>
+<localSettings><Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
+<StructProperty Name="isDefault">
+<Struct>
+<StringProperty Name="landscape_ratio4x3">true</StringProperty>
+<StringProperty Name="landscape_ratio16x9">true</StringProperty>
+<StringProperty Name="portrait_ratio1x1">true</StringProperty>
+</Struct>
+</StructProperty>
+<StructProperty Name="relative">
+<Struct>
+<StringProperty Name="landscape_ratio4x3">position;x1=0.13238770685579196;y1=0.0914826498422713;x2=0.8955561567782826;y2=0.8548895899053628</StringProperty>
+<StringProperty Name="landscape_ratio16x9">position;x1=0.10815602836879433;y1=0.056782334384858045;x2=0.9218772246306146;y2=0.8706624605678233</StringProperty>
+<StringProperty Name="portrait_ratio1x1">position;x1=0.07744107744107744;y1=0.08832807570977917;x2=0.905201329807008;y2=0.8643533123028391</StringProperty>
+</Struct>
+</StructProperty>
+<StructProperty Name="transforms">
+<Struct>
+<StringProperty Name="portrait_ratio1x1">b;a=0;c=1/crop;x=0;y=0;width=2092;height=2091;bg=FFFFFFFF</StringProperty>
+<StringProperty Name="landscape_ratio4x3">b;a=0;c=1/crop;x=-349;y=0;width=2789;height=2091;bg=FFFFFFFF</StringProperty>
+<StringProperty Name="landscape_ratio16x9">b;a=0;c=1/crop;x=-813;y=0;width=3718;height=2091;bg=FFFFFFFF</StringProperty>
+<StringProperty Name="portrait_ratio3x4">b;a=0;c=1/crop;x=0;y=-349;width=2091;height=2789;bg=FFFFFFFF</StringProperty>
+<StringProperty Name="portrait_ratio2x3">b;a=0;c=1/crop;x=0;y=-523;width=2091;height=3137;bg=FFFFFFFF</StringProperty>
+<StringProperty Name="landscape_ratio8x3">b;a=0;c=1/crop;x=-1743;y=0;width=5577;height=2091;bg=FFFFFFFF</StringProperty>
+</Struct>
+</StructProperty>
+<StructProperty Name="enlarge">
+<Struct>
+<BooleanProperty Name="landscape_ratio16x9">true</BooleanProperty>
+<BooleanProperty Name="landscape_ratio4x3">true</BooleanProperty>
+<BooleanProperty Name="portrait_ratio3x4">true</BooleanProperty>
+<BooleanProperty Name="portrait_ratio2x3">true</BooleanProperty>
+<BooleanProperty Name="portrait_ratio1x1">true</BooleanProperty>
+<BooleanProperty Name="landscape_ratio8x3">true</BooleanProperty>
+</Struct>
+</StructProperty>
+</Struct></localSettings>
+<linkedSettings/>
+<resourceBundles2/>
+<segment></segment>
+<title>100% NATURAL INGREDIENTS</title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy/>
+<locationTaxonomy/>
+<contexts/>
+<teaserTitle></teaserTitle>
+<pictures/>
+<related/>
+<authors/>
+<alt>stock-vector--natural-ingredients-sticker-vector-illustration-1027792915</alt>
+<copyright></copyright>
+<dataUrl></dataUrl>
+<width>2091</width>
+<height>2091</height>
+<data href="natural-ingredients-sticker-vector-illustration.data.png" mimetype="image/png"/>
+<asset/>
+</CMPicture>

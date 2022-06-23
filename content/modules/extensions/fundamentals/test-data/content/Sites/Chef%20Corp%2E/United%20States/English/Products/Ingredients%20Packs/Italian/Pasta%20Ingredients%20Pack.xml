@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMProduct folder="/Sites/Chef Corp./United States/English/Products/Ingredients Packs/Italian" name="Pasta Ingredients Pack" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master/>
+<viewtype/>
+<linkedSettings/>
+<resourceBundles2/>
+<segment></segment>
+<title></title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy/>
+<locationTaxonomy/>
+<contexts><link href="Italian.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Italian/Italian"/></contexts>
+<teaserTitle></teaserTitle>
+<detailText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>Our ingredients Packs come shipped with 100% fresh ingredients.</p><p>The Pasta Ingredients Pack consists of:</p><p><br/></p><ul><li>olive oil</li><li>bacon</li><li>onions</li><li>carrots</li><li>celery sticks</li><li>garlic</li><li>rosemary</li><li>beef</li><li>plum tomatoes</li><li>basil</li><li>oregano</li><li>spaghetti</li></ul></div></detailText>
+<pictures><link href="../../../Editorial/Assets/Pictures/Products/Ingredients%20Packs/natural-ingredients-sticker-vector-illustration.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Editorial/Assets/Pictures/Products/Ingredients%20Packs/natural-ingredients-sticker-vector-illustration"/></pictures>
+<related/>
+<authors/>
+<downloads/>
+<productCode>IP-IT-PA</productCode>
+<productName>Pasta Ingredients Pack</productName>
+</CMProduct>

@@ -27,6 +27,7 @@ packages:
   - "apps/main/extensions/osm"
   - "apps/main/extensions/p13n"
   - "apps/main/extensions/taxonomy"
+  - "apps/main/extensions/training"
   - "apps/main/extensions/validators"
   - "apps/workflow/app"
   - "apps/workflow/extension-config/extension-dependencies"

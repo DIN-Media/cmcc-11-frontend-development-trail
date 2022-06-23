@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<DocumentTypeModel xmlns="http://www.coremedia.com/2008/documenttypes"
+                   xmlns:extensions="http://www.coremedia.com/2013/documenttypes-extensions"
+                   Name="training-doctypes">
+
+  <!--
+  well known grammars
+  -->
+
+  <ImportGrammar Name="coremedia-richtext-1.0"/>
+  <ImportGrammar Name="coremedia-struct-2008"/>
+
+  <!--
+  well known content types
+  -->
+
+  <ImportDocType Name="CMArticle"/>
+  <ImportDocType Name="CMVideo" />
+  <ImportDocType Name="CMProduct" />
+
+  <!-- Add your own document types-->
+  <DocType Name="CMVideoTutorial" Parent="CMArticle">
+    <LinkListProperty Name="master"
+                      LinkType="CMVideoTutorial"
+                      extensions:weakLink="true"
+                      Override="true"
+                      Max="1" />
+    <StringProperty Name="copyright" Length="100" />
+    <LinkListProperty Name="video" LinkType="CMVideo" Max="1" />
+    <XmlProperty Name="productionInfo" Grammar="coremedia-richtext-1.0" />
+    <IntProperty Name="duration" />
+    <LinkListProperty Name="featuredProduct" LinkType="CMProduct" Max="1" />
+  </DocType>
+
+</DocumentTypeModel>

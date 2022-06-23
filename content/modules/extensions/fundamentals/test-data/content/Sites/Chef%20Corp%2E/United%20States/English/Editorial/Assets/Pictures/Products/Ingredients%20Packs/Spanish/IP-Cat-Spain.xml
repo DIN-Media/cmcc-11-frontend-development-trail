@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMPicture folder="/Sites/Chef Corp./United States/English/Editorial/Assets/Pictures/Products/Ingredients Packs/Spanish" name="IP-Cat-Spain" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master/>
+<viewtype/>
+<localSettings><Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
+<StructProperty Name="enlarge">
+<Struct>
+<BooleanProperty Name="landscape_ratio16x9">true</BooleanProperty>
+<BooleanProperty Name="portrait_ratio3x4">true</BooleanProperty>
+<BooleanProperty Name="portrait_ratio2x3">true</BooleanProperty>
+<BooleanProperty Name="landscape_ratio4x3">true</BooleanProperty>
+<BooleanProperty Name="portrait_ratio1x1">true</BooleanProperty>
+<BooleanProperty Name="landscape_ratio8x3">true</BooleanProperty>
+</Struct>
+</StructProperty>
+<StructProperty Name="transforms">
+<Struct>
+<StringProperty Name="landscape_ratio16x9">b;a=0;c=1/crop;x=-813;y=0;width=3718;height=2091;bg=FFFFFFFF</StringProperty>
+<StringProperty Name="portrait_ratio3x4">b;a=0;c=1/crop;x=0;y=-349;width=2091;height=2789;bg=FFFFFFFF</StringProperty>
+<StringProperty Name="portrait_ratio2x3">b;a=0;c=1/crop;x=0;y=-523;width=2091;height=3137;bg=FFFFFFFF</StringProperty>
+<StringProperty Name="landscape_ratio4x3">b;a=0;c=1/crop;x=-349;y=0;width=2789;height=2091;bg=FFFFFFFF</StringProperty>
+<StringProperty Name="portrait_ratio1x1">b;a=0;c=1/crop;x=0;y=0;width=2092;height=2091;bg=FFFFFFFF</StringProperty>
+<StringProperty Name="landscape_ratio8x3">b;a=0;c=1/crop;x=-1743;y=0;width=5577;height=2091;bg=FFFFFFFF</StringProperty>
+</Struct>
+</StructProperty>
+</Struct></localSettings>
+<linkedSettings/>
+<resourceBundles2/>
+<segment></segment>
+<title>IP-Cat-Spain</title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy/>
+<locationTaxonomy/>
+<contexts/>
+<teaserTitle></teaserTitle>
+<pictures/>
+<related/>
+<authors/>
+<alt>IP-Cat-Spain</alt>
+<copyright></copyright>
+<dataUrl></dataUrl>
+<width>2091</width>
+<height>2091</height>
+<data href="IP-Cat-Spain.data.png" mimetype="image/png"/>
+<asset/>
+</CMPicture>

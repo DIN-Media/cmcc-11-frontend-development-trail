@@ -1,0 +1,38 @@
+#!import file=includes/elements.yml
+#!import file=includes/classes.yml
+#!import file=includes/attributes.yml
+
+name: outline
+
+contexts:
+  - !Context
+    name: headline
+    defaultHandler:
+      !Handler
+      outputHandler:
+        !ElementWriter
+        writeElement: false
+        writeCharacters: true
+
+  - &root !RootContext
+    name: root
+    handlers:
+      - - !Handler
+          eventMatcher: !Matcher {qname: *p, classes: *headline_styles}
+          contextHandler: !Push {contextName: headline}
+          outputHandler:
+            !ElementWriter
+            writeElement: true
+            writeCharacters: true
+            elementTransformer:
+              !ElementFromClass
+              mapping:
+                *headline_1_style: h1
+                *headline_2_style: h2
+                *headline_3_style: h3
+                *headline_4_style: h4
+                *headline_5_style: h5
+                *headline_6_style: h6
+
+
+initialContext: *root

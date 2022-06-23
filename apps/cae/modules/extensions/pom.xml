@@ -26,6 +26,7 @@
     <module>lc-es</module>
     <module>lc-p13n</module>
     <module>p13n</module>
+    <module>training</module>
   </modules>
 
 </project>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMVideoTutorial folder="/Sites/Core.Dining/United States/English/Editorial/04 - Tutorials/Fresh Vietnamese Springrolls" name="Fresh Vietnamese Springrolls Tutorial" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master>
+</master>
+<viewtype>
+</viewtype>
+<linkedSettings>
+</linkedSettings>
+<resourceBundles2>
+</resourceBundles2>
+<segment></segment>
+<title>How To Make Vietnamese Springrolls</title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy>
+</subjectTaxonomy>
+<locationTaxonomy>
+</locationTaxonomy>
+<contexts>
+</contexts>
+<teaserTitle></teaserTitle>
+<teaserText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>These spring rolls are refreshing and have become a family favorite. They are great and delicious dipped in soja sauce.</p></div></teaserText>
+<detailText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p class="p--heading-2">Ingredients</p><ul><li>300 g pork belly (0.66 lb)</li><li>200 g shrimp 15 pcs</li><li>200 g rice vermicelli “bún”</li><li>15 pieces rice paper</li><li>1 tsp salt</li><li>Fresh greens: Lettuce, mint leaves, cilantro, garlic chives, cucumber</li><li>1 tbsp vegetable oil</li><li>1 tbsp minced garlic</li><li>5 tbsp hoisin sauce</li><li>5 tbsp pork broth / water</li><li>1 tbsp peanut butter</li><li>1 tbsp sugar</li></ul><p class="p--heading-2">Instructions</p><ol><li>Bring a sauce pan half full of water to a rolling boil over high heat, add the pork belly together with a teaspoon of salt. When it boils again, turn heat to medium low and cook for 25-35 min. depending on how thick the cut of pork is. Keep the broth for later use. The pork is cooked if you see no pink water running out when piercing it with a chopstick. Soak the meat in cold water for 5 minutes to avoid it from blackening. Drain and let cool. Then cut into thin slices.</li><li>Fry the shrimps without any oil on medium heat for 1-2 minutes until they turn orange. Let cool and peel. Slice each shrimp lengthwise into 2 halves. Remove the black line if any.</li><li>Cook rice vermicelli in boiling water for 3 to 5 minutes following package instructions and drain. Rinse under cold water to stop the cooking process.</li><li>Rinse the fresh greens well and drain. Cut the cucumber lengthwise into thin 7 x 3 cm (3 x 1 inch) slices.</li><li>To make the dipping sauce, heat 1 tbsp vegetable oil in a small sauce pan on medium high heat, then fry 1 tbsp minced garlic till golden brown. Then add hoisin sauce, pork broth, peanut butter and sugar. Stir well and simmer on low heat for 1-2 minutes until thickened. Transfer to condiment bowls and top up with minced fresh chili and crushed peanuts.</li><li>To assemble the roll, place the cooked rice vermicelli, shrimps, pork, fresh greens and sliced cucumber on the plates. Also prepare a pan of lukewarm water to soften rice paper and a flat work surface (like a cutting board or a large plate) for the rolling job. Dip a rice paper in water to thoroughly soak (This dipping motion should take no more than 2 seconds). Gently shake off the excess water and lay it on the flat surface. Place the fresh vegetables in a row on the lower/upper third of the rice paper, leaving about 2 inches on both sides. Also lay some vermicelli, 2 pork slices, 2 shrimp halves on the rice paper. Keep the orange side of shrimps facing down. Starting from the end with vegetables, roll 1-2 rounds first until you reach the center of the rice paper, then fold both sides inwards. Then continue rolling until reaching the other end. You can also include some garlic chives at the end to give the roll a little “tail”.</li><li>To serve, dip the salad roll in the dipping sauce or spoon some sauce onto the roll and have a bite. You can also cut the rolls diagonally in half to make it more manageable.</li></ol><p> </p><p class="p--heading-2">Notes</p><ol><li>You can replace pork belly with pork loin or pork shoulder to reduce fat.</li><li>To save you the rolling task, let everyone sit around the table and make their own rolls while dining. It’s more fun and interactive that way. Experiencing the rolling skill is a great part of learning the Vietnamese dining culture.</li><li>The rolls should be served within 2 hours after wrapping. If you are going on a picnic, you can wrap the rolls in plastic wrap so that the rice paper won’t dry out or stick to each other. This way they can be kept for a few hours longer.</li></ol><p> </p></div></detailText>
+<pictures>
+<link href="Fresh-Vietnamese-Springrolls-1.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/04%20-%20Tutorials/Fresh%20Vietnamese%20Springrolls/Fresh-Vietnamese-Springrolls-1"/>
+<link href="Fresh-Vietnamese-Springrolls-2.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/04%20-%20Tutorials/Fresh%20Vietnamese%20Springrolls/Fresh-Vietnamese-Springrolls-2"/>
+</pictures>
+<related>
+</related>
+<authors>
+</authors>
+<copyright>(c) 2020, CoreMedia GmbH</copyright>
+<video>
+<link href="Fresh%20Vietnamese%20Springrolls%20Video.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/04%20-%20Tutorials/Fresh%20Vietnamese%20Springrolls/Fresh%20Vietnamese%20Springrolls%20Video"/>
+</video>
+<productionInfo grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>The video for this tutorial is hosted on youtube.</p></div></productionInfo>
+<duration>5</duration>
+<featuredProduct>
+</featuredProduct>
+</CMVideoTutorial>

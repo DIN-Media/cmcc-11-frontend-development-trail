@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMViewtype folder="/Sites/Core.Dining/United States/English/Options/Viewtypes/CMChannel" name="two-column" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master>
+</master>
+<description>A two column Container</description>
+<layout>two-column</layout>
+</CMViewtype>

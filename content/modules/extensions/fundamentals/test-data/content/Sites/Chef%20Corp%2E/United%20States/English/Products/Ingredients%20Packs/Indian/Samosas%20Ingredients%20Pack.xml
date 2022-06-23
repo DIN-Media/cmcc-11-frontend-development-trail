@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMProduct folder="/Sites/Chef Corp./United States/English/Products/Ingredients Packs/Indian" name="Samosas Ingredients Pack" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master/>
+<viewtype/>
+<linkedSettings/>
+<resourceBundles2/>
+<segment></segment>
+<title></title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy/>
+<locationTaxonomy/>
+<contexts><link href="Indian.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Products/Ingredients%20Packs/Indian/Indian"/></contexts>
+<teaserTitle></teaserTitle>
+<detailText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>Our ingredients Packs come shipped with 100% fresh ingredients.</p><p>The Samosas Ingredients Pack consists of:</p><p><br/></p><ul><li>potatoes</li><li>olive oil</li><li>onions</li><li>jalapeo pepper</li><li>ginger</li><li>garlic</li><li>coriander seeds </li><li>curry powder </li><li>cumin </li><li>allspice </li><li>cinnamon </li><li>salt</li><li>black pepper </li><li>tomatos</li><li>peas</li></ul></div></detailText>
+<pictures><link href="../../../Editorial/Assets/Pictures/Products/Ingredients%20Packs/natural-ingredients-sticker-vector-illustration.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Editorial/Assets/Pictures/Products/Ingredients%20Packs/natural-ingredients-sticker-vector-illustration"/></pictures>
+<related/>
+<authors/>
+<downloads/>
+<productCode>IP-IN-S</productCode>
+<productName>Samosas Ingredients Pack</productName>
+</CMProduct>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMPicture folder="/Sites/Core.Dining/United States/English/Editorial/01 - Ahead/Pho Ga" name="Pho Ga Picture" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master>
+</master>
+<viewtype>
+</viewtype>
+<linkedSettings>
+</linkedSettings>
+<resourceBundles2>
+</resourceBundles2>
+<segment></segment>
+<title>Pho Ga Picture</title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy>
+</subjectTaxonomy>
+<locationTaxonomy>
+</locationTaxonomy>
+<contexts>
+</contexts>
+<teaserTitle></teaserTitle>
+<detailText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>Vietnamese Noodle Soup with Chicken (Pho Ga) in a bowl.</p></div></detailText>
+<pictures>
+</pictures>
+<related>
+</related>
+<authors>
+</authors>
+<alt>Pho Ga Picture</alt>
+<copyright>(c) 2017 CoreMedia</copyright>
+<dataUrl></dataUrl>
+<width>1920</width>
+<height>1280</height>
+<data href="Pho%20Ga%20Picture.data.jpeg" mimetype="image/jpeg"/>
+<asset>
+</asset>
+</CMPicture>

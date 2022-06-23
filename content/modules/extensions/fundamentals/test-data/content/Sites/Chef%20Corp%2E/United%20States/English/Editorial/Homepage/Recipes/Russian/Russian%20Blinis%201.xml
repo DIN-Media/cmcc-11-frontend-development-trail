@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMPicture folder="/Sites/Chef Corp./United States/English/Editorial/Homepage/Recipes/Russian" name="Russian Blinis 1" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master/>
+<viewtype/>
+<localSettings><Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
+<StructProperty Name="isDefault">
+<Struct>
+<StringProperty Name="portrait_ratio1x1">false</StringProperty>
+<StringProperty Name="landscape_ratio4x3">false</StringProperty>
+<StringProperty Name="landscape_ratio16x9">false</StringProperty>
+</Struct>
+</StructProperty>
+<StructProperty Name="relative">
+<Struct>
+<StringProperty Name="portrait_ratio1x1">position;x1=0.33542976939203356;y1=0;x2=0.9994297693920335;y2=1</StringProperty>
+<StringProperty Name="landscape_ratio4x3">position;x1=0.11530398322851143;y1=0;x2=1;y2=0.9992801394256273</StringProperty>
+<StringProperty Name="landscape_ratio16x9">position;x1=0;y1=0.15141955835962145;x2=1;y2=0.9985581125764889</StringProperty>
+</Struct>
+</StructProperty>
+<StructProperty Name="transforms">
+<Struct>
+<StringProperty Name="portrait_ratio1x1">b;a=0;c=1/crop;x=1006;y=0;width=1992;height=1992</StringProperty>
+<StringProperty Name="landscape_ratio4x3">b;a=0;c=1/crop;x=346;y=0;width=2654;height=1991</StringProperty>
+<StringProperty Name="landscape_ratio16x9">b;a=0;c=1/crop;x=0;y=302;width=3000;height=1688</StringProperty>
+</Struct>
+</StructProperty>
+</Struct></localSettings>
+<linkedSettings/>
+<resourceBundles2/>
+<segment></segment>
+<title>Russian Blinis 1</title>
+<htmlTitle></htmlTitle>
+<keywords></keywords>
+<htmlDescription></htmlDescription>
+<subjectTaxonomy/>
+<locationTaxonomy/>
+<contexts/>
+<teaserTitle></teaserTitle>
+<pictures/>
+<related/>
+<authors/>
+<alt>Russian Blinis 1</alt>
+<copyright></copyright>
+<dataUrl></dataUrl>
+<width>3000</width>
+<height>1992</height>
+<data href="Russian%20Blinis%201.data.jpeg" mimetype="image/jpeg"/>
+<asset/>
+</CMPicture>

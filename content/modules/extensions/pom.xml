@@ -14,11 +14,9 @@
   <modules>
     <module>am</module>
     <module>corporate</module>
-    <module>ecommerce-commercetools</module>
-    <module>ecommerce-ibm</module>
-    <module>ecommerce-sfcc</module>
     <module>es</module>
-    <module>hybris</module>
+    <module>training</module>
+    <module>fundamentals</module>
   </modules>
 
 </project>

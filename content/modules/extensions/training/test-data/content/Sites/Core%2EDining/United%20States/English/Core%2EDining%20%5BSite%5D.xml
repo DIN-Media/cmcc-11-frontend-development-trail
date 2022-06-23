@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMSite folder="/Sites/Core.Dining/United States/English" name="Core.Dining [Site]" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master>
+</master>
+<id>abffe57734feeef</id>
+<name>Core.Dining</name>
+<root>
+<link href="Editorial/00%20-%20Home/Core%2EDining%20Home%20Page.xml" path="/Sites/Core%2EDining/United%20States/English/Editorial/00%20-%20Home/Core%2EDining%20Home%20Page"/>
+</root>
+<siteManagerGroup>manager-c-en-US</siteManagerGroup>
+<linkedSettings>
+</linkedSettings>
+</CMSite>

@@ -84,6 +84,54 @@
         }
       }
     ],
+    "CMProduct": [
+      {
+        "titleKey": "preview_label_default",
+        "viewName": "DEFAULT"
+      },
+      {
+        "titleKey": "preview_label_banner_hero",
+        "viewName": "asContainerPreview",
+        "viewParams": {
+          "containerView": "asHeroBannerContainer"
+        }
+      },
+      {
+        "titleKey": "preview_label_banner_portrait",
+        "viewName": "asContainerPreview",
+        "viewParams": {
+          "containerView": "asPortraitBannerContainer"
+        }
+      },
+      {
+        "titleKey": "preview_label_banner_landscape",
+        "viewName": "asContainerPreview",
+        "viewParams": {
+          "containerView": "asLandscapeBannerContainer"
+        }
+      },
+      {
+        "titleKey": "preview_label_banner_square",
+        "viewName": "asContainerPreview",
+        "viewParams": {
+          "containerView": "asSquareBannerContainer"
+        }
+      },
+      {
+        "titleKey": "preview_label_banner_leftright",
+        "viewName": "asContainerPreview",
+        "viewParams": {
+          "containerView": "asLeftRightBannerContainer"
+        }
+      },
+      {
+        "titleKey": "preview_label_banner_carousel",
+        "viewName": "asContainerPreview",
+        "viewParams": {
+          "containerView": "asCarouselBannerContainer"
+        }
+      }
+    ],
     "CMTeasable": [
       {
         "titleKey": "preview_label_banner_hero",
