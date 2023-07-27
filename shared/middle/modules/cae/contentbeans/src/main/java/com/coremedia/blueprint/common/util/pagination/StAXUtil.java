@@ -8,6 +8,8 @@ import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.XMLEvent;
 
+import static com.coremedia.blueprint.common.util.pagination.PagingPerCharactersCountAndNextBlockRule.DEFAULT_PAGE_BLOCK_TAGS;
+
 class StAXUtil {
   private static final Logger LOG = LoggerFactory.getLogger(StAXUtil.class);
 
@@ -41,6 +43,14 @@ class StAXUtil {
 
   public static boolean isWhitespace(XMLEvent event) {
     return event.isCharacters() && event.asCharacters().isWhiteSpace();
+  }
+
+  static boolean isBlockElement(XMLEvent event) {
+    if (event == null) {
+      return false;
+    }
+    return event.isStartElement() && DEFAULT_PAGE_BLOCK_TAGS.contains(event.asStartElement().getName().getLocalPart()) ||
+    event.isEndElement() && DEFAULT_PAGE_BLOCK_TAGS.contains(event.asEndElement().getName().getLocalPart());
   }
 
   public static String getAttribute(XMLEvent event, String attributeName) {

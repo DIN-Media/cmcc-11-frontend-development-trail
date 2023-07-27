@@ -19,9 +19,6 @@ import org.springframework.context.annotation.ImportResource;
 @AutoConfiguration
 @ComponentScan
 @Import({LcStudioValidatorsConfiguration.class, LcStudioPlacementsConfiguration.class})
-@ImportResource(value = {
-        "classpath:/META-INF/coremedia/lc-services.xml"
-}, reader = ResourceAwareXmlBeanDefinitionReader.class)
 public class LcStudioLibComponentAutoConfiguration {
 
   @Bean

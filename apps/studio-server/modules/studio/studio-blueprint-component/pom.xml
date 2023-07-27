@@ -60,7 +60,7 @@
     </dependency>
     <dependency>
       <groupId>com.coremedia.ui</groupId>
-      <artifactId>editing-rest-security-component</artifactId>
+      <artifactId>editing-rest-security</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -160,7 +160,6 @@
     <dependency>
       <groupId>com.coremedia.blueprint</groupId>
       <artifactId>content-services</artifactId>
-      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>com.coremedia.blueprint</groupId>

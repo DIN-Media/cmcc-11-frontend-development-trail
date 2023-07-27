@@ -173,14 +173,9 @@ class CatalogLinkPropertyField extends CatalogLinkPropertyFieldBase {
       ],
       ...ConfigUtils.append({
         plugins: [
-          // Workaround because dockedItems breaks bottom line boarding when IssuePlugin is used
-          Config(OnlyIf, {
-            condition: () => config.showRemoveReferenceButton,
-            then: [
-              // Overwrite the order-bottom-width extjs class
-              Config(BEMPlugin, { block: "cm-catalog-link-property-field" }),
-            ],
-          }),
+          // Always overwrite the bottom line boarding. This workaround is implemented to address the issue of bottom
+          // line boarding being disrupted when the IssuePlugin is used in conjunction with dockedItems
+          Config(BEMPlugin, { block: "cm-catalog-link-property-field" }),
           Config(OnlyIf, {
             condition: () => !config.showRemoveReferenceButton,
             then: [

@@ -73,7 +73,7 @@ const TopicPages_properties: TopicPages_properties = {
   TopicPages_root_channel_not_found_msg: "The main page content of the active site '{0}' could not be resolved. The update of the topic page linking failed.",
   topic_pages_button_tooltip: "Open Topic Pages",
   topic_pages_button_no_preferred_site_tooltip: "Please select a preferred site to open the topic pages.",
-  topic_pages_button_no_topic_page_settings_tooltip: "No root channel for topic pages found. Please check the 'TopicPages' settings document of the preferred site.",
+  topic_pages_button_no_topic_page_settings_tooltip: "No root channel for topic pages found. Please check the 'TopicPages' settings of the preferred site.",
 };
 
 export default TopicPages_properties;

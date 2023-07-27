@@ -15,9 +15,10 @@
   <import resource="livecontext-cae-services.xml"/>
   <import resource="livecontext-site-services.xml"/>
   <import resource="livecontext-fragment.xml"/>
-  <import resource="classpath:META-INF/coremedia/lc-services.xml"/>
   <import resource="classpath:/com/coremedia/cache/cache-services.xml"/>
   <import resource="classpath:/com/coremedia/blueprint/base/links/bpbase-urlpathformatting.xml"/>
+
+  <bean class="com.coremedia.blueprint.base.livecontext.augmentation.config.AugmentationTreeServicesConfiguration"/>
 
   <bean id="ecommerceHandlerBase" abstract="true" parent="pageHandlerBase" class="com.coremedia.livecontext.handler.LiveContextPageHandlerBase">
     <property name="dataViewFactory" ref="dataViewFactory"/>

@@ -150,7 +150,7 @@ class TaxonomyExplorerPanelBase extends Panel {
   }
 
   /**
-   * Ensures that the document form for the given taxonomy node has been rendered.
+   * Ensures that the content form for the given taxonomy node has been rendered.
    * @param newChild the taxonomy child that has been selected/created
    * @param callback the callback method to invoke afterwards, no parameters required
    */
@@ -371,9 +371,9 @@ class TaxonomyExplorerPanelBase extends Panel {
   }
 
   /**
-   * Updates after the selected node has been changed. The document form dispatcher is updated afterwards
+   * Updates after the selected node has been changed. The content form dispatcher is updated afterwards
    * with the selected content or hidden, if no content is selected.
-   * @param node The node to display the Document Form Dispatcher for.
+   * @param node The node to display the Content Form Dispatcher for.
    * @param titleFocus True to focus the title field after selection
    */
   updateTaxonomyNodeForm(node: TaxonomyNode, titleFocus: boolean): void {
@@ -408,7 +408,7 @@ class TaxonomyExplorerPanelBase extends Panel {
         this.setBusy(false);
       }
     } else {
-      //hide the document dispatcher panel!
+      //hide the content dispatcher panel!
       dfd.hide();
       this.setBusy(false);
     }
@@ -687,7 +687,7 @@ class TaxonomyExplorerPanelBase extends Panel {
   }
 
   /**
-   * Delegates the tab selection event to the tabbed document form dispatcher and selected
+   * Delegates the tab selection event to the tabbed content form dispatcher and selected
    * the hidden tab in the form.
    * @param tabPanel the artificial visible tab panel
    */
@@ -707,7 +707,7 @@ class TaxonomyExplorerPanelBase extends Panel {
 
   /**
    * Executes on node change:
-   * updates the tabs by reading the tab information from the tabbed document form dispatcher.
+   * updates the tabs by reading the tab information from the tabbed content form dispatcher.
    */
   #updateTabs(): void {
     TaxonomyExplorerPanelBase.#getTabs().removeListener("tabchange", TaxonomyExplorerPanelBase.#onTabChange);

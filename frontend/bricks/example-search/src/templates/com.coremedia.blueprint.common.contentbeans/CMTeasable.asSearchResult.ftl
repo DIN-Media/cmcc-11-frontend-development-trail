@@ -41,12 +41,12 @@
     <#if !bp.isEmptyRichtext(self.teaserText!"")>
       <p<@preview.metadata "properties.teaserText" />>
         <@search.renderDate date=self.externallyDisplayedDate />
-        <span<@preview.metadata "properties.teaserText" />>${bp.truncateHighlightedText((highlightingItem["teaserText"][0])!"", teaserLength)?no_esc}</span>
+        <span<@preview.metadata "properties.teaserText" />>${bp.truncateHighlightedText((highlightingItem["teaserText"][0])!self.teaserText!"", teaserLength)?no_esc}</span>
       </p>
     <#elseif htmlDescription?has_content>
       <p class="cm-search-result__text">
         <@search.renderDate date=self.externallyDisplayedDate />
-        <span<@preview.metadata "properties.htmlDescription" />>${bp.truncateHighlightedText((highlightingItem["htmlDescription"][0])!self.teaserText!"", teaserLength)?no_esc}</span>
+        <span<@preview.metadata "properties.htmlDescription" />>${bp.truncateHighlightedText((highlightingItem["htmlDescription"][0])!self.htmlDescription!"", teaserLength)?no_esc}</span>
       </p>
     <#else>
       <p class="cm-search-result__text">

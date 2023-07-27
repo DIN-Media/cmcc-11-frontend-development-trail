@@ -1,20 +1,23 @@
 package com.coremedia.ecommerce.studio.rest;
 
 import com.coremedia.cap.content.Content;
+import com.coremedia.cap.content.ContentRepository;
+import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cap.struct.Struct;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
 import com.coremedia.livecontext.ecommerce.catalog.Category;
 import com.coremedia.livecontext.ecommerce.catalog.Product;
 import com.coremedia.livecontext.ecommerce.common.CommerceBean;
+import com.coremedia.rest.cap.intercept.InterceptService;
 import com.google.common.annotations.VisibleForTesting;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
-import javax.inject.Named;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,13 +28,20 @@ import static java.lang.invoke.MethodHandles.lookup;
 /**
  * A REST service to augment a product.
  */
-@Named
+@Service
 public class ProductAugmentationHelper extends AugmentationHelperBase<Product> {
   private static final Logger LOGGER = LoggerFactory.getLogger(lookup().lookupClass());
   private static final String CM_EXTERNAL_PRODUCT = "CMExternalProduct";
   private static final String PAGEGRID_STRUCT_PROPERTY = "pdpPagegrid";
   static final String TITLE = "title";
-  private AugmentationService categoryAugmentationService;
+
+  ProductAugmentationHelper(@NonNull @Qualifier("categoryAugmentationService") AugmentationService categoryAugmentationService,
+                            @NonNull ContentRepository contentRepository,
+                            @NonNull InterceptService interceptService,
+                            @NonNull SitesService sitesService,
+                            @NonNull @Value("${livecontext.augmentation.path:" + DEFAULT_BASE_FOLDER_NAME + "}") String baseFolderName) {
+    super(categoryAugmentationService, contentRepository, interceptService, sitesService, baseFolderName);
+  }
 
   @Override
   @Nullable
@@ -43,7 +53,7 @@ public class ProductAugmentationHelper extends AugmentationHelperBase<Product> {
     }
 
     // create folder hierarchy for category
-    Content categoryFolder = contentRepository.createSubfolders(computerFolderPath(parentCategory, site, getBaseFolderName(),
+    Content categoryFolder = getContentRepository().createSubfolders(computerFolderPath(parentCategory, site, getBaseFolderName(),
             (CommerceBean bean) -> getCatalog(parentCategory)));
 
     if (categoryFolder == null) {
@@ -51,10 +61,7 @@ public class ProductAugmentationHelper extends AugmentationHelperBase<Product> {
     }
 
     Map<String, Object> properties = buildProductContentDocumentProperties(product);
-
-    if (augmentationService != null) {
-      initializeLayoutSettings(product, properties);
-    }
+    initializeLayoutSettings(product, properties);
 
     return createContent(CM_EXTERNAL_PRODUCT, categoryFolder, computeDocumentName(product), properties);
   }
@@ -84,11 +91,6 @@ public class ProductAugmentationHelper extends AugmentationHelperBase<Product> {
     properties.put(PAGEGRID_STRUCT_PROPERTY, structWithLayoutLink);
   }
 
-  @Override
-  Content getCategoryContent(@NonNull Category category) {
-    return categoryAugmentationService.getContent(category);
-  }
-
   /**
    * Builds properties for an <code>CMExternalProduct</code> document.
    */
@@ -110,15 +112,4 @@ public class ProductAugmentationHelper extends AugmentationHelperBase<Product> {
             .replace('/', '_');
   }
 
-  @Autowired(required = false)
-  @Qualifier("productAugmentationService")
-  public void setAugmentationService(AugmentationService augmentationService) {
-    this.augmentationService = augmentationService;
-  }
-
-  @Autowired(required = false)
-  @Qualifier("categoryAugmentationService")
-  public void setCategoryAugmentationService(AugmentationService categoryAugmentationService) {
-    this.categoryAugmentationService = categoryAugmentationService;
-  }
 }

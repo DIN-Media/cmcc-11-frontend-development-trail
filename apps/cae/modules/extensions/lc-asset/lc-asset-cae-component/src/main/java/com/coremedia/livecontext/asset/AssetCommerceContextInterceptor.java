@@ -1,6 +1,5 @@
 package com.coremedia.livecontext.asset;
 
-import com.coremedia.blueprint.base.livecontext.util.LocaleHelper;
 import com.coremedia.blueprint.ecommerce.cae.AbstractCommerceContextInterceptor;
 import com.coremedia.cap.multisite.Site;
 import com.coremedia.livecontext.handler.util.LiveContextSiteResolver;

@@ -8,17 +8,17 @@
   "version": "1.0.0",
   "engines": {
     "node": "18",
-    "pnpm": "^8.1"
+    "pnpm": "^8.6"
   },
   "dependencies": {
     "@coremedia/cm-logger": "workspace:*",
     "@coremedia/tool-utils": "workspace:*",
     "glob": "^7.2.3",
-    "semver": "^7.5.0"
+    "semver": "^7.5.4"
   },
   "devDependencies": {
     "jest": "^27.5.1",
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,json}\"",

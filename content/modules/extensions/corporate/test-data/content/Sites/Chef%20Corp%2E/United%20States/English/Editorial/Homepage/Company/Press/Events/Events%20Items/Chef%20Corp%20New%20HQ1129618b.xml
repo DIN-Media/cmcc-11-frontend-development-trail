@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<CMArticle folder="/Sites/Chef Corp./United States/English/Editorial/Homepage/Company/Press/Events/Events Items" name="Chef Corp New HQ Opening Party Article">
+<CMArticle folder="/Sites/Chef Corp./United States/English/Editorial/Homepage/Company/Press/Events/Events Items" name="Chef Corp New HQ Opening Party Article" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
 <externalRefId></externalRefId>
 <locale>en-US</locale>
 <master>
@@ -7,7 +7,7 @@
 <viewtype>
 </viewtype>
 <localSettings>
-<Struct xmlns="http://www.coremedia.com/2008/struct">
+<Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
 <BooleanProperty Name="callToActionDisabled">false</BooleanProperty>
 <StringProperty Name="callToActionCustomText"/>
 </Struct>
@@ -31,9 +31,8 @@
 <contexts>
 </contexts>
 <teaserTitle>New HQ Opening Party</teaserTitle>
-<teaserText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0"><p>Chef Corp. will host a grand party on June 15 at our new offices in Downtown Chicago. Meet celebrity chefs and taste their creations. </p></div></teaserText>
-<detailText grammarName="coremedia-richtext-1.0">
-  <div xmlns="http://www.coremedia.com/2003/richtext-1.0"><p/><p>Chef Corp. will celebrate the opening of our new headquarters building in Downtown Chicago with a grand opening party. Celebrity Chefs Jamie Bourdain and Oliver Anthony will impress our guests with their famous culinary creations cooked live in our show kitchen. Don't miss out on the magnificent views from our rooftop viewing terrace - and chill in the sunset with drinks from our well-equipped bar mixed by the famous, Michelin 3 star rated "mixologist" Aaron Spangler.</p></div></detailText>
+<teaserText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p>Chef Corp. will host a grand party on June 15 at our new offices in Downtown Chicago. Meet celebrity chefs and taste their creations. </p></div></teaserText>
+<detailText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p/><p>Chef Corp. will celebrate the opening of our new headquarters building in Downtown Chicago with a grand opening party. Celebrity Chefs Jamie Bourdain and Oliver Anthony will impress our guests with their famous culinary creations cooked live in our show kitchen. Don't miss out on the magnificent views from our rooftop viewing terrace - and chill in the sunset with drinks from our well-equipped bar mixed by the famous, Michelin 3 star rated "mixologist" Aaron Spangler.</p></div></detailText>
 <pictures>
 <link href="../../../../../Assets/Pictures/News/Chef%20Corp%2E%20New%20HQ%20in%20Downtown%20Ch43bdfe6f.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Editorial/Assets/Pictures/News/Chef%20Corp%2E%20New%20HQ%20in%20Downtown%20Chicago%20%20Picture"/>
 </pictures>

@@ -7,17 +7,16 @@ import CatalogObject from "../../src/model/CatalogObject";
 
 class CatalogObjectTest extends AbstractCatalogTest {
 
-  #catalogObject: CatalogObject = null;
+  #catalogObject: CatalogObject & RemoteBean = null;
 
   override setUp(): void {
     super.setUp();
-    this.#catalogObject = as(beanFactory._.getRemoteBean("livecontext/store/HeliosSiteId"), CatalogObject);
+    this.#catalogObject = beanFactory._.getRemoteBeanOfType("livecontext/store/HeliosSiteId", CatalogObject);
   }
 
-  testCatalogObject(): void {
-    as(this.#catalogObject, RemoteBean).load(this.addAsync((): void =>
-      Assert.assertEquals("PerfectChefESite", this.#catalogObject.getName())
-    , 500));
+  async testCatalogObject(): Promise<void> {
+    await this.#catalogObject.load();
+    Assert.assertEquals("PerfectChefESite", this.#catalogObject.getName());
   }
 
 }

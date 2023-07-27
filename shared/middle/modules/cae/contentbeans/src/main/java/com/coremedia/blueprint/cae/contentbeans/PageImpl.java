@@ -154,8 +154,6 @@ public class PageImpl extends AbstractPageImpl implements Page {
     return codeResourcesAsBeans(CMNavigationBase.JAVA_SCRIPT, CodeResourcesModel.MODE_IE);
   }
 
-
-
   // --- hash & cache -----------------------------------------------
 
   @Override
@@ -190,7 +188,6 @@ public class PageImpl extends AbstractPageImpl implements Page {
     developer = other.developer;
     mergeCodeResources = other.mergeCodeResources;
   }
-
 
   // --- internal ---------------------------------------------------
 

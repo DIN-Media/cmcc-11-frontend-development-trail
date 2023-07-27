@@ -1,7 +1,6 @@
 package com.coremedia.livecontext.asset;
 
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.CatalogAliasTranslationService;
-import com.coremedia.blueprint.base.livecontext.util.LocaleHelper;
 import com.coremedia.blueprint.cae.handlers.HandlerBase;
 import com.coremedia.cap.common.Blob;
 import com.coremedia.cap.content.Content;

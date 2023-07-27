@@ -97,8 +97,6 @@ class TaxonomyUtil {
     }
     if (!content) {
       callback.call(null, true);
-    } else if (content.isCheckedOutByOther()) {
-      callback.call(null, false);
     } else if (!content.getState().readable) {
       callback.call(null, false);
     } else {

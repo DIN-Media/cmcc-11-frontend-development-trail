@@ -1,20 +1,18 @@
 package com.coremedia.livecontext.navigation;
 
+import com.coremedia.blueprint.base.livecontext.augmentation.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.blueprint.common.navigation.Linkable;
 import com.coremedia.cap.content.Content;
 import com.coremedia.cap.multisite.Site;
 import com.coremedia.livecontext.context.LiveContextNavigation;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
 import com.coremedia.livecontext.ecommerce.catalog.Category;
-import com.coremedia.livecontext.tree.CommerceTreeRelation;
-import com.coremedia.livecontext.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.objectserver.beans.ContentBeanFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Collection;
@@ -36,9 +34,6 @@ public class LiveContextNavigationTreeRelationTest {
   private Category augmentedCategory;
 
   @Mock
-  private CommerceTreeRelation treeRelation;
-
-  @Mock
   private AugmentationService augmentationService;
 
   @Mock
@@ -47,9 +42,8 @@ public class LiveContextNavigationTreeRelationTest {
   @Mock
   private Content content;
 
-  @InjectMocks
-  @Spy
-  private ExternalChannelContentTreeRelation delegate;
+  @Mock
+  private ExternalChannelContentTreeRelation externalChannelContentTreeRelation;
 
   @InjectMocks
   private LiveContextNavigationFactory navigationFactory;
@@ -60,9 +54,8 @@ public class LiveContextNavigationTreeRelationTest {
   @Before
   public void setUp() {
     testling.setNavigationFactory(navigationFactory);
-    testling.setDelegate(delegate);
+    testling.setDelegate(externalChannelContentTreeRelation);
     navigationFactory.setTreeRelation(testling);
-    delegate.setCommerceTreeRelation(treeRelation);
 
     when(augmentationService.getContent(augmentedCategory)).thenReturn(content);
   }

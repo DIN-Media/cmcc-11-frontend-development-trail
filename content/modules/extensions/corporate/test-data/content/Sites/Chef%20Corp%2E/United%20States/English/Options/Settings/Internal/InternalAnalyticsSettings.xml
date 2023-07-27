@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<CMSettings folder="/Sites/Chef Corp./United States/English/Options/Settings/Internal" name="InternalAnalyticsSettings" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<CMSettings folder="/Sites/Chef Corp./United States/English/Options/Settings/Internal" name="InternalAnalyticsSettings"
+            xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
   <externalRefId></externalRefId>
   <locale></locale>
   <master>

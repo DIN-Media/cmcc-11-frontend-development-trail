@@ -157,7 +157,7 @@ import WorkflowRouteKeys from "@coremedia/studio-client.workflow-services-api/ro
 interface BlueprintFormsStudioPluginConfig extends Config<BlueprintFormsStudioPluginBase> {
 }
 
-/* Configure the generic Studio components for the Blueprint document type model and use cases. */
+/* Configure the generic Studio components for the Blueprint content type model and use cases. */
 class BlueprintFormsStudioPlugin extends BlueprintFormsStudioPluginBase {
   declare Config: BlueprintFormsStudioPluginConfig;
 
@@ -451,7 +451,7 @@ class BlueprintFormsStudioPlugin extends BlueprintFormsStudioPluginBase {
           ],
         }),
 
-        /* Register document types to be allowed to be dropped */
+        /* Register content types to be allowed to be dropped */
         new ConfigureDocumentTypes({
           names: "CMLinkable",
           richTextLinkable: true,

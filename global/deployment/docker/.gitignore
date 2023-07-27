@@ -19,6 +19,7 @@ overlays/
 # OS X
 .DS_Store
 /coremedia-licenses/*.zip
+/coremedia-keystore/.keystore*
 # docker
 /docker-compose*.yml
 /.env

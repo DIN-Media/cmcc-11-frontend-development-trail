@@ -2,6 +2,7 @@ package com.coremedia.blueprint.caas.augmentation.adapter;
 
 import com.coremedia.blueprint.base.caas.model.adapter.PageGridAdapter;
 import com.coremedia.blueprint.base.caas.model.adapter.PageGridAdapterFactory;
+import com.coremedia.blueprint.base.livecontext.augmentation.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGridService;
 import com.coremedia.blueprint.caas.augmentation.CommerceConnectionHelper;
 import com.coremedia.blueprint.caas.augmentation.CommerceRefHelper;
@@ -17,7 +18,6 @@ import com.coremedia.livecontext.ecommerce.catalog.ProductVariant;
 import com.coremedia.livecontext.ecommerce.common.CommerceBean;
 import com.coremedia.livecontext.ecommerce.common.CommerceConnection;
 import com.coremedia.livecontext.ecommerce.common.StoreContext;
-import com.coremedia.livecontext.tree.ExternalChannelContentTreeRelation;
 import edu.umd.cs.findbugs.annotations.DefaultAnnotation;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import graphql.schema.DataFetchingEnvironment;

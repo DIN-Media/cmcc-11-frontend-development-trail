@@ -39,6 +39,7 @@ packages:
   - "apps/workflow/extensions/lc"
   - "apps/workflow/extensions/p13n"
   - "global/studio"
+  - "shared/ext/studio-apps-window-connection"
   - "shared/js/blueprint-doctypes"
   - "shared/js/ckeditor5"
   - "shared/js/ecommerce-doctypes"

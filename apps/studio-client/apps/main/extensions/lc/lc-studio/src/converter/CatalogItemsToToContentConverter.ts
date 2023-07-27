@@ -5,6 +5,7 @@ import ProductVariant from "@coremedia-blueprint/studio-client.main.ec-studio-mo
 import ConverterTargetKeys from "@coremedia/studio-client.cap-base-models/converter/ConverterTargetKeys";
 import ItemConverter from "@coremedia/studio-client.cap-base-models/converter/ItemConverter";
 import ToContentConverterHint from "@coremedia/studio-client.cap-base-services-api/converter/content/ToContentConverterHint";
+import ItemConverterHint from "@coremedia/studio-client.cap-base-services-api/converter/ItemConverterHint";
 import jobService from "@coremedia/studio-client.cap-rest-client/common/jobService";
 import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
 import sitesService from "@coremedia/studio-client.multi-site-models/global/sitesService";
@@ -26,13 +27,13 @@ class CatalogItemsToToContentConverter implements ItemConverter {
     return ConverterTargetKeys.CONTENT;
   }
 
-  handles(item: any): Promise<any> {
+  handles(item: any): Promise<boolean> {
     return new Promise((resolve: AnyFunction): void => {
       resolve(is(item, Product) || is(item, Category));
     });
   }
 
-  computeHints(items: Array<any>, options: any = null): Promise<any> {
+  computeHints(items: Array<any>, options: any = null): Promise<ItemConverterHint[]> {
     return new Promise((resolve: AnyFunction): void => {
       resolve(items.map((item: CatalogObject): ToContentConverterHint => {
         const contentConverterHint = new ToContentConverterHint();
@@ -65,7 +66,7 @@ class CatalogItemsToToContentConverter implements ItemConverter {
     return null;
   }
 
-  convert(commerceObjects: Array<any>, options: any = null): Promise<any> {
+  convert(commerceObjects: Array<any>, options: any = null): Promise<any[]> {
     return new Promise((resolve: AnyFunction): void => {
       const targetFolder = CatalogItemsToToContentConverter.#evaluateTargetFolder(options);
 

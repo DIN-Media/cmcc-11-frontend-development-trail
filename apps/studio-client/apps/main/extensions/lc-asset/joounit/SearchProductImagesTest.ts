@@ -1,20 +1,29 @@
 import Store from "@coremedia-blueprint/studio-client.main.ec-studio-model/model/Store";
 import ECommerceStudioPlugin from "@coremedia-blueprint/studio-client.main.ec-studio/ECommerceStudioPlugin";
-import ECommerceStudioPlugin_properties from "@coremedia-blueprint/studio-client.main.ec-studio/ECommerceStudioPlugin_properties";
-import CatalogRepositoryContextMenu from "@coremedia-blueprint/studio-client.main.ec-studio/components/repository/CatalogRepositoryContextMenu";
-import CatalogRepositoryList from "@coremedia-blueprint/studio-client.main.ec-studio/components/repository/CatalogRepositoryList";
-import CatalogRepositoryListContainer from "@coremedia-blueprint/studio-client.main.ec-studio/components/repository/CatalogRepositoryListContainer";
-import CatalogTreeDragDropModel from "@coremedia-blueprint/studio-client.main.ec-studio/components/tree/impl/CatalogTreeDragDropModel";
+import ECommerceStudioPlugin_properties
+  from "@coremedia-blueprint/studio-client.main.ec-studio/ECommerceStudioPlugin_properties";
+import CatalogRepositoryContextMenu
+  from "@coremedia-blueprint/studio-client.main.ec-studio/components/repository/CatalogRepositoryContextMenu";
+import CatalogRepositoryList
+  from "@coremedia-blueprint/studio-client.main.ec-studio/components/repository/CatalogRepositoryList";
+import CatalogRepositoryListContainer
+  from "@coremedia-blueprint/studio-client.main.ec-studio/components/repository/CatalogRepositoryListContainer";
+import CatalogTreeDragDropModel
+  from "@coremedia-blueprint/studio-client.main.ec-studio/components/tree/impl/CatalogTreeDragDropModel";
 import CatalogTreeModel from "@coremedia-blueprint/studio-client.main.ec-studio/components/tree/impl/CatalogTreeModel";
 import CatalogHelper from "@coremedia-blueprint/studio-client.main.ec-studio/helper/CatalogHelper";
-import ECommerceCollectionViewExtension from "@coremedia-blueprint/studio-client.main.ec-studio/library/ECommerceCollectionViewExtension";
+import ECommerceCollectionViewExtension
+  from "@coremedia-blueprint/studio-client.main.ec-studio/library/ECommerceCollectionViewExtension";
 import LivecontextStudioPluginBase from "@coremedia-blueprint/studio-client.main.lc-studio/LivecontextStudioPluginBase";
-import LivecontextCollectionViewActionsPlugin from "@coremedia-blueprint/studio-client.main.lc-studio/library/LivecontextCollectionViewActionsPlugin";
-import LivecontextCollectionViewExtension from "@coremedia-blueprint/studio-client.main.lc-studio/library/LivecontextCollectionViewExtension";
-import LivecontextContentTreeRelation from "@coremedia-blueprint/studio-client.main.lc-studio/library/LivecontextContentTreeRelation";
+import LivecontextCollectionViewActionsPlugin
+  from "@coremedia-blueprint/studio-client.main.lc-studio/library/LivecontextCollectionViewActionsPlugin";
+import LivecontextCollectionViewExtension
+  from "@coremedia-blueprint/studio-client.main.lc-studio/library/LivecontextCollectionViewExtension";
+import LivecontextContentTreeRelation
+  from "@coremedia-blueprint/studio-client.main.lc-studio/library/LivecontextContentTreeRelation";
 import contentTreeRelationRegistry from "@coremedia/studio-client.cap-base-models/content/contentTreeRelationRegistry";
 import ContentImpl from "@coremedia/studio-client.cap-rest-client-impl/content/impl/ContentImpl";
-import Step from "@coremedia/studio-client.client-core-test-helper/Step";
+import { waitUntil } from "@coremedia/studio-client.client-core-test-helper/async";
 import RemoteBean from "@coremedia/studio-client.client-core/data/RemoteBean";
 import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpression";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
@@ -23,14 +32,21 @@ import SwitchingContainer from "@coremedia/studio-client.ext.ui-components/compo
 import ContextMenuEventAdapter from "@coremedia/studio-client.ext.ui-components/util/ContextMenuEventAdapter";
 import TableUtil from "@coremedia/studio-client.ext.ui-components/util/TableUtil";
 import CollectionView from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionView";
-import CollectionViewConstants from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionViewConstants";
-import CollectionViewContainer from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionViewContainer";
-import CollectionViewManagerInternal from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionViewManagerInternal";
-import CollectionViewModel from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionViewModel";
+import CollectionViewConstants
+  from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionViewConstants";
+import CollectionViewContainer
+  from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionViewContainer";
+import CollectionViewManagerInternal
+  from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionViewManagerInternal";
+import CollectionViewModel
+  from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionViewModel";
 import LibraryTree from "@coremedia/studio-client.main.editor-components/sdk/collectionview/tree/LibraryTree";
-import ComponentBasedEntityWorkAreaTabType from "@coremedia/studio-client.main.editor-components/sdk/desktop/ComponentBasedEntityWorkAreaTabType";
-import SidePanelManagerImpl from "@coremedia/studio-client.main.editor-components/sdk/desktop/sidepanel/SidePanelManagerImpl";
-import SidePanelStudioPlugin from "@coremedia/studio-client.main.editor-components/sdk/desktop/sidepanel/SidePanelStudioPlugin";
+import ComponentBasedEntityWorkAreaTabType
+  from "@coremedia/studio-client.main.editor-components/sdk/desktop/ComponentBasedEntityWorkAreaTabType";
+import SidePanelManagerImpl
+  from "@coremedia/studio-client.main.editor-components/sdk/desktop/sidepanel/SidePanelManagerImpl";
+import SidePanelStudioPlugin
+  from "@coremedia/studio-client.main.editor-components/sdk/desktop/sidepanel/SidePanelStudioPlugin";
 import sidePanelManager from "@coremedia/studio-client.main.editor-components/sdk/desktop/sidepanel/sidePanelManager";
 import editorContext from "@coremedia/studio-client.main.editor-components/sdk/editorContext";
 import Ext from "@jangaroo/ext-ts";
@@ -159,68 +175,54 @@ class SearchProductImagesTest extends AbstractCatalogAssetTest {
   /**
    * Test the product images search
    */
-  testSearchProductImages(): void {
-    this.chain(
-      this.#initStore(),
-      this.loadContentRepository(),
-      this.waitForContentRepositoryLoaded(),
-      this.loadContentTypes(),
-      this.waitForContentTypesLoaded(),
-      this.#createTestlingStep(),
-      this.#selectStore(),
-      this.#waitUntilStoreIsSelected(),
-      this.#selectNextCatalogTreeNode(),
-      this.#waitUntilMarketingSpotsAreSelected(),
-      this.#selectNextCatalogTreeNode(),
-      this.#waitUntilProductCatalogIsSelected(),
-      //wait for the product catalog node to be expanded
-      this.#waitUntilSelectedTreeNodeIsExpanded(),
-      this.#selectNextCatalogTreeNode(),
-      //wait for the Apparel node to be expanded
-      this.#waitUntilSelectedTreeNodeIsExpanded(),
-      this.#selectNextCatalogTreeNode(),
-      //wait for the women node to be expanded
-      this.#waitUntilSelectedTreeNodeIsExpanded(),
-      this.#selectNextCatalogTreeNode(),
-      //wait for the women node to be expanded
-      this.#waitUntilSelectedTreeNodeIsExpanded(),
-      this.#selectNextCatalogTreeNode(),
-      //wait for the women node to be expanded
-      this.#waitUntilSelectedTreeNodeIsExpanded(),
-      this.#selectNextCatalogTreeNode(),
+  async testSearchProductImages(): Promise<void> {
+    await this.#initStore();
+    await this.waitForContentRepositoryLoaded();
+    await this.waitForContentTypesLoaded();
+    this.#createTestling();
+    await this.#selectStore();
+    await this.#waitUntilStoreIsSelected();
+    this.#selectNextCatalogTreeNode();
+    await this.#waitUntilMarketingSpotsAreSelected();
+    this.#selectNextCatalogTreeNode();
+    await this.#waitUntilProductCatalogIsSelected();
+    //wait for the product catalog node to be expanded
+    await this.#waitUntilSelectedTreeNodeIsExpanded();
+    this.#selectNextCatalogTreeNode();
+    //wait for the Apparel node to be expanded
+    await this.#waitUntilSelectedTreeNodeIsExpanded();
+    this.#selectNextCatalogTreeNode();
+    //wait for the women node to be expanded
+    await this.#waitUntilSelectedTreeNodeIsExpanded();
+    this.#selectNextCatalogTreeNode();
+    //wait for the women node to be expanded
+    await this.#waitUntilSelectedTreeNodeIsExpanded();
+    this.#selectNextCatalogTreeNode();
+    //wait for the women node to be expanded
+    await this.#waitUntilSelectedTreeNodeIsExpanded();
+    this.#selectNextCatalogTreeNode();
 
-      //now the Dresses node is selected
-      this.#waitUntilProductIsLoadedInRepositoryList(),
-      this.#waitUntilSearchProductPicturesToolbarButtonIsInvisible(),
-      this.#openContextMenuOnFirstItemOfRepositoryList(),
-      this.#waitUntilRepositoryListContextMenuOpened(),
-      this.#waitUntilSearchProductPicturesToolbarButtonIsEnabled(),
-      this.#waitUntilSearchProductPicturesContextMenuIsEnabled(),
-      this.#searchProductPicturesUsingContextMenu(),
-      this.#waitUntilSearchModeIsActive(),
-      this.#waitUntilSearchTextIsPartnumber(),
-      this.#waitUntilSearchTypeIsPicture(),
-      this.#waitUntilSearchFolderIsRoot(),
-    );
+    //now the Dresses node is selected
+    await this.#waitUntilProductIsLoadedInRepositoryList();
+    await this.#waitUntilSearchProductPicturesToolbarButtonIsInvisible();
+    this.#openContextMenuOnFirstItemOfRepositoryList();
+    await this.#waitUntilRepositoryListContextMenuOpened();
+    await this.#waitUntilSearchProductPicturesToolbarButtonIsEnabled();
+    await this.#waitUntilSearchProductPicturesContextMenuIsEnabled();
+    this.#searchProductPicturesUsingContextMenu();
+    await this.#waitUntilSearchModeIsActive();
+    await this.#waitUntilSearchTextIsPartnumber();
+    await this.#waitUntilSearchTypeIsPicture();
+    await this.#waitUntilSearchFolderIsRoot();
   }
 
-  #createTestlingStep(): Step {
-    return new Step("Create the testling",
-      (): boolean =>
-        true
-      , bind(
-        this, this.#createTestling),
-    );
-  }
-
-  #initStore(): Step {
-    return new Step("Load Store Data",
-      (): boolean => {
-        const store: Store = CatalogHelper.getInstance().getActiveStoreExpression().getValue();
-        return store !== null && store !== undefined;
-      },
-      CatalogHelper.getInstance().getActiveStoreExpression().getValue(),
-    );
+  async #initStore(): Promise<void> {
+    // Load Store Data:
+    await waitUntil((): boolean => {
+      const store: Store = CatalogHelper.getInstance().getActiveStoreExpression().getValue();
+      return store !== null && store !== undefined;
+    });
+    CatalogHelper.getInstance().getActiveStoreExpression().getValue();
   }
 
   #getRepositoryContainer(): CatalogRepositoryList {
@@ -231,177 +233,133 @@ class SearchProductImagesTest extends AbstractCatalogAssetTest {
     return as(repositoryListContainer.getComponent(CollectionViewConstants.LIST_VIEW), CatalogRepositoryList);
   }
 
-  #selectStore(): Step {
-    return new Step("Select Store Node",
-      (): boolean => {
-        const store: Store = CatalogHelper.getInstance().getActiveStoreExpression().getValue();
-        this.#testling.setOpenPath(store);
-        return !!this.#getRepositoryContainer() && this.#getRepositoryContainer().rendered && !!this.#getRepositoryContainer().getStore();
-      },
-    );
+  async #selectStore(): Promise<void> {
+    // Select Store Node:
+    await waitUntil((): boolean => {
+      const store: Store = CatalogHelper.getInstance().getActiveStoreExpression().getValue();
+      this.#testling.setOpenPath(store);
+      return !!this.#getRepositoryContainer() && this.#getRepositoryContainer().rendered && !!this.#getRepositoryContainer().getStore();
+    });
   }
 
-  #waitUntilStoreIsSelected(): Step {
-    return new Step("catalog tree should select the store",
-      (): boolean => {
-        const selection = this.#catalogTree.getSelection();
-        return selection.length === 1 && cast(Model, selection[0]).get("text") === "PerfectChefESite";
-      },
-      (): void => {
-        const selectionModel = cast(TreeSelectionModel, this.#catalogTree.getSelectionModel());
-        selectionModel.getSelection()[0]["expand"]();
-      });
+  async #waitUntilStoreIsSelected(): Promise<void> {
+    // catalog tree should select the store:
+    await waitUntil((): boolean => {
+      const selection = this.#catalogTree.getSelection();
+      return selection.length === 1 && cast(Model, selection[0]).get("text") === "PerfectChefESite";
+    });
+    const selectionModel = cast(TreeSelectionModel, this.#catalogTree.getSelectionModel());
+    selectionModel.getSelection()[0]["expand"]();
   }
 
-  #selectNextCatalogTreeNode(): Step {
-    return new Step("selecting next catalog tree node",
-      (): boolean =>
-        true
-
-      ,
-      (): void => {
-        const selectionModel = cast(TreeSelectionModel, this.#catalogTree.getSelectionModel());
-        selectionModel.selectNext();
-        selectionModel.getSelection()[0]["expand"]();
-      });
+  #selectNextCatalogTreeNode(): void {
+    // selecting next catalog tree node:
+    const selectionModel = cast(TreeSelectionModel, this.#catalogTree.getSelectionModel());
+    selectionModel.selectNext();
+    selectionModel.getSelection()[0]["expand"]();
   }
 
-  #waitUntilMarketingSpotsAreSelected(): Step {
-    return new Step("catalog tree should select the marketing root",
-      (): boolean =>
-        this.#catalogTree.getSelection().length > 0 &&
-                      ECommerceStudioPlugin_properties.StoreTree_marketing_root
-                      === cast(Model, this.#catalogTree.getSelection()[0]).get("text"),
-
-    );
+  async #waitUntilMarketingSpotsAreSelected(): Promise<void> {
+    // catalog tree should select the marketing root:
+    await waitUntil((): boolean =>
+      this.#catalogTree.getSelection().length > 0 &&
+      ECommerceStudioPlugin_properties.StoreTree_marketing_root
+      === cast(Model, this.#catalogTree.getSelection()[0]).get("text"));
   }
 
-  #waitUntilProductCatalogIsSelected(): Step {
-    return new Step("catalog tree should select the product catalog",
-      (): boolean =>
-        this.#catalogTree.getSelection().length > 0 &&
-                      ("Product Catalog" === cast(Model, this.#catalogTree.getSelection()[0]).get("text") ||
-                      "Produktkatalog" === cast(Model, this.#catalogTree.getSelection()[0]).get("text"))
+  async #waitUntilProductCatalogIsSelected(): Promise<void> {
+    // catalog tree should select the product catalog:
+    await waitUntil((): boolean =>
+      this.#catalogTree.getSelection().length > 0 &&
+        ("Product Catalog" === cast(Model, this.#catalogTree.getSelection()[0]).get("text") ||
+          "Produktkatalog" === cast(Model, this.#catalogTree.getSelection()[0]).get("text")));
 
-      ,
-      (): void => {
-        cast(TreeSelectionModel, this.#catalogTree.getSelectionModel()).selectNext();
-      });
+    cast(TreeSelectionModel, this.#catalogTree.getSelectionModel()).selectNext();
   }
 
-  #waitUntilRepositoryListContextMenuOpened(): Step {
-    return new Step("Wait for the context menu on the repository list to be opened",
-      (): boolean =>
-        !!this.#findCatalogRepositoryContextMenu(),
-
-    );
+  async #waitUntilRepositoryListContextMenuOpened(): Promise<void> {
+    // Wait for the context menu on the repository list to be opened:
+    await waitUntil((): boolean =>
+      !!this.#findCatalogRepositoryContextMenu());
   }
 
   #getProductPicturesSearchButton(): Button {
     return cast(Button, this.#getActiveToolbar().queryById(LivecontextAssetStudioPlugin.SEARCH_PRODUCT_PICTURES_BUTTON_ITEM_ID));
   }
 
-  #waitUntilSearchModeIsActive(): Step {
-    return new Step("Search Mode should be active",
-      (): boolean =>
-        this.#getCollectionModesContainer().getActiveItemValue() === CollectionViewModel.SEARCH_MODE,
-
-    );
+  async #waitUntilSearchModeIsActive(): Promise<void> {
+    // Search Mode should be active:
+    await waitUntil((): boolean =>
+      this.#getCollectionModesContainer().getActiveItemValue() === CollectionViewModel.SEARCH_MODE);
   }
 
-  #waitUntilSearchTextIsPartnumber(): Step {
-    return new Step("Search Text should be the part number of the product",
-      (): boolean => {
-        const mainStateBean = this.#testling.getCollectionViewModel().getMainStateBean();
-        return mainStateBean.get(CollectionViewModel.SEARCH_TEXT_PROPERTY) === "AuroraWMDRS-1";
-      },
-    );
+  async #waitUntilSearchTextIsPartnumber(): Promise<void> {
+    // Search Text should be the part number of the product:
+    await waitUntil((): boolean => {
+      const mainStateBean = this.#testling.getCollectionViewModel().getMainStateBean();
+      return mainStateBean.get(CollectionViewModel.SEARCH_TEXT_PROPERTY) === "AuroraWMDRS-1";
+    });
   }
 
-  #waitUntilSearchTypeIsPicture(): Step {
-    return new Step("Search Type should be CMPicture",
-      (): boolean => {
-        const mainStateBean = this.#testling.getCollectionViewModel().getMainStateBean();
-        return mainStateBean.get(CollectionViewModel.CONTENT_TYPE_PROPERTY) === "CMPicture";
-      },
-    );
+  async #waitUntilSearchTypeIsPicture(): Promise<void> {
+    // Search Type should be CMPicture:
+    await waitUntil((): boolean => {
+      const mainStateBean = this.#testling.getCollectionViewModel().getMainStateBean();
+      return mainStateBean.get(CollectionViewModel.CONTENT_TYPE_PROPERTY) === "CMPicture";
+    });
   }
 
-  #waitUntilSearchFolderIsRoot(): Step {
-    return new Step("Search Folder should be root",
-      (): boolean => {
-        const mainStateBean = this.#testling.getCollectionViewModel().getMainStateBean();
-        const folder: ContentImpl = mainStateBean.get(CollectionViewModel.FOLDER_PROPERTY);
-        return folder.getPath() === "/";
-      },
-    );
+  async #waitUntilSearchFolderIsRoot(): Promise<void> {
+    // Search Folder should be root:
+    await waitUntil((): boolean => {
+      const mainStateBean = this.#testling.getCollectionViewModel().getMainStateBean();
+      const folder: ContentImpl = mainStateBean.get(CollectionViewModel.FOLDER_PROPERTY);
+      return folder.getPath() === "/";
+    });
   }
 
-  #waitUntilProductIsLoadedInRepositoryList(): Step {
-    return new Step("Wait for the repository list to be loaded with products",
-      (): boolean =>
-        this.#getRepositoryList().getStore().getCount() > 0 &&
-                      Ext.get(TableUtil.getCellAsDom(this.#getRepositoryList(), 0, 0)).query("[aria-label]")[0].getAttribute("aria-label") === ECommerceStudioPlugin_properties.Product_label,
-
-    );
+  async #waitUntilProductIsLoadedInRepositoryList(): Promise<void> {
+    // Wait for the repository list to be loaded with products:
+    await waitUntil((): boolean =>
+      this.#getRepositoryList().getStore().getCount() > 0 &&
+      Ext.get(TableUtil.getCellAsDom(this.#getRepositoryList(), 0, 0)).query("[aria-label]")[0].getAttribute("aria-label") === ECommerceStudioPlugin_properties.Product_label);
   }
 
-  #waitUntilSelectedTreeNodeIsExpanded(): Step {
-    return new Step("Wait for the selected node of the catalog tree to be expanded",
-      (): boolean => {
-        const selectionModel = cast(TreeSelectionModel, this.#catalogTree.getSelectionModel());
-        const selection = selectionModel.getSelection();
-        return selection.length === 1 && cast(NodeInterface, selection[0]).isExpanded();
-      },
-    );
+  async #waitUntilSelectedTreeNodeIsExpanded(): Promise<void> {
+    // Wait for the selected node of the catalog tree to be expanded:
+    await waitUntil((): boolean => {
+      const selectionModel = cast(TreeSelectionModel, this.#catalogTree.getSelectionModel());
+      const selection = selectionModel.getSelection();
+      return selection.length === 1 && cast(NodeInterface, selection[0]).isExpanded();
+    });
   }
 
-  #waitUntilSearchProductPicturesToolbarButtonIsInvisible(): Step {
-    return new Step("Wait for the product pictures search toolbar button is invisible",
-      (): boolean =>
-        this.#getProductPicturesSearchButton().hidden,
-
-    );
+  async #waitUntilSearchProductPicturesToolbarButtonIsInvisible(): Promise<void> {
+    // Wait for the product pictures search toolbar button is invisible:
+    await waitUntil((): boolean =>
+      this.#getProductPicturesSearchButton().hidden);
   }
 
-  #waitUntilSearchProductPicturesToolbarButtonIsEnabled(): Step {
-    return new Step("Wait for the product pictures search toolbar button is enabled",
-      (): boolean =>
-        !this.#getProductPicturesSearchButton().disabled,
-
-    );
+  async #waitUntilSearchProductPicturesToolbarButtonIsEnabled(): Promise<void> {
+    // Wait for the product pictures search toolbar button is enabled:
+    await waitUntil((): boolean =>
+      !this.#getProductPicturesSearchButton().disabled);
   }
 
-  #waitUntilSearchProductPicturesContextMenuIsEnabled(): Step {
-    return new Step("Wait for the product pictures search context menu item is enabled",
-      (): boolean =>
-        !this.#searchProductPicturesContextMenuItem.disabled,
-
-    );
+  async #waitUntilSearchProductPicturesContextMenuIsEnabled(): Promise<void> {
+    // Wait for the product pictures search context menu item is enabled:
+    await waitUntil((): boolean =>
+      !this.#searchProductPicturesContextMenuItem.disabled);
   }
 
-  #openContextMenuOnFirstItemOfRepositoryList(): Step {
-    return new Step("Open Context Menu on the first item of the repository list",
-      (): boolean =>
-        true
-      ,
-      (): void =>
-        this.#openContextMenu(this.#getRepositoryList(), 0),
-
-    );
-
+  #openContextMenuOnFirstItemOfRepositoryList(): void {
+    // Open Context Menu on the first item of the repository list:
+    this.#openContextMenu(this.#getRepositoryList(), 0);
   }
 
-  #searchProductPicturesUsingContextMenu(): Step {
-    return new Step("Search Product Pictures using the context menu",
-      (): boolean =>
-        true
-      ,
-      (): void =>
-        this.#searchProductPicturesContextMenuItem.baseAction.execute(),
-
-    );
-
+  #searchProductPicturesUsingContextMenu(): void {
+    // Search Product Pictures using the context menu:
+    this.#searchProductPicturesContextMenuItem.baseAction.execute();
   }
 
   #openContextMenu(grid: GridPanel, row: number): void {

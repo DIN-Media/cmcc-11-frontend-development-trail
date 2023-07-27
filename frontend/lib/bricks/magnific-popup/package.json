@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "jquery": "^3.6.4",
+    "jquery": "^3.7.0",
     "magnific-popup": "1.1.0"
   },
   "devDependencies": {
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,json}\""

@@ -134,7 +134,7 @@ class TaxonomySuggestionsLinkListPanelBase extends GridPanel {
   /**
    * Fired when the underlying content changes
    * We use this event to refresh and reload the taxonomy list iff
-   * the surrounding document form is visible. Otherwise, wait
+   * the surrounding content form is visible. Otherwise, wait
    * for activation.
    */
   #contentChanged(): void {
@@ -147,7 +147,7 @@ class TaxonomySuggestionsLinkListPanelBase extends GridPanel {
   }
 
   /**
-   * After activation of the surrounding document form
+   * After activation of the surrounding content form
    */
   #documentFormActivated(): void {
     if (this.#needsUpdateAfterContentChange) {

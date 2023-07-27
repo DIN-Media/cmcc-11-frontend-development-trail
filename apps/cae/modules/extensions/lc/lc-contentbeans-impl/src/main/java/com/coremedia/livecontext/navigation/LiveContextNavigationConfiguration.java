@@ -1,17 +1,19 @@
 package com.coremedia.livecontext.navigation;
 
+import com.coremedia.blueprint.base.livecontext.augmentation.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.CommerceConnectionSupplier;
 import com.coremedia.blueprint.base.settings.SettingsFinder;
 import com.coremedia.blueprint.base.tree.TreeRelation;
 import com.coremedia.blueprint.common.services.validation.ValidationService;
+import com.coremedia.cap.content.Content;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.livecontext.context.LiveContextNavigation;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
-import com.coremedia.livecontext.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.objectserver.beans.ContentBeanFactory;
 import com.coremedia.springframework.customizer.Customize;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Lazy;
 
@@ -20,11 +22,13 @@ import java.util.Map;
 @ImportResource(reader = com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader.class, value = {
         "classpath:/com/coremedia/cae/uapi-services.xml",
         "classpath:/com/coremedia/cap/multisite/multisite-services.xml",
-        "classpath:/META-INF/coremedia/lc-services.xml",
         "classpath:/com/coremedia/cae/contentbean-services.xml",
         "classpath:/framework/spring/blueprint-services.xml",
         "classpath:/com/coremedia/blueprint/base/settings/impl/bpbase-settings-services.xml"})
 @Configuration(proxyBeanMethods = false)
+@Import({
+        com.coremedia.blueprint.base.livecontext.augmentation.config.AugmentationTreeServicesConfiguration.class,
+})
 public class LiveContextNavigationConfiguration {
   @Bean
   LiveContextNavigationFactory liveContextNavigationFactory(LiveContextNavigationTreeRelation liveContextNavigationTreeRelation,
@@ -58,7 +62,7 @@ public class LiveContextNavigationConfiguration {
 
   @Customize("contentSettingsFinderHierarchies")
   @Bean(autowireCandidate = false)
-  Map<String, TreeRelation<?>> liveContextNavigationSettingsFinderCustomizer(ExternalChannelContentTreeRelation externalChannelContentTreeRelation) {
+  Map<String, TreeRelation<?>> liveContextNavigationSettingsFinderCustomizer(TreeRelation<Content> externalChannelContentTreeRelation) {
     return Map.of("CMExternalChannel", externalChannelContentTreeRelation);
   }
 

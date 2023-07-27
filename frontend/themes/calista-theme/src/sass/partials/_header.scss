@@ -1,13 +1,11 @@
 .cm-logo {
-  background: url("../../img/calista-logo-mobile.svg") no-repeat center center transparent;
-  // keep in sync with image dimensions
+  background: url("../../img/calista-logo.svg") no-repeat center center transparent;
+  background-size: contain;
   width: 81px;
   height: 25px;
 
   @include breakpoints(("sm", landscape) "lg-and-up") {
-    background-image: url("../../img/calista-logo.svg");
-    // keep in sync with image dimensions
-    width: 115px;
+    width: 120px;
     height: 41px;
   }
 }

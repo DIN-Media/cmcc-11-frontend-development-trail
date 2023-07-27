@@ -45,7 +45,7 @@ class AnalyticsStudioPlugin extends AnalyticsStudioPluginBase {
           ],
         }),
 
-        /* This tab has been disabled while cleaning document forms.
+        /* This tab has been disabled while cleaning content forms.
          It is recommend to configure ALX using the struct editor and reduce
          the amount for forms visible for the user.  */
         /* add analytics tab to channel form */

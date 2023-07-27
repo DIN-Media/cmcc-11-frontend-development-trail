@@ -1,15 +1,17 @@
 import Category from "@coremedia-blueprint/studio-client.main.ec-studio-model/model/Category";
 import Store from "@coremedia-blueprint/studio-client.main.ec-studio-model/model/Store";
 import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
-import Step from "@coremedia/studio-client.client-core-test-helper/Step";
+import { waitUntil } from "@coremedia/studio-client.client-core-test-helper/async";
 import Bean from "@coremedia/studio-client.client-core/data/Bean";
 import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
-import CompoundChildTreeModel from "@coremedia/studio-client.main.editor-components/sdk/collectionview/tree/CompoundChildTreeModel";
+import CollectionViewManager
+  from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionViewManager";
+import CompoundChildTreeModel
+  from "@coremedia/studio-client.main.editor-components/sdk/collectionview/tree/CompoundChildTreeModel";
 import ContentTreeModel from "@coremedia/studio-client.main.editor-components/sdk/collectionview/tree/ContentTreeModel";
 import editorContext from "@coremedia/studio-client.main.editor-components/sdk/editorContext";
 import Assert from "@jangaroo/joounit/flexunit/framework/Assert";
-import { as, bind, is } from "@jangaroo/runtime";
-import { AnyFunction } from "@jangaroo/runtime/types";
+import { as, is } from "@jangaroo/runtime";
 import CatalogTreeModel from "../../../src/components/tree/impl/CatalogTreeModel";
 import CatalogHelper from "../../../src/helper/CatalogHelper";
 import ShowInLibraryHelper from "../../../src/library/ShowInLibraryHelper";
@@ -46,7 +48,7 @@ class ShowInLibraryHelperTest extends AbstractCatalogStudioTest {
     this.#showInLibraryHelper = new ShowInLibraryHelper(this.#entities, this.#treeModel);
   }
 
-  #setUpRepository() {
+  #setUpRepository(): void {
     this.#treeModel = new ContentTreeModel();
     this.#augmentedCategory = as(beanFactory._.getRemoteBean("content/500"), Content); // Catalog Root
     this.#entities = new Array(this.#augmentedCategory);
@@ -54,12 +56,12 @@ class ShowInLibraryHelperTest extends AbstractCatalogStudioTest {
   }
 
   checkOpenedInCatalog(): void {
-    (editorContext._ as unknown)["getCollectionViewManager"] = (() =>
-      ({
+    editorContext._.getCollectionViewManager = ((): CollectionViewManager =>
+      Object.setPrototypeOf({
         showInRepository: (entity, view, treeModelId) => {
           this.#functionArguments = [entity, view, treeModelId];
         },
-      })
+      }, CollectionViewManager.prototype)
     );
     // do not allow the catalog contents to be shown in content repository
     this.#preferences.set(ShowInLibraryHelperTest.PREFERENCE_SHOW_CATALOG_KEY, false);
@@ -73,12 +75,12 @@ class ShowInLibraryHelperTest extends AbstractCatalogStudioTest {
   }
 
   checkOpenInContentRepository(): void {
-    (editorContext._ as unknown)["getCollectionViewManager"] = (() =>
-      ({
+    editorContext._.getCollectionViewManager = ((): CollectionViewManager =>
+      Object.setPrototypeOf({
         showInRepository: (entity, view, treeModelId) => {
           this.#functionArguments = [entity, view, treeModelId];
         },
-      })
+      }, CollectionViewManager.prototype)
     );
     // allow the catalog contents to be shown in content repository
     this.#preferences.set(ShowInLibraryHelperTest.PREFERENCE_SHOW_CATALOG_KEY, true);
@@ -96,70 +98,41 @@ class ShowInLibraryHelperTest extends AbstractCatalogStudioTest {
     editorContext._.getSitesService().getPreferredSiteIdExpression().setValue("TestSiteId");
   }
 
-  #waitForActiveStoreLoadStep(): Step {
-    return new Step(
-      "wait for store to load",
-      (): boolean =>
-        (is(CatalogHelper.getInstance().getActiveStoreExpression().getValue(), Store)),
-
-    );
+  async #waitForActiveStoreLoad(): Promise<void> {
+    // wait for store to load:
+    await waitUntil((): boolean =>
+      (is(CatalogHelper.getInstance().getActiveStoreExpression().getValue(), Store)));
   }
 
-  #waitForCategoryLoadStep(): Step {
-    return new Step(
-      "wait for category to load",
-      // wait for the complete path to be loaded otherwise it can not be opened in the catalog tree
-      (): boolean => !!this.#treeModel.getIdPathFromModel(this.#category),
-    );
+  async #waitForCategoryLoad(): Promise<void> {
+    // wait for category to load:
+    // wait for the complete path to be loaded otherwise it can not be opened in the catalog tree
+    await waitUntil((): boolean => !!this.#treeModel.getIdPathFromModel(this.#category));
   }
 
-  #waitUntilStoreIsLoadedStep(): Step {
-    return new Step(
-      "wait for store to load again",
-      (): boolean =>
-      // wait for the complete path to be loaded otherwise it can not be opened in the catalog tree
-        (is(CatalogHelper.getInstance().getActiveStoreExpression().getValue(), Store))
-      , bind(
-        this, this.checkOpenedInCatalog),
-    );
+  // noinspection JSUnusedGlobalSymbols
+  async testShowInCatalogTree(): Promise<void> {
+    this.#setUpCatalog();
+    await this.#waitForActiveStoreLoad();
+    await this.#waitForCategoryLoad();
+    this.checkOpenedInCatalog();
   }
 
-  testShowInCatalogTreeWithSteps() {
-    this.chain(
-      this.#stepFromFunction(bind(this, this.#setUpCatalog), "set up catalog"),
-      this.#waitForActiveStoreLoadStep(),
-      this.#waitForCategoryLoadStep(),
-      this.#stepFromFunction(bind(this, this.checkOpenedInCatalog), "check open in catalog"),
-    );
+  // noinspection JSUnusedGlobalSymbols
+  async testShowInContentRepositoryTree(): Promise<void> {
+    this.#setUpRepository();
+    await this.#waitForActiveStoreLoad();
+    this.checkOpenInContentRepository();
   }
 
-  testShowInContentRepositoryTreeWithSteps() {
-    this.chain(
-      this.#stepFromFunction(bind(this, this.#setUpRepository), "set up repository"),
-      this.#waitForActiveStoreLoadStep(),
-      this.#stepFromFunction(bind(this, this.checkOpenInContentRepository), "check open in content repository"),
-    );
-  }
-
-  testMyWrongSiteWithSteps(): void {
-    this.chain(
-      this.#stepFromFunction(bind(this, this.#setUpCatalog), "set up catalog"),
-      this.#waitForActiveStoreLoadStep(),
-      this.#waitForCategoryLoadStep(),
-      this.#stepFromFunction(bind(this, this.#makeSiteInvalid), "make site invalid"),
-      this.#waitForActiveStoreLoadStep(),
-      this.#stepFromFunction(bind(this, this.checkOpenedInCatalog), "check open in catalog"),
-    );
-  }
-
-  #stepFromFunction(callback: AnyFunction, msg: string): Step {
-    return new Step(
-      msg,
-      (): boolean =>
-        true
-      ,
-      callback,
-    );
+  // noinspection JSUnusedGlobalSymbols
+  async testMyWrongSite(): Promise<void> {
+    this.#setUpCatalog();
+    await this.#waitForActiveStoreLoad();
+    await this.#waitForCategoryLoad();
+    this.#makeSiteInvalid();
+    await this.#waitForActiveStoreLoad();
+    this.checkOpenedInCatalog();
   }
 }
 

@@ -2,11 +2,11 @@ package com.coremedia.blueprint.analytics.elastic.tasks;
 
 
 import com.coremedia.elastic.core.api.tasks.configuration.TaskQueueConfigurationBuilder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static com.coremedia.blueprint.analytics.elastic.tasks.ElasticAnalyticsTaskQueueConfiguration.FETCH_INTERVAL;
 import static org.mockito.ArgumentMatchers.any;
@@ -15,8 +15,8 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ElasticAnalyticsTaskQueueConfigurationTest {
+@ExtendWith(MockitoExtension.class)
+class ElasticAnalyticsTaskQueueConfigurationTest {
   @InjectMocks
   private ElasticAnalyticsTaskQueueConfiguration config = new ElasticAnalyticsTaskQueueConfiguration();
 
@@ -24,7 +24,7 @@ public class ElasticAnalyticsTaskQueueConfigurationTest {
   private TaskQueueConfigurationBuilder builder;
 
   @Test
-  public void getTaskQueues() {
+  void getTaskQueues() {
     //noinspection unchecked
     when(builder.configureTask(anyString(), any(Class.class), anyLong())).thenReturn(builder);
 

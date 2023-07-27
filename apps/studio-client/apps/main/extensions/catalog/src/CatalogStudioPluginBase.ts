@@ -74,7 +74,7 @@ class CatalogStudioPluginBase extends StudioPlugin {
     const treeModel = new RepositoryCatalogTreeModel();
     collectionViewManagerInternal.addTreeModel(treeModel, new RepositoryTreeDragDropModel(treeModel));
 
-    //add extension for custom search document types
+    //add extension for custom search content types
     const catalogTreeRelation = new CatalogTreeRelation();
     const isApplicable: AnyFunction = (model: any): boolean => {
       const isCmStore = CatalogHelper.getInstance().isActiveCoreMediaStore();

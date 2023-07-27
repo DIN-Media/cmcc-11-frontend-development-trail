@@ -30,8 +30,8 @@
      | this property must always be set to the version of the solr because of the symlink filesystem
      | structure in the base image
     -->
-    <solr.version>8.11.2</solr.version>
-    <solr.image-base-tag>1.1-cm-8.11.2</solr.image-base-tag>
+    <solr.version>9.2.1</solr.version>
+    <solr.image-base-tag>2.0-cm-9.2.1</solr.image-base-tag>
     <solr.image-base>coremedia/solr-base:${solr.image-base-tag}</solr.image-base>
     <application.image-prefix>coremedia</application.image-prefix>
     <application.image-suffix>solr</application.image-suffix>

@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1.3
 
-FROM node:18-slim as tooling-image
+FROM node:18-bullseye-slim as tooling-image
 
 # pnpm 8.x
-RUN npm install -g pnpm@8.1.0
+RUN npm install -g pnpm@8.6.9
 
 
 FROM tooling-image as audit-task
@@ -32,10 +32,12 @@ RUN pnpm build
 RUN pnpm build-frontend-zip
 # test
 ARG SKIP_TESTS
-RUN if [ "${SKIP_TESTS:-false}" = "true" ] ; then echo "Skip tests." ; else pnpm test || true; fi
+RUN echo "Tests skipped: ${SKIP_TESTS:-false}" > /tmp/test.out
+RUN if [ "${SKIP_TESTS:-false}" = "true" ] ; then echo "Skip tests." ; else pnpm test || echo "failed" > /tmp/test.out; fi
 # cleanup
 RUN find /ws-root/frontend -name "node_modules" -type d -exec rm -rf {} +
 
 
 FROM scratch as build-stage
+COPY --from=build-task /tmp/test.out /test.out
 COPY --from=build-task /ws-root/frontend/target/frontend.zip /frontend.zip

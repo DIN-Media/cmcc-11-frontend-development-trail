@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<CMArticle folder="/Sites/Chef Corp./Germany/German/Editorial/Homepage/Company/Press/Events/Events Items" name="Chef Corp New HQ Opening Party Article"
-           translationState="up-to-date">
+<CMArticle folder="/Sites/Chef Corp./Germany/German/Editorial/Homepage/Company/Press/Events/Events Items" name="Chef Corp New HQ Opening Party Article" xmlns:cmexport="http://www.coremedia.com/2012/cmexport" translationState="up-to-date">
 <externalRefId></externalRefId>
 <locale>de-DE</locale>
 <master>
@@ -9,7 +8,7 @@
 <viewtype>
 </viewtype>
 <localSettings>
-<Struct xmlns="http://www.coremedia.com/2008/struct">
+<Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
 <BooleanProperty Name="callToActionDisabled">false</BooleanProperty>
 <StringProperty Name="callToActionCustomText"/>
 </Struct>
@@ -33,9 +32,8 @@
 <contexts>
 </contexts>
 <teaserTitle>New HQ Opening Party</teaserTitle>
-<teaserText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0"><p> Chef Corp. wird eine große Party am 15. Juni in unserem neuen Büro in Downtown Chicago hosten. Treffen Sie Starköche und ihre Kreationen zu probieren. </p> </div></teaserText>
-<detailText grammarName="coremedia-richtext-1.0">
-  <div xmlns="http://www.coremedia.com/2003/richtext-1.0"><p/> <p> Chef Corp. wird die Eröffnung unseres neuen Verwaltungsgebäude in Downtown Chicago mit einer großen Eröffnungsparty feiern. Celebrity Chefs Jamie Oliver Anthony Bourdain und werden unsere Gäste mit ihren berühmten kulinarischen Kreationen in unserem Live-Show-Küche zubereitet beeindrucken. Verpassen Sie nicht auf den herrlichen Blick von unserer Dachterrasse Aussichtsterrasse - und Chill in den Sonnenuntergang mit Getränken aus unserer gut ausgestatteten Bar des berühmten gemischt, Michelin 3-Sterne "Barkeeper" Aaron Spangler. </p> </div></detailText>
+<teaserText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p> Chef Corp. wird eine große Party am 15. Juni in unserem neuen Büro in Downtown Chicago hosten. Treffen Sie Starköche und ihre Kreationen zu probieren. </p> </div></teaserText>
+<detailText grammarName="coremedia-richtext-1.0"><div xmlns="http://www.coremedia.com/2003/richtext-1.0" xmlns:xlink="http://www.w3.org/1999/xlink"><p/> <p> Chef Corp. wird die Eröffnung unseres neuen Verwaltungsgebäude in Downtown Chicago mit einer großen Eröffnungsparty feiern. Celebrity Chefs Jamie Oliver Anthony Bourdain und werden unsere Gäste mit ihren berühmten kulinarischen Kreationen in unserem Live-Show-Küche zubereitet beeindrucken. Verpassen Sie nicht auf den herrlichen Blick von unserer Dachterrasse Aussichtsterrasse - und Chill in den Sonnenuntergang mit Getränken aus unserer gut ausgestatteten Bar des berühmten gemischt, Michelin 3-Sterne "Barkeeper" Aaron Spangler. </p> </div></detailText>
 <pictures>
 <link href="../../../../../Assets/Pictures/News/Chef%20Corp%2E%20New%20HQ%20in%20Downtown%20Chicago%20%20Picture.xml" path="/Sites/Chef%20Corp%2E/Germany/German/Editorial/Assets/Pictures/News/Chef%20Corp%2E%20New%20HQ%20in%20Downtown%20Chicago%20%20Picture"/>
 </pictures>

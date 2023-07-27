@@ -36,11 +36,11 @@
     "@coremedia/cm-cli": "workspace:*",
     "@coremedia/theme-utils": "workspace:*",
     "cross-env": "^7.0.3",
-    "jquery": "^3.6.4",
+    "jquery": "^3.7.0",
     "webpack": "^4.46.0"
   },
   "devDependencies": {
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "coremedia": {
     "type": "theme"

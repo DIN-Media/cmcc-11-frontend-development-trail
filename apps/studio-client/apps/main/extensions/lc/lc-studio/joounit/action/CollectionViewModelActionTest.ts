@@ -1,5 +1,5 @@
 import CatalogHelper from "@coremedia-blueprint/studio-client.main.ec-studio/helper/CatalogHelper";
-import Step from "@coremedia/studio-client.client-core-test-helper/Step";
+import { waitUntil } from "@coremedia/studio-client.client-core-test-helper/async";
 import Bean from "@coremedia/studio-client.client-core/data/Bean";
 import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpression";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
@@ -58,151 +58,125 @@ class CollectionViewModelActionTest extends AbstractLiveContextStudioTest {
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testDefault(): void {
-    this.chain(this.#waitForDefault());
+  async testDefault(): Promise<void> {
+    await this.#waitForDefault();
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testInCmsToSearch(): void {
-    this.chain(this.#switchToSearch(),
-      this.#waitForCmsSearch());
+  async testInCmsToSearch(): Promise<void> {
+    this.#switchToSearch();
+    await this.#waitForCmsSearch();
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testInCmsToRepository(): void {
-    this.chain(this.#switchToSearch(),
-      this.#waitForCmsSearch(),
-      this.#switchToRepository(),
-      this.#waitForDefault());
+  async testInCmsToRepository(): Promise<void> {
+    this.#switchToSearch();
+    await this.#waitForCmsSearch();
+    this.#switchToRepository();
+    await this.#waitForDefault();
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testInCatalogToSearch(): void {
-    this.chain(this.#switchToCatalog(),
-      this.#waitForCatalogRepository(),
-      this.#switchToSearch(),
-      this.#waitForCatalogSearch());
+  async testInCatalogToSearch(): Promise<void> {
+    this.#switchToCatalog();
+    await this.#waitForCatalogRepository();
+    this.#switchToSearch();
+    this.#waitForCatalogSearch();
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testInCatalogToRepository(): void {
-    this.chain(this.#switchToCatalog(),
-      this.#switchToSearch(),
-      this.#waitForCatalogSearch(),
-      this.#switchToRepository(),
-      this.#waitForCatalogRepository());
+  async testInCatalogToRepository(): Promise<void> {
+    this.#switchToCatalog();
+    this.#switchToSearch();
+    await this.#waitForCatalogSearch();
+    this.#switchToRepository();
+    await this.#waitForCatalogRepository();
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testInRepositoryToCatalog(): void {
-    this.chain(this.#switchToCatalog(),
-      this.#waitForCatalogRepository());
+  async testInRepositoryToCatalog(): Promise<void> {
+    this.#switchToCatalog();
+    await this.#waitForCatalogRepository();
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testInRepositoryToCms(): void {
-    this.chain(this.#switchToCatalog(),
-      this.#waitForCatalogRepository(),
-      this.#waitForDefault());
+  async testInRepositoryToCms(): Promise<void> {
+    this.#switchToCatalog();
+    await this.#waitForCatalogRepository();
+    await this.#waitForDefault();
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testInSearchToCatalog(): void {
-    this.chain(this.#switchToSearch(),
-      this.#waitForCmsSearch(),
-      this.#switchToCatalog(),
-      this.#waitForCatalogSearch());
+  async testInSearchToCatalog(): Promise<void> {
+    this.#switchToSearch();
+    await this.#waitForCmsSearch();
+    this.#switchToCatalog();
+    await this.#waitForCatalogSearch();
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testInSearchToCms(): void {
-    this.chain(this.#switchToSearch(),
-      this.#switchToCatalog(),
-      this.#waitForCatalogSearch(),
-      this.#waitForCmsSearch());
+  async testInSearchToCms(): Promise<void> {
+    this.#switchToSearch();
+    this.#switchToCatalog();
+    await this.#waitForCatalogSearch();
+    await this.#waitForCmsSearch();
   }
 
   /**
    *  Waiting and Testing Steps
    */
 
-  #waitForDefault(): Step {
-    return new Step("wait for default repository cms and default mode repository.",
-      (): boolean =>
-        CollectionViewModelActionTest.getCollectionViewState().get(CollectionViewModelActionTest.#MODE_PROPERTY) === CollectionViewModelActionTest.#REPOSITORY_MODE
-      ,
-      (): void => {
-        Assert.assertTrue(this.#repositoryAction.isPressed());
-        Assert.assertFalse(this.#searchAction.isPressed());
-      });
+  async #waitForDefault(): Promise<void> {
+    // wait for default repository cms and default mode repository:
+    await waitUntil((): boolean =>
+      CollectionViewModelActionTest.getCollectionViewState().get(CollectionViewModelActionTest.#MODE_PROPERTY) === CollectionViewModelActionTest.#REPOSITORY_MODE);
+
+    Assert.assertTrue(this.#repositoryAction.isPressed());
+    Assert.assertFalse(this.#searchAction.isPressed());
   }
 
-  #waitForCmsSearch(): Step {
-    return new Step("wait for repository cms and search mode.",
-      (): boolean =>
-        CollectionViewModelActionTest.getCollectionViewState().get(CollectionViewModelActionTest.#MODE_PROPERTY) === CollectionViewModelActionTest.#SEARCH_MODE
-      ,
-      (): void => {
-        Assert.assertFalse(this.#repositoryAction.isPressed());
-        Assert.assertTrue(this.#searchAction.isPressed());
-      });
+  async #waitForCmsSearch(): Promise<void> {
+    // wait for repository cms and search mode:
+    await waitUntil((): boolean =>
+      CollectionViewModelActionTest.getCollectionViewState().get(CollectionViewModelActionTest.#MODE_PROPERTY) === CollectionViewModelActionTest.#SEARCH_MODE);
+    Assert.assertFalse(this.#repositoryAction.isPressed());
+    Assert.assertTrue(this.#searchAction.isPressed());
   }
 
-  #waitForCatalogRepository(): Step {
-    return new Step("wait for repository catalog and mode repository.",
-      (): boolean =>
-        CollectionViewModelActionTest.getCollectionViewState().get(CollectionViewModelActionTest.#MODE_PROPERTY) === CollectionViewModelActionTest.#REPOSITORY_MODE
-      ,
-      (): void => {
-        Assert.assertTrue(this.#repositoryAction.isPressed());
-        Assert.assertFalse(this.#searchAction.isPressed());
-      });
+  async #waitForCatalogRepository(): Promise<void> {
+    // wait for repository catalog and mode repository:
+    await waitUntil((): boolean =>
+      CollectionViewModelActionTest.getCollectionViewState().get(CollectionViewModelActionTest.#MODE_PROPERTY) === CollectionViewModelActionTest.#REPOSITORY_MODE);
+    Assert.assertTrue(this.#repositoryAction.isPressed());
+    Assert.assertFalse(this.#searchAction.isPressed());
   }
 
-  #waitForCatalogSearch(): Step {
-    return new Step("wait for repository catalog and mode search.",
-      (): boolean =>
-        CollectionViewModelActionTest.getCollectionViewState().get(CollectionViewModelActionTest.#MODE_PROPERTY) === CollectionViewModelActionTest.#SEARCH_MODE
-      ,
-      (): void => {
-        Assert.assertFalse(this.#repositoryAction.isPressed());
-        Assert.assertTrue(this.#searchAction.isPressed());
-      });
+  async #waitForCatalogSearch(): Promise<void> {
+    // wait for repository catalog and mode search:
+    await waitUntil((): boolean =>
+      CollectionViewModelActionTest.getCollectionViewState().get(CollectionViewModelActionTest.#MODE_PROPERTY) === CollectionViewModelActionTest.#SEARCH_MODE);
+    Assert.assertFalse(this.#repositoryAction.isPressed());
+    Assert.assertTrue(this.#searchAction.isPressed());
   }
 
   /**
    * Action Steps
    */
 
-  #switchToRepository(): Step {
-    return new Step("switch to repository.",
-      (): boolean =>
-        true
-      ,
-      (): void =>
-        this.#repositoryAction.execute(),
-    );
+  #switchToRepository(): void {
+    // switch to repository:
+    this.#repositoryAction.execute();
   }
 
-  #switchToSearch(): Step {
-    return new Step("switch to search.",
-      (): boolean =>
-        true
-      ,
-      (): void =>
-        this.#searchAction.execute(),
-    );
+  #switchToSearch(): void {
+    // switch to search:
+    this.#searchAction.execute();
   }
 
-  #switchToCatalog(): Step {
-    return new Step("switch to catalog.",
-      (): boolean =>
-        true
-      ,
-      (): void => {
-        const store: Store = CatalogHelper.getInstance().getActiveStoreExpression().getValue();
-        CollectionViewModelActionTest.getCollectionViewState().set(CollectionViewModel.FOLDER_PROPERTY, store);
-      });
+  #switchToCatalog(): void {
+    // switch to catalog:
+    const store: Store = CatalogHelper.getInstance().getActiveStoreExpression().getValue();
+    CollectionViewModelActionTest.getCollectionViewState().set(CollectionViewModel.FOLDER_PROPERTY, store);
   }
 
   static getCollectionViewState(): Bean {

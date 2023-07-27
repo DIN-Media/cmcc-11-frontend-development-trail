@@ -1,9 +1,11 @@
 import BeanFactoryImpl from "@coremedia/studio-client.client-core-impl/data/impl/BeanFactoryImpl";
 import AbstractRemoteTest from "@coremedia/studio-client.client-core-test-helper/AbstractRemoteTest";
+import { waitUntil } from "@coremedia/studio-client.client-core-test-helper/async";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
 import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
 import EditorContextImpl from "@coremedia/studio-client.main.editor-components/sdk/EditorContextImpl";
 import Ext from "@jangaroo/ext-ts";
+import Button from "@jangaroo/ext-ts/button/Button";
 import Viewport from "@jangaroo/ext-ts/container/Viewport";
 import Assert from "@jangaroo/joounit/flexunit/framework/Assert";
 import { bind, cast } from "@jangaroo/runtime";
@@ -24,7 +26,7 @@ class OpenAnalyticsHomeUrlButtonTest extends AbstractRemoteTest {
 
   #beanImplPrototype: any;
 
-  static isSubObject(value: any, propertyPath: any): boolean {
+  static isSubObject(value: any, _propertyPath: any): boolean {
     // Plain objects represent sub-beans.
     return value.constructor === Object;
   }
@@ -64,29 +66,24 @@ class OpenAnalyticsHomeUrlButtonTest extends AbstractRemoteTest {
     AnalyticsStudioPluginBase.SETTINGS.extendBy("properties.settings.testService.homeUrl").setValue(value);
   }
 
+  // noinspection JSUnusedGlobalSymbols
   testInitialState(): void {
     Assert.assertTrue(this.#button.disabled);
   }
 
-  testSetHomeUrls(): void {
+  // noinspection JSUnusedGlobalSymbols
+  async testSetHomeUrls(): Promise<void> {
     OpenAnalyticsHomeUrlButtonTest.setHomeUrlValue("http://fake.url");
-    this.waitUntil("button still disabled",
-      (): boolean =>
-        !this.#button.disabled
-      ,
-      cast(Function, this.#button.handler), // simulate click
-    );
-    this.waitUntil("home url not opened",
-      (): boolean => this.#args !== null && this.#args[0] == "http://fake.url",
-      (): void =>
-        OpenAnalyticsHomeUrlButtonTest.setHomeUrlValue("yetAnotherInvalidUrl"),
+    // button still disabled:
+    await waitUntil((): boolean => !this.#button.disabled);
 
-    );
-    this.waitUntil("button still enabled",
-      (): boolean =>
-        this.#button.disabled,
+    (this.#button.handler as (button: Button) => any)(this.#button); // simulate click
 
-    );
+    // wait until home url opened:
+    await waitUntil((): boolean => this.#args !== null && this.#args[0] == "http://fake.url");
+    OpenAnalyticsHomeUrlButtonTest.setHomeUrlValue("yetAnotherInvalidUrl");
+    // wait until button disabled:
+    await waitUntil((): boolean => this.#button.disabled);
   }
 
 }

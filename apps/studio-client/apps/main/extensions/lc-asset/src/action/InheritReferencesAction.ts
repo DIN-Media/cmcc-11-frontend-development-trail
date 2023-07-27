@@ -23,7 +23,7 @@ class InheritReferencesAction extends InheritReferencesActionBase {
   }
 
   /**
-   * Document form content.
+   * content form content.
    */
   bindTo: ValueExpression = null;
 

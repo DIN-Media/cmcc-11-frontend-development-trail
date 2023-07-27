@@ -11,7 +11,7 @@ interface MetaDataDocumentFormBaseConfig extends Config<PropertyFieldGroup> {
 }
 
 /**
- * Base model of the image meta data document form.
+ * Base model of the image meta data content form.
  * The base class determines the different meta data type available for an image.
  */
 class MetaDataDocumentFormBase extends PropertyFieldGroup {

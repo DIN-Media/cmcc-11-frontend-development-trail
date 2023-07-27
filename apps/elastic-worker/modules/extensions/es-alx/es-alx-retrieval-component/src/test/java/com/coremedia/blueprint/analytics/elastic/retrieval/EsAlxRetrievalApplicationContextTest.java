@@ -9,26 +9,26 @@ import com.coremedia.blueprint.base.analytics.elastic.ReportModelService;
 import com.coremedia.blueprint.base.analytics.elastic.TopNReportModelService;
 import com.coremedia.blueprint.base.analytics.elastic.util.RetrievalUtil;
 import com.coremedia.blueprint.base.settings.SettingsService;
+import com.coremedia.cap.common.xml.XmlCapRepositoryConfiguration;
 import com.coremedia.cap.content.Content;
 import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cms.delivery.configuration.DeliveryConfigurationProperties;
 import com.coremedia.elastic.core.api.models.Model;
 import com.coremedia.elastic.core.api.models.Query;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
+import com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Scope;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import javax.inject.Inject;
 import java.text.SimpleDateFormat;
@@ -40,9 +40,7 @@ import java.util.Map;
 
 import static com.coremedia.blueprint.base.analytics.elastic.ReportModel.REPORT_DATE_FORMAT;
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.eq;
@@ -54,14 +52,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(value = {
-        "classpath:/com/coremedia/blueprint/analytics/elastic/retrieval/EsAlxRetrievalApplicationContextTest-context.xml",
-        "classpath:/com/coremedia/blueprint/base/navigation/context/bpbase-default-contextstrategy.xml",
-        "classpath:/com/coremedia/blueprint/base/multisite/bpbase-multisite-services.xml"
-})
-@Configuration(proxyBeanMethods = false)
-@ComponentScan("com.coremedia.cap.common.xml")
+@SpringJUnitConfig(EsAlxRetrievalApplicationContextTest.LocalConfig.class)
 @TestPropertySource(properties = {
         "elastic.core.persistence=memory",
         "repository.params.contentxml=classpath:/com/coremedia/testing/contenttest.xml",
@@ -73,7 +64,7 @@ import static org.mockito.Mockito.when;
 @EnableConfigurationProperties({
         DeliveryConfigurationProperties.class
 })
-public class EsAlxRetrievalApplicationContextTest {
+class EsAlxRetrievalApplicationContextTest {
 
   private static final String SERVICE = "service"; // compare with 12345settings.xml
   static final Object APPLICATION_NAME = "CoreMedia";
@@ -111,25 +102,22 @@ public class EsAlxRetrievalApplicationContextTest {
   private Content pageList;
   private long start;
 
-  @Before
+  @BeforeEach
   public void setup() {
     pageList = contentRepository.getContent("12348"); // compare with contenttest.xml
 
     when(analyticsServiceProvider.getServiceKey()).thenReturn(SERVICE);
     when(analyticsServiceProvider.computeEffectiveRetrievalSettings(any(), any(Content.class)))
-    .then(new Answer<Object>() {
-      @Override
-      public Object answer(InvocationOnMock invocation) throws Throwable {
-        final Object[] args = invocation.getArguments();
-        return RetrievalUtil.computeEffectiveRetrievalSettings(SERVICE, EFFECTIVE_SETTINGS, (Content)args[0], (Content) args[1], settingsService, sitesService);
-      }
-    });
+            .then(invocation -> {
+              final Object[] args = invocation.getArguments();
+              return RetrievalUtil.computeEffectiveRetrievalSettings(SERVICE, EFFECTIVE_SETTINGS, (Content) args[0], (Content) args[1], settingsService, sitesService);
+            });
 
-    assertEquals(contentRepository.getContentType("CMALXPageList"), pageList.getType());
+    assertThat(pageList.getType()).isEqualTo(contentRepository.getContentType("CMALXPageList"));
     start = System.currentTimeMillis();
   }
 
-  @After
+  @AfterEach
   public void teardown() {
     reset(analyticsServiceProvider);
 
@@ -149,55 +137,55 @@ public class EsAlxRetrievalApplicationContextTest {
   }
 
   @Test
-  public void runFetchReportsTaskWithConfiguration() throws Exception {
-    when(analyticsServiceProvider.fetchDataFor(eq(pageList), eq(EFFECTIVE_SETTINGS))).thenReturn(ARTICLES);
+  void runFetchReportsTaskWithConfiguration() throws Exception {
+    when(analyticsServiceProvider.fetchDataFor(pageList, EFFECTIVE_SETTINGS)).thenReturn(ARTICLES);
 
     fetchReportsTask.run();
     verify(analyticsServiceProvider).computeEffectiveRetrievalSettings(eq(pageList), any(Content.class));
     verify(analyticsServiceProvider).fetchDataFor(eq(pageList), any(Map.class));
 
     final ReportModel reportModel = topNReportModelService.getReportModel(pageList, SERVICE);
-    assertEquals(TOP_4_ARTICLES, reportModel.getReportData());
+    assertThat(reportModel.getReportData()).isEqualTo(TOP_4_ARTICLES);
     recentlySaved(reportModel);
   }
 
   private void recentlySaved(ReportModel reportModel) {
     final long lastSaved = reportModel.getLastSaved();
-    assertTrue(lastSaved + " should be greater equals than " + start, lastSaved >= start);
+    assertThat(lastSaved).as(lastSaved + " should be greater equals than " + start).isGreaterThanOrEqualTo(start);
   }
 
   @Test
-  public void runFetchReportsTaskWithException() throws Exception {
-    when(analyticsServiceProvider.fetchDataFor(eq(pageList), eq(EFFECTIVE_SETTINGS))).thenThrow(RuntimeException.class);
+  void runFetchReportsTaskWithException() throws Exception {
+    when(analyticsServiceProvider.fetchDataFor(pageList, EFFECTIVE_SETTINGS)).thenThrow(RuntimeException.class);
 
     fetchReportsTask.run();
     verify(analyticsServiceProvider).computeEffectiveRetrievalSettings(eq(pageList), any(Content.class));
     verify(analyticsServiceProvider).fetchDataFor(eq(pageList), any(Map.class));
 
     final ReportModel reportModel = topNReportModelService.getReportModel(pageList, SERVICE);
-    assertEquals(emptyList(), reportModel.getReportData());
+    assertThat(reportModel.getReportData()).isEmpty();
     recentlySaved(reportModel);
   }
 
   @Test
-  public void runFetchReportsTaskForNotConfiguredService() throws Exception {
+  void runFetchReportsTaskForNotConfiguredService() throws Exception {
     final Content pageList = this.pageList.copyTo(this.pageList.getParent(), this.toString());
     pageList.checkOut();
     pageList.set("analyticsProvider", "ignoredService");
 
-    when(analyticsServiceProvider.fetchDataFor(eq(pageList), eq(EFFECTIVE_SETTINGS))).thenReturn(ARTICLES);
+    when(analyticsServiceProvider.fetchDataFor(pageList, EFFECTIVE_SETTINGS)).thenReturn(ARTICLES);
 
     fetchReportsTask.run();
     verify(analyticsServiceProvider, never()).computeEffectiveRetrievalSettings(any(Content.class), same(pageList));
     verify(analyticsServiceProvider, never()).fetchDataFor(same(pageList), anyMap());
 
     final ReportModel reportModel = topNReportModelService.getReportModel(pageList, SERVICE);
-    assertEquals(emptyList(), reportModel.getReportData());
-    assertEquals(0, reportModel.getLastSaved());
+    assertThat(reportModel.getReportData()).isEmpty();
+    assertThat(reportModel.getLastSaved()).isZero();
   }
 
   @Test
-  public void runPageViewHistoryTaskWithoutResult() throws Exception {
+  void runPageViewHistoryTaskWithoutResult() throws Exception {
     fetchPageViewHistoryTask.run();
 
     verify(analyticsServiceProvider, atLeast(1)).getServiceKey();
@@ -205,15 +193,15 @@ public class EsAlxRetrievalApplicationContextTest {
 
     // root model is saved
     final Query<ReportModel> query = pageViewTaskReportModelService.query();
-    assertEquals(1, query.count());
+    assertThat(query.count()).isOne();
     recentlySaved(query.get());
 
     // but we have no page views at all
-    assertEquals(0, pageViewReportModelService.query().count());
+    assertThat(pageViewReportModelService.query().count()).isZero();
   }
 
   @Test
-  public void runPageViewHistoryTaskWithResult() throws Exception {
+  void runPageViewHistoryTaskWithResult() throws Exception {
     Map<String, Map<String, Long>> data = new HashMap<>();
     String today = new SimpleDateFormat(REPORT_DATE_FORMAT, Locale.getDefault()).format(new Date());
     data.put("not_a_content_id", Map.of(today, 13L));
@@ -228,21 +216,26 @@ public class EsAlxRetrievalApplicationContextTest {
 
     // root model is saved
     final Query<ReportModel> query = pageViewTaskReportModelService.query();
-    assertEquals(1, query.count());
+    assertThat(query.count()).isOne();
     recentlySaved(query.get());
 
     // article model is saved
     recentlySaved(pageViewReportModelService.getReportModel(contentRepository.getContent(articleId), SERVICE));
   }
 
-  // =========================================================
-  //                      spring config
-  // =========================================================
+  @Configuration(proxyBeanMethods = false)
+  @Import(XmlCapRepositoryConfiguration.class)
+  @ImportResource(value = {
+          "classpath:/com/coremedia/blueprint/base/navigation/context/bpbase-default-contextstrategy.xml",
+          "classpath:/com/coremedia/blueprint/base/multisite/bpbase-multisite-services.xml"
+  }, reader = ResourceAwareXmlBeanDefinitionReader.class)
+  @EnableAutoConfiguration
+  public static class LocalConfig {
 
-  @Bean
-  @Scope("singleton")
-  public AnalyticsServiceProvider analyticsServiceProvider(){
-    return mock(AnalyticsServiceProvider.class);
+    @Bean
+    @Scope("singleton")
+    public AnalyticsServiceProvider analyticsServiceProvider() {
+      return mock(AnalyticsServiceProvider.class);
+    }
   }
-
 }

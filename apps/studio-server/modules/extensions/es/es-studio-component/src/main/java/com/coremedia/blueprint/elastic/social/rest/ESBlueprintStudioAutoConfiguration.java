@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 
 @AutoConfiguration
 @Import(CapRestServiceConfiguration.class)
@@ -20,5 +21,6 @@ import org.springframework.context.annotation.ImportResource;
         "com.coremedia.elastic.social",
         "com.coremedia.blueprint.elastic.social"
 })
+@PropertySource("classpath:META-INF/coremedia/elastic-social-rest-extension.properties")
 public class ESBlueprintStudioAutoConfiguration {
 }

@@ -1,4 +1,4 @@
-ARG NODE_TAG=18.13.0-slim
+ARG NODE_TAG=18-bullseye-slim
 ARG NODE_IMAGE="node:${NODE_TAG}"
 FROM ${NODE_IMAGE} as npm-tooling-base
 LABEL NODE_TAG="${NODE_TAG}"
@@ -19,8 +19,8 @@ RUN apt-get update -y -qq > /dev/null && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # pnpm 8.x
-RUN npm install -g pnpm@8.1.0
-LABEL PNPM_VERSION="8.1.0"
+RUN npm install -g pnpm@8.6.9
+LABEL PNPM_VERSION="8.6.9"
 
 
 FROM npm-tooling-base as sencha-layer
@@ -28,13 +28,9 @@ USER root
 RUN apt-get update -y -qq > /dev/null && \
     apt-get install -y -qq > /dev/null \
     openjdk-11-jre \
-    ca-certificates \
-    chromium && \
+    ca-certificates && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# use the chromium from apt
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 # sencha cmd 7.2.0.84
 ARG SENCHA_COMMAND_SH_ZIP_DOWNLOAD_URL_DIRECTIVE=https://cdn.sencha.com/cmd/7.2.0.84/no-jre/SenchaCmd-7.2.0.84-linux-amd64.sh.zip
 RUN curl -s -L -o senchacmd.zip ${SENCHA_COMMAND_SH_ZIP_DOWNLOAD_URL_DIRECTIVE} && \

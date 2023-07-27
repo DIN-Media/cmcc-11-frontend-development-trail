@@ -9,7 +9,6 @@
   <import resource="livecontext-preview-handler-interceptors.xml"/>
   <import resource="livecontext-preview-links.xml"/>
   <import resource="classpath:/META-INF/coremedia/livecontext-handlers.xml"/>
-  <import resource="classpath:META-INF/coremedia/lc-services.xml"/>
 
   <bean class="com.coremedia.livecontext.preview.LiveContextExternalChannelPreviewHandler"
         parent="ecommerceHandlerBase">

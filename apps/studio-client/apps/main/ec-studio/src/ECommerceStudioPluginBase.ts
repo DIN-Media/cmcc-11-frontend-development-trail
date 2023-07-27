@@ -184,22 +184,33 @@ class ECommerceStudioPluginBase extends StudioPlugin {
       if (!catalog) {
         return undefined;
       }
-      const rootCategory = catalog.getRootCategory();
 
+      const rootCategory = catalog.getRootCategory();
       if (rootCategory === undefined) {
         return undefined;
       }
-      if (rootCategory) {
-        const rootCategoryContent = augmentationService.getContent(rootCategory);
-        if (rootCategoryContent === undefined) {
-          return undefined;
-        }
-        const layout = PageGridUtil.getLayoutWithoutDefault(rootCategoryContent, pagegridProperty);
-        if (layout === undefined) {
-          return undefined;
-        }
-        return layout;
+      if (rootCategory === null) {
+        console.warn("Root category not found for catalog: " + catalog);
+        return null;
       }
+
+      const rootCategoryContent = augmentationService.getContent(rootCategory);
+      if (rootCategoryContent === undefined) {
+        return undefined;
+      }
+      if (rootCategoryContent === null) {
+        console.warn("Root category is not augmented: " + rootCategory);
+        return null;
+      }
+
+      const layout = PageGridUtil.getLayoutWithoutDefault(rootCategoryContent, pagegridProperty);
+      if (layout === undefined) {
+        return undefined;
+      }
+      if (layout === null) {
+        console.warn("Layout not found for augmented root category: " + rootCategoryContent);
+      }
+      return layout;
     }
     return null;
   }

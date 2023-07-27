@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<CMSettings folder="/Settings/Options/Settings/Feedback Hub" name="Keywords Adapter">
+<CMSettings folder="/Settings/Options/Settings/Feedback Hub" name="Keywords Adapter"
+            xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+  <externalRefId></externalRefId>
   <locale></locale>
   <master>
   </master>
   <settings>
-    <Struct xmlns="http://www.coremedia.com/2008/struct">
+    <Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
       <StringProperty Name="factoryId">imagga</StringProperty>
       <StringProperty Name="groupId">imagga</StringProperty>
       <StringProperty Name="contentType">CMPicture</StringProperty>
@@ -15,7 +17,7 @@
       <StructProperty Name="settings">
         <Struct>
           <StringProperty Name="sourceBlobProperty">data</StringProperty>
-          <StringProperty Name="basicAuthKey"></StringProperty>
+          <StringProperty Name="basicAuthKey"/>
         </Struct>
       </StructProperty>
     </Struct>

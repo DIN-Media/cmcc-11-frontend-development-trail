@@ -19,7 +19,7 @@ ResourceBundleUtil.override(TopicPages_properties, {
   TopicPages_deletion_tooltip: "Delete Topic Page",
   TopicPages_deletion_text: "Do you really want to delete the custom topic page '{0}'?",
   TopicPages_root_channel_checked_out_title: "Main Page Error",
-  TopicPages_root_channel_checked_out_msg: "The main page document of the active site '{0}' is checked out by another user.",
+  TopicPages_root_channel_checked_out_msg: "The main page of the active site '{0}' is checked out by another user.",
   TopicPages_root_channel_not_found_title: "Main Page Error",
-  TopicPages_root_channel_not_found_msg: "The main page document of the active site '{0}' could not be resolved. The update of the topic page linking failed.",
+  TopicPages_root_channel_not_found_msg: "The main page of the active site '{0}' could not be resolved. The update of the topic page linking failed.",
 });

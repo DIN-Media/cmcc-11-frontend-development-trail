@@ -131,6 +131,10 @@ class OverrideGenericCommerceConnectionTest {
             .isNotNull()
             // the store context must reference the custom connection instance
             .returns(connection, StoreContext::getConnection);
+
+    // connection instances are not cached by the factory
+    var secondConnection = connectionFactory.createConnection(site).orElseThrow(IllegalStateException::new);
+    assertThat(connection).isNotSameAs(secondConnection);
   }
 
 }

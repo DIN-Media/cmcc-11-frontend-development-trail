@@ -1,9 +1,11 @@
 package com.coremedia.blueprint.caas.augmentation;
 
 import com.coremedia.blueprint.base.caas.model.adapter.ByPathAdapterFactory;
+import com.coremedia.blueprint.base.livecontext.augmentation.config.AugmentationPageGridServiceConfiguration;
+import com.coremedia.blueprint.base.livecontext.augmentation.config.ContentAugmentedPageGridServiceBuilder;
+import com.coremedia.blueprint.base.livecontext.augmentation.config.ContentAugmentedProductPageGridServiceBuilder;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.CatalogAliasMappingProvider;
 import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGridService;
-import com.coremedia.blueprint.base.pagegrid.internal.PageGridConfiguration;
 import com.coremedia.blueprint.base.settings.SettingsService;
 import com.coremedia.blueprint.caas.augmentation.adapter.AugmentationPageGridAdapterFactoryCmsOnly;
 import com.coremedia.blueprint.caas.augmentation.adapter.CommerceRefAdapterCmsOnly;
@@ -13,15 +15,13 @@ import com.coremedia.blueprint.caas.augmentation.model.AugmentationFacadeCmsOnly
 import com.coremedia.blueprint.caas.augmentation.tree.ExternalBreadcrumbContentTreeRelationFactory;
 import com.coremedia.blueprint.caas.augmentation.tree.ExternalBreadcrumbContentTreeRelationUtil;
 import com.coremedia.blueprint.caas.augmentation.tree.ExternalBreadcrumbTreeRelation;
-import com.coremedia.cache.Cache;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
-import com.coremedia.livecontext.pagegrid.ContentAugmentedPageGridServiceImpl;
-import com.coremedia.livecontext.pagegrid.ContentAugmentedProductPageGridServiceImpl;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.web.context.WebApplicationContext;
@@ -34,6 +34,9 @@ import static com.coremedia.blueprint.caas.augmentation.adapter.AugmentationPage
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({
         CaasAssetSearchServiceConfigProperties.class,
+})
+@Import({
+        AugmentationPageGridServiceConfiguration.class,
 })
 public class HeadlessAugmentationCmsOnlyConfiguration {
 
@@ -92,32 +95,19 @@ public class HeadlessAugmentationCmsOnlyConfiguration {
   }
 
   @Bean
-  public ContentBackedPageGridService categoryContentBackedPageGridServiceCmsOnly(
-          Cache cache,
-          SitesService sitesService,
-          PageGridConfiguration pageGridConfiguration) {
-    ContentAugmentedPageGridServiceImpl pageGridService = new ContentAugmentedPageGridServiceImpl();
-    pageGridService.setCache(cache);
-    pageGridService.setSitesService(sitesService);
-    pageGridService.setConfiguration(pageGridConfiguration);
-    pageGridService.setFallbackStructPropertyName(PAGE_GRID_STRUCT_PROPERTY);
-    pageGridService.setRootCategoryContentSupplier(ExternalBreadcrumbContentTreeRelationUtil::getContentForRootCategory);
-    return pageGridService;
+  public ContentBackedPageGridService categoryContentBackedPageGridServiceCmsOnly(ContentAugmentedPageGridServiceBuilder builder) {
+    return builder.withFallbackStructPropertyName(PAGE_GRID_STRUCT_PROPERTY)
+            .withRootCategoryContentSupplier(ExternalBreadcrumbContentTreeRelationUtil::getContentForRootCategory)
+            .build();
   }
 
   @Bean
-  public ContentBackedPageGridService pdpContentBackedPageGridServiceCmsOnly(
-          Cache cache,
-          SitesService sitesService,
-          PageGridConfiguration pageGridConfiguration) {
-    ContentAugmentedProductPageGridServiceImpl pageGridService = new ContentAugmentedProductPageGridServiceImpl();
-    pageGridService.setStructPropertyName(PDP_PAGEGRID_PROPERTY_NAME);
-    pageGridService.setCache(cache);
-    pageGridService.setSitesService(sitesService);
-    pageGridService.setConfiguration(pageGridConfiguration);
-    pageGridService.setFallbackStructPropertyName(PAGE_GRID_STRUCT_PROPERTY);
-    pageGridService.setNearestCategoryContentSupplier(ExternalBreadcrumbContentTreeRelationUtil::getNearestContentForLeafCategory);
-    return pageGridService;
+  public ContentBackedPageGridService pdpContentBackedPageGridServiceCmsOnly(ContentAugmentedProductPageGridServiceBuilder builder) {
+    return builder
+            .withStructPropertyName(PDP_PAGEGRID_PROPERTY_NAME)
+            .withFallbackStructPropertyName(PAGE_GRID_STRUCT_PROPERTY)
+            .withNearestCategoryContentSupplier(ExternalBreadcrumbContentTreeRelationUtil::getNearestContentForLeafCategory)
+            .build();
   }
 
   @Bean

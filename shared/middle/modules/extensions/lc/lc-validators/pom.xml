@@ -12,10 +12,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>lc-services-lib</artifactId>
-      <version>${project.version}</version>
-      <scope>runtime</scope>
+      <groupId>com.coremedia.blueprint.base</groupId>
+      <artifactId>bpbase-lc-augmentation</artifactId>
     </dependency>
     <dependency>
       <groupId>com.coremedia.blueprint.base</groupId>
@@ -52,6 +50,7 @@
     <dependency>
       <groupId>com.coremedia.cms</groupId>
       <artifactId>coremedia-spring</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.coremedia.cms</groupId>
@@ -109,12 +108,6 @@
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>com.coremedia.blueprint.base</groupId>
-      <artifactId>bpbase-lc-augmentation</artifactId>
-      <scope>test</scope>
-    </dependency>
-
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

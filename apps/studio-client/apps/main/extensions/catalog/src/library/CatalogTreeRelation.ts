@@ -15,7 +15,7 @@ import CatalogTreeRelationHelper from "./CatalogTreeRelationHelper";
 import CatalogUndelete from "./CatalogUndelete";
 
 /**
- * Intercepts the new content creation and updates the calculateDisabled/hidden state for catalog document types.
+ * Intercepts the new content creation and updates the calculateDisabled/hidden state for catalog content types.
  */
 class CatalogTreeRelation implements ContentTreeRelation {
 

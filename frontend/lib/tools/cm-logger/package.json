@@ -8,16 +8,16 @@
   "version": "1.0.0",
   "engines": {
     "node": "18",
-    "pnpm": "^8.1"
+    "pnpm": "^8.6"
   },
   "dependencies": {
     "chalk": "^4.1.2",
-    "date-fns": "^2.29.3",
+    "date-fns": "^2.30.0",
     "log-symbols": "^4.1.0"
   },
   "devDependencies": {
     "jest": "^27.5.1",
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,json}\"",

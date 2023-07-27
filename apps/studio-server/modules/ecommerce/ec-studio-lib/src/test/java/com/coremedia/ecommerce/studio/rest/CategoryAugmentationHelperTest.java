@@ -1,6 +1,6 @@
 package com.coremedia.ecommerce.studio.rest;
 
-import com.coremedia.blueprint.base.livecontext.ecommerce.common.BaseCommerceServicesAutoConfiguration;
+import com.coremedia.blueprint.base.livecontext.augmentation.config.AugmentationPageGridServiceConfiguration;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.MappedCatalogsProvider;
 import com.coremedia.blueprint.base.livecontext.ecommerce.id.CommerceIdParserHelper;
 import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGridService;
@@ -8,26 +8,19 @@ import com.coremedia.blueprint.base.pagegrid.PageGridContentKeywords;
 import com.coremedia.cap.content.Content;
 import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.struct.Struct;
-import com.coremedia.cap.test.xmlrepo.XmlRepoConfiguration;
-import com.coremedia.cap.test.xmlrepo.XmlUapiConfig;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
 import com.coremedia.livecontext.ecommerce.catalog.Catalog;
 import com.coremedia.livecontext.ecommerce.catalog.Category;
 import com.coremedia.livecontext.ecommerce.common.StoreContext;
 import com.coremedia.rest.cap.intercept.InterceptService;
-import com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,17 +36,23 @@ import static com.coremedia.ecommerce.studio.rest.CategoryAugmentationHelper.SEG
 import static com.coremedia.ecommerce.studio.rest.CategoryAugmentationHelper.TITLE;
 import static java.util.Collections.emptyMap;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {XmlRepoConfiguration.class, CategoryAugmentationHelperTest.LocalConfig.class})
-public class CategoryAugmentationHelperTest {
+@SpringBootTest(classes = {
+        AugmentationPageGridServiceConfiguration.class,
+        CategoryAugmentationHelper.class,
+}, properties = {
+        "repository.factoryClassName=com.coremedia.cap.xmlrepo.XmlCapConnectionFactory",
+        "repository.params.contentxml=classpath:/com/coremedia/ecommerce/studio/rest/ec-studio-lib-test-content.xml",
+        "repository.params.userxml=classpath:/com/coremedia/cap/common/xml/users-default.xml",
+})
+class CategoryAugmentationHelperTest {
 
   private static final String CATEGORY_EXTERNALID = "leafCategory";
   private static final String CATEGORY_ID = "test:///catalog/category/" + CATEGORY_EXTERNALID;
@@ -63,17 +62,20 @@ public class CategoryAugmentationHelperTest {
   private static final String ROOT = "root";
   private static final String TOP = "top";
 
-  @Inject
+  @Autowired
   private ContentRepository contentRepository;
 
   @SuppressWarnings("SpringJavaAutowiringInspection")
-  @Inject
+  @SpyBean
   private CategoryAugmentationHelper testling;
 
-  @Mock
+  @SpyBean(name = "categoryAugmentationService")
   private AugmentationService augmentationService;
 
-  @Mock
+  @SpyBean(name = "contentBackedPageGridService")
+  private ContentBackedPageGridService pageGridService;
+
+  @MockBean
   private MappedCatalogsProvider mappedCatalogsProvider;
 
   @Mock
@@ -88,15 +90,12 @@ public class CategoryAugmentationHelperTest {
   @Mock
   private StoreContext storeContext;
 
-  @Mock
-  ContentBackedPageGridService pageGridService;
+  @SuppressWarnings("unused")
+  @MockBean
+  private InterceptService interceptService;
 
-  @Before
+  @BeforeEach
   public void setUp() {
-    testling.setAugmentationService(augmentationService);
-    testling.setMappedCatalogsProvider(mappedCatalogsProvider);
-    testling.setPageGridService(pageGridService);
-
     Content rootCategoryContent = contentRepository.getContent("20");
     when(augmentationService.getContent(rootCategory)).thenReturn(rootCategoryContent);
 
@@ -161,7 +160,7 @@ public class CategoryAugmentationHelperTest {
   @Test
   public void testAugmentationWithPropertyTooLong() {
     //length of string is 90 characters
-    String propertyValueTooLong = "this-dispaly-name-is-too-long-this-dispaly-name-is-too-long-this-dispaly-name-is-too-long";
+    String propertyValueTooLong = "this-display-name-is-too-long-this-display-name-is-too-long-this-display-name-is-too-long";
     when(leafCategory.getDisplayName()).thenReturn(propertyValueTooLong);
     testling.augment(leafCategory);
 
@@ -190,20 +189,21 @@ public class CategoryAugmentationHelperTest {
     assertThat(content.get()).isEqualTo(bCategoryAugmentation);
   }
 
-  @Test(expected = CommerceAugmentationException.class)
+  @Test
   public void testInitializeLayoutSettingsWithInvalidState() {
     when(augmentationService.getContent(rootCategory)).thenReturn(null);
 
-    testling.initializeLayoutSettings(leafCategory, emptyMap());
+    assertThatThrownBy(() -> testling.initializeLayoutSettings(leafCategory, emptyMap()))
+            .isInstanceOf(CommerceAugmentationException.class);
   }
 
   @Test
   public void testInitializeRootCategoryContent() {
     Content layoutFromSiteRoot = contentRepository.getContent("224");
     when(augmentationService.getContent(rootCategory)).thenReturn(null);
-    when(pageGridService.getLayout(any(Content.class), eq(PAGE_GRID_STRUCT_PROPERTY))).thenReturn(layoutFromSiteRoot);
+    doReturn(layoutFromSiteRoot).when(pageGridService).getLayout(any(Content.class), eq(PAGE_GRID_STRUCT_PROPERTY));
 
-    Map properties = new HashMap();
+    Map<String, Object> properties = new HashMap<>();
     testling.initializeRootCategoryContent(rootCategory, properties);
 
     assertThat(properties).isNotEmpty();
@@ -213,36 +213,9 @@ public class CategoryAugmentationHelperTest {
     assertThat(pdpPageGrid).isNotNull();
     assertThat(placement).isEqualTo(pdpPageGrid);
 
-    Content layoutPalcement = (Content) placement.getStruct(PageGridContentKeywords.PLACEMENTS_PROPERTY_NAME).get(PageGridContentKeywords.LAYOUT_PROPERTY_NAME);
-    assertThat(layoutPalcement).isNotNull();
-    assertThat(layoutPalcement).isEqualTo(layoutFromSiteRoot);
+    Content layoutPlacement = (Content) placement.getStruct(PageGridContentKeywords.PLACEMENTS_PROPERTY_NAME).get(PageGridContentKeywords.LAYOUT_PROPERTY_NAME);
+    assertThat(layoutPlacement).isNotNull();
+    assertThat(layoutPlacement).isEqualTo(layoutFromSiteRoot);
   }
 
-  @Configuration(proxyBeanMethods = false)
-  @ImportResource(value = {
-          "classpath:/com/coremedia/blueprint/base/multisite/bpbase-multisite-services.xml",
-  }, reader = ResourceAwareXmlBeanDefinitionReader.class)
-  @Import(BaseCommerceServicesAutoConfiguration.class)
-  public static class LocalConfig {
-
-    @Bean
-    public XmlUapiConfig xmlUapiConfig() {
-      return new XmlUapiConfig("classpath:/com/coremedia/ecommerce/studio/rest/ec-studio-lib-test-content.xml");
-    }
-
-    @Bean
-    CategoryAugmentationHelper categoryAugmentationResource() {
-      return spy(new CategoryAugmentationHelper());
-    }
-
-    @Bean
-    public InterceptService interceptService() {
-      return null;
-    }
-
-    @Bean
-    public ContentBackedPageGridService contentBackedPageGridService() {
-      return mock(ContentBackedPageGridService.class);
-    }
-  }
 }

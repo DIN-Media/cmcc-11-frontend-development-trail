@@ -4,24 +4,24 @@
 <locale>en-US</locale>
 <master>
 </master>
-  <settings>
-    <Struct xmlns="http://www.coremedia.com/2008/struct">
-      <StructProperty Name="limits">
-        <Struct>
-          <StructProperty Name="translation">
-            <Struct>
-              <IntProperty Name="maxDepthToCompleteChangeSet"></IntProperty>
-              <IntProperty Name="limitForDependentContentItems"></IntProperty>
-            </Struct>
-          </StructProperty>
-          <StructProperty Name="publication">
-            <Struct>
-              <IntProperty Name="maxDepthToCompleteChangeSet"></IntProperty>
-            </Struct>
-          </StructProperty>
-        </Struct>
-      </StructProperty>
-    </Struct>
-  </settings>
+<settings>
+<Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
+<StructProperty Name="limits">
+<Struct>
+<StructProperty Name="translation">
+<Struct>
+<IntProperty Name="maxDepthToCompleteChangeSet"/>
+<IntProperty Name="limitForDependentContentItems"/>
+</Struct>
+</StructProperty>
+<StructProperty Name="publication">
+<Struct>
+<IntProperty Name="maxDepthToCompleteChangeSet"/>
+</Struct>
+</StructProperty>
+</Struct>
+</StructProperty>
+</Struct>
+</settings>
 <identifier></identifier>
 </CMSettings>

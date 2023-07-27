@@ -142,8 +142,9 @@ describe("parseSettings()", () => {
     const relativeFilename = path.basename(__filename);
     const relativeLink = asLink(relativeFilename);
     const relativeLinkArray = asLinks([relativeFilename, relativeFilename]);
-    const absoluteLink = asLink(__filename);
-    const absoluteLinkArray = asLinks([__filename, __filename]);
+    const fileNameWithSlash = __filename.replace(/\\/g, "/");
+    const absoluteLink = asLink(fileNameWithSlash);
+    const absoluteLinkArray = asLinks([fileNameWithSlash, fileNameWithSlash]);
 
     expect(
       parseSettings(

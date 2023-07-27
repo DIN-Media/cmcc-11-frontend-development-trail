@@ -19,7 +19,8 @@ import LivecontextStudioPlugin_properties from "../LivecontextStudioPlugin_prope
 interface CommerceAugmentedPageGridFormConfig extends Config<PropertyFieldGroup>, Partial<Pick<CommerceAugmentedPageGridForm,
   "showLocal" |
   "pageGridPropertyName" |
-  "fallbackPageGridPropertyName"
+  "fallbackPageGridPropertyName" |
+  "layoutPaths"
 >> {
 }
 
@@ -44,6 +45,7 @@ class CommerceAugmentedPageGridForm extends PropertyFieldGroup {
           fallbackPropertyName: config.fallbackPageGridPropertyName,
           hideLabel: true,
           showLocal: config.showLocal,
+          layoutPaths: config.layoutPaths,
           pageTreeRelation: augmentedCategoryTreeRelation,
           fields: [
             Config(DataField, {
@@ -89,6 +91,8 @@ class CommerceAugmentedPageGridForm extends PropertyFieldGroup {
   pageGridPropertyName: string = null;
 
   fallbackPageGridPropertyName: string = null;
+
+  layoutPaths: Array<string> = null;
 }
 
 export default CommerceAugmentedPageGridForm;

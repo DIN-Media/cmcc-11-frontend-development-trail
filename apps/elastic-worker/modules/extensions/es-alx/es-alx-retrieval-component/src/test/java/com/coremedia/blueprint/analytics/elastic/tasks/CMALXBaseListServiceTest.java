@@ -5,21 +5,18 @@ import com.coremedia.blueprint.base.elastic.social.configuration.ElasticSocialPl
 import com.coremedia.cap.content.Content;
 import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.content.ContentType;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class CMALXBaseListServiceTest {
+class CMALXBaseListServiceTest {
 
   private ElasticSocialPlugin elasticSocialPlugin;
 
@@ -28,7 +25,7 @@ public class CMALXBaseListServiceTest {
   private CMALXBaseListService cmalxBaseListService;
   private ContentType contentType;
 
-  @Before
+  @BeforeEach
   public void setup() {
     elasticSocialPlugin = mock(ElasticSocialPlugin.class);
     contentType = mock(ContentType.class);
@@ -39,7 +36,7 @@ public class CMALXBaseListServiceTest {
   }
 
   @Test
-  public void testGetCMALXBaseLists() throws Exception {
+  void testGetCMALXBaseLists() {
     cmalxBaseListService.initialize();
     verify(contentRepository).getContentType(TYPE_NAME);
 
@@ -51,7 +48,7 @@ public class CMALXBaseListServiceTest {
     when(c3.isInProduction()).thenReturn(false);
 
     when(contentType.getInstances()).thenReturn(
-            new HashSet<>(Arrays.asList(c1,c2))
+            new HashSet<>(Arrays.asList(c1, c2))
     );
 
     ElasticSocialConfiguration config = mock(ElasticSocialConfiguration.class);
@@ -61,9 +58,8 @@ public class CMALXBaseListServiceTest {
     when(elasticSocialPlugin.getElasticSocialConfiguration(c2, null)).thenReturn(config2);
     when(config2.getTenant()).thenReturn("unknown");
 
-    assertEquals(singletonList(c1), cmalxBaseListService.getCMALXBaseLists(null, "test"));
-    List<Content> emptyList = emptyList();
-    assertEquals(emptyList, cmalxBaseListService.getCMALXBaseLists(null, "doesNotExist"));
+    assertThat(cmalxBaseListService.getCMALXBaseLists(null, "test")).containsExactly(c1);
+    assertThat(cmalxBaseListService.getCMALXBaseLists(null, "doesNotExist")).isEmpty();
   }
 
 }

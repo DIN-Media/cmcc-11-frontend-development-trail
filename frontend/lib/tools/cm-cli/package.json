@@ -9,7 +9,7 @@
   "version": "2.0.0",
   "engines": {
     "node": "18",
-    "pnpm": "^8.1"
+    "pnpm": "^8.6"
   },
   "bin": {
     "cm": "./bin/cm-cli.js"
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "jest": "^27.5.1",
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,json}\"",

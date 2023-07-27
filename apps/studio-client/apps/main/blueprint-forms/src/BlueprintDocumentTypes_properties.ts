@@ -2,7 +2,7 @@ import CoreIcons_properties from "@coremedia/studio-client.core-icons/CoreIcons_
 
 /**
  *
- * Display labels and tool tips for Document Types
+ * Display labels and tool tips for Content Types
  *
  * @see BlueprintDocumentTypes_properties#INSTANCE
  */

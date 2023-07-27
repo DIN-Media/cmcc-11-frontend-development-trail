@@ -2,6 +2,7 @@ package com.coremedia.lc.studio.lib.validators;
 
 import com.coremedia.blueprint.base.links.UrlPathFormattingHelper;
 import com.coremedia.blueprint.base.links.impl.BlueprintUrlPathFormattingConfiguration;
+import com.coremedia.blueprint.base.livecontext.augmentation.config.AugmentationServiceConfiguration;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.BaseCommerceServicesConfiguration;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.CommerceConnectionSupplier;
 import com.coremedia.blueprint.base.multisite.BlueprintMultisiteConfiguration;
@@ -15,27 +16,23 @@ import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
 import com.coremedia.rest.cap.validators.StructLinkListIndexValidator;
 import com.coremedia.rest.validation.Severity;
-import com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
 
 import java.util.Objects;
 
 @Configuration(proxyBeanMethods = false)
 @Import({
+        AugmentationServiceConfiguration.class,
         BaseCommerceServicesConfiguration.class,
         BlueprintMultisiteConfiguration.class,
         BlueprintUrlPathFormattingConfiguration.class,
         CacheConfiguration.class,
 })
-@ImportResource(value = {
-        "classpath:/META-INF/coremedia/lc-services.xml",
-}, reader = ResourceAwareXmlBeanDefinitionReader.class)
 public class LcStudioValidatorsConfiguration {
 
   private static final String CMPRODUCTLIST_NAME = "CMProductList";

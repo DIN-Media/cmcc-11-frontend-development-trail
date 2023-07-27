@@ -147,7 +147,7 @@
 <StringProperty Name="contentType">Document_</StringProperty>
 <StringProperty Name="mode">search</StringProperty>
 <StringProperty Name="view">list</StringProperty>
-<LinkProperty Name="folder" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/content/309"/>
+<LinkProperty Name="folder" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../.." cmexport:path="/"/>
 <StringProperty Name="orderBy">freshness desc</StringProperty>
 <StringProperty Name="orderByRepo">name asc</StringProperty>
 <StringProperty Name="null">freshness desc</StringProperty>
@@ -231,7 +231,7 @@
 <BooleanProperty Name="lostAndFoundCheckboxSelected">false</BooleanProperty>
 </Struct>
 </StructProperty>
-<StringProperty Name="_name">Neu in Aurora en-US</StringProperty>
+<StringProperty Name="_name">Neu in Aurora de-DE</StringProperty>
 </Struct>
 </StructListProperty>
 </Struct>
@@ -302,7 +302,7 @@
 <StringProperty Name="contentType">Document_</StringProperty>
 <StringProperty Name="mode">search</StringProperty>
 <StringProperty Name="view">list</StringProperty>
-<LinkProperty Name="folder" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/content/309"/>
+<LinkProperty Name="folder" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../.." cmexport:path="/"/>
 <StringProperty Name="orderBy">freshness desc</StringProperty>
 <StringProperty Name="orderByRepo">name asc</StringProperty>
 <StringProperty Name="null">freshness desc</StringProperty>
@@ -388,7 +388,7 @@
 </StructProperty>
 </Struct>
 </StructProperty>
-<StringProperty Name="title">Neu in Aurora en-US</StringProperty>
+<StringProperty Name="title">Neu in Aurora de-DE</StringProperty>
 <IntProperty Name="column">1</IntProperty>
 </Struct>
 <Struct>

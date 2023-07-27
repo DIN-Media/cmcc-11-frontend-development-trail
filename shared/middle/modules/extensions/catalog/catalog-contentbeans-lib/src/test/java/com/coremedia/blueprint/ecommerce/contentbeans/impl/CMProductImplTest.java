@@ -1,6 +1,6 @@
 package com.coremedia.blueprint.ecommerce.contentbeans.impl;
 
-import com.coremedia.blueprint.base.ecommerce.catalog.CmsCatalogService;
+import com.coremedia.blueprint.base.ecommerce.catalog.content.CatalogContentHelper;
 import com.coremedia.blueprint.common.contentbeans.CMPicture;
 import com.coremedia.blueprint.ecommerce.contentbeans.CMProduct;
 import com.coremedia.cap.content.Content;
@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -49,8 +49,7 @@ public class CMProductImplTest {
   private CMPicture productPic2Bean;
 
   @Mock
-  private CmsCatalogService catalogService;
-
+  private CatalogContentHelper catalogContentHelper;
 
   @SuppressWarnings("Duplicates")
   @Test
@@ -97,7 +96,7 @@ public class CMProductImplTest {
 
   public CMProduct createTestling() {
     CMProductImpl testling = Mockito.spy(new CMProductImpl());
-    testling.setCatalogService(catalogService);
+    testling.setCatalogContentHelper(catalogContentHelper);
     return testling;
   }
 

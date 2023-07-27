@@ -1,5 +1,6 @@
 package com.coremedia.blueprint.caas.augmentation.tree;
 
+import com.coremedia.blueprint.base.livecontext.augmentation.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.blueprint.base.livecontext.ecommerce.id.CommerceIdFormatterHelper;
 import com.coremedia.blueprint.base.livecontext.ecommerce.id.CommerceIdParserHelper;
 import com.coremedia.cap.content.Content;
@@ -8,7 +9,6 @@ import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
 import com.coremedia.livecontext.ecommerce.catalog.Category;
 import com.coremedia.livecontext.ecommerce.common.CommerceId;
-import com.coremedia.livecontext.tree.ExternalChannelContentTreeRelation;
 import edu.umd.cs.findbugs.annotations.DefaultAnnotation;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
@@ -21,7 +21,7 @@ import java.util.Optional;
 import static java.lang.invoke.MethodHandles.lookup;
 
 @DefaultAnnotation(NonNull.class)
-public class ExternalBreadcrumbContentTreeRelation extends ExternalChannelContentTreeRelation {
+public class ExternalBreadcrumbContentTreeRelation implements ExternalChannelContentTreeRelation {
   private static final Logger LOG = LoggerFactory.getLogger(lookup().lookupClass());
 
   private static final String EXTERNAL_ID = "externalId";

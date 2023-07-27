@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    svg {
+      background: transparent;
+    }
+    #logo {
+      fill: #3F3F3F;
+    }
+    @media (prefers-color-scheme: dark)  {
+      svg {
+        background: transparent;
+      }
+      #logo {
+        fill: #FFFFFF;
+      }
+    }
+  </style>
+  <svg enable-background="new 0 0 32 32" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+  <path id="logo" d="m19.34 23.91c1.92-0.81 4.14-0.42 5.61 1.05l2.36 2.36c-6.51 6.51-17.27 6.23-23.42-0.84-5.19-5.97-5.19-15 0-20.96 6.14-7.07 16.91-7.35 23.42-0.84l-2.36 2.36c-1.47 1.47-3.69 1.86-5.61 1.05-3.41-1.44-7.56-0.58-10.07 2.57-2.47 3.1-2.47 7.58 0 10.67 2.51 3.16 6.66 4.01 10.07 2.58zm-0.7-7.94c0-1.46-1.19-2.65-2.65-2.65s-2.65 1.19-2.65 2.65 1.19 2.65 2.65 2.65 2.65-1.19 2.65-2.65z"/>
+  </svg>
+</svg>

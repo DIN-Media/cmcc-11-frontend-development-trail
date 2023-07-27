@@ -8,7 +8,7 @@
     "@coremedia/brick-utils": "workspace:*"
   },
   "devDependencies": {
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,json}\""

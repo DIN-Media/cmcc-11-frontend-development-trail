@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
         "net.devh.boot.grpc.client.autoconfigure.GrpcClientAutoConfiguration",
         "net.devh.boot.grpc.client.autoconfigure.GrpcClientHealthAutoConfiguration",
         "net.devh.boot.grpc.client.autoconfigure.GrpcClientMetricAutoConfiguration",
+        "org.springframework.boot.autoconfigure.solr.SolrAutoConfiguration",
 })
 @EnableScheduling
 public class ContentFeederApp {

@@ -1,23 +1,27 @@
 package com.coremedia.ecommerce.studio.rest;
 
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.MappedCatalogsProvider;
+import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGridService;
 import com.coremedia.blueprint.base.pagegrid.PageGridContentKeywords;
 import com.coremedia.cap.content.Content;
+import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.multisite.Site;
+import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cap.struct.Struct;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
 import com.coremedia.livecontext.ecommerce.catalog.Category;
 import com.coremedia.livecontext.ecommerce.common.CommerceBean;
 import com.coremedia.livecontext.ecommerce.common.StoreContext;
+import com.coremedia.rest.cap.intercept.InterceptService;
 import com.google.common.annotations.VisibleForTesting;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
-import javax.inject.Named;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +35,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * A REST service to augment a category.
  */
-@Named
+@Service
 public class CategoryAugmentationHelper extends AugmentationHelperBase<Category> {
   private static final Logger LOGGER = LoggerFactory.getLogger(lookup().lookupClass());
   public static final String CATEGORY_PRODUCT_PAGEGRID_STRUCT_PROPERTY = "pdpPagegrid";
@@ -40,7 +44,20 @@ public class CategoryAugmentationHelper extends AugmentationHelperBase<Category>
   static final String TITLE = "title";
   static final String SEGMENT = "segment";
 
-  private MappedCatalogsProvider mappedCatalogsProvider;
+  private final MappedCatalogsProvider mappedCatalogsProvider;
+  private final ContentBackedPageGridService contentBackedPageGridService;
+
+  CategoryAugmentationHelper(@NonNull @Qualifier("categoryAugmentationService") AugmentationService categoryAugmentationService,
+                             @NonNull ContentRepository contentRepository,
+                             @NonNull InterceptService interceptService,
+                             @NonNull SitesService sitesService,
+                             @NonNull MappedCatalogsProvider mappedCatalogsProvider,
+                             @NonNull ContentBackedPageGridService contentBackedPageGridService,
+                             @NonNull @Value("${livecontext.augmentation.path:" + DEFAULT_BASE_FOLDER_NAME + "}") String baseFolderName) {
+    super(categoryAugmentationService, contentRepository, interceptService, sitesService, baseFolderName);
+    this.mappedCatalogsProvider = mappedCatalogsProvider;
+    this.contentBackedPageGridService = contentBackedPageGridService;
+  }
 
   @Override
   @Nullable
@@ -51,7 +68,7 @@ public class CategoryAugmentationHelper extends AugmentationHelperBase<Category>
     }
 
     // create folder hierarchy for category
-    Content categoryFolder = contentRepository.createSubfolders(computerFolderPath(category, site, getBaseFolderName(),
+    Content categoryFolder = getContentRepository().createSubfolders(computerFolderPath(category, site, getBaseFolderName(),
             (CommerceBean bean) -> getCatalog(category)));
 
     if (categoryFolder == null) {
@@ -59,10 +76,7 @@ public class CategoryAugmentationHelper extends AugmentationHelperBase<Category>
     }
 
     Map<String, Object> properties = buildCategoryContentDocumentProperties(category);
-
-    if (augmentationService != null) {
-      initializeLayoutSettings(category, properties);
-    }
+    initializeLayoutSettings(category, properties);
 
     return createContent(CM_EXTERNAL_CHANNEL, categoryFolder, computeDocumentName(category), properties);
   }
@@ -110,10 +124,10 @@ public class CategoryAugmentationHelper extends AugmentationHelperBase<Category>
   }
 
   private void initializeLayoutSettingsWithSiteRoot(@NonNull Category category, @NonNull Map<String, Object> properties) {
-    Site site = requireNonNull(sitesService.getSite(category.getContext().getSiteId()));
+    Site site = requireNonNull(getSitesService().getSite(category.getContext().getSiteId()));
     Content siteRootDocument = site.getSiteRootDocument();
     if (siteRootDocument != null) {
-      Content layout = pageGridService.getLayout(siteRootDocument, PageGridContentKeywords.PAGE_GRID_STRUCT_PROPERTY);
+      Content layout = contentBackedPageGridService.getLayout(siteRootDocument, PageGridContentKeywords.PAGE_GRID_STRUCT_PROPERTY);
       LOGGER.info("Getting default layout from site root document '{}' results to '{}'", siteRootDocument, layout);
       Struct structWithLayoutLink = createStructWithLayoutLink(layout);
       properties.put(CATEGORY_PAGEGRID_STRUCT_PROPERTY, structWithLayoutLink);
@@ -134,7 +148,7 @@ public class CategoryAugmentationHelper extends AugmentationHelperBase<Category>
             mappedCatalogsProvider.getConfiguredRootCategories(context);
 
     return configuredRootCategories.stream()
-            .map(augmentationService::getContent)
+            .map(getCategoryAugmentationService()::getContent)
             .filter(Objects::nonNull)
             .findFirst();
   }
@@ -169,11 +183,6 @@ public class CategoryAugmentationHelper extends AugmentationHelperBase<Category>
     properties.put(CATEGORY_PRODUCT_PAGEGRID_STRUCT_PROPERTY, structWithLayoutLink);
   }
 
-  @Override
-  protected Content getCategoryContent(@NonNull Category category) {
-    return augmentationService.getContent(category);
-  }
-
   /**
    * Builds properties for an <code>CMExternalChannel</code> document.
    */
@@ -191,14 +200,4 @@ public class CategoryAugmentationHelper extends AugmentationHelperBase<Category>
     return properties;
   }
 
-  @Autowired(required = false)
-  @Qualifier("categoryAugmentationService")
-  public void setAugmentationService(AugmentationService augmentationService) {
-    this.augmentationService = augmentationService;
-  }
-
-  @Autowired
-  public void setMappedCatalogsProvider(MappedCatalogsProvider mappedCatalogsProvider) {
-    this.mappedCatalogsProvider = mappedCatalogsProvider;
-  }
 }

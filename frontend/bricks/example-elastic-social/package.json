@@ -6,10 +6,10 @@
     "@coremedia/brick-dynamic-include": "workspace:*",
     "@coremedia/brick-node-decoration-service": "workspace:*",
     "@coremedia/brick-utils": "workspace:*",
-    "jquery": "^3.6.4"
+    "jquery": "^3.7.0"
   },
   "devDependencies": {
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,json}\""

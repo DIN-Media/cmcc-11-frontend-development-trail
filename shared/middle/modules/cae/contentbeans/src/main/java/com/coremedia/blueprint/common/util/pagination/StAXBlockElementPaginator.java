@@ -19,6 +19,7 @@ import java.util.List;
 import static com.coremedia.blueprint.common.util.pagination.StAXUtil.elementIsA;
 import static com.coremedia.blueprint.common.util.pagination.StAXUtil.elementName;
 import static com.coremedia.blueprint.common.util.pagination.StAXUtil.getAttribute;
+import static com.coremedia.blueprint.common.util.pagination.StAXUtil.isBlockElement;
 import static com.coremedia.blueprint.common.util.pagination.StAXUtil.isClosingDiv;
 import static com.coremedia.blueprint.common.util.pagination.StAXUtil.isOpeningDiv;
 import static com.coremedia.blueprint.common.util.pagination.StAXUtil.isWhitespace;
@@ -67,7 +68,8 @@ class StAXBlockElementPaginator extends AbstractPaginator { // NOSONAR  cyclomat
       currentEvent = xmlReader.nextEvent();
       if (currentEvent.isStartDocument() ||
               currentEvent.isEndDocument() ||
-              isWhitespace(currentEvent) ||
+              //drop empty block elements
+              (isWhitespace(currentEvent) && isBlockElement(previousEvent)) ||
               isClosingDiv(currentEvent)) {
         continue;
       }

@@ -15,7 +15,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.Scope;
 
 @AutoConfiguration
 @ImportResource(
@@ -32,14 +31,12 @@ import org.springframework.context.annotation.Scope;
 public class CustomTopicPagesConfiguration {
 
   @Bean
-  @Scope("prototype")
   TopicPagesResource topicPagesResource(CapConnection connection,
                                         ConfigurationService configurationService,
                                         SitesService sitesService,
                                         TaxonomyResolver strategyResolver,
                                         TaxonomyLocalizationStrategy taxonomyLocalizationStrategy,
                                         ContentConfigurationProperties contentConfigurationProperties) {
-
     TopicPagesResource topicPagesResource = new TopicPagesResource(connection,
             configurationService,
             strategyResolver,

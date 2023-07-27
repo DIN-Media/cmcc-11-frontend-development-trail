@@ -1,7 +1,4 @@
 import * as downloadCollection from "../downloadCollection";
-import LocalStorageMock from "../__mocks__/LocalStorageMock";
-
-global.localStorage = new LocalStorageMock();
 
 describe("Test initialization of Download Collection", function () {
   afterEach(function () {

@@ -46,7 +46,7 @@ const Validation_properties: Validation_properties = {
   Validator_duplicate_segment_text: "This URL segment already exists with the same navigation parent in '{0}'.",
   Validator_duplicate_root_segment_text: "This URL root segment is already used in '{0}' of site '{1} - {2}'.",
   Validator_unfavorable_segment_text: "This URL segment '{0}' is not recommended, it should not end with '-' followed by numbers.",
-  Validator_no_context_text: "This document has no navigation context.",
+  Validator_no_context_text: "This content item has no navigation context.",
   Validator_not_in_navigation_text: "This page is not part of the navigation.",
   Validator_LengthValidator_text: "The length of the text value is too large.",
   Validator_duplicate_referrer_text: "The page is linked by more than one page.",
@@ -63,9 +63,9 @@ const Validation_properties: Validation_properties = {
   ValidationStatus_not_valid_anymore: "Invalid since",
   ValidationStatus_will_be_active: "Will be valid as of",
   Validator_validFrom_is_after_validTo_text: "The Valid From date is after the Valid To date.",
-  Validator_validFrom_equals_validTo_text: "The document is never valid as the Valid From date equals the Valid To date.",
+  Validator_validFrom_equals_validTo_text: "The content item is never valid as the Valid From date equals the Valid To date.",
   Validator_placement_visibleFrom_is_after_visibleTo_text: "The Visible From date for content item '{0}' is after the Visible To date.",
-  Validator_placement_visibleFrom_equals_visibleTo_text: "The document is never visible as the Visible From date equals the Visible To date.",
+  Validator_placement_visibleFrom_equals_visibleTo_text: "The content item is never visible as the Visible From date equals the Visible To date.",
   Validator_placement_visibility_not_within_validity_text: "The visibility range set for content item '{0}' is not within the content's validity range.",
 };
 

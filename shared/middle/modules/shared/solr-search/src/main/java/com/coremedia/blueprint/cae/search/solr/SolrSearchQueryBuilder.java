@@ -220,6 +220,9 @@ public class SolrSearchQueryBuilder implements SolrQueryBuilder {
 
   protected static void setHighlight(SolrQuery q) {
     q.setHighlight(true);
+    // for Solr 9, set to "original" highlighter explicitly to have configuration in solrconfig.xml be applied.
+    // if going to "unified" highlighter, highlighting parameters would have to be specified here.
+    q.setParam("hl.method", "original");
     q.setParam("hl.fl",
             SearchConstants.FIELDS.TEASER_TITLE.toString(),
             SearchConstants.FIELDS.TEASER_TEXT.toString(),
@@ -238,8 +241,8 @@ public class SolrSearchQueryBuilder implements SolrQueryBuilder {
    *
    * @param query the query string
    * @return the escaped query string
-   * @see <a href="https://solr.apache.org/guide/8_11/local-parameters-in-queries.html">
-   *   Solr Reference Guide: Local Parameters in Queries</a>
+   * @see <a href="https://solr.apache.org/guide/solr/9_2/query-guide/local-params.html">
+   *   Solr Reference Guide: Local Params</a>
    */
   private static String escapeLocalParamsQueryString(String query) {
     return query.startsWith("{!") ? "\\" + query : query;

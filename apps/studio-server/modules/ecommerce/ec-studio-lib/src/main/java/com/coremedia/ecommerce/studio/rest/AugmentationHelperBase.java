@@ -1,7 +1,6 @@
 package com.coremedia.ecommerce.studio.rest;
 
 import com.coremedia.blueprint.base.livecontext.util.CommerceBeanUtils;
-import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGridService;
 import com.coremedia.blueprint.base.pagegrid.PageGridContentKeywords;
 import com.coremedia.cap.common.CapException;
 import com.coremedia.cap.common.CapStructHelper;
@@ -28,8 +27,6 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,13 +46,39 @@ abstract class AugmentationHelperBase<T> {
   static final String EXTERNAL_ID = "externalId";
   public static final int MAX_CONTENT_NAME_LENGTH = 233;
 
-  protected ContentRepository contentRepository;
-  protected AugmentationService augmentationService;
-  protected ContentBackedPageGridService pageGridService;
-  private InterceptService interceptService;
-  protected SitesService sitesService;
+  private final AugmentationService categoryAugmentationService;
+  private final ContentRepository contentRepository;
+  private final InterceptService interceptService;
+  private final SitesService sitesService;
+  private final String baseFolderName;
 
-  private String baseFolderName;
+  AugmentationHelperBase(@NonNull AugmentationService categoryAugmentationService,
+                         @NonNull ContentRepository contentRepository,
+                         @NonNull InterceptService interceptService,
+                         @NonNull SitesService sitesService,
+                         @NonNull String baseFolderName) {
+    this.categoryAugmentationService = categoryAugmentationService;
+    this.contentRepository = contentRepository;
+    this.interceptService = interceptService;
+    this.sitesService = sitesService;
+    this.baseFolderName = baseFolderName;
+  }
+
+  protected ContentRepository getContentRepository() {
+    return contentRepository;
+  }
+
+  protected InterceptService getInterceptService() {
+    return interceptService;
+  }
+
+  protected SitesService getSitesService() {
+    return sitesService;
+  }
+
+  public AugmentationService getCategoryAugmentationService() {
+    return categoryAugmentationService;
+  }
 
   @Nullable
   abstract Content augment(@NonNull T type);
@@ -191,8 +214,9 @@ abstract class AugmentationHelperBase<T> {
     return category.getDisplayName().replace('/', '_').trim();
   }
 
-  @Nullable
-  abstract Content getCategoryContent(@NonNull Category category);
+  protected Content getCategoryContent(@NonNull Category category) {
+    return categoryAugmentationService.getContent(category);
+  }
 
   @NonNull
   protected static Category getRootCategory(@NonNull CommerceBean commerceBean) {
@@ -259,31 +283,6 @@ abstract class AugmentationHelperBase<T> {
             contentRepository.getContentType("Document_"), layoutSettings);
     builder.add(PageGridContentKeywords.PLACEMENTS_PLACEMENTS_PROPERTY_NAME, createEmptyStruct());
     return builder.build();
-  }
-
-  @Autowired
-  public void setContentRepository(ContentRepository contentRepository) {
-    this.contentRepository = contentRepository;
-  }
-
-  @Autowired(required = false)
-  public void setInterceptService(InterceptService interceptService) {
-    this.interceptService = interceptService;
-  }
-
-  @Autowired
-  public void setSitesService(SitesService sitesService) {
-    this.sitesService = sitesService;
-  }
-
-  @Value("${livecontext.augmentation.path:" + DEFAULT_BASE_FOLDER_NAME + "}")
-  public void setBaseFolderName(String baseFolderName) {
-    this.baseFolderName = baseFolderName;
-  }
-
-  @Autowired
-  public void setPageGridService(ContentBackedPageGridService pageGridService) {
-    this.pageGridService = pageGridService;
   }
 
   public String getBaseFolderName() {

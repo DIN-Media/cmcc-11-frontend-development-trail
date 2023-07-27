@@ -25,7 +25,7 @@ class CreateCatalogObjectDocumentAction extends CreateCatalogObjectDocumentActio
   catalogObjectType: Class = null;
 
   /**
-   * Optional: if set to false the property editors will not be inherited from the super document types.
+   * Optional: if set to false the property editors will not be inherited from the super content types.
    * Default is true, i.e. the property editors are inherited.
    */
   inheritEditors: boolean = false;

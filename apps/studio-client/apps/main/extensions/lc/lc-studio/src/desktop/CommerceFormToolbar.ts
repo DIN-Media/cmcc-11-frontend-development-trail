@@ -49,7 +49,7 @@ class CommerceFormToolbar extends CommerceFormToolbarBase {
           ],
         }),
         Config(Fill),
-        /*Document type*/
+        /*content type*/
         Config(IconDisplayField, {
           itemId: CommerceFormToolbar.DOCUMENT_TYPE_ITEM_ID,
           tooltipOnValue: true,
@@ -63,7 +63,7 @@ class CommerceFormToolbar extends CommerceFormToolbarBase {
           ],
         }),
         Config(Spacer, { width: 6 }),
-        /*Button to collapse document form*/
+        /*Button to collapse content form*/
         Config(IconButton, {
           itemId: CommerceFormToolbar.COLLAPSE_BUTTON_ITEM_ID,
           scale: "medium",

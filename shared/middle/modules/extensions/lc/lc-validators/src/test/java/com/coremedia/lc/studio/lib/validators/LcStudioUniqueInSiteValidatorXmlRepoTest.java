@@ -28,13 +28,13 @@ import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ComponentScan("com.coremedia.cap.common.xml")
 @ContextConfiguration(classes = {
         LcStudioUniqueInSiteValidatorXmlRepoTest.LocalConfig.class
 })
 @TestPropertySource(properties = {
         "repository.factoryClassName=com.coremedia.cap.xmlrepo.XmlCapConnectionFactory",
         "repository.params.contentxml=classpath:/com/coremedia/lc/studio/lib/validators/lc-studio-lib-test-content.xml",
+        "repository.params.userxml=classpath:/com/coremedia/cap/common/xml/users-default.xml",
 })
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class LcStudioUniqueInSiteValidatorXmlRepoTest {

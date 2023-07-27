@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "jquery": "^3.6.4"
+    "jquery": "^3.7.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "^7.21.4",
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
     "babel-jest": "^27.5.1",
     "jest": "^27.5.1",
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,json}\"",

@@ -34,23 +34,43 @@ import org.springframework.context.annotation.Scope;
 })
 public class BlueprintPageCaeContentBeansConfiguration {
 
+  private final DeliveryConfigurationProperties deliveryProperties;
+  private final BlueprintPageCaeContentBeansConfigurationProperties bpCaeProperties;
+
+  private final TreeRelation<Content> navigationTreeRelation;
+  private final ContentBeanFactory contentBeanFactory;
+  private final DataViewFactory dataViewFactory;
+  private final SitesService sitesService;
+  private final Cache cache;
+
+  BlueprintPageCaeContentBeansConfiguration(DeliveryConfigurationProperties deliveryProperties,
+                                            BlueprintPageCaeContentBeansConfigurationProperties bpCaeProperties,
+                                            TreeRelation<Content> navigationTreeRelation,
+                                            ContentBeanFactory contentBeanFactory,
+                                            DataViewFactory dataViewFactory,
+                                            SitesService sitesService,
+                                            Cache cache) {
+    this.deliveryProperties = deliveryProperties;
+    this.bpCaeProperties = bpCaeProperties;
+    this.navigationTreeRelation = navigationTreeRelation;
+    this.contentBeanFactory = contentBeanFactory;
+    this.dataViewFactory = dataViewFactory;
+    this.sitesService = sitesService;
+    this.cache = cache;
+  }
+
   @Bean
   @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-  public PageImpl cmPage(DeliveryConfigurationProperties deliveryConfigurationProperties,
-                         BlueprintPageCaeContentBeansConfigurationProperties contentbeansConfigurationProperties,
-                         SitesService sitesService,
-                         Cache cache,
-                         TreeRelation<Content> navigationTreeRelation,
-                         ContentBeanFactory contentBeanFactory,
-                         DataViewFactory dataViewFactory) {
+  //Create the cmPage prototype bean. Do not define any arguments here to avoid repeated spring dependency lookup.
+  public PageImpl cmPage() {
     PageImpl page = new PageImpl(
-            deliveryConfigurationProperties.isDeveloperMode(),
+            deliveryProperties.isDeveloperMode(),
             sitesService,
             cache,
             navigationTreeRelation,
             contentBeanFactory,
             dataViewFactory);
-    page.setMergeCodeResources(contentbeansConfigurationProperties.isMergeCodeResources());
+    page.setMergeCodeResources(bpCaeProperties.isMergeCodeResources());
     return page;
   }
 }

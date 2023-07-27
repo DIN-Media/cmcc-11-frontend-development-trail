@@ -1,6 +1,6 @@
 package com.coremedia.blueprint.ecommerce.contentbeans.impl;
 
-import com.coremedia.blueprint.base.ecommerce.catalog.CmsCatalogService;
+import com.coremedia.blueprint.base.ecommerce.catalog.content.CatalogContentHelper;
 import com.coremedia.blueprint.cae.contentbeans.CMTeasableImpl;
 import com.coremedia.blueprint.common.contentbeans.CMDownload;
 import com.coremedia.blueprint.common.contentbeans.CMPicture;
@@ -22,19 +22,19 @@ import java.util.stream.Collectors;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class CMProductImpl extends CMTeasableImpl implements CMProduct {
-  private CmsCatalogService catalogService;
+  private CatalogContentHelper catalogContentHelper;
 
   // --- configuration ----------------------------------------------
 
-  public void setCatalogService(CmsCatalogService catalogService) {
-    this.catalogService = catalogService;
+  public void setCatalogContentHelper(CatalogContentHelper catalogContentHelper) {
+    this.catalogContentHelper = catalogContentHelper;
   }
 
   @Override
   protected void initialize() {
     super.initialize();
-    if (catalogService == null) {
-      throw new IllegalStateException("Required property not set: catalogService");
+    if (catalogContentHelper == null) {
+      throw new IllegalStateException("Required property not set: catalogContentHelper");
     }
   }
 
@@ -76,13 +76,9 @@ public class CMProductImpl extends CMTeasableImpl implements CMProduct {
     return (List<? extends Aspect<? extends CMProduct>>) super.getAspects();
   }
 
-
-  // --- Features ---------------------------------------------------
-
-  // --- E-Commerce API ---------------------------------------------
   @Override
   public Product getProduct() {
-    return catalogService.findProductByContent(getContent());
+    return catalogContentHelper.findProductByContent(getContent());
   }
 
   @Override

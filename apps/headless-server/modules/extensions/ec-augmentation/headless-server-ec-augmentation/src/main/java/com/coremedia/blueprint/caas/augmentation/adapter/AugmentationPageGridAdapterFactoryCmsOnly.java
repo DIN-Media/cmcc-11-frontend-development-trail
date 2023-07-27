@@ -86,7 +86,6 @@ public class AugmentationPageGridAdapterFactoryCmsOnly {
 
     //Raise Exception, if commerce bean type is not supported (e.g. SKU)
     if (!isCommerceBeanTypSupported(id.getCommerceBeanType())) {
-      LOG.debug("Wrong bean type. PageGrid lookup not supported for {}", id);
       throw new IllegalArgumentException(format("Wrong bean type. PageGrid lookup not supported for %s", id));
     }
 

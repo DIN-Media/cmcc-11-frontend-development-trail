@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<CMCollection folder="/Sites/Hybris Apparel/Germany/German/Editorial/Content/Snow" name="Snow Hero Slideshow"
-              translationState="up-to-date">
+<CMCollection folder="/Sites/Hybris Apparel/Germany/German/Editorial/Content/Snow" name="Snow Hero Slideshow" xmlns:cmexport="http://www.coremedia.com/2012/cmexport" translationState="up-to-date">
 <externalRefId></externalRefId>
 <locale>de-DE</locale>
 <master>

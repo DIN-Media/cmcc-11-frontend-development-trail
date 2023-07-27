@@ -28,7 +28,7 @@ class InheritReferencesButton extends IconButton {
   }
 
   /**
-   * Document form content.
+   * content form content.
    */
   bindTo: ValueExpression = null;
 

@@ -1,5 +1,6 @@
 package com.coremedia.livecontext.contentbeans;
 
+import com.coremedia.blueprint.base.livecontext.augmentation.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.CommerceConnectionSupplier;
 import com.coremedia.blueprint.base.livecontext.ecommerce.id.CommerceIdParserHelper;
 import com.coremedia.blueprint.common.contentbeans.CMContext;
@@ -13,7 +14,6 @@ import com.coremedia.livecontext.ecommerce.catalog.Category;
 import com.coremedia.livecontext.ecommerce.catalog.Product;
 import com.coremedia.livecontext.ecommerce.common.CommerceConnection;
 import com.coremedia.livecontext.ecommerce.common.CommerceId;
-import com.coremedia.livecontext.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.xml.Markup;
 import com.google.common.base.MoreObjects;
 import edu.umd.cs.findbugs.annotations.NonNull;

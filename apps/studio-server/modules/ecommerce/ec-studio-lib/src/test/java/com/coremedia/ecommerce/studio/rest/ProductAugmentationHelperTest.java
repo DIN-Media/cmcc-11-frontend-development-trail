@@ -1,32 +1,28 @@
 package com.coremedia.ecommerce.studio.rest;
 
+import com.coremedia.blueprint.base.livecontext.augmentation.config.AugmentationPageGridServiceConfiguration;
 import com.coremedia.blueprint.base.livecontext.ecommerce.id.CommerceIdParserHelper;
-import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGridService;
 import com.coremedia.blueprint.base.pagegrid.PageGridContentKeywords;
 import com.coremedia.cap.content.Content;
 import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.struct.Struct;
-import com.coremedia.cap.test.xmlrepo.XmlRepoConfiguration;
-import com.coremedia.cap.test.xmlrepo.XmlUapiConfig;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
 import com.coremedia.livecontext.ecommerce.catalog.Catalog;
 import com.coremedia.livecontext.ecommerce.catalog.Category;
 import com.coremedia.livecontext.ecommerce.catalog.Product;
 import com.coremedia.livecontext.ecommerce.common.StoreContext;
 import com.coremedia.rest.cap.intercept.InterceptService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.mockito.Answers;
 import org.mockito.Mock;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.annotation.DirtiesContext;
 
-import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -36,15 +32,22 @@ import static com.coremedia.ecommerce.studio.rest.AugmentationHelperBase.EXTERNA
 import static com.coremedia.ecommerce.studio.rest.CategoryAugmentationHelper.CATEGORY_PRODUCT_PAGEGRID_STRUCT_PROPERTY;
 import static com.coremedia.ecommerce.studio.rest.CategoryAugmentationHelper.TITLE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-@WebAppConfiguration
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {XmlRepoConfiguration.class, ProductAugmentationHelperTest.LocalConfig.class})
-public class ProductAugmentationHelperTest {
+@SpringBootTest(classes = {
+        AugmentationPageGridServiceConfiguration.class,
+        ProductAugmentationHelper.class,
+}, properties = {
+        "repository.factoryClassName=com.coremedia.cap.xmlrepo.XmlCapConnectionFactory",
+        "repository.params.contentxml=classpath:/com/coremedia/ecommerce/studio/rest/ec-studio-lib-test-content.xml",
+        "repository.params.userxml=classpath:/com/coremedia/cap/common/xml/users-default.xml",
+})
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+class ProductAugmentationHelperTest {
 
   private static final String PRODUCT_EXTERNAL_ID = "prodId";
   private static final String PRODUCT_ID = "test:///catalog/product/" + PRODUCT_EXTERNAL_ID;
@@ -54,17 +57,14 @@ public class ProductAugmentationHelperTest {
   private static final String ROOT = "root";
   private static final String TOP = "top";
 
-  @Inject
+  @Autowired
   private ContentRepository contentRepository;
 
   @SuppressWarnings("SpringJavaAutowiringInspection")
-  @Inject
+  @SpyBean
   private ProductAugmentationHelper testling;
 
-  @Mock
-  private AugmentationService productAugmentationService;
-
-  @Mock
+  @SpyBean(name = "categoryAugmentationService")
   private AugmentationService categoryAugmentationService;
 
   @Mock
@@ -79,11 +79,12 @@ public class ProductAugmentationHelperTest {
   @Mock
   private Catalog catalog;
 
-  @Before
-  public void setUp() {
-    testling.setAugmentationService(productAugmentationService);
-    testling.setCategoryAugmentationService(categoryAugmentationService);
+  @SuppressWarnings("unused")
+  @MockBean
+  private InterceptService interceptService;
 
+  @BeforeEach
+  public void setUp() {
     Content rootCategoryContent = contentRepository.getContent("20");
     when(categoryAugmentationService.getContent(rootCategory)).thenReturn(rootCategoryContent);
 
@@ -123,7 +124,6 @@ public class ProductAugmentationHelperTest {
     assertThat(cmProduct.getString(TITLE)).isEqualTo(PRODUCT_NAME);
 
     // Assert the initialized layout for product pages.
-
     Struct productPageGridStruct = cmProduct.getStruct(CATEGORY_PRODUCT_PAGEGRID_STRUCT_PROPERTY);
     assertThat(productPageGridStruct).isNotNull();
 
@@ -135,37 +135,12 @@ public class ProductAugmentationHelperTest {
     assertThat(productLayout.getName()).isEqualTo("ProductLayoutSettings");
   }
 
-  @Test(expected = CommerceAugmentationException.class)
+  @Test
   public void testInitializeLayoutSettingsWithInvalidState() {
     when(categoryAugmentationService.getContent(rootCategory)).thenReturn(null);
 
-    testling.initializeLayoutSettings(product, Collections.emptyMap());
+    assertThatThrownBy( () -> testling.initializeLayoutSettings(product, Collections.emptyMap()))
+            .isInstanceOf(CommerceAugmentationException.class);
   }
 
-  @Configuration(proxyBeanMethods = false)
-  @ImportResource(value = {
-          "classpath:/com/coremedia/blueprint/base/multisite/bpbase-multisite-services.xml",
-  }, reader = com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader.class)
-  public static class LocalConfig {
-
-    @Bean
-    public XmlUapiConfig xmlUapiConfig() {
-      return new XmlUapiConfig("classpath:/com/coremedia/ecommerce/studio/rest/ec-studio-lib-test-content.xml");
-    }
-
-    @Bean
-    ProductAugmentationHelper productAugmentationHelper() {
-      return spy(new ProductAugmentationHelper());
-    }
-
-    @Bean
-    public InterceptService interceptService() {
-      return null;
-    }
-
-    @Bean
-    public ContentBackedPageGridService contentBackedPageGridService() {
-      return mock(ContentBackedPageGridService.class);
-    }
-  }
 }

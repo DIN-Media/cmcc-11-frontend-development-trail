@@ -18,7 +18,7 @@
     <jib.skip>true</jib.skip>
     <!--set to build to use without docker being installed, but then you need a registry configured in jib.repository-->
     <jib.goal>dockerBuild</jib.goal>
-    <application.image-base>coremedia/nginx-base:1.0-cm-1.23-alpine</application.image-base>
+    <application.image-base>coremedia/nginx-base:1.1-cm-1.24-alpine</application.image-base>
     <application.image-prefix>coremedia</application.image-prefix>
     <application.image-suffix>site-manager</application.image-suffix>
     <application.image-tag>${project.version}</application.image-tag>

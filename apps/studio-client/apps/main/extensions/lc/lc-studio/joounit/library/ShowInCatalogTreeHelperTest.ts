@@ -1,6 +1,7 @@
 import Category from "@coremedia-blueprint/studio-client.main.ec-studio-model/model/Category";
 import Store from "@coremedia-blueprint/studio-client.main.ec-studio-model/model/Store";
 import CatalogHelper from "@coremedia-blueprint/studio-client.main.ec-studio/helper/CatalogHelper";
+import { waitUntil } from "@coremedia/studio-client.client-core-test-helper/async";
 import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
 import CompoundChildTreeModel from "@coremedia/studio-client.main.editor-components/sdk/collectionview/tree/CompoundChildTreeModel";
 import editorContext from "@coremedia/studio-client.main.editor-components/sdk/editorContext";
@@ -30,36 +31,31 @@ class ShowInCatalogTreeHelperTest extends AbstractLiveContextStudioTest {
     this.#treeModel = ShowInCatalogTreeHelper.TREE_MODEL;
   }
 
-  testSwitchSite(): void {
+  // noinspection JSUnusedGlobalSymbols
+  async testSwitchSite(): Promise<void> {
     this.#setUpCatalog();
 
-    this.waitUntil("wait for store to load",
-      (): boolean =>
-        !!(as(CatalogHelper.getInstance().getActiveStoreExpression().getValue(), Store))
-      ,
-      (): void =>
-        this.waitUntil("wait for category to load",
-          (): boolean =>
-          // wait for the complete path to be loaded otherwise it can not be opened in the catalog tree
-            !!this.#treeModel.getIdPathFromModel(this.#category)
-          ,
-          (): void => {
-            (this.#showInCatalogTreeHelper as unknown)["adjustSettings"] = ((entity, callback, msg) => {
-              this.#functionArguments = [entity, callback, msg];
-            });
-            this.preferences.set(ShowInCatalogTreeHelperTest.PREFERENCE_SHOW_CATALOG_KEY, false); // do not allow the catalog contents to be shown in content repository
-            // configure wrong site
-            editorContext._.getSitesService().getPreferredSiteIdExpression().setValue("TestSiteId");
+    // wait for store to load:
+    await waitUntil((): boolean =>
+      !!(as(CatalogHelper.getInstance().getActiveStoreExpression().getValue(), Store)));
 
-            // test for the preferences: no catalog content visible in the repository tree
-            this.#showInCatalogTreeHelper.showItems(this.#treeModel.getTreeId());
-            Assert.assertNotNull(this.#functionArguments);
-            Assert.assertEquals(this.#entities[0], this.#functionArguments[0]);
-            Assert.assertEquals(bind(this.#showInCatalogTreeHelper, this.#showInCatalogTreeHelper.showInCatalogTree), this.#functionArguments[1]);
-          },
-        ),
+    // wait for category to load:
+    await waitUntil((): boolean =>
+      // wait for the complete path to be loaded otherwise it can not be opened in the catalog tree
+      !!this.#treeModel.getIdPathFromModel(this.#category));
 
-    );
+    (this.#showInCatalogTreeHelper as unknown)["adjustSettings"] = ((entity, callback, msg): void => {
+      this.#functionArguments = [entity, callback, msg];
+    });
+    this.preferences.set(ShowInCatalogTreeHelperTest.PREFERENCE_SHOW_CATALOG_KEY, false); // do not allow the catalog contents to be shown in content repository
+    // configure wrong site
+    editorContext._.getSitesService().getPreferredSiteIdExpression().setValue("TestSiteId");
+
+    // test for the preferences: no catalog content visible in the repository tree
+    this.#showInCatalogTreeHelper.showItems(this.#treeModel.getTreeId());
+    Assert.assertNotNull(this.#functionArguments);
+    Assert.assertEquals(this.#entities[0], this.#functionArguments[0]);
+    Assert.assertEquals(bind(this.#showInCatalogTreeHelper, this.#showInCatalogTreeHelper.showInCatalogTree), this.#functionArguments[1]);
   }
 
 }

@@ -1,11 +1,26 @@
-import CapPropertyDescriptorUtil from "@coremedia/studio-client.cap-rest-client-impl/common/descriptors/impl/CapPropertyDescriptorUtil";
+import CapPropertyDescriptorUtil
+  from "@coremedia/studio-client.cap-rest-client-impl/common/descriptors/impl/CapPropertyDescriptorUtil";
 import ContentImpl from "@coremedia/studio-client.cap-rest-client-impl/content/impl/ContentImpl";
 import ContentRepositoryImpl from "@coremedia/studio-client.cap-rest-client-impl/content/impl/ContentRepositoryImpl";
+import {
+  $BooleanPropertyDescriptor,
+  $StringListPropertyDescriptor,
+  $StructPropertyDescriptor,
+} from "@coremedia/studio-client.cap-rest-client-test-helper/protocol/common";
+import {
+  $ContentRef,
+  $ContentTypeRef,
+  ContentRightsForUserUri,
+  ContentUri,
+  makeDocumentCall,
+  makeContentRightsForUserCall,
+} from "@coremedia/studio-client.cap-rest-client-test-helper/protocol/content";
 import CapSession from "@coremedia/studio-client.cap-rest-client/common/CapSession";
 import session from "@coremedia/studio-client.cap-rest-client/common/session";
 import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
 import ContentRepository from "@coremedia/studio-client.cap-rest-client/content/ContentRepository";
 import ContentType from "@coremedia/studio-client.cap-rest-client/content/ContentType";
+import ContentTypeNames from "@coremedia/studio-client.cap-rest-client/content/ContentTypeNames";
 import Right from "@coremedia/studio-client.cap-rest-client/content/authorization/Right";
 import Group from "@coremedia/studio-client.cap-rest-client/user/Group";
 import User from "@coremedia/studio-client.cap-rest-client/user/User";
@@ -13,11 +28,11 @@ import WorkflowContentService from "@coremedia/studio-client.cap-rest-client/wor
 import WorkflowRepository from "@coremedia/studio-client.cap-rest-client/workflow/WorkflowRepository";
 import BeanFactoryImpl from "@coremedia/studio-client.client-core-impl/data/impl/BeanFactoryImpl";
 import RemoteBeanCache from "@coremedia/studio-client.client-core-impl/data/impl/RemoteBeanCache";
+import RemoteService from "@coremedia/studio-client.client-core-impl/data/impl/RemoteService";
 import AbstractRemoteTest from "@coremedia/studio-client.client-core-test-helper/AbstractRemoteTest";
-import MockFetch from "@coremedia/studio-client.client-core-test-helper/MockFetch";
-import Step from "@coremedia/studio-client.client-core-test-helper/Step";
+import MockFetch, { MockCall } from "@coremedia/studio-client.client-core-test-helper/MockFetch";
 import Locale from "@coremedia/studio-client.client-core/data/Locale";
-import RemoteBean from "@coremedia/studio-client.client-core/data/RemoteBean";
+import RemoteBeanUtil from "@coremedia/studio-client.client-core/data/RemoteBeanUtil";
 import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpression";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
 import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
@@ -30,7 +45,6 @@ import { as, mixin } from "@jangaroo/runtime";
 import Class from "@jangaroo/runtime/Class";
 import joo from "@jangaroo/runtime/joo";
 import { AnyFunction } from "@jangaroo/runtime/types";
-import RemoteService from "@coremedia/studio-client.client-core-impl/data/impl/RemoteService";
 
 class AbstractCatalogTest extends AbstractRemoteTest {
 
@@ -113,31 +127,31 @@ class AbstractCatalogTest extends AbstractRemoteTest {
 
     this.#contentRepository.getAccessControl = ((): any =>
       ({
-        mayPerform: (content: Content, right: Right): any =>
+        mayPerform: (_content: Content, _right: Right): any =>
           true
         ,
-        mayPerformForType: (content: Content, contentType: ContentType, right: Right): any =>
+        mayPerformForType: (_content: Content, _contentType: ContentType, _right: Right): any =>
           true
         ,
-        mayCreate: (content: Content, right: Right): any =>
+        mayCreate: (_content: Content, _right: Right): any =>
           true
         ,
         filterReadableContents: (contents: Array<any>): any =>
           contents
         ,
-        mayCopy: (contents: Array<any>, target: Content): any =>
+        mayCopy: (_contents: Array<any>, _target: Content): any =>
           true
         ,
-        mayMove: (contents: Array<any>, target: Content): any =>
+        mayMove: (_contents: Array<any>, _target: Content): any =>
           true
         ,
-        mayWrite: (contents: Array<any>, target: Content): any =>
+        mayWrite: (_contents: Array<any>, _target: Content): any =>
           true
         ,
-        mayRename: (contents: Array<any>, target: Content): any =>
+        mayRename: (_contents: Array<any>, _target: Content): any =>
           true
         ,
-        isWritable: (content: Content): any =>
+        isWritable: (_content: Content): any =>
           true,
 
       })
@@ -153,7 +167,7 @@ class AbstractCatalogTest extends AbstractRemoteTest {
             Object.setPrototypeOf({
               getWorkflowContentService: (): WorkflowContentService =>
                 Object.setPrototypeOf({
-                  isLockedForUser: (content: Content): boolean =>
+                  isLockedForUser: (_content: Content): boolean =>
                     false,
 
                 }, mixin(class {}, WorkflowContentService).prototype),
@@ -199,16 +213,16 @@ class AbstractCatalogTest extends AbstractRemoteTest {
         getPreferredSite: (): any =>
           preferredSite
         ,
-        getSiteIdFor: (content: Content): string =>
+        getSiteIdFor: (_content: Content): string =>
           this.#preferredSiteExpression.getValue()
         ,
-        getSiteFor: (content: Content): any =>
+        getSiteFor: (_content: Content): any =>
           preferredSite
         ,
         getSites: (): Array<any> =>
           [preferredSite]
         ,
-        getSite: (siteId: string): any =>
+        getSite: (_siteId: string): any =>
           preferredSite,
 
       })
@@ -226,8 +240,8 @@ class AbstractCatalogTest extends AbstractRemoteTest {
     );
   }
 
-  protected override getMockCalls(): Array<any> {
-    return AbstractCatalogTest.MOCK_RESPONSES;
+  protected override getMockCalls(): MockCall[] {
+    return AbstractCatalogTest.MOCK_CALLS;
   }
 
   override tearDown(): void {
@@ -237,67 +251,16 @@ class AbstractCatalogTest extends AbstractRemoteTest {
     RemoteBeanCache.disposeAll();
   }
 
-  protected makeShopInvalid(): Step {
-    return new Step("make shop invalid",
-      (): boolean =>
-        true
-      ,
-      (): void => {
-        this.#preferredSiteExpression.setValue("Media");
-      });
+  protected async waitForContentRepositoryLoaded(): Promise<void> {
+    await this.#contentRepository.load();
   }
 
-  protected makeShopValid(): Step {
-    return new Step("make shop valid",
-      (): boolean =>
-        true
-      ,
-      (): void => {
-        this.#preferredSiteExpression.setValue("HeliosSiteId");
-      });
+  protected async waitForContentTypesLoaded(): Promise<void> {
+    // load content types:
+    await RemoteBeanUtil.loadAll(...this.#contentRepository.getContentTypes());
   }
 
-  protected loadContentRepository(): Step {
-    return new Step("load content repository",
-      (): boolean =>
-        true
-      ,
-      () =>
-        this.#contentRepository.load(),
-    );
-  }
-
-  protected waitForContentRepositoryLoaded(): Step {
-    return new Step("Wait for content repository to be loaded",
-      (): boolean =>
-        this.#contentRepository.isLoaded(),
-
-    );
-  }
-
-  protected loadContentTypes(): Step {
-    return new Step("load content types",
-      (): boolean =>
-        true
-      ,
-      (): void =>
-        this.#contentRepository.getContentTypes().forEach((contentType: RemoteBean) =>
-          contentType.load(),
-        ),
-    );
-  }
-
-  protected waitForContentTypesLoaded(): Step {
-    return new Step("wait for the content types to be loaded",
-      (): boolean =>
-        this.#contentRepository.getContentTypes().every((contentType: RemoteBean): boolean =>
-          contentType.isLoaded(),
-
-        ),
-    );
-  }
-
-  static readonly MOCK_RESPONSES: Array<any> = [
+  static readonly MOCK_CALLS: MockCall[] = [
     {
       "request": {
         "uri": "upload/config?site=HeliosSiteId",
@@ -521,12 +484,12 @@ class AbstractCatalogTest extends AbstractRemoteTest {
           "id": "ibm:///catalog/category/Vegetables",
           "children": [],
           "childrenData": [],
+          "externalId": "Vegetables",
+          "displayName": "Vegetables",
+          "store": { "$Ref": "livecontext/store/HeliosSiteId" },
+          "subCategories": [],
+          "parent": { "$Ref": "livecontext/category/HeliosSiteId/catalog/Grocery" },
         },
-        "externalId": "Vegetables",
-        "displayName": "Vegetables",
-        "store": { "$Ref": "livecontext/store/HeliosSiteId" },
-        "subCategories": [],
-        "parent": { "$Ref": "livecontext/category/HeliosSiteId/catalog/Grocery" },
       },
     },
     {
@@ -1720,55 +1683,14 @@ class AbstractCatalogTest extends AbstractRemoteTest {
       "response": {
         "contentType": "application/json",
         "body": {
-          "$Struct": [
-            {
-              "$CapPropertyDescriptor": {
-                "name": "commerce",
-                "type": "STRUCT",
-                "minCardinality": 1,
-                "maxCardinality": 1,
-                "atomic": true,
-                "collection": false,
-              },
-            },
+          $Struct: [
+            $StructPropertyDescriptor({ name: "commerce" }),
           ],
           "commerce": {
-            "$Struct": [
-              {
-                "$CapPropertyDescriptor": {
-                  "name": "inherit",
-                  "type": "BOOLEAN",
-                  "atomic": true,
-                  "collection": false,
-                  "minCardinality": 1,
-                  "maxCardinality": 1,
-                },
-              },
-              {
-                "$CapPropertyDescriptor": {
-                  "name": "references",
-                  "type": "STRING",
-                  "minCardinality": 0,
-                  "maxCardinality": 2147483647,
-                  "length": 2147483647,
-                  "encodedLength": 2147483647,
-                  "atomic": false,
-                  "collection": true,
-                },
-              },
-              {
-                "$CapPropertyDescriptor": {
-                  "name": "originReferences",
-                  "type": "STRING",
-                  "minCardinality": 0,
-                  "maxCardinality": 2147483647,
-                  "length": 2147483647,
-                  "encodedLength": 2147483647,
-                  "atomic": false,
-                  "collection": true,
-                },
-              },
-
+            $Struct: [
+              $BooleanPropertyDescriptor({ name: "inherit" }),
+              $StringListPropertyDescriptor({ name: "references" }),
+              $StringListPropertyDescriptor({ name: "originReferences" }),
             ],
             "inherit": false,
             "references": [AbstractCatalogTest.ORANGES_ID, AbstractCatalogTest.ORANGES_SKU_ID],
@@ -1807,60 +1729,20 @@ class AbstractCatalogTest extends AbstractRemoteTest {
       "response": {
         "contentType": "application/json",
         "body": {
-          "$Struct": [
-            {
-              "$CapPropertyDescriptor": {
-                "name": "commerce",
-                "type": "STRUCT",
-                "minCardinality": 1,
-                "maxCardinality": 1,
-                "atomic": true,
-                "collection": false,
-              },
-            },
+          $Struct: [
+            $StructPropertyDescriptor({ name: "commerce" }),
           ],
-          "commerce": {
-            "$Struct": [
-              {
-                "$CapPropertyDescriptor": {
-                  "name": "inherit",
-                  "type": "BOOLEAN",
-                  "atomic": true,
-                  "collection": false,
-                  "minCardinality": 1,
-                  "maxCardinality": 1,
-                },
-              },
-              {
-                "$CapPropertyDescriptor": {
-                  "name": "references",
-                  "type": "STRING",
-                  "minCardinality": 0,
-                  "maxCardinality": 2147483647,
-                  "length": 2147483647,
-                  "encodedLength": 2147483647,
-                  "atomic": false,
-                  "collection": true,
-                },
-              },
-              {
-                "$CapPropertyDescriptor": {
-                  "name": "originReferences",
-                  "type": "STRING",
-                  "minCardinality": 0,
-                  "maxCardinality": 2147483647,
-                  "length": 2147483647,
-                  "encodedLength": 2147483647,
-                  "atomic": false,
-                  "collection": true,
-                },
-              },
-
-            ],
-            "inherit": true,
-            "references": [AbstractCatalogTest.PRODUCT1_FROM_XMP_ID, AbstractCatalogTest.PRODUCT2_FROM_XMP_ID],
-            "originReferences": [AbstractCatalogTest.PRODUCT1_FROM_XMP_ID, AbstractCatalogTest.PRODUCT2_FROM_XMP_ID],
-          },
+          "commerce":
+            {
+              $Struct: [
+                $BooleanPropertyDescriptor({ name: "inherit" }),
+                $StringListPropertyDescriptor({ name: "references" }),
+                $StringListPropertyDescriptor({ name: "originReferences" }),
+              ],
+              "inherit": true,
+              "references": [AbstractCatalogTest.PRODUCT1_FROM_XMP_ID, AbstractCatalogTest.PRODUCT2_FROM_XMP_ID],
+              "originReferences": [AbstractCatalogTest.PRODUCT1_FROM_XMP_ID, AbstractCatalogTest.PRODUCT2_FROM_XMP_ID],
+            },
         },
       },
     },
@@ -1872,109 +1754,60 @@ class AbstractCatalogTest extends AbstractRemoteTest {
       },
       "response": { "code": 200 },
     },
-    {
-      "request": {
-        "uri": "content/300",
-        "method": "GET",
+    makeDocumentCall(ContentUri(300), {
+      name: "Persona",
+      parent: $ContentRef(1),
+      type: $ContentTypeRef("CMUserProfile"),
+      properties: {
+        "externalId": "",
+        "teaserText": null,
       },
-      "response": {
-        "body": {
-          "name": "Persona",
-          "id": "coremedia:///cap/content/300",
-          "properties": {
-            "externalId": "",
-            "teaserText": null,
-          },
-          "type": { "$Ref": "content/type/CMUserProfile" },
-        },
+    }),
+    makeDocumentCall(ContentUri(400), {
+      name: "Site Root Document",
+      parent: $ContentRef(1),
+      type: $ContentTypeRef(ContentTypeNames.DOCUMENT),
+      properties: {
+        "externalId": "",
+        "teaserText": null,
       },
-    },
-    {
-      "request": {
-        "uri": "content/400",
-        "method": "GET",
+    }),
+    makeDocumentCall(ContentUri(500), {
+      name: "Root Category Document",
+      parent: $ContentRef(1),
+      type: $ContentTypeRef(ContentTypeNames.DOCUMENT),
+      properties: { "externalId": "ibm:///catalog/category/ROOT" },
+    }),
+    makeDocumentCall(ContentUri(600), {
+      name: "Grocery Augmented Category",
+      parent: $ContentRef(1),
+      type: $ContentTypeRef(ContentTypeNames.DOCUMENT),
+      properties: { "externalId": "ibm:///catalog/category/Grocery" },
+    }),
+    makeDocumentCall(ContentUri(700), {
+      name: "Fruit Augmented Category",
+      parent: $ContentRef(1),
+      type: $ContentTypeRef(ContentTypeNames.DOCUMENT),
+      properties: { "externalId": "ibm:///catalog/category/Fruit" },
+    }),
+    makeContentRightsForUserCall(ContentRightsForUserUri(1, 1), [
+      {
+        type: $ContentTypeRef("CMMarketingSpot"),
+        rights: "RMDAPS",
       },
-      "response": {
-        "body": {
-          "name": "Site Root Document",
-          "id": "coremedia:///cap/content/400",
-          "properties": {
-            "externalId": "",
-            "teaserText": null,
-          },
-          "type": { "$Ref": "content/type/Document_" },
-        },
+      {
+        type: $ContentTypeRef("CMProductTeaser"),
+        rights: "RMDAPS",
       },
-    },
-    {
-      "request": {
-        "uri": "content/500",
-        "method": "GET",
+      {
+        type: $ContentTypeRef("CMPicture"),
+        rights: "RMDAPS",
       },
-      "response": {
-        "body": {
-          "name": "Root Category Document",
-          "id": "coremedia:///cap/content/500",
-          "properties": { "externalId": "ibm:///catalog/category/ROOT" },
-          "type": { "$Ref": "content/type/Document_" },
-        },
+      {
+        type: $ContentTypeRef("CMTeaser"),
+        rights: "R",
       },
-    },
-    {
-      "request": {
-        "uri": "content/600",
-        "method": "GET",
-      },
-      "response": {
-        "body": {
-          "name": "Grocery Augmented Category",
-          "id": "coremedia:///cap/content/600",
-          "properties": { "externalId": "ibm:///catalog/category/Grocery" },
-          "type": { "$Ref": "content/type/Document_" },
-        },
-      },
-    },
-    {
-      "request": {
-        "uri": "content/700",
-        "method": "GET",
-      },
-      "response": {
-        "body": {
-          "name": "Fruit Augmented Category",
-          "id": "coremedia:///cap/content/700",
-          "properties": { "externalId": "ibm:///catalog/category/Fruit" },
-          "type": { "$Ref": "content/type/Document_" },
-        },
-      },
-    },
-    {
-      "request": {
-        "uri": "content/1/rights/1",
-        "method": "GET",
-      },
-      "response": {
-        "body": [
-          {
-            "type": { "$Ref": "content/type/CMMarketingSpot" },
-            "rights": "RMDAPS",
-          },
-          {
-            "type": { "$Ref": "content/type/CMProductTeaser" },
-            "rights": "RMDAPS",
-          },
-          {
-            "type": { "$Ref": "content/type/CMPicture" },
-            "rights": "RMDAPS",
-          },
-          {
-            "type": { "$Ref": "content/type/CMTeaser" },
-            "rights": "R",
-          },
-        ],
-      },
-    },
-
+    ]),
   ];
 }
 

@@ -1,5 +1,6 @@
 package com.coremedia.lc.studio.lib.validators;
 
+import com.coremedia.blueprint.base.multisite.BlueprintMultisiteConfiguration;
 import com.coremedia.blueprint.base.rest.validators.UniqueInSiteStringValidator;
 import com.coremedia.cap.common.CapPropertyDescriptor;
 import com.coremedia.cap.content.Content;
@@ -7,21 +8,19 @@ import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.content.ContentType;
 import com.coremedia.cap.content.observe.ObservedPropertyService;
 import com.coremedia.cap.multisite.SitesService;
-import com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Import;
 
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
 @Configuration(proxyBeanMethods = false)
-@ImportResource(value = {
-        "classpath:/com/coremedia/cap/common/uapi-services.xml",
-        "classpath:/com/coremedia/cap/multisite/multisite-services.xml"
-}, reader = ResourceAwareXmlBeanDefinitionReader.class)
+@Import({
+        BlueprintMultisiteConfiguration.class,
+})
 class LcUniqueInSiteValidatorsConfiguration {
 
   private static final String CM_EXTERNAL_CHANNEL = "CMExternalChannel";

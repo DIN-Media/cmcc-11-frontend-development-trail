@@ -26,6 +26,8 @@ import org.springframework.graphql.test.tester.WebGraphQlTester;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.util.Locale;
+
 @SpringBootTest(classes = {
         CaasConfig.class,
         BlueprintBaseMediaConfig.class,
@@ -59,6 +61,7 @@ class SchemaIntrospectionDisabledGraphQLTest {
 
   @BeforeAll
   public void setUp() {
+    Locale.setDefault(Locale.ENGLISH);
     webGraphQlTester = HttpGraphQlTester.builder(
                     webTestClient
                             .mutate()

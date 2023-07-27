@@ -19,7 +19,7 @@
     Prerequisites:
 
     - Download the official Solr distribution,
-      for example from http://archive.apache.org/dist/lucene/solr/8.11.2/solr-8.11.2.tgz
+      for example from https://dlcdn.apache.org/solr/solr/9.2.1/solr-9.2.1.tgz
     - Extract it into a directory of your choice
     - Set the environment variable SOLR_SCRIPT to point to the Solr start/stop script
       in the extracted directory. Choose "bin/solr" for Unix or "bin/solr.cmd" for a Windows shell.
@@ -203,6 +203,8 @@ dataDir=${project.build.directory}/zoo_data
                 <SOLR_OPTS>-DcoreRootDirectory=${solr.coreRootDirectory} -Dsolr.leader=true</SOLR_OPTS>
                 <SOLR_PORT>${solr.port}</SOLR_PORT>
                 <STOP_PORT>${solr.stopPort}</STOP_PORT>
+                <SOLR_HOME>${project.build.directory}/solr-config</SOLR_HOME>
+                <SOLR_DATA_HOME>${project.build.directory}/cores</SOLR_DATA_HOME>
               </environmentVariables>
             </configuration>
           </execution>
@@ -228,9 +230,11 @@ dataDir=${project.build.directory}/zoo_data
               <commandlineArgs>start -s ${project.build.directory}/solr-config</commandlineArgs>
               <environmentVariables>
                 <SOLR_LOGS_DIR>${project.build.directory}/follower-logs</SOLR_LOGS_DIR>
-                <SOLR_OPTS>-DcoreRootDirectory=${solr.followerCoreRootDirectory} -Dsolr.follower=true -Dsolr.leader.url=http://localhost:${solr.port}/solr -Dsolr.disable.shardsWhitelist=true</SOLR_OPTS>
+                <SOLR_OPTS>-DcoreRootDirectory=${solr.followerCoreRootDirectory} -Dsolr.follower=true -Dsolr.leader.url=http://localhost:${solr.port}/solr -Dsolr.disable.allowUrls=true</SOLR_OPTS>
                 <SOLR_PORT>${solr.followerPort}</SOLR_PORT>
                 <STOP_PORT>${solr.stopFollowerPort}</STOP_PORT>
+                <SOLR_HOME>${project.build.directory}/solr-config</SOLR_HOME>
+                <SOLR_DATA_HOME>${project.build.directory}/follower-cores</SOLR_DATA_HOME>
               </environmentVariables>
             </configuration>
           </execution>
@@ -259,6 +263,9 @@ dataDir=${project.build.directory}/zoo_data
                 <SOLR_OPTS>-DcoreRootDirectory=${solr.coreRootDirectory}</SOLR_OPTS>
                 <SOLR_PORT>${solr.port}</SOLR_PORT>
                 <STOP_PORT>${solr.stopPort}</STOP_PORT>
+                <SOLR_HOME>${project.build.directory}/solr-config</SOLR_HOME>
+                <SOLR_DATA_HOME>${project.build.directory}/cores</SOLR_DATA_HOME>
+                <SOLR_SECURITY_MANAGER_ENABLED>false</SOLR_SECURITY_MANAGER_ENABLED>
               </environmentVariables>
             </configuration>
           </execution>

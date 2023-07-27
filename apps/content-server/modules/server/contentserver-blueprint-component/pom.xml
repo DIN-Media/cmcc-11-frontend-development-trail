@@ -10,6 +10,18 @@
   <artifactId>contentserver-blueprint-component</artifactId>
 
   <dependencies>
+    <dependency>
+      <groupId>com.coremedia.blueprint.base</groupId>
+      <artifactId>bpbase-multisite</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
     <!-- RUNTIME SCOPE -->
     <dependency>
       <groupId>com.coremedia.cms</groupId>
@@ -51,11 +63,6 @@
     <dependency>
       <groupId>com.coremedia.cms</groupId>
       <artifactId>content-server-solr-component</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.coremedia.blueprint.base</groupId>
-      <artifactId>bpbase-multisite</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>

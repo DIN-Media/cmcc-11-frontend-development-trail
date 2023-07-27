@@ -38,11 +38,11 @@
     "@coremedia/theme-utils": "workspace:*",
     "bootstrap-sass": "3.3.7",
     "cross-env": "^7.0.3",
-    "jquery": "^3.6.4",
+    "jquery": "^3.7.0",
     "webpack": "^4.46.0"
   },
   "devDependencies": {
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "main": "src/js/index.js",
   "coremedia": {

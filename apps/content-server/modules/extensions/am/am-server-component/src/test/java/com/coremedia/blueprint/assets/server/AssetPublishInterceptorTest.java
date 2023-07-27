@@ -5,37 +5,33 @@ import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.test.xmlrepo.XmlRepoConfiguration;
 import com.coremedia.cap.test.xmlrepo.XmlUapiConfig;
 import com.coremedia.cms.server.plugins.PublishRequest;
-import com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings({"SpringJavaAutowiringInspection", "DuplicateStringLiteralInspection"})
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AssetPublishInterceptorTest.LocalConfig.class)
+@SpringJUnitConfig(AssetPublishInterceptorTest.LocalConfig.class)
+@ExtendWith(MockitoExtension.class)
 @ActiveProfiles(AssetPublishInterceptorTest.LocalConfig.PROFILE)
-public class AssetPublishInterceptorTest {
+class AssetPublishInterceptorTest {
 
   @Inject
   private ContentRepository repository;
@@ -46,9 +42,7 @@ public class AssetPublishInterceptorTest {
   @Inject
   private AssetPublishInterceptor testling;
 
-  private void setUp(String contentPath) throws Exception {
-    MockitoAnnotations.initMocks(this);
-
+  private void setUp(String contentPath) {
     Content testContent = repository.getChild(contentPath);
     Map<String, Object> properties = new HashMap<>(testContent.getProperties());
     Mockito.when(publishRequest.getVersion()).thenReturn(testContent.getCheckedInVersion());
@@ -56,7 +50,7 @@ public class AssetPublishInterceptorTest {
   }
 
   @Test
-  public void testMarkedPublishable() throws Exception {
+  void testMarkedPublishable() {
     setUp("AssetAllTrue");
 
     testling.intercept(publishRequest);
@@ -64,7 +58,7 @@ public class AssetPublishInterceptorTest {
   }
 
   @Test
-  public void testMarkedNotPublishable() throws Exception {
+  void testMarkedNotPublishable() {
     setUp("Asset");
 
     testling.intercept(publishRequest);
@@ -72,7 +66,7 @@ public class AssetPublishInterceptorTest {
   }
 
   @Test
-  public void testMarkedNotPublishableThumbnailOverride() throws Exception {
+  void testMarkedNotPublishableThumbnailOverride() {
     setUp("AssetAllFalse");
 
     testling.intercept(publishRequest);
@@ -80,7 +74,7 @@ public class AssetPublishInterceptorTest {
   }
 
   @Test
-  public void testNoSuchRendition() throws Exception {
+  void testNoSuchRendition() {
     setUp("Asset");
 
     testling.intercept(publishRequest);
@@ -89,7 +83,7 @@ public class AssetPublishInterceptorTest {
 
   @Test
   @DirtiesContext
-  public void testNoSuchRenditionDefaultFalse() throws Exception {
+  void testNoSuchRenditionDefaultFalse() {
     setUp("Asset");
     testling.setRemoveDefault(false);
 
@@ -98,7 +92,7 @@ public class AssetPublishInterceptorTest {
   }
 
   @Test
-  public void testNotMarked() throws Exception {
+  void testNotMarked() {
     setUp("Asset");
 
     testling.intercept(publishRequest);
@@ -107,7 +101,7 @@ public class AssetPublishInterceptorTest {
 
   @Test
   @DirtiesContext
-  public void testNotMarkedDefaultFalse() throws Exception {
+  void testNotMarkedDefaultFalse() {
     setUp("Asset");
     testling.setRemoveDefault(false);
 
@@ -116,7 +110,7 @@ public class AssetPublishInterceptorTest {
   }
 
   @Test
-  public void testNoRenditions() throws Exception {
+  void testNoRenditions() {
     setUp("AssetWithoutRenditions");
 
     testling.intercept(publishRequest);
@@ -124,16 +118,16 @@ public class AssetPublishInterceptorTest {
   }
 
   @Test
-  public void testNoRenditionsThumbnailOverride() throws Exception {
+  void testNoRenditionsThumbnailOverride() {
     setUp("AssetWithoutRenditions");
 
     testling.intercept(publishRequest);
     Map<String, Object> properties = publishRequest.getProperties();
-    assertNotNull(properties.get("thumbnail"));
+    assertThat(properties.get("thumbnail")).isNotNull();
   }
 
   @Test
-  public void testNoMetadata() throws Exception {
+  void testNoMetadata() {
     setUp("AssetWithoutMetadata");
 
     testling.intercept(publishRequest);
@@ -141,16 +135,16 @@ public class AssetPublishInterceptorTest {
   }
 
   @Test
-  public void testNoMetadataThumbnailOverride() throws Exception {
+  void testNoMetadataThumbnailOverride() {
     setUp("AssetWithoutMetadata");
 
     testling.intercept(publishRequest);
     Map<String, Object> properties = publishRequest.getProperties();
-    assertNotNull(properties.get("thumbnail"));
+    assertThat(properties.get("thumbnail")).isNotNull();
   }
 
   @Test
-  public void testBadMetadata() throws Exception {
+  void testBadMetadata() {
     setUp("AssetWithBadRenditions");
 
     testling.intercept(publishRequest);
@@ -158,30 +152,27 @@ public class AssetPublishInterceptorTest {
   }
 
   @Test
-  public void testBadMetadataThumbnailOverride() throws Exception {
+  void testBadMetadataThumbnailOverride() {
     setUp("AssetWithBadRenditions");
 
     testling.intercept(publishRequest);
     Map<String, Object> properties = publishRequest.getProperties();
-    assertNotNull(properties.get("thumbnail"));
+    assertThat(properties.get("thumbnail")).isNotNull();
   }
 
   private void assertPublished(String rendition) {
     Map<String, Object> properties = publishRequest.getProperties();
-    assertEquals(publishRequest.getVersion().get(rendition), properties.get(rendition));
+    assertThat(properties.get(rendition)).isEqualTo(publishRequest.getVersion().get(rendition));
   }
 
   private void assertNotPublished(String rendition) {
     Map<String, Object> properties = publishRequest.getProperties();
-    assertNull(properties.get(rendition));
+    assertThat(properties.get(rendition)).isNull();
   }
 
   @Configuration(proxyBeanMethods = false)
   @Import(XmlRepoConfiguration.class)
-  @ImportResource(
-          value = "classpath:/META-INF/coremedia/component-am-server.xml",
-          reader = ResourceAwareXmlBeanDefinitionReader.class
-  )
+  @EnableAutoConfiguration
   @Profile(LocalConfig.PROFILE)
   public static class LocalConfig {
     public static final String PROFILE = "AssetPublishInterceptorTest";

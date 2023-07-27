@@ -1,5 +1,6 @@
 package com.coremedia.livecontext.navigation;
 
+import com.coremedia.blueprint.base.livecontext.augmentation.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.blueprint.base.tree.TreeRelation;
 import com.coremedia.blueprint.common.navigation.Linkable;
 import com.coremedia.cap.content.Content;
@@ -9,7 +10,6 @@ import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.livecontext.contentbeans.CMExternalChannel;
 import com.coremedia.livecontext.context.LiveContextNavigation;
 import com.coremedia.livecontext.ecommerce.catalog.Category;
-import com.coremedia.livecontext.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.objectserver.beans.ContentBean;
 import com.coremedia.objectserver.beans.ContentBeanFactory;
 import edu.umd.cs.findbugs.annotations.NonNull;

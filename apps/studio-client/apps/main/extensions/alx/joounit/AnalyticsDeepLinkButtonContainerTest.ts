@@ -1,4 +1,6 @@
 import AbstractRemoteTest from "@coremedia/studio-client.client-core-test-helper/AbstractRemoteTest";
+import { waitUntil } from "@coremedia/studio-client.client-core-test-helper/async";
+import { MockCall } from "@coremedia/studio-client.client-core-test-helper/MockFetch";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
 import IconButton from "@coremedia/studio-client.ext.ui-components/components/IconButton";
 import EditorContextImpl from "@coremedia/studio-client.main.editor-components/sdk/EditorContextImpl";
@@ -56,7 +58,8 @@ class AnalyticsDeepLinkButtonContainerTest extends AbstractRemoteTest {
     this.#args = null;
   }
 
-  testAnalyticsDeepLinkButtonContainerSingleView(): void {
+  // noinspection JSUnusedGlobalSymbols
+  async testAnalyticsDeepLinkButtonContainerSingleView(): Promise<void> {
     const testView = new SingleAnalyticsUrlButtonTestView(
       Config(SingleAnalyticsUrlButtonTestView, { contentValueExpression: ValueExpressionFactory.createFromValue() }));
 
@@ -69,21 +72,16 @@ class AnalyticsDeepLinkButtonContainerTest extends AbstractRemoteTest {
 
     contentContainer.setContent(AnalyticsDeepLinkButtonContainerTest.#content);
 
-    this.waitUntil("button still disabled",
-      (): boolean =>
-        !item.disabled
-      ,
-      (): void => {
-        // invoke handler on enabled buttons:
-        cast(Function, item.handler)();
-        Assert.assertNotNull(this.#args);
-        Assert.assertEquals(AnalyticsDeepLinkButtonContainerTest.#URL_1, this.#args[0]);
-      },
-    );
-
+    // button still disabled:
+    await waitUntil((): boolean => !item.disabled);
+    // invoke handler on enabled buttons:
+    cast(Function, item.handler)();
+    Assert.assertNotNull(this.#args);
+    Assert.assertEquals(AnalyticsDeepLinkButtonContainerTest.#URL_1, this.#args[0]);
   }
 
-  testAnalyticsDeepLinkButtonContainerMultiView(): void {
+  // noinspection JSUnusedGlobalSymbols
+  async testAnalyticsDeepLinkButtonContainerMultiView(): Promise<void> {
     const testView = new MultipleAnalyticsUrlButtonsTestView(
       Config(MultipleAnalyticsUrlButtonsTestView, { contentValueExpression: ValueExpressionFactory.createFromValue() }));
     const contentContainer = cast(ContentProvidingTestContainerBase, testView.getComponent("contentContainer"));
@@ -104,29 +102,24 @@ class AnalyticsDeepLinkButtonContainerTest extends AbstractRemoteTest {
 
     contentContainer.setContent(AnalyticsDeepLinkButtonContainerTest.#content);
 
-    this.waitUntil("button still disabled",
-      (): boolean =>
-        !item.disabled
-      ,
-      (): void => {
-        // state of menu items:
-        Assert.assertTrue("first menu item should be disabled", items[0].disabled);
-        Assert.assertFalse("second menu item should be enabled", items[1].disabled);
-        Assert.assertFalse("third menu item should be enabled", items[2].disabled);
+    // button still disabled:
+    await waitUntil((): boolean => !item.disabled);
+    // state of menu items:
+    Assert.assertTrue("first menu item should be disabled", items[0].disabled);
+    Assert.assertFalse("second menu item should be enabled", items[1].disabled);
+    Assert.assertFalse("third menu item should be enabled", items[2].disabled);
 
-        // invoke handler on enabled menu items:
-        items[1]["handler"]();
-        Assert.assertNotNull(this.#args);
-        Assert.assertEquals(AnalyticsDeepLinkButtonContainerTest.#URL_1, this.#args[0]);
-        this.#args = null;
-        items[2]["handler"]();
-        Assert.assertNotNull(this.#args);
-        Assert.assertEquals(AnalyticsDeepLinkButtonContainerTest.#URL_2, this.#args[0]);
-      },
-    );
+    // invoke handler on enabled menu items:
+    items[1]["handler"]();
+    Assert.assertNotNull(this.#args);
+    Assert.assertEquals(AnalyticsDeepLinkButtonContainerTest.#URL_1, this.#args[0]);
+    this.#args = null;
+    items[2]["handler"]();
+    Assert.assertNotNull(this.#args);
+    Assert.assertEquals(AnalyticsDeepLinkButtonContainerTest.#URL_2, this.#args[0]);
   }
 
-  protected override getMockCalls(): Array<any> {
+  protected override getMockCalls(): MockCall[] {
     return [
       {
         "request": { "uri": "alxservice/" + AnalyticsDeepLinkButtonContainerTest.#MY_ID },

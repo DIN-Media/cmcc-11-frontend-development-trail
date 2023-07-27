@@ -16,7 +16,7 @@ is the preferred way for all frontend developers.
 
 === Prerequisites
 * Node.js `[18.x,)`
-* pnpm `[8.1.x,)`
+* pnpm `[8.6.x,)`
 
 === Build the Themes
 

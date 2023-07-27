@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.inject.Inject;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +31,7 @@ public abstract class CommerceBeanResource<Entity extends CommerceBean> extends 
   private AugmentationService augmentationService;
   private SitesService sitesService;
 
-  @Inject
+  @Autowired
   private ContentRepositoryResource contentRepositoryResource;
 
   public CommerceBeanResource(CatalogAliasTranslationService catalogAliasTranslationService) {

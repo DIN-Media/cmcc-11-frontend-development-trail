@@ -1,37 +1,31 @@
 package com.coremedia.blueprint.ecommerce.contentbeans.impl;
 
-import com.coremedia.blueprint.base.ecommerce.catalog.CmsCatalogService;
-import com.coremedia.blueprint.base.ecommerce.catalog.CmsCategory;
-import com.coremedia.blueprint.base.ecommerce.catalog.CmsProduct;
+import com.coremedia.blueprint.base.ecommerce.catalog.content.CatalogContentHelper;
 import com.coremedia.blueprint.ecommerce.common.contentbeans.CMAbstractCategoryImpl;
 import com.coremedia.blueprint.ecommerce.contentbeans.CMCategory;
 import com.coremedia.blueprint.ecommerce.contentbeans.CMProduct;
 import com.coremedia.cae.aspect.Aspect;
-import com.coremedia.cap.content.Content;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class CMCategoryImpl extends CMAbstractCategoryImpl implements CMCategory {
-  private CmsCatalogService catalogService;
-
+  private CatalogContentHelper catalogContentHelper;
 
   // --- configuration ----------------------------------------------
 
-  public void setCatalogService(CmsCatalogService catalogService) {
-    this.catalogService = catalogService;
+  public void setCatalogContentHelper(CatalogContentHelper catalogContentHelper) {
+    this.catalogContentHelper = catalogContentHelper;
   }
 
   @Override
   protected void initialize() {
     super.initialize();
-    if (catalogService == null) {
-      throw new IllegalStateException("Required property not set: catalogService");
+    if (catalogContentHelper == null) {
+      throw new IllegalStateException("Required property not set: catalogContentHelper");
     }
   }
 
@@ -76,40 +70,13 @@ public class CMCategoryImpl extends CMAbstractCategoryImpl implements CMCategory
   @NonNull
   @Override
   public List<CMCategory> getSubcategories() {
-    CmsCategory category = getCategory();
-    if (category == null) {
-      return Collections.emptyList();
-    }
-
-    List<Content> result = category.getChildren().stream()
-            .filter(CmsCategory.class::isInstance)
-            .map(CmsCategory.class::cast)
-            .map(CmsCategory::getContent)
-            .collect(Collectors.toUnmodifiableList());
-
-    return createBeansFor(result, CMCategory.class);
+    return createBeansFor(catalogContentHelper.getSubCategories(getContent()), CMCategory.class);
   }
 
   @NonNull
   @Override
   public List<CMProduct> getProducts() {
-    CmsCategory category = getCategory();
-    if (category == null) {
-      return Collections.emptyList();
-    }
-
-    List<Content> result = category.getProducts().stream()
-            .filter(CmsProduct.class::isInstance)
-            .map(CmsProduct.class::cast)
-            .map(CmsProduct::getContent)
-            .collect(Collectors.toUnmodifiableList());
-
-    return createBeansFor(result, CMProduct.class);
+    return createBeansFor(catalogContentHelper.getProductsForCategory(getContent()), CMProduct.class);
   }
 
-  // --- Features ---------------------------------------------------
-
-  private CmsCategory getCategory() {
-    return catalogService.findCategoryByContent(getContent());
-  }
 }

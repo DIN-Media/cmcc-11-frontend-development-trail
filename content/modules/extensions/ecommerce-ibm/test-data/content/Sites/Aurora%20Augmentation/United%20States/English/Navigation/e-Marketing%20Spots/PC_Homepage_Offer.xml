@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<CMMarketingSpot folder="/Sites/Aurora Augmentation/United States/English/Navigation/e-Marketing Spots"
-                 name="PC_Homepage_Offer">
+<CMMarketingSpot folder="/Sites/Aurora Augmentation/United States/English/Navigation/e-Marketing Spots" name="PC_Homepage_Offer" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
 <externalRefId></externalRefId>
 <locale>en-US</locale>
 <master>

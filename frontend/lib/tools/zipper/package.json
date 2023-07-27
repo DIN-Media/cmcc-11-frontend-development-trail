@@ -4,14 +4,14 @@
   "private": true,
   "engines": {
     "node": "18",
-    "pnpm": "^8.1"
+    "pnpm": "^8.6"
   },
   "dependencies": {
     "@coremedia/cm-logger": "workspace:*",
     "archiver": "^5.3.1"
   },
   "devDependencies": {
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,json}\""

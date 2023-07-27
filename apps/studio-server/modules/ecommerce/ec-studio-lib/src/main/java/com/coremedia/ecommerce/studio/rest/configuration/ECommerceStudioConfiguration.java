@@ -1,5 +1,6 @@
 package com.coremedia.ecommerce.studio.rest.configuration;
 
+import com.coremedia.blueprint.base.livecontext.augmentation.config.AugmentationPageGridServiceConfiguration;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.BaseCommerceServicesConfiguration;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.CommerceConnectionSupplier;
 import com.coremedia.cap.content.ContentRepository;
@@ -20,9 +21,10 @@ import org.springframework.context.annotation.Import;
 
 @AutoConfiguration
 @Import({
+        AugmentationPageGridServiceConfiguration.class,
         EcStudioFilters.class,
         CapRestServiceConfiguration.class,
-        BaseCommerceServicesConfiguration.class
+        BaseCommerceServicesConfiguration.class,
 })
 @EnableConfigurationProperties({
         ECommerceStudioConfigurationProperties.class,

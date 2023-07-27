@@ -32,7 +32,6 @@ import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.id.IdScheme;
 import com.coremedia.livecontext.ecommerce.common.BaseCommerceBeanType;
 import com.coremedia.livecontext.ecommerce.common.CommerceBeanType;
-import com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader;
 import org.apache.solr.client.solrj.SolrClient;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,7 +41,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.web.context.WebApplicationContext;
@@ -63,7 +61,6 @@ import java.util.Set;
         HeadlessAugmentationCommerceConfiguration.class,
         HeadlessAugmentationCmsOnlyConfiguration.class,
 })
-@ImportResource(value = "classpath:/META-INF/coremedia/lc-services.xml", reader = ResourceAwareXmlBeanDefinitionReader.class)
 public class HeadlessAugmentationConfiguration {
 
   public static final String CATEGORY_REF = "CategoryRef";

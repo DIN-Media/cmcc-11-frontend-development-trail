@@ -5,7 +5,7 @@ import CatalogLinkPropertyField
   from "@coremedia-blueprint/studio-client.main.ec-studio/components/link/CatalogLinkPropertyField";
 import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
 import StructRemoteBean from "@coremedia/studio-client.cap-rest-client/struct/StructRemoteBean";
-import Step from "@coremedia/studio-client.client-core-test-helper/Step";
+import { waitUntil } from "@coremedia/studio-client.client-core-test-helper/async";
 import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpression";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
 import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
@@ -73,7 +73,7 @@ class InheritReferencesTest extends AbstractCatalogAssetTest {
     //We have to mock QuickTips.getQuickTip as this returns undefined
     this.#getQuickTip = bind(QuickTipManager, QuickTipManager.getQuickTip);
     QuickTipManager.getQuickTip = ((): StatefulQuickTip =>
-        Ext.create(StatefulQuickTip, {})
+      Ext.create(StatefulQuickTip, {})
     );
 
     QtipUtil.registerQtipFormatter();
@@ -83,7 +83,7 @@ class InheritReferencesTest extends AbstractCatalogAssetTest {
     const picture = as(beanFactory._.getRemoteBean(path), Content);
     //we need to mock the write access
     picture.getRepository().getAccessControl().mayWrite = ((): boolean =>
-        !this.#contentReadOnlyExpression.getValue()
+      !this.#contentReadOnlyExpression.getValue()
     );
     const localSettings = as(beanFactory._.getRemoteBean(path + "/structs/localSettings"), StructRemoteBean);
     //PUT should cause no trouble
@@ -103,102 +103,98 @@ class InheritReferencesTest extends AbstractCatalogAssetTest {
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testDisableStateWhenNoInherit(): void {
-    this.chain(
-      //open the grid with the content inherit=false
-      this.#createTestling("content/200"),
+  async testDisableStateWhenNoInherit(): Promise<void> {
+    //open the grid with the content inherit=false
+    this.#createTestling("content/200");
 
-      this.#waitForInheritButtonVisible(),
-      this.#waitForInheritButtonUnpressed(),
-      this.#waitForGridWritable(),
-      this.#openContextMenu(),
-      this.#waitContextMenuOpened(),
-      this.#waitRemoveButtonEnabled(),
-      this.#waitRemoveButtonNotHidden(),
+    await this.#waitForInheritButtonVisible();
+    await this.#waitForInheritButtonUnpressed();
+    await this.#waitForGridWritable();
+    await this.#openContextMenu();
+    await this.#waitContextMenuOpened();
+    await this.#waitRemoveButtonEnabled();
+    await this.#waitRemoveButtonNotHidden();
 
-      this.#forceReadOnly(),
+    this.#forceReadOnly();
 
-      this.#waitForInheritButtonDisabled(),
-      this.#waitForGridReadonly(),
-      this.#openContextMenu(),
-      this.#waitContextMenuOpened(),
-      this.#waitRemoveButtonHidden(),
+    await this.#waitForInheritButtonDisabled();
+    await this.#waitForGridReadonly();
+    await this.#openContextMenu();
+    await this.#waitContextMenuOpened();
+    await this.#waitRemoveButtonHidden();
 
-      this.#forceWritable(),
+    this.#forceWritable();
 
-      this.#waitForInheritButtonEnabled(),
-      this.#waitForGridWritable(),
-      this.#openContextMenu(),
-      this.#waitContextMenuOpened(),
-      this.#waitRemoveButtonEnabled(),
+    await this.#waitForInheritButtonEnabled();
+    await this.#waitForGridWritable();
+    await this.#openContextMenu();
+    await this.#waitContextMenuOpened();
+    await this.#waitRemoveButtonEnabled();
 
-      this.#makeContentReadOnly(),
+    this.#makeContentReadOnly();
 
-      this.#waitForInheritButtonDisabled(),
-      this.#waitForGridReadonly(),
-      this.#openContextMenu(),
-      this.#waitContextMenuOpened(),
-      this.#waitRemoveButtonHidden(),
+    await this.#waitForInheritButtonDisabled();
+    await this.#waitForGridReadonly();
+    await this.#openContextMenu();
+    await this.#waitContextMenuOpened();
+    await this.#waitRemoveButtonHidden();
 
-      this.#makeContentWritable(),
+    this.#makeContentWritable();
 
-      this.#waitForInheritButtonEnabled(),
-      this.#waitForGridWritable(),
-      this.#openContextMenu(),
-      this.#waitContextMenuOpened(),
-      this.#waitRemoveButtonEnabled(),
-    );
+    await this.#waitForInheritButtonEnabled();
+    await this.#waitForGridWritable();
+    await this.#openContextMenu();
+    await this.#waitContextMenuOpened();
+    await this.#waitRemoveButtonEnabled();
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testDisableStateWhenInherit(): void {
-    this.chain(
-      //open the grid with the content inherit=true
-      this.#createTestling("content/202"),
+  async testDisableStateWhenInherit(): Promise<void> {
+    //open the grid with the content inherit=true
+    this.#createTestling("content/202");
 
-      this.#waitForInheritButtonVisible(),
-      this.#waitForInheritButtonPressed(),
-      this.#waitForGridReadonly(),
-      this.#openContextMenu(),
-      this.#waitContextMenuOpened(),
-      this.#waitRemoveButtonDisabled(),
+    await this.#waitForInheritButtonVisible();
+    await this.#waitForInheritButtonPressed();
+    await this.#waitForGridReadonly();
+    await this.#openContextMenu();
+    await this.#waitContextMenuOpened();
+    await this.#waitRemoveButtonDisabled();
 
-      this.#forceReadOnly(),
+    this.#forceReadOnly();
 
-      this.#waitForInheritButtonDisabled(),
-      this.#waitForGridReadonly(),
-      this.#openContextMenu(),
-      this.#waitContextMenuOpened(),
-      this.#waitRemoveButtonDisabled(),
+    await this.#waitForInheritButtonDisabled();
+    await this.#waitForGridReadonly();
+    await this.#openContextMenu();
+    await this.#waitContextMenuOpened();
+    await this.#waitRemoveButtonDisabled();
 
-      this.#forceWritable(),
+    this.#forceWritable();
 
-      this.#waitForInheritButtonEnabled(),
-      this.#waitForGridReadonly(),
-      this.#openContextMenu(),
-      this.#waitContextMenuOpened(),
-      this.#waitRemoveButtonDisabled(),
+    await this.#waitForInheritButtonEnabled();
+    await this.#waitForGridReadonly();
+    await this.#openContextMenu();
+    await this.#waitContextMenuOpened();
+    await this.#waitRemoveButtonDisabled();
 
-      this.#makeContentReadOnly(),
+    this.#makeContentReadOnly();
 
-      this.#waitForInheritButtonDisabled(),
-      this.#waitForGridReadonly(),
-      this.#openContextMenu(),
-      this.#waitContextMenuOpened(),
-      this.#waitRemoveButtonDisabled(),
+    await this.#waitForInheritButtonDisabled();
+    await this.#waitForGridReadonly();
+    await this.#openContextMenu();
+    await this.#waitContextMenuOpened();
+    await this.#waitRemoveButtonDisabled();
 
-      this.#makeContentWritable(),
+    this.#makeContentWritable();
 
-      this.#waitForInheritButtonEnabled(),
-      this.#waitForGridReadonly(),
-      this.#openContextMenu(),
-      this.#waitContextMenuOpened(),
-      this.#waitRemoveButtonDisabled(),
-    );
+    await this.#waitForInheritButtonEnabled();
+    await this.#waitForGridReadonly();
+    await this.#openContextMenu();
+    await this.#waitContextMenuOpened();
+    await this.#waitRemoveButtonDisabled();
   }
 
   //noinspection JSUnusedGlobalSymbols
-  testInheritAction(): void {
+  async testInheritAction(): Promise<void> {
     this.#inheritExpression = ValueExpressionFactory.createFromValue(true);
     const originalList = ["A", "B"];
     this.#referencesExpression = ValueExpressionFactory.createFromValue(originalList);
@@ -212,72 +208,56 @@ class InheritReferencesTest extends AbstractCatalogAssetTest {
       }));
 
     const changedList = ["C", "D"];
-    this.chain(
-      this.#toggleInheritAction(),
-      this.#waitInheritFalse(), //inherit is now false: we can edit the list manually
-      this.#changeProductList(changedList),
-      this.#toggleInheritAction(),
-      this.#waitInheritTrue(), //inherit is now true: the list must be original again
-      this.#waitProductListEqual(originalList),
-      this.#toggleInheritAction(),
-      this.#waitInheritFalse(), //inherit is now false the list must be the previously changed one
-      this.#waitProductListEqual(changedList),
+    this.#toggleInheritAction();
+    await this.#waitInheritFalse(); //inherit is now false: we can edit the list manually
+    this.#changeProductList(changedList);
+    this.#toggleInheritAction();
+    await this.#waitInheritTrue(); //inherit is now true: the list must be original again
+    await this.#waitProductListEqual(originalList);
+    this.#toggleInheritAction();
+    await this.#waitInheritFalse(); //inherit is now false the list must be the previously changed one
+    await this.#waitProductListEqual(changedList);
+  }
+
+  #toggleInheritAction(): void {
+    // Toggle inherit:
+    this.#inheritAction.execute();
+  }
+
+  #changeProductList(list: Array<any>): void {
+    // Change the product list to <list>:
+    this.#referencesExpression.setValue(list);
+  }
+
+  async #waitInheritFalse(): Promise<void> {
+    // Wait Inherit False:
+    await waitUntil((): boolean =>
+      !this.#inheritExpression.getValue(),
     );
   }
 
-  #toggleInheritAction(): Step {
-    return new Step("Toggle inherit",
-      (): boolean =>
-        true
-      ,
-      (): void =>
-        this.#inheritAction.execute(),
-    );
+  async #waitInheritTrue(): Promise<void> {
+    // Wait Inherit True:
+    await waitUntil((): boolean =>
+      this.#inheritExpression.getValue());
   }
 
-  #changeProductList(list: Array<any>): Step {
-    return new Step("Change the product list to " + list,
-      (): boolean =>
-        true
-
-      ,
-      (): void => {
-        this.#referencesExpression.setValue(list);
-      });
+  async #waitProductListEqual(list: Array<any>): Promise<void> {
+    // Wait for the Product list to be equal to <list>:
+    await waitUntil((): boolean =>
+      this.#referencesExpression.getValue() === list);
   }
 
-  #waitInheritFalse(): Step {
-    return new Step("Wait Inherit False",
-      (): boolean =>
-        !this.#inheritExpression.getValue(),
-    );
+  async #waitForGridReadonly(): Promise<void> {
+    // Wait for grid is read-only:
+    await waitUntil((): boolean =>
+      this.#myCatalogLink && this.#isReadOnly(this.#myCatalogLink));
   }
 
-  #waitInheritTrue(): Step {
-    return new Step("Wait Inherit True",
-      (): boolean =>
-        this.#inheritExpression.getValue(),
-    );
-  }
-
-  #waitProductListEqual(list: Array<any>): Step {
-    return new Step("Wait the Product list to be equal to " + list,
-      (): boolean =>
-        this.#referencesExpression.getValue() === list,
-    );
-  }
-
-  #waitForGridReadonly(): Step {
-    return new Step("Wait for grid is read-only",
-      (): boolean =>
-        this.#myCatalogLink && this.#isReadOnly(this.#myCatalogLink),
-    );
-  }
-
-  #waitForGridWritable(): Step {
-    return new Step("Wait for grid is writable",
-      (): boolean =>
-        this.#myCatalogLink && !this.#isReadOnly(this.#myCatalogLink),
+  async #waitForGridWritable(): Promise<void> {
+    // Wait for grid is writable:
+    await waitUntil((): boolean =>
+      this.#myCatalogLink && !this.#isReadOnly(this.#myCatalogLink),
     );
   }
 
@@ -285,103 +265,65 @@ class InheritReferencesTest extends AbstractCatalogAssetTest {
     return cast(ReadOnlyStateMixin, link.getView()).readOnly;
   }
 
-  #createTestling(path: string): Step {
-    return new Step("Create the testling",
-      (): boolean =>
-        true
-      ,
-      (): void => {
-        this.#setBindTo(path);
-        const conf = Config(InheritReferencesTestView);
-        conf.bindTo = this.#bindTo;
-        conf.forceReadOnlyValueExpression = this.#forceReadOnlyValueExpression;
-        this.#viewport = new InheritReferencesTestView(conf);
-        this.#myCatalogLink = this.#findCatalogLink();
-      },
+  #createTestling(path: string): void {
+    // Create the testling:
+    this.#setBindTo(path);
+    const conf = Config(InheritReferencesTestView);
+    conf.bindTo = this.#bindTo;
+    conf.forceReadOnlyValueExpression = this.#forceReadOnlyValueExpression;
+    this.#viewport = new InheritReferencesTestView(conf);
+    this.#myCatalogLink = this.#findCatalogLink();
+  }
+
+  async #waitForInheritButtonVisible(): Promise<void> {
+    // Wait for the inherit button to be visible:
+    await waitUntil((): boolean =>
+      this.#findInheritButton(),
     );
   }
 
-  #waitForInheritButtonVisible(): Step {
-    return new Step("Wait for the inherit button to be visible",
-      (): boolean =>
-        this.#findInheritButton(),
-    );
+  async #waitForInheritButtonUnpressed(): Promise<void> {
+    // Wait for the inherit button to be unpressed:
+    await waitUntil((): boolean =>
+      !this.#inheritButton.pressed);
   }
 
-  #waitForInheritButtonUnpressed(): Step {
-    return new Step("Wait for the inherit button to be unpressed",
-      (): boolean =>
-        !this.#inheritButton.pressed,
-    );
+  async #waitForInheritButtonPressed(): Promise<void> {
+    // Wait for the inherit button to be pressed:
+    await waitUntil((): boolean =>
+      this.#inheritButton.pressed);
   }
 
-  #waitForInheritButtonPressed(): Step {
-    return new Step("Wait for the inherit button to be pressed",
-      (): boolean =>
-        this.#inheritButton.pressed,
-    );
+  #forceReadOnly(): void {
+    // Force to read only:
+    this.#forceReadOnlyValueExpression.setValue(true);
   }
 
-  #forceReadOnly(): Step {
-    return new Step("Force to read only",
-      (): boolean =>
-        true
-
-      ,
-      (): void => {
-        this.#forceReadOnlyValueExpression.setValue(true);
-      });
+  #forceWritable(): void {
+    // Force to writable:
+    this.#forceReadOnlyValueExpression.setValue(false);
   }
 
-  #forceWritable(): Step {
-    return new Step("Force to writable",
-      (): boolean =>
-        true
-
-      ,
-      (): void => {
-        this.#forceReadOnlyValueExpression.setValue(false);
-      });
-
+  #makeContentReadOnly(): void {
+    // Make Content read only:
+    this.#contentReadOnlyExpression.setValue(true);
   }
 
-  #makeContentReadOnly(): Step {
-    return new Step("Make Content read only",
-      (): boolean =>
-        true
-
-      ,
-      (): void => {
-        this.#contentReadOnlyExpression.setValue(true);
-      });
-
+  #makeContentWritable(): void {
+    // Make Content writable:
+    this.#contentReadOnlyExpression.setValue(false);
   }
 
-  #makeContentWritable(): Step {
-    return new Step("Make Content writable",
-      (): boolean =>
-        true
-
-      ,
-      (): void => {
-        this.#contentReadOnlyExpression.setValue(false);
-      });
+  async #waitForInheritButtonDisabled(): Promise<void> {
+    // Wait for the inherit button to be disabled:
+    await waitUntil((): boolean =>
+      this.#inheritButton.disabled);
   }
 
-  #waitForInheritButtonDisabled(): Step {
-    return new Step("Wait for the inherit button to be disabled",
-      (): boolean =>
-        this.#inheritButton.disabled,
-    );
-
-  }
-
-  #waitForInheritButtonEnabled(): Step {
-    return new Step("Wait for the inherit button to be enabled",
-      (): boolean =>
-        !this.#inheritButton.disabled,
-    );
-
+  async #waitForInheritButtonEnabled(): Promise<void> {
+    // Wait for the inherit button to be enabled:
+    await waitUntil((): boolean =>
+      !this.#inheritButton.disabled);
   }
 
   #findInheritButton(): boolean {
@@ -400,63 +342,54 @@ class InheritReferencesTest extends AbstractCatalogAssetTest {
     return this.#myCatalogLink;
   }
 
-  #openContextMenu(): Step {
-    return new Step("open Context Menu",
-      (): boolean =>
-        //wait for the list filled
-        asConfig(this.#myCatalogLink.getStore()).data.length > 0
+  async #openContextMenu(): Promise<void> {
+    // open Context Menu:
+    await waitUntil((): boolean =>
+    //wait for the list filled
+      asConfig(this.#myCatalogLink.getStore()).data.length > 0);
+    const event: Record<string, any> = {
+      getXY: (): Array<any> =>
+        TableUtil.getCell(this.#myCatalogLink, 0, 1).getXY()
       ,
-      (): void => {
-        const event: Record<string, any> = {
-          getXY: (): Array<any> =>
-            TableUtil.getCell(this.#myCatalogLink, 0, 1).getXY()
-          ,
-          preventDefault: (): void => {
-            //do nothing
-          },
-          getTarget: (): HTMLElement =>
-            TableUtil.getCellAsDom(this.#myCatalogLink, 0, 1)
-          ,
-          type: ContextMenuEventAdapter.EVENT_NAME,
-        };
-        this.#myCatalogLink.fireEvent("rowcontextmenu", this.#myCatalogLink, null, null, 0, event);
+      preventDefault: (): void => {
+        //do nothing
       },
-    );
+      getTarget: (): HTMLElement =>
+        TableUtil.getCellAsDom(this.#myCatalogLink, 0, 1)
+      ,
+      type: ContextMenuEventAdapter.EVENT_NAME,
+    };
+    this.#myCatalogLink.fireEvent("rowcontextmenu", this.#myCatalogLink, null, null, 0, event);
   }
 
-  #waitRemoveButtonDisabled(): Step {
-    return new Step("Wait remove button disabled",
-      (): boolean =>
-        this.#removeButton.disabled,
-    );
+  async #waitRemoveButtonDisabled(): Promise<void> {
+    // Wait remove button disabled:
+    await waitUntil((): boolean =>
+      this.#removeButton.disabled);
   }
 
-  #waitRemoveButtonHidden(): Step {
-    return new Step("Wait remove button hidden",
-      (): boolean =>
-        this.#removeButton.hidden,
-    );
+  async #waitRemoveButtonHidden(): Promise<void> {
+    // Wait remove button hidden:
+    await waitUntil((): boolean =>
+      this.#removeButton.hidden);
   }
 
-  #waitRemoveButtonNotHidden(): Step {
-    return new Step("Wait remove button disabled",
-      (): boolean =>
-        !this.#removeButton.hidden,
-    );
+  async #waitRemoveButtonNotHidden(): Promise<void> {
+    // Wait remove button disabled:
+    await waitUntil((): boolean =>
+      !this.#removeButton.hidden);
   }
 
-  #waitRemoveButtonEnabled(): Step {
-    return new Step("Wait remove button enabled",
-      (): boolean =>
-        !this.#removeButton.disabled,
-    );
+  async #waitRemoveButtonEnabled(): Promise<void> {
+    // Wait remove button enabled:
+    await waitUntil((): boolean =>
+      !this.#removeButton.disabled);
   }
 
-  #waitContextMenuOpened(): Step {
-    return new Step("Wait context menu opened",
-      (): boolean =>
-        !!this.#findContextMenu(),
-    );
+  async #waitContextMenuOpened(): Promise<void> {
+    // Wait context menu opened:
+    await waitUntil((): boolean =>
+      !!this.#findContextMenu());
   }
 
   #findContextMenu(): CatalogLinkContextMenu {

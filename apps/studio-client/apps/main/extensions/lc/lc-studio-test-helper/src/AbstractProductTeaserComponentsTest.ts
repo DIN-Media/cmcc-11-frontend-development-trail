@@ -1,12 +1,12 @@
 import AbstractCatalogTest from "@coremedia-blueprint/studio-client.main.ec-studio-test-helper/AbstractCatalogTest";
 import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
-import Step from "@coremedia/studio-client.client-core-test-helper/Step";
+import ContentType from "@coremedia/studio-client.cap-rest-client/content/ContentType";
 import RemoteBean from "@coremedia/studio-client.client-core/data/RemoteBean";
 import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpression";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
 import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
 import PropertyEditorUtil from "@coremedia/studio-client.main.editor-components/sdk/util/PropertyEditorUtil";
-import { as, cast } from "@jangaroo/runtime";
+import { as } from "@jangaroo/runtime";
 import { AnyFunction } from "@jangaroo/runtime/types";
 
 /**
@@ -64,53 +64,24 @@ class AbstractProductTeaserComponentsTest extends AbstractCatalogTest {
     PropertyEditorUtil.createReadOnlyValueExpression = this.#createReadOnlyValueExpression;
   }
 
-  protected loadProductTeaser(): Step {
-    return new Step("Load the product teaser",
-      (): boolean =>
-        true
-      ,
-      () =>
-        this.productTeaser.load(),
-
-    );
+  protected async waitForProductTeaserToBeLoaded(): Promise<void> {
+    // Wait for the product teaser to be loaded:
+    await this.productTeaser.load();
   }
 
-  protected waitForProductTeaserToBeLoaded(): Step {
-    return new Step("Wait for the product teaser to be loaded",
-      (): boolean =>
-        this.productTeaser.isLoaded(),
-
-    );
+  protected async waitForProductTeaserContentTypeToBeLoaded(): Promise<void> {
+    // Wait for the product teaser content type to be loaded:
+    await (this.productTeaser.getType() as ContentType & RemoteBean).load();
   }
 
-  protected waitForProductTeaserContentTypeToBeLoaded(): Step {
-    return new Step("Wait for the product teaser content type to be loaded",
-      (): boolean =>
-        cast(RemoteBean, this.productTeaser.getType()).isLoaded(),
-
-    );
+  protected setLink(value: string): void {
+    // set product link to <value>:
+    this.#propertyExpression.setValue(value);
   }
 
-  protected setLink(value: string): Step {
-    return new Step("set product link to " + value,
-      (): boolean =>
-        true
-      ,
-      (): void => {
-        this.#propertyExpression.setValue(value);
-      },
-    );
-  }
-
-  protected setForceReadOnly(value: boolean): Step {
-    return new Step("set forceReadOnlyValueExpression " + value,
-      (): boolean =>
-        true
-      ,
-      (): void => {
-        this.#forceReadOnlyValueExpression.setValue(value);
-      },
-    );
+  protected setForceReadOnly(value: boolean): void {
+    // set forceReadOnlyValueExpression to <value>:
+    this.#forceReadOnlyValueExpression.setValue(value);
   }
 
   protected getBindTo(): ValueExpression {

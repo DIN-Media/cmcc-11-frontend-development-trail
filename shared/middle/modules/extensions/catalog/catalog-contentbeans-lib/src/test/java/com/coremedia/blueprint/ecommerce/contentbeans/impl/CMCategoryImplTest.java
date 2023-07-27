@@ -1,14 +1,9 @@
 package com.coremedia.blueprint.ecommerce.contentbeans.impl;
 
-import com.coremedia.blueprint.base.ecommerce.catalog.AbstractCmsCommerceBean;
-import com.coremedia.blueprint.base.ecommerce.catalog.CmsCatalogService;
-import com.coremedia.blueprint.base.ecommerce.catalog.CmsCategory;
-import com.coremedia.blueprint.base.ecommerce.catalog.CmsProduct;
+import com.coremedia.blueprint.base.ecommerce.catalog.content.CatalogContentHelper;
 import com.coremedia.blueprint.ecommerce.contentbeans.CMCategory;
 import com.coremedia.blueprint.ecommerce.contentbeans.CMProduct;
 import com.coremedia.cap.content.Content;
-import com.coremedia.livecontext.ecommerce.catalog.Category;
-import com.coremedia.livecontext.ecommerce.catalog.Product;
 import com.coremedia.objectserver.beans.ContentBeanFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +23,7 @@ import static org.mockito.Mockito.when;
 public class CMCategoryImplTest {
 
   @Mock
-  private CmsCatalogService catalogService;
+  private CatalogContentHelper catalogContentHelper;
 
   @Mock
   private Content content;
@@ -41,7 +36,7 @@ public class CMCategoryImplTest {
   @Before
   public void setUp() throws Exception {
     category = Mockito.spy(new CMCategoryImpl());
-    category.setCatalogService(catalogService);
+    category.setCatalogContentHelper(catalogContentHelper);
     doReturn(content).when(category).getContent();
     doReturn(contentBeanFactory).when(category).getContentBeanFactory();
   }
@@ -56,14 +51,7 @@ public class CMCategoryImplTest {
     Content contentChild1 = mock(Content.class, "child1");
     Content contentChild2 = mock(Content.class, "child2");
     List<Content> contentChildren = List.of(contentChild1, contentChild2);
-
-    CmsCategory cmsCategory = mock(CmsCategory.class);
-    when(catalogService.findCategoryByContent(content)).thenReturn(cmsCategory);
-
-    CmsCategory cmsCategoryChild1 = mockCmsCommerceBean(contentChild1, CmsCategory.class);
-    CmsCategory cmsCategoryChild2 = mockCmsCommerceBean(contentChild2, CmsCategory.class);
-    List<Category> cmsCategoryChildren = List.of(cmsCategoryChild1, cmsCategoryChild2);
-    when(cmsCategory.getChildren()).thenReturn(cmsCategoryChildren);
+    when(catalogContentHelper.getSubCategories(content)).thenReturn(contentChildren);
 
     CMCategory cmCategory1 = mock(CMCategory.class);
     CMCategory cmCategory2 = mock(CMCategory.class);
@@ -84,13 +72,7 @@ public class CMCategoryImplTest {
     Content contentChild2 = mock(Content.class, "child2");
     List<Content> contentChildren = List.of(contentChild1, contentChild2);
 
-    CmsCategory cmsCategory = mock(CmsCategory.class);
-    when(catalogService.findCategoryByContent(content)).thenReturn(cmsCategory);
-
-    CmsProduct cmsProductChild1 = mockCmsCommerceBean(contentChild1, CmsProduct.class);
-    CmsProduct cmsProductChild2 = mockCmsCommerceBean(contentChild2, CmsProduct.class);
-    List<Product> cmsProductChildren = List.of(cmsProductChild1, cmsProductChild2);
-    when(cmsCategory.getProducts()).thenReturn(cmsProductChildren);
+    when(catalogContentHelper.getProductsForCategory(content)).thenReturn(contentChildren);
 
     CMProduct cmProduct1 = mock(CMProduct.class);
     CMProduct cmProduct2 = mock(CMProduct.class);
@@ -98,15 +80,6 @@ public class CMCategoryImplTest {
     when(contentBeanFactory.createBeansFor(contentChildren, CMProduct.class)).thenReturn(expectedChildren);
 
     assertEquals(expectedChildren, category.getProducts());
-  }
-
-
-  // ----------------------------------------------------------------------
-
-  private static <T extends AbstractCmsCommerceBean> T mockCmsCommerceBean(Content content, Class<T> type) {
-    T result = mock(type);
-    when(result.getContent()).thenReturn(content);
-    return result;
   }
 
 }

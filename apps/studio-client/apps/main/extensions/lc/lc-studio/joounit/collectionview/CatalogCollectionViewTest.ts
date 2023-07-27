@@ -2,9 +2,6 @@ import CatalogModel from "@coremedia-blueprint/studio-client.main.ec-studio-mode
 import CatalogObject from "@coremedia-blueprint/studio-client.main.ec-studio-model/model/CatalogObject";
 import Store from "@coremedia-blueprint/studio-client.main.ec-studio-model/model/Store";
 import AbstractCatalogTest from "@coremedia-blueprint/studio-client.main.ec-studio-test-helper/AbstractCatalogTest";
-import ECommerceStudioPlugin from "@coremedia-blueprint/studio-client.main.ec-studio/ECommerceStudioPlugin";
-import ECommerceStudioPlugin_properties
-  from "@coremedia-blueprint/studio-client.main.ec-studio/ECommerceStudioPlugin_properties";
 import CatalogRepositoryContextMenu
   from "@coremedia-blueprint/studio-client.main.ec-studio/components/repository/CatalogRepositoryContextMenu";
 import CatalogRepositoryList
@@ -19,15 +16,17 @@ import CatalogSearchListContainer
 import CatalogTreeDragDropModel
   from "@coremedia-blueprint/studio-client.main.ec-studio/components/tree/impl/CatalogTreeDragDropModel";
 import CatalogTreeModel from "@coremedia-blueprint/studio-client.main.ec-studio/components/tree/impl/CatalogTreeModel";
+import ECommerceStudioPlugin from "@coremedia-blueprint/studio-client.main.ec-studio/ECommerceStudioPlugin";
+import ECommerceStudioPlugin_properties
+  from "@coremedia-blueprint/studio-client.main.ec-studio/ECommerceStudioPlugin_properties";
 import CatalogHelper from "@coremedia-blueprint/studio-client.main.ec-studio/helper/CatalogHelper";
 import ECommerceCollectionViewExtension
   from "@coremedia-blueprint/studio-client.main.ec-studio/library/ECommerceCollectionViewExtension";
 import contentTreeRelationRegistry from "@coremedia/studio-client.cap-base-models/content/contentTreeRelationRegistry";
-import ActionStep from "@coremedia/studio-client.client-core-test-helper/ActionStep";
-import Step from "@coremedia/studio-client.client-core-test-helper/Step";
+import { waitUntil } from "@coremedia/studio-client.client-core-test-helper/async";
+import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
 import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpression";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
-import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
 import SwitchingContainer from "@coremedia/studio-client.ext.ui-components/components/SwitchingContainer";
 import BeanRecord from "@coremedia/studio-client.ext.ui-components/store/BeanRecord";
 import ContextMenuEventAdapter from "@coremedia/studio-client.ext.ui-components/util/ContextMenuEventAdapter";
@@ -46,16 +45,16 @@ import CollectionViewModel
 import SearchArea from "@coremedia/studio-client.main.editor-components/sdk/collectionview/search/SearchArea";
 import ComponentBasedEntityWorkAreaTabType
   from "@coremedia/studio-client.main.editor-components/sdk/desktop/ComponentBasedEntityWorkAreaTabType";
+import sidePanelManager from "@coremedia/studio-client.main.editor-components/sdk/desktop/sidepanel/sidePanelManager";
 import SidePanelManagerImpl
   from "@coremedia/studio-client.main.editor-components/sdk/desktop/sidepanel/SidePanelManagerImpl";
 import SidePanelStudioPlugin
   from "@coremedia/studio-client.main.editor-components/sdk/desktop/sidepanel/SidePanelStudioPlugin";
-import sidePanelManager from "@coremedia/studio-client.main.editor-components/sdk/desktop/sidepanel/sidePanelManager";
 import editorContext from "@coremedia/studio-client.main.editor-components/sdk/editorContext";
 import Ext from "@jangaroo/ext-ts";
+import Button from "@jangaroo/ext-ts/button/Button";
 import Component from "@jangaroo/ext-ts/Component";
 import ComponentManager from "@jangaroo/ext-ts/ComponentManager";
-import Button from "@jangaroo/ext-ts/button/Button";
 import Container from "@jangaroo/ext-ts/container/Container";
 import Viewport from "@jangaroo/ext-ts/container/Viewport";
 import Event from "@jangaroo/ext-ts/event/Event";
@@ -64,15 +63,15 @@ import Item from "@jangaroo/ext-ts/menu/Item";
 import RowSelectionModel from "@jangaroo/ext-ts/selection/RowModel";
 import TextItem from "@jangaroo/ext-ts/toolbar/TextItem";
 import Toolbar from "@jangaroo/ext-ts/toolbar/Toolbar";
-import { as, bind, cast } from "@jangaroo/runtime";
+import { as, cast } from "@jangaroo/runtime";
 import Config from "@jangaroo/runtime/Config";
 import int from "@jangaroo/runtime/int";
 import { AnyFunction } from "@jangaroo/runtime/types";
-import LivecontextStudioPlugin from "../../src/LivecontextStudioPlugin";
-import LivecontextStudioPluginBase from "../../src/LivecontextStudioPluginBase";
 import LivecontextCollectionViewActionsPlugin from "../../src/library/LivecontextCollectionViewActionsPlugin";
 import LivecontextCollectionViewExtension from "../../src/library/LivecontextCollectionViewExtension";
 import LivecontextContentTreeRelation from "../../src/library/LivecontextContentTreeRelation";
+import LivecontextStudioPlugin from "../../src/LivecontextStudioPlugin";
+import LivecontextStudioPluginBase from "../../src/LivecontextStudioPluginBase";
 import AbstractLiveContextStudioTest from "../AbstractLiveContextStudioTest";
 
 class CatalogCollectionViewTest extends AbstractLiveContextStudioTest {
@@ -109,73 +108,70 @@ class CatalogCollectionViewTest extends AbstractLiveContextStudioTest {
     QtipUtil.registerQtipFormatter();
   }
 
-  testCatalogLibrary(): void {
-    this.chain(
-      //initialize the catalog library
-      this.#initStore(),
-      this.loadContentRepository(),
-      this.waitForContentRepositoryLoaded(),
-      this.loadContentTypes(),
-      this.waitForContentTypesLoaded(),
-      this.#createTestlingStep(),
+  // noinspection JSUnusedGlobalSymbols
+  async testCatalogLibrary(): Promise<void> {
+    //initialize the catalog library
+    await this.#initStore();
+    await this.waitForContentRepositoryLoaded();
+    await this.waitForContentTypesLoaded();
+    this.#createTestling();
 
-      //test catalog repository thumbnail view
-      this.#selectNode("livecontext/category/HeliosSiteId/catalog/Women"),
-      this.#waitUntilSwitchToListButtonIsPressed(),
-      this.#switchToThumbnailView(),
-      this.#waitUntilSwitchToListButtonIsUnpressed(),
-      this.#waitUntilThumbnailViewIsActive(),
+    //test catalog repository thumbnail view
+    this.#selectNode("livecontext/category/HeliosSiteId/catalog/Women");
+    await this.#waitUntilSwitchToListButtonIsPressed();
+    this.#switchToThumbnailView();
+    await this.#waitUntilSwitchToListButtonIsUnpressed();
+    await this.#waitUntilThumbnailViewIsActive();
 
-      //test context menu on the repository list and thumbnail view
-      this.#switchToListView(),
-      this.#waitUntilListViewIsActive(),
-      this.#selectNode("livecontext/category/HeliosSiteId/catalog/Dresses"),
-      this.#waitUntilProductIsLoadedInRepositoryList(),
-      this.#waitUntilSearchProductVariantToolbarButtonIsHidden(),
-      this.#openContextMenuOnFirstItemOfRepositoryList(),
-      this.#waitUntilRepositoryListContextMenuOpened(),
-      this.#waitUntilSearchProductVariantToolbarButtonIsEnabled(),
-      this.#waitUntilSearchProductVariantContextMenuIsEnabled(),
-      this.#searchProductVariantsUsingContextMenu(),
-      this.#waitUntilSearchModeIsActive(),
-      this.#waitUntilProductVariantIsLoadedInSearchList(),
-      this.#waitUntilCatalogSearchListIsLoadedAndNotEmpty(2, AbstractCatalogTest.HERMITAGE_RUCHED_BODICE_COCKTAIL_DRESS),
-      //now test that the variant search is hidden on product variants themselves
-      this.#selectFirstItemOfSearchList(),
-      this.#openContextMenuOnFirstItemOfSearchList(),
-      this.#waitUntilSearchListContextMenuOpened(),
-      this.#waitUntilSearchProductVariantToolbarButtonIsHidden(),
-      this.#waitUntilSearchProductVariantContextMenuIsHidden(),
+    //test context menu on the repository list and thumbnail view
+    this.#switchToListView();
+    await this.#waitUntilListViewIsActive();
+    this.#selectNode("livecontext/category/HeliosSiteId/catalog/Dresses");
+    await this.#waitUntilProductIsLoadedInRepositoryList();
+    await this.#waitUntilSearchProductVariantToolbarButtonIsHidden();
+    this.#openContextMenuOnFirstItemOfRepositoryList();
+    await this.#waitUntilRepositoryListContextMenuOpened();
+    await this.#waitUntilSearchProductVariantToolbarButtonIsEnabled();
+    await this.#waitUntilSearchProductVariantContextMenuIsEnabled();
+    this.#searchProductVariantsUsingContextMenu();
+    await this.#waitUntilSearchModeIsActive();
+    await this.#waitUntilProductVariantIsLoadedInSearchList();
+    await this.#waitUntilCatalogSearchListIsLoadedAndNotEmpty(2, AbstractCatalogTest.HERMITAGE_RUCHED_BODICE_COCKTAIL_DRESS);
+    //now test that the variant search is hidden on product variants themselves
+    this.#selectFirstItemOfSearchList();
+    await this.#openContextMenuOnFirstItemOfSearchList();
+    await this.#waitUntilSearchListContextMenuOpened();
+    await this.#waitUntilSearchProductVariantToolbarButtonIsHidden();
+    await this.#waitUntilSearchProductVariantContextMenuIsHidden();
 
-      // test marketing spots
-      this.#switchToRepositoryMode(),
-      this.#selectNode("livecontext/marketing/HeliosSiteId"),
-      this.#waitUntilSwitchToListButtonIsPressed(),
-      this.#switchToThumbnailView(),
-      this.#waitUntilSwitchToListButtonIsUnpressed(),
-      this.#waitUntilThumbnailViewIsActive(),
+    // test marketing spots
+    this.#switchToRepositoryMode();
+    this.#selectNode("livecontext/marketing/HeliosSiteId");
+    await this.#waitUntilSwitchToListButtonIsPressed();
+    this.#switchToThumbnailView();
+    await this.#waitUntilSwitchToListButtonIsUnpressed();
+    await this.#waitUntilThumbnailViewIsActive();
 
-      //test product search
-      this.#selectStore(),
-      this.#triggerSearch("Oranges", CatalogModel.TYPE_PRODUCT),
-      this.#waitUntilSearchModeIsActive(),
-      this.#waitUntilSwitchToListButtonIsPressed(),
-      this.#waitUntilCatalogSearchListIsLoadedAndNotEmpty(2, AbstractCatalogTest.ORANGES_NAME),
-      this.#waitUntilCatalogSearchListAndLabelIsLoadedAndFooterShowsTotalHits(2),
-      this.#switchToThumbnailView(),
-      this.#waitUntilSwitchToListButtonIsUnpressed(),
-      this.#waitUntilThumbnailViewIsActive(),
+    //test product search
+    await this.#selectStore();
+    this.#triggerSearch("Oranges", CatalogModel.TYPE_PRODUCT);
+    await this.#waitUntilSearchModeIsActive();
+    await this.#waitUntilSwitchToListButtonIsPressed();
+    await this.#waitUntilCatalogSearchListIsLoadedAndNotEmpty(2, AbstractCatalogTest.ORANGES_NAME);
+    await this.#waitUntilCatalogSearchListAndLabelIsLoadedAndFooterShowsTotalHits(2);
+    this.#switchToThumbnailView();
+    await this.#waitUntilSwitchToListButtonIsUnpressed();
+    await this.#waitUntilThumbnailViewIsActive();
 
-      //test product variant search
-      this.#switchToListView(),
-      this.#waitUntilListViewIsActive(),
-      this.#triggerSearch("Oranges", CatalogModel.TYPE_PRODUCT_VARIANT),
-      this.#waitUntilCatalogSearchListIsLoadedAndNotEmpty(3, AbstractCatalogTest.ORANGES_SKU_NAME),
-      this.#waitUntilCatalogSearchListAndLabelIsLoadedAndFooterShowsTotalHits(3),
-      this.#switchToThumbnailView(),
-      this.#waitUntilSwitchToListButtonIsUnpressed(),
-      this.#waitUntilThumbnailViewIsActive(),
-    );
+    //test product variant search
+    this.#switchToListView();
+    await this.#waitUntilListViewIsActive();
+    this.#triggerSearch("Oranges", CatalogModel.TYPE_PRODUCT_VARIANT);
+    await this.#waitUntilCatalogSearchListIsLoadedAndNotEmpty(3, AbstractCatalogTest.ORANGES_SKU_NAME);
+    await this.#waitUntilCatalogSearchListAndLabelIsLoadedAndFooterShowsTotalHits(3);
+    this.#switchToThumbnailView();
+    await this.#waitUntilSwitchToListButtonIsUnpressed();
+    await this.#waitUntilThumbnailViewIsActive();
   }
 
   override tearDown(): void {
@@ -251,74 +247,50 @@ class CatalogCollectionViewTest extends AbstractLiveContextStudioTest {
   #getFooterTotalHitsLabel(): TextItem {
     return cast(TextItem, this.#getFooter().getComponent("totalHitsLabel"));
   }
-
-  #createTestlingStep(): Step {
-    return new Step("Create the testling",
-      (): boolean =>
-        true
-      , bind(
-        this, this.#createTestling),
-    );
+  async #initStore(): Promise<void> {
+    // Load Store Data:
+    await waitUntil((): boolean => {
+      const store: Store = CatalogHelper.getInstance().getActiveStoreExpression().getValue();
+      return store !== null && store !== undefined;
+    });
+    CatalogHelper.getInstance().getActiveStoreExpression().getValue();
   }
 
-  #initStore(): Step {
-    return new Step("Load Store Data",
-      (): boolean => {
-        const store: Store = CatalogHelper.getInstance().getActiveStoreExpression().getValue();
-        return store !== null && store !== undefined;
-      },
-      CatalogHelper.getInstance().getActiveStoreExpression().getValue(),
-    );
+  async #selectStore(): Promise<void> {
+    // Select Store Node:
+    await waitUntil((): boolean => {
+      const store: Store = CatalogHelper.getInstance().getActiveStoreExpression().getValue();
+      this.#testling.setOpenPath(store);
+      return !!this.#getRepositoryContainer() && this.#getRepositoryContainer().rendered && !!this.#getRepositoryContainer().getStore();
+    });
   }
 
-  #selectStore(): Step {
-    return new Step("Select Store Node",
-      (): boolean => {
-        const store: Store = CatalogHelper.getInstance().getActiveStoreExpression().getValue();
-        this.#testling.setOpenPath(store);
-        return !!this.#getRepositoryContainer() && this.#getRepositoryContainer().rendered && !!this.#getRepositoryContainer().getStore();
-      },
-    );
+  #selectNode(path: string): void {
+    // selecting <path> tree node:
+    this.#testling.setOpenPath(beanFactory._.getRemoteBean(path));
   }
 
-  #selectNode(path: string): Step {
-    return new ActionStep("selecting '" + path + "' tree node",
-      (): void =>
-        this.#testling.setOpenPath(beanFactory._.getRemoteBean(path)),
-    );
+  #triggerSearch(searchTerm: string, searchType: string): void {
+    // trigger catalog search:
+    CatalogCollectionViewTest.#setSearchStateAndTriggerSearch(searchTerm, searchType);
   }
 
-  #triggerSearch(searchTerm: string, searchType: string): Step {
-    return new Step("trigger catalog search",
-      (): boolean =>
-        true
-      ,
-      (): void =>
-        CatalogCollectionViewTest.#setSearchStateAndTriggerSearch(searchTerm, searchType),
-    );
+  async #waitUntilSwitchToListButtonIsPressed(): Promise<void> {
+    // Switch to List Button should be pressed:
+    await waitUntil((): boolean =>
+      this.#getSwitchToListViewButton() && this.#getSwitchToListViewButton().pressed);
   }
 
-  #waitUntilSwitchToListButtonIsPressed(): Step {
-    return new Step("Switch to List Button should be pressed",
-      (): boolean =>
-        this.#getSwitchToListViewButton() && this.#getSwitchToListViewButton().pressed,
-    );
+  async #waitUntilRepositoryListContextMenuOpened(): Promise<void> {
+    // Wait for the context menu on the repository list to be opened:
+    await waitUntil((): boolean =>
+      !!this.#findCatalogRepositoryContextMenu());
   }
 
-  #waitUntilRepositoryListContextMenuOpened(): Step {
-    return new Step("Wait for the context menu on the repository list to be opened",
-      (): boolean =>
-        !!this.#findCatalogRepositoryContextMenu(),
-
-    );
-  }
-
-  #waitUntilSearchListContextMenuOpened(): Step {
-    return new Step("Wait for the context menu on the search list to be opened",
-      (): boolean =>
-        !!this.#findCatalogSearchListContextMenu(),
-
-    );
+  async #waitUntilSearchListContextMenuOpened(): Promise<void> {
+    // Wait for the context menu on the search list to be opened:
+    await waitUntil((): boolean =>
+      !!this.#findCatalogSearchListContextMenu());
   }
 
   #getSwitchToRepositoryModeButton(): Button {
@@ -360,200 +332,144 @@ class CatalogCollectionViewTest extends AbstractLiveContextStudioTest {
     return as(searchContainer.queryById("commerceToolbar"), Toolbar);
   }
 
-  #waitUntilSwitchToListButtonIsUnpressed(): Step {
-    return new Step("Switch to List Button should be unpressed",
-      (): boolean =>
-        !this.#getSwitchToListViewButton().pressed
-      ,
-      (): void => {
-        //nothing to do
-      });
+  async #waitUntilSwitchToListButtonIsUnpressed(): Promise<void> {
+    // Switch to List Button should be unpressed:
+    await waitUntil((): boolean =>
+      !this.#getSwitchToListViewButton().pressed);
   }
 
-  #waitUntilListViewIsActive(): Step {
-    return new Step("List View should be active",
-      (): boolean =>
-        this.#getRepositorySwitchingContainer().getActiveItemValue() === CollectionViewConstants.LIST_VIEW,
-    );
+  async #waitUntilListViewIsActive(): Promise<void> {
+    // List View should be active:
+    await waitUntil((): boolean =>
+      this.#getRepositorySwitchingContainer().getActiveItemValue() === CollectionViewConstants.LIST_VIEW);
   }
 
-  #waitUntilThumbnailViewIsActive(): Step {
-    return new Step("Thumbnail View should be active",
-      (): boolean =>
-        this.#getRepositorySwitchingContainer().getActiveItemValue() === CollectionViewConstants.THUMBNAILS_VIEW,
-    );
+  async #waitUntilThumbnailViewIsActive(): Promise<void> {
+    // Thumbnail View should be active:
+    await waitUntil((): boolean =>
+      this.#getRepositorySwitchingContainer().getActiveItemValue() === CollectionViewConstants.THUMBNAILS_VIEW);
   }
 
-  #waitUntilSearchModeIsActive(): Step {
-    return new Step("Search Mode should be active",
-      (): boolean =>
-        this.#getCollectionModesContainer().getActiveItemValue() === CollectionViewModel.SEARCH_MODE,
-
-    );
+  async #waitUntilSearchModeIsActive(): Promise<void> {
+    // Search Mode should be active:
+    await waitUntil((): boolean =>
+      this.#getCollectionModesContainer().getActiveItemValue() === CollectionViewModel.SEARCH_MODE);
   }
 
-  #waitUntilProductIsLoadedInRepositoryList(): Step {
-    return new Step("Wait for the repository list to be loaded with products",
-      (): boolean =>
-        this.#getRepositoryList().getStore().getCount() > 0 &&
-                      Ext.get(TableUtil.getCellAsDom(this.#getRepositoryList(), 0, 0)).query("[aria-label]")[0].getAttribute("aria-label") === ECommerceStudioPlugin_properties.Product_label,
-
-    );
+  async #waitUntilProductIsLoadedInRepositoryList(): Promise<void> {
+    // Wait for the repository list to be loaded with products:
+    await waitUntil((): boolean =>
+      this.#getRepositoryList().getStore().getCount() > 0 &&
+      Ext.get(TableUtil.getCellAsDom(this.#getRepositoryList(), 0, 0)).query("[aria-label]")[0].getAttribute("aria-label") === ECommerceStudioPlugin_properties.Product_label);
   }
 
-  #waitUntilProductVariantIsLoadedInSearchList(): Step {
-    return new Step("Wait for the search list to be loaded with product variants",
-      (): boolean =>
-        this.#getSearchList().getStore().getCount() > 0 &&
-                      Ext.get(TableUtil.getCellAsDom(this.#getSearchList(), 0, 0)).query("[aria-label]")[0].getAttribute("aria-label") === ECommerceStudioPlugin_properties.ProductVariant_label,
-
-    );
+  async #waitUntilProductVariantIsLoadedInSearchList(): Promise<void> {
+    // Wait for the search list to be loaded with product variants:
+    await waitUntil((): boolean =>
+      this.#getSearchList().getStore().getCount() > 0 &&
+      Ext.get(TableUtil.getCellAsDom(this.#getSearchList(), 0, 0)).query("[aria-label]")[0].getAttribute("aria-label") === ECommerceStudioPlugin_properties.ProductVariant_label);
   }
 
-  #waitUntilSearchProductVariantToolbarButtonIsHidden(): Step {
-    return new Step("Wait for the product variant search toolbar button is hidden",
-      (): boolean =>
-        this.#getProductVariantSearchButton().hidden,
-
-    );
+  async #waitUntilSearchProductVariantToolbarButtonIsHidden(): Promise<void> {
+    // Wait for the product variant search toolbar button is hidden:
+    await waitUntil((): boolean =>
+      this.#getProductVariantSearchButton().hidden);
   }
 
-  #waitUntilSearchProductVariantToolbarButtonIsEnabled(): Step {
-    return new Step("Wait for the product variant search toolbar button is enabled",
-      (): boolean =>
-        !this.#getProductVariantSearchButton().disabled,
-
-    );
+  async #waitUntilSearchProductVariantToolbarButtonIsEnabled(): Promise<void> {
+    // Wait for the product variant search toolbar button is enabled:
+    await waitUntil((): boolean =>
+      !this.#getProductVariantSearchButton().disabled);
   }
 
-  #waitUntilSearchProductVariantContextMenuIsEnabled(): Step {
-    return new Step("Wait for the product variant search context menu item is enabled",
-      (): boolean =>
-        !this.#searchProductVariantsContextMenuItem.disabled,
-
-    );
+  async #waitUntilSearchProductVariantContextMenuIsEnabled(): Promise<void> {
+    // Wait for the product variant search context menu item is enabled:
+    await waitUntil((): boolean =>
+      !this.#searchProductVariantsContextMenuItem.disabled);
   }
 
-  #waitUntilSearchProductVariantContextMenuIsHidden(): Step {
-    return new Step("Wait for the product variant search context menu item is hidden",
-      (): boolean =>
-        this.#searchProductVariantsContextMenuItem.hidden,
-
-    );
+  async #waitUntilSearchProductVariantContextMenuIsHidden(): Promise<void> {
+    // Wait for the product variant search context menu item is hidden:
+    await waitUntil((): boolean =>
+      this.#searchProductVariantsContextMenuItem.hidden);
   }
 
-  #switchToListView(): Step {
-    return new ActionStep("Switch to list view",
-      (): void => {
-        const handler = this.#getSwitchToListViewButton().initialConfig.handler;
-        typeof handler !== "string" && handler(this.#getSwitchToListViewButton(), null);
-      });
+  #switchToListView(): void {
+    // Switch to list view
+    const handler = this.#getSwitchToListViewButton().initialConfig.handler;
+    typeof handler !== "string" && handler(this.#getSwitchToListViewButton(), null);
   }
 
-  #switchToThumbnailView(): Step {
-    return new ActionStep("Switch to thumbnail view",
-      (): void => {
-        const handler = this.#getSwitchToThumbnailViewButton().initialConfig.handler;
-        typeof handler !== "string" && handler(this.#getSwitchToThumbnailViewButton(), null);
-      });
+  #switchToThumbnailView(): void {
+    // Switch to thumbnail view:
+    const handler = this.#getSwitchToThumbnailViewButton().initialConfig.handler;
+    typeof handler !== "string" && handler(this.#getSwitchToThumbnailViewButton(), null);
   }
 
-  #switchToRepositoryMode(): Step {
-    return new ActionStep("Switch to repository mode",
-      (): void => {
-        const handler = this.#getSwitchToRepositoryModeButton().initialConfig.handler;
-        typeof handler !== "string" && handler(this.#getSwitchToRepositoryModeButton(), null);
-      });
+  #switchToRepositoryMode(): void {
+    // Switch to repository mode:
+    const handler = this.#getSwitchToRepositoryModeButton().initialConfig.handler;
+    typeof handler !== "string" && handler(this.#getSwitchToRepositoryModeButton(), null);
   }
 
-  #waitUntilCatalogSearchListIsLoadedAndNotEmpty(expectedResultCount: int, firstItemName: string): Step {
-    return new Step("Wait for the catalog search list to be loaded and the search items to be " + expectedResultCount +
-            " and the first item to be " + firstItemName,
-    (): boolean => {
+  async #waitUntilCatalogSearchListIsLoadedAndNotEmpty(expectedResultCount: int, firstItemName: string): Promise<void> {
+    // Wait for the catalog search list to be loaded and the search items to be <expectedResultCount>
+    // and the first item to be <firstItemName>
+    await waitUntil((): boolean => {
       if (this.#getSearchList().getStore() && this.#getSearchList().getStore().getCount() <= 0) {
         return false;
       }
       const name = cast(CatalogObject, cast(BeanRecord, this.#getSearchList().getStore().getAt(0)).getBean()).getName();
       return firstItemName === name && expectedResultCount === this.#getSearchList().getStore().getCount();
-    },
-    );
+    });
   }
 
-  #waitUntilCatalogSearchListAndLabelIsLoadedAndFooterShowsTotalHits(expectedResultCount: int): Step {
-    return new Step("footer and catalog search list should be loaded and must not be empty",
-      (): boolean => {
-        const footerTotalHitsLabel = this.#getFooterTotalHitsLabel();
-        const searchList = this.#getSearchList();
-        return footerTotalHitsLabel && searchList.getStore() && searchList.getStore().getCount() > 0 &&
-                      footerTotalHitsLabel.html && footerTotalHitsLabel.html.indexOf(String(expectedResultCount)) === 0;
-
-      },
-      (): void => {
-        //nothing to do
-      });
+  async #waitUntilCatalogSearchListAndLabelIsLoadedAndFooterShowsTotalHits(expectedResultCount: int): Promise<void> {
+    // footer and catalog search list should be loaded and must not be empty:
+    await waitUntil((): boolean => {
+      const footerTotalHitsLabel = this.#getFooterTotalHitsLabel();
+      const searchList = this.#getSearchList();
+      return footerTotalHitsLabel && searchList.getStore() && searchList.getStore().getCount() > 0 &&
+          footerTotalHitsLabel.html && footerTotalHitsLabel.html.indexOf(String(expectedResultCount)) === 0;
+    });
   }
 
-  #openContextMenuOnFirstItemOfRepositoryList(): Step {
-    return new Step("Open Context Menu on the first item of the repository list",
-      (): boolean =>
-        true
-      ,
-      (): void =>
-        this.#openContextMenu(this.#getRepositoryList(), 0),
-
-    );
-
+  #openContextMenuOnFirstItemOfRepositoryList(): void {
+    // Open Context Menu on the first item of the repository list:
+    this.#openContextMenu(this.#getRepositoryList(), 0);
   }
 
-  #selectFirstItemOfSearchList(): Step {
-    return new Step("Open Context Menu on the first item of the searhc list",
-      (): boolean =>
-        true
-      ,
-      (): void => {
-        const sm = as(this.#getSearchList().getSelectionModel(), RowSelectionModel);
-        sm.select(0);
-      },
-    );
-
+  #selectFirstItemOfSearchList(): void {
+    // Open Context Menu on the first item of the searhc list:
+    const sm = as(this.#getSearchList().getSelectionModel(), RowSelectionModel);
+    sm.select(0);
   }
 
-  #openContextMenuOnFirstItemOfSearchList(): Step {
-    return new Step("Open Context Menu on the first item of the searhc list",
-      (): boolean => {
-        const contextMenu = as(ComponentManager.getAll().filter((component: Component): boolean =>
-          component.isXType(CatalogSearchContextMenu.xtype),
-        )[0], CatalogSearchContextMenu);
-        return contextMenu.items.getRange().some((item: Item): boolean =>
-          ! !item.baseAction && !item.isHidden(),
-        );
-      },
-      (): void =>
-        this.#openContextMenu(this.#getSearchList(), 0),
-
-    );
-
+  async #openContextMenuOnFirstItemOfSearchList(): Promise<void> {
+    // Open Context Menu on the first item of the searhc list:
+    await waitUntil((): boolean => {
+      const contextMenu = as(ComponentManager.getAll().filter((component: Component): boolean =>
+        component.isXType(CatalogSearchContextMenu.xtype),
+      )[0], CatalogSearchContextMenu);
+      return contextMenu.items.getRange().some((item: Item): boolean =>
+        !!item.baseAction && !item.isHidden(),
+      );
+    });
+    this.#openContextMenu(this.#getSearchList(), 0);
   }
 
-  #searchProductVariantsUsingContextMenu(): Step {
-    return new Step("Search Product Variants using the context menu",
-      (): boolean =>
-        true
-      ,
-      (): void => {
-        const handler = this.#searchProductVariantsContextMenuItem.initialConfig.handler;
-        typeof handler !== "string" && handler(this.#searchProductVariantsContextMenuItem, null);
-      },
-    );
-
+  #searchProductVariantsUsingContextMenu(): void {
+    // Search Product Variants using the context menu:
+    const handler = this.#searchProductVariantsContextMenuItem.initialConfig.handler;
+    typeof handler !== "string" && handler(this.#searchProductVariantsContextMenuItem, null);
   }
 
   #openContextMenu(grid: GridPanel, row: number): void {
-    var event = cast(Event, {
+    const event = cast(Event, {
       getXY: (): Array<any> =>
         Ext.fly(event.getTarget()).getXY()
       ,
-      preventDefault: (): void =>{
+      preventDefault: (): void => {
         //do nothing
       },
       getTarget: (): HTMLElement =>

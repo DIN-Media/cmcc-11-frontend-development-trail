@@ -35,7 +35,7 @@ public final class TaxonomyUtil {
    */
   @NonNull
   public static String formatQuery(@NonNull String name) {
-    String result = '*' + name.replaceAll("-", " ");
+    String result = name.replaceAll("-", " ");
     return result.endsWith(" ") ? result : result + '*';
   }
 

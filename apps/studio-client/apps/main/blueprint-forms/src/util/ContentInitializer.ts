@@ -23,7 +23,7 @@ class ContentInitializer {
   static readonly #ENABLE_TEASER_OVERLAY_BY_DEFAULT: boolean = false;
 
   /**
-   * The registration of the initializers for the corresponding document types.
+   * The registration of the initializers for the corresponding content types.
    */
   static applyInitializers(): void {
     editorContext._.registerContentInitializer("CMArticle", ContentInitializer.#initArticle);
@@ -69,7 +69,7 @@ class ContentInitializer {
     const localSettings: Struct = content.getProperties().get("localSettings");
     localSettings.getType().addIntegerProperty("limit", 10);
 
-    //should be part of the query editor, but since the document types are set for each condition we've added the default init here
+    //should be part of the query editor, but since the content types are set for each condition we've added the default init here
     const documentTypes = ["CMArticle", "CMVideo", "CMPicture", "CMGallery", "CMChannel"];
     const struct: Struct = content.getProperties().get("localSettings");
     struct.getType().addStructProperty("fq");

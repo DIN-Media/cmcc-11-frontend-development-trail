@@ -66,12 +66,19 @@
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
+      <artifactId>spring-context</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-      <scope>runtime</scope>
+      <artifactId>spring-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>

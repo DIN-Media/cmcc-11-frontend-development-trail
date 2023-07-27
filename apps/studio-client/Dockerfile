@@ -2,7 +2,7 @@
 
 ARG TYPE=zip
 ARG STUDIO_CLIENT_TOOLING_IMAGE=scratch
-ARG APPLICATION_BASE_IMAGE=coremedia/nginx-base:1.0-cm-1.23-alpine
+ARG APPLICATION_BASE_IMAGE=coremedia/nginx-base:1.1-cm-1.24-alpine
 
 # builder stage to extract all necessary artifacts
 FROM alpine:3.9.4 as source-zip

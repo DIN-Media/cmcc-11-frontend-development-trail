@@ -14,14 +14,14 @@
         scope="prototype"
         parent="abstractChannel-blueprint-doctypes"
         class="com.coremedia.blueprint.ecommerce.contentbeans.impl.CMCategoryImpl">
-    <property name="catalogService" ref="cmsCatalogService"/>
+    <property name="catalogContentHelper" ref="catalogContentHelper"/>
   </bean>
 
   <bean name="contentBeanFactory:CMProduct"
         scope="prototype"
         parent="abstractTeasable-blueprint-doctypes"
         class="com.coremedia.blueprint.ecommerce.contentbeans.impl.CMProductImpl">
-    <property name="catalogService" ref="cmsCatalogService"/>
+    <property name="catalogContentHelper" ref="catalogContentHelper"/>
   </bean>
 
   <bean id="cmsCommerceLinkedBeanContextFinder"

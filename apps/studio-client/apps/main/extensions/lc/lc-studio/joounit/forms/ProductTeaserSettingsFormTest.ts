@@ -1,5 +1,5 @@
 import AbstractProductTeaserComponentsTest from "@coremedia-blueprint/studio-client.main.lc-studio-test-helper/AbstractProductTeaserComponentsTest";
-import Step from "@coremedia/studio-client.client-core-test-helper/Step";
+import { waitUntil } from "@coremedia/studio-client.client-core-test-helper/async";
 import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpression";
 import Ext from "@jangaroo/ext-ts";
 import Viewport from "@jangaroo/ext-ts/container/Viewport";
@@ -25,62 +25,52 @@ class ProductTeaserSettingsFormTest extends AbstractProductTeaserComponentsTest 
     this.#viewPort = null;
   }
 
-  testProductTeaserSettingsForm(): void {
-    this.chain(
-      this.loadContentRepository(),
-      this.waitForContentRepositoryLoaded(),
-      this.loadContentTypes(),
-      this.waitForContentTypesLoaded(),
-      this.loadProductTeaser(),
-      this.waitForProductTeaserToBeLoaded(),
-      this.#createTestlingStep(),
-      //inherit is the default
-      this.#waitForRadioToBeChecked(ViewSettingsRadioGroup.INHERITED_SETTING),
-      this.#checkRadio(ViewSettingsRadioGroup.ENABLED_SETTING),
-      this.#waitForRadioToBeChecked(ViewSettingsRadioGroup.ENABLED_SETTING),
-      this.#checkRadio(ViewSettingsRadioGroup.DISABLED_SETTING),
-      this.#waitForRadioToBeChecked(ViewSettingsRadioGroup.DISABLED_SETTING),
-      this.#checkRadio(ViewSettingsRadioGroup.INHERITED_SETTING),
-      this.#waitForRadioToBeChecked(ViewSettingsRadioGroup.INHERITED_SETTING),
-    );
+  // noinspection JSUnusedGlobalSymbols
+  async testProductTeaserSettingsForm(): Promise<void> {
+    await this.waitForContentRepositoryLoaded();
+    await this.waitForContentTypesLoaded();
+    await this.waitForProductTeaserToBeLoaded();
+    await this.#createTestling();
+    //inherit is the default
+    await this.#waitForRadioToBeChecked(ViewSettingsRadioGroup.INHERITED_SETTING);
+    this.#checkRadio(ViewSettingsRadioGroup.ENABLED_SETTING);
+    await this.#waitForRadioToBeChecked(ViewSettingsRadioGroup.ENABLED_SETTING);
+    this.#checkRadio(ViewSettingsRadioGroup.DISABLED_SETTING);
+    await this.#waitForRadioToBeChecked(ViewSettingsRadioGroup.DISABLED_SETTING);
+    this.#checkRadio(ViewSettingsRadioGroup.INHERITED_SETTING);
+    await this.#waitForRadioToBeChecked(ViewSettingsRadioGroup.INHERITED_SETTING);
   }
 
-  #checkRadio(value: string): Step {
-    return new Step("change view settings to " + value,
-      (): boolean => true,
-      (): void => {
-        const valueObject: Record<string, any> = {};
-        valueObject[this.#viewSettings.radioButtonFormName] = value;
-        this.#viewSettings.setValue(valueObject);
-      },
-    );
+  #checkRadio(value: string): void {
+    // change view settings to <value>:
+    const valueObject: Record<string, any> = {};
+    valueObject[this.#viewSettings.radioButtonFormName] = value;
+    this.#viewSettings.setValue(valueObject);
   }
 
-  #waitForRadioToBeChecked(itemId: string): Step {
-    return new Step("Wait for radio button " + itemId + " to be checked",
-      (): boolean => {
-        const value: any = this.#viewSettings.getValue();
-        return value[this.#viewSettings.radioButtonFormName] === itemId;
-      },
-    );
+  async #waitForRadioToBeChecked(itemId: string): Promise<void> {
+    // Wait for radio button " + itemId + " to be checked:
+    await waitUntil((): boolean => {
+      const value: any = this.#viewSettings.getValue();
+      return value[this.#viewSettings.radioButtonFormName] === itemId;
+    });
   }
 
-  #createTestlingStep(): Step {
+  async #createTestling(): Promise<void> {
     let ve: ValueExpression;
-    return new Step("Create the testling",
-      (): boolean => {
-        if (!this.#viewPort) {
-          // create only once
-          const config = Config(ProductTeaserSettingsFormTestView);
-          config.bindTo = this.getBindTo();
-          this.#viewPort = new ProductTeaserSettingsFormTestView(Config(ProductTeaserSettingsFormTestView, Ext.apply({}, config)));
-          this.#viewSettings = as(this.#viewPort.queryById("viewSettingsPropertyField"), ViewSettingsRadioGroup);
-          ve = Object(this.#viewSettings).getInheritOptionVisibleExpression(config.bindTo);
-        }
-        // but wait for inherit option to initialize
-        return ve.getValue();
-      },
-    );
+    // Create the testling:
+    await waitUntil((): boolean => {
+      if (!this.#viewPort) {
+        // create only once
+        const config = Config(ProductTeaserSettingsFormTestView);
+        config.bindTo = this.getBindTo();
+        this.#viewPort = new ProductTeaserSettingsFormTestView(Config(ProductTeaserSettingsFormTestView, Ext.apply({}, config)));
+        this.#viewSettings = as(this.#viewPort.queryById("viewSettingsPropertyField"), ViewSettingsRadioGroup);
+        ve = Object(this.#viewSettings).getInheritOptionVisibleExpression(config.bindTo);
+      }
+      // but wait for inherit option to initialize
+      return ve.getValue();
+    });
   }
 
 }

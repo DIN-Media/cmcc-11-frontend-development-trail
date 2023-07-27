@@ -1,40 +1,38 @@
 package com.coremedia.blueprint.elastic.base;
 
-import com.coremedia.blueprint.base.settings.SettingsService;
-import com.coremedia.blueprint.base.settings.impl.SettingsServiceImpl;
+import com.coremedia.blueprint.base.settings.impl.BlueprintSettingsServiceConfiguration;
 import com.coremedia.cap.test.xmlrepo.XmlRepoConfiguration;
 import com.coremedia.cap.test.xmlrepo.XmlUapiConfig;
 import com.coremedia.elastic.core.api.tenant.TenantServiceListener;
 import com.coremedia.elastic.core.api.tenant.TenantServiceListenerBase;
+import com.coremedia.elastic.core.impl.tenant.TenantConfiguration;
 import com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {
+@SpringJUnitConfig({
         TenantInitializerTest.LocalConfig.class,
-        com.coremedia.elastic.core.impl.tenant.TenantConfiguration.class,
+        TenantConfiguration.class,
         TenantInitializerConfiguration.class,
         XmlRepoConfiguration.class
 })
-public class TenantInitializerTest {
+class TenantInitializerTest {
 
   @Autowired
   private MyTenantServiceListenerBase myTenantServiceListenerBase;
 
   @Test
-  public void tenantsRegistered() throws InterruptedException {
+  void tenantsRegistered() throws InterruptedException {
     final String tenant = "tenant";
     final String testTenant = "testTenant";
     for (int i = 0; i < 10; i++) {
@@ -44,8 +42,8 @@ public class TenantInitializerTest {
         }
       }
     }
-    assertTrue(tenant, containsTenant(tenant));
-    assertTrue(testTenant, containsTenant(testTenant));
+    assertThat(containsTenant(tenant)).as(tenant).isTrue();
+    assertThat(containsTenant(testTenant)).as(testTenant).isTrue();
   }
 
   private boolean containsTenant(String tenant) {
@@ -53,8 +51,8 @@ public class TenantInitializerTest {
   }
 
   @Configuration(proxyBeanMethods = false)
-  @ImportResource(value = {"classpath:META-INF/coremedia/component-elastic-worker.xml",
-          "classpath:/com/coremedia/blueprint/base/settings/impl/bpbase-settings-services.xml"},
+  @Import(BlueprintSettingsServiceConfiguration.class)
+  @ImportResource(value = "classpath:META-INF/coremedia/elastic-worker.xml",
           reader = ResourceAwareXmlBeanDefinitionReader.class)
   public static class LocalConfig {
     @Bean
@@ -65,11 +63,6 @@ public class TenantInitializerTest {
     @Bean
     public TenantServiceListener tenantServiceListener() {
       return new MyTenantServiceListenerBase();
-    }
-
-    @Bean
-    public SettingsService settingsService() {
-      return new SettingsServiceImpl();
     }
 
   }

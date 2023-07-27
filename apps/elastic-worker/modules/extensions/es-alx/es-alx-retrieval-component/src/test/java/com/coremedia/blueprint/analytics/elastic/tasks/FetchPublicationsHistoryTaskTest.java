@@ -16,28 +16,27 @@ import com.coremedia.cap.multisite.Site;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cap.test.xmlrepo.XmlRepoConfiguration;
 import com.coremedia.cap.test.xmlrepo.XmlUapiConfig;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import javax.inject.Inject;
 import java.lang.reflect.Proxy;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -52,14 +51,15 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = FetchPublicationsHistoryTaskTest.LocalConfig.class)
-public class FetchPublicationsHistoryTaskTest {
+@SpringJUnitConfig(FetchPublicationsHistoryTaskTest.LocalConfig.class)
+@ExtendWith(MockitoExtension.class)
+class FetchPublicationsHistoryTaskTest {
 
   private Date referenceDate;
   private static final String REFERENCE_DATE_STRING = "20130601";
@@ -105,10 +105,8 @@ public class FetchPublicationsHistoryTaskTest {
   @Mock
   private Version version2;
 
-  @Before
+  @BeforeEach
   public void setup() throws ParseException {
-    MockitoAnnotations.initMocks(this);
-
     referenceDate = new SimpleDateFormat(REPORT_DATE_FORMAT).parse(REFERENCE_DATE_STRING);
 
     initQueryService();
@@ -123,7 +121,7 @@ public class FetchPublicationsHistoryTaskTest {
 
     when(reportModel.getReportMap()).thenReturn(reportMap);
 
-    when(settingsService.settingWithDefault(eq(PUBLICATION_HISTORY_DOCUMENT_TYPE_KEY), eq(String.class), eq(PUBLICATION_HISTORY_DOCUMENT_TYPE), any(Content.class))).thenReturn(PUBLICATION_HISTORY_DOCUMENT_TYPE);
+    lenient().when(settingsService.settingWithDefault(eq(PUBLICATION_HISTORY_DOCUMENT_TYPE_KEY), eq(String.class), eq(PUBLICATION_HISTORY_DOCUMENT_TYPE), any(Content.class))).thenReturn(PUBLICATION_HISTORY_DOCUMENT_TYPE);
     when(settingsService.settingWithDefault(eq(PUBLICATION_HISTORY_INTERVAL_KEY), eq(Integer.class), eq(PUBLICATION_HISTORY_INTERVAL), any(Content.class))).thenReturn(PUBLICATION_HISTORY_INTERVAL);
 
     when(sitesService.getContentSiteAspect(any(Content.class))).thenReturn(contentSiteAspect);
@@ -132,7 +130,7 @@ public class FetchPublicationsHistoryTaskTest {
   }
 
   private void initQueryService() {
-    when(queryService.poseVersionQuery(anyString(), any())).thenReturn(Arrays.asList(version1,version2));
+    when(queryService.poseVersionQuery(anyString(), any(Object[].class))).thenReturn(List.of(version1, version2));
   }
 
   private ContentRepository createContentRepositoryProxy(ContentRepository contentRepository, PublicationService publicationService1) {
@@ -151,7 +149,7 @@ public class FetchPublicationsHistoryTaskTest {
   }
 
   @Test
-  public void getPublicationsTest() {
+  void getPublicationsTest() {
     when(reportModel.getSettings()).thenReturn(Map.of(PUBLICATION_HISTORY_DOCUMENT_TYPE_KEY, PUBLICATION_HISTORY_DOCUMENT_TYPE));
     Calendar startTime = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
     startTime.setTime(referenceDate);
@@ -165,7 +163,7 @@ public class FetchPublicationsHistoryTaskTest {
   }
 
   @Test
-  public void getPublicationsInitially() {
+  void getPublicationsInitially() {
     when(reportModel.getLastSaved()).thenReturn(0L);
     Calendar startTime = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
     Date startDate = getDateWithoutTime(new DaysBack(30).getStartDate());
@@ -183,7 +181,7 @@ public class FetchPublicationsHistoryTaskTest {
   }
 
   @Test
-  public void getPublicationsInitiallyWithDifferentDocumentType() {
+  void getPublicationsInitiallyWithDifferentDocumentType() {
     String documentType = "CMArticle";
     when(settingsService.settingWithDefault(eq(PUBLICATION_HISTORY_DOCUMENT_TYPE_KEY), eq(String.class), eq(PUBLICATION_HISTORY_DOCUMENT_TYPE), any(Content.class))).thenReturn(documentType);
     when(reportModel.getLastSaved()).thenReturn(System.currentTimeMillis());
@@ -206,7 +204,7 @@ public class FetchPublicationsHistoryTaskTest {
 
 
   @Test
-  public void getPublicationsNotNecessary() {
+  void getPublicationsNotNecessary() {
     when(reportModel.getLastSaved()).thenReturn(System.currentTimeMillis());
 
     fetchPublicationsHistory.run();

@@ -1,21 +1,17 @@
 package com.coremedia.blueprint.caas.augmentation;
 
+import com.coremedia.blueprint.base.livecontext.augmentation.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.CatalogAliasTranslationService;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.CommerceConnectionSupplier;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.CommerceSiteFinder;
 import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGridService;
-import com.coremedia.blueprint.base.pagegrid.internal.PageGridConfiguration;
 import com.coremedia.blueprint.caas.augmentation.adapter.AugmentationPageGridAdapterFactory;
 import com.coremedia.blueprint.caas.augmentation.adapter.CommerceRefAdapter;
 import com.coremedia.blueprint.caas.augmentation.model.AssetFacade;
 import com.coremedia.blueprint.caas.augmentation.model.AugmentationFacade;
-import com.coremedia.cache.Cache;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.livecontext.ecommerce.asset.AssetService;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
-import com.coremedia.livecontext.pagegrid.ContentAugmentedPageGridServiceImpl;
-import com.coremedia.livecontext.pagegrid.ContentAugmentedProductPageGridServiceImpl;
-import com.coremedia.livecontext.tree.ExternalChannelContentTreeRelation;
 import com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +23,6 @@ import static com.coremedia.blueprint.caas.augmentation.adapter.AugmentationPage
 
 @Configuration(proxyBeanMethods = false)
 @ImportResource(value = {
-        "classpath:/META-INF/coremedia/lc-services.xml",
         "classpath:com/coremedia/blueprint/base/pagegrid/impl/bpbase-pagegrid-services.xml"},
         reader = ResourceAwareXmlBeanDefinitionReader.class)
 @PropertySource("classpath:/META-INF/coremedia/headless-server-ec-augmentation-defaults.properties")
@@ -80,52 +75,6 @@ public class HeadlessAugmentationCommerceConfiguration {
             externalChannelContentTreeRelation,
             productContentBackedPageGridService,
             sitesService, commerceConnectionHelper);
-  }
-
-  @Bean
-  public ContentAugmentedPageGridServiceImpl categoryContentBackedPageGridService(
-          Cache cache,
-          SitesService sitesService,
-          PageGridConfiguration pageGridConfiguration,
-          ExternalChannelContentTreeRelation externalChannelContentTreeRelation) {
-    ContentAugmentedPageGridServiceImpl pageGridService = new ContentAugmentedPageGridServiceImpl();
-    pageGridService.setCache(cache);
-    pageGridService.setSitesService(sitesService);
-    pageGridService.setConfiguration(pageGridConfiguration);
-    pageGridService.setTreeRelation(externalChannelContentTreeRelation);
-    return pageGridService;
-  }
-
-  @Bean
-  public ContentAugmentedPageGridServiceImpl pdpContentBackedPageGridService(
-          Cache cache,
-          SitesService sitesService,
-          PageGridConfiguration pageGridConfiguration,
-          ExternalChannelContentTreeRelation externalChannelContentTreeRelation) {
-    ContentAugmentedPageGridServiceImpl pageGridService = new ContentAugmentedPageGridServiceImpl();
-    pageGridService.setStructPropertyName(PDP_PAGEGRID_PROPERTY_NAME);
-    pageGridService.setCache(cache);
-    pageGridService.setSitesService(sitesService);
-    pageGridService.setConfiguration(pageGridConfiguration);
-    pageGridService.setTreeRelation(externalChannelContentTreeRelation);
-    pageGridService.setFallbackStructPropertyName(PAGE_GRID_STRUCT_PROPERTY);
-    return pageGridService;
-  }
-
-  @Bean
-  public ContentAugmentedProductPageGridServiceImpl productContentBackedPageGridService(
-          Cache cache,
-          SitesService sitesService,
-          PageGridConfiguration pageGridConfiguration,
-          ExternalChannelContentTreeRelation externalChannelContentTreeRelation) {
-    ContentAugmentedProductPageGridServiceImpl pageGridService = new ContentAugmentedProductPageGridServiceImpl();
-    pageGridService.setStructPropertyName(PDP_PAGEGRID_PROPERTY_NAME);
-    pageGridService.setCache(cache);
-    pageGridService.setSitesService(sitesService);
-    pageGridService.setConfiguration(pageGridConfiguration);
-    pageGridService.setTreeRelation(externalChannelContentTreeRelation);
-    pageGridService.setFallbackStructPropertyName(PAGE_GRID_STRUCT_PROPERTY);
-    return pageGridService;
   }
 
   @Bean

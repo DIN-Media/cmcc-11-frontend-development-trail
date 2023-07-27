@@ -7,10 +7,10 @@
     "closest-package": "1.0.0",
     "deepmerge": "^4.3.1",
     "node-sass": "^8.0.0",
-    "semver": "^7.5.0"
+    "semver": "^7.5.4"
   },
   "devDependencies": {
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,json}\""

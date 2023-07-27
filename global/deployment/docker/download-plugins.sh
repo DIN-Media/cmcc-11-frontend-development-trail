@@ -96,7 +96,7 @@ function download_plugins() {
     file=$(cat ${descriptor} | jq -r --arg app "${app}" '.plugins[$app].file')
     if [ ${file} != null ]; then
       mkdir -p plugins/${app}
-      mv plugin-descriptors/${file} plugins/${app}/
+      cp plugin-descriptors/${file} plugins/${app}/
     fi
 
     url=$(cat ${descriptor} | jq -r --arg app "${app}" '.plugins[$app].url')

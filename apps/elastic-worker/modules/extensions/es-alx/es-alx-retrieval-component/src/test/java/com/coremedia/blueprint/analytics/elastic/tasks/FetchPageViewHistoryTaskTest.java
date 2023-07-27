@@ -13,19 +13,16 @@ import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cap.test.xmlrepo.XmlRepoConfiguration;
 import com.coremedia.cap.test.xmlrepo.XmlUapiConfig;
-import com.coremedia.elastic.core.api.tenant.TenantService;
 import com.coremedia.cms.delivery.configuration.DeliveryConfigurationProperties;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.invocation.InvocationOnMock;
+import com.coremedia.elastic.core.api.tenant.TenantService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.stubbing.Answer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import javax.inject.Inject;
 import java.text.DateFormat;
@@ -34,15 +31,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import static com.coremedia.blueprint.base.analytics.elastic.ReportModel.REPORT_DATE_FORMAT;
 import static java.util.Arrays.asList;
-import static org.mockito.ArgumentMatchers.anyCollection;
-import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyCollection;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
@@ -51,9 +49,11 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {FetchPageViewHistoryTaskTest.LocalConfig.class, XmlRepoConfiguration.class})
-public class FetchPageViewHistoryTaskTest {
+@SpringJUnitConfig({
+        FetchPageViewHistoryTaskTest.LocalConfig.class,
+        XmlRepoConfiguration.class
+})
+class FetchPageViewHistoryTaskTest {
 
   @Configuration(proxyBeanMethods = false)
   @EnableConfigurationProperties({
@@ -101,7 +101,7 @@ public class FetchPageViewHistoryTaskTest {
   private Content articleContent;
   private Map<String, Object> analyticsSettings;
 
-  @Before
+  @BeforeEach
   public void setup() {
     taskModelForRoot = mock(ReportModel.class);
     pageViewReportModel = mock(ReportModel.class);
@@ -130,32 +130,26 @@ public class FetchPageViewHistoryTaskTest {
     when(taskModelForRoot.getSettings()).thenReturn(analyticsSettings);
 
     when(analyticsServiceProvider.computeEffectiveRetrievalSettings(eq(null), any(Content.class)))
-            .then(new Answer<Object>() {
-              @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
-                final Object[] args = invocation.getArguments();
-                return RetrievalUtil.computeEffectiveRetrievalSettings(SERVICE_KEY, DEFAULT_SETTINGS, (Content)args[0], (Content) args[1], settingsService, sitesService);
-              }
+            .then(invocation -> {
+              final Object[] args = invocation.getArguments();
+              return RetrievalUtil.computeEffectiveRetrievalSettings(SERVICE_KEY, DEFAULT_SETTINGS, (Content) args[0], (Content) args[1], settingsService, sitesService);
             });
 
     when(modelService.getReportModel(articleContent, SERVICE_KEY)).thenReturn(pageViewReportModel);
     when(tenantService.getCurrent()).thenReturn(TENANT);
 
-    doAnswer(new Answer<Void>() {
-      @Override
-      public Void answer(InvocationOnMock invocation) {
-        //noinspection unchecked
-        Collection<ReportModel> models = (Collection<ReportModel>) invocation.getArguments()[0];
-        for(ReportModel model : models) {
-          model.save();
-        }
-        return null;
+    doAnswer((Answer<Void>) invocation -> {
+      //noinspection unchecked
+      Collection<ReportModel> models = (Collection<ReportModel>) invocation.getArguments()[0];
+      for (ReportModel model : models) {
+        model.save();
       }
+      return null;
     }).when(modelService).saveAll(anyCollection());
 
     when(analyticsServiceProvider.getServiceKey()).thenReturn(SERVICE_KEY);
     when(unconfigureAnalyticsServiceProvider.getServiceKey()).thenReturn(UNKNOWN_SERVICE);
-    when(resultItemValidationService.filterValidResultItems(anyCollection(), anyString())).thenReturn(asList(ARTICLE_CONTENT_ID));
+    when(resultItemValidationService.filterValidResultItems(anyCollection(), anyString())).thenReturn(List.of(ARTICLE_CONTENT_ID));
   }
 
   public Content getContent(String contentId) {
@@ -163,7 +157,7 @@ public class FetchPageViewHistoryTaskTest {
   }
 
   @Test
-  public void run() throws Exception {
+  void run() throws Exception {
     Map<String, Map<String, Long>> data = new HashMap<>();
     Map<String, Long> pageViews = new HashMap<>();
     String today = dateFormat.format(new Date());
@@ -185,7 +179,7 @@ public class FetchPageViewHistoryTaskTest {
   }
 
   @Test
-  public void runButNoData() throws Exception {
+  void runButNoData() throws Exception {
 
     when(taskReportModelService.getReportModel(channelContent, SERVICE_KEY)).thenReturn(taskModelForRoot);
     when(analyticsServiceProvider.fetchPageViews(any(Content.class), anyMap())).thenReturn(null);
@@ -198,7 +192,7 @@ public class FetchPageViewHistoryTaskTest {
   }
 
   @Test
-  public void runWithContentException() throws Exception {
+  void runWithContentException() throws Exception {
     Map<String, Map<String, Long>> data = new HashMap<>();
     Map<String, Long> pageViews = new HashMap<>();
     String today = dateFormat.format(new Date());
@@ -214,7 +208,7 @@ public class FetchPageViewHistoryTaskTest {
   }
 
   @Test
-  public void runWithIdException() throws Exception {
+  void runWithIdException() throws Exception {
     Map<String, Map<String, Long>> data = new HashMap<>();
     Map<String, Long> pageViews = new HashMap<>();
     String today = dateFormat.format(new Date());
@@ -230,7 +224,7 @@ public class FetchPageViewHistoryTaskTest {
   }
 
   @Test
-  public void runWithNonLinkable() throws Exception {
+  void runWithNonLinkable() throws Exception {
     Map<String, Map<String, Long>> data = new HashMap<>();
     Map<String, Long> pageViews = new HashMap<>();
     String today = dateFormat.format(new Date());
@@ -248,7 +242,7 @@ public class FetchPageViewHistoryTaskTest {
   }
 
   @Test
-  public void runWithNoRootForTenant() throws Exception {
+  void runWithNoRootForTenant() throws Exception {
     when(tenantService.getCurrent()).thenReturn("unknownTenant");
 
     task.run();
@@ -258,7 +252,7 @@ public class FetchPageViewHistoryTaskTest {
   }
 
   @Test
-  public void runWithConfigChanges() throws Exception {
+  void runWithConfigChanges() throws Exception {
     long start = System.currentTimeMillis();
     when(taskModelForRoot.getLastSaved()).thenReturn(start - 1);
     when(taskReportModelService.getReportModel(channelContent, SERVICE_KEY)).thenReturn(taskModelForRoot);
@@ -283,7 +277,7 @@ public class FetchPageViewHistoryTaskTest {
   }
 
   @Test
-  public void runWithAdditionalConfig() throws Exception {
+  void runWithAdditionalConfig() throws Exception {
     long start = System.currentTimeMillis();
     when(taskModelForRoot.getLastSaved()).thenReturn(start - 1);
 
@@ -310,7 +304,7 @@ public class FetchPageViewHistoryTaskTest {
   }
 
   @Test
-  public void runWithNoUpdate() throws Exception {
+  void runWithNoUpdate() throws Exception {
     // make sure that the model's effective settings are equal to the channels effective service settings
     analyticsSettings.put("password", "password");
 
@@ -324,7 +318,7 @@ public class FetchPageViewHistoryTaskTest {
   }
 
   @Test
-  public void runWithoutSettings() throws Exception {
+  void runWithoutSettings() throws Exception {
     Map<String, Map<String, Long>> data = new HashMap<>();
     Map<String, Long> pageViews = new HashMap<>();
     String today = dateFormat.format(new Date());

@@ -4,7 +4,7 @@ import BlueprintDocumentTypes_properties from "./BlueprintDocumentTypes_properti
 
 /**
  *
- * Display labels and tool tips for Document Types
+ * Display labels and tool tips for Content Types
  *
  * @see BlueprintDocumentTypes_properties#INSTANCE
  */
