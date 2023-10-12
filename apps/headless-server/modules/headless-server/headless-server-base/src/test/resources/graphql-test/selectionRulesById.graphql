@@ -1,0 +1,24 @@
+query getSelectionRulesById($id: String!) {
+  content {
+    content(id: $id) {
+      ... on CMSelectionRulesImpl {
+        id
+        uuid
+        name
+        type
+        rules {
+          rule
+          target {
+            id
+          }
+          referencedContent {
+            id
+          }
+        }
+        defaultContent {
+          id
+        }
+      }
+    }
+  }
+}

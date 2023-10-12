@@ -5,7 +5,7 @@
   "license": "CoreMedia Open Source License",
   "private": true,
   "dependencies": {
-    "@coremedia/studio-client.cap-base-models": "2307.1.0",
+    "@coremedia/studio-client.cap-base-models": "2307.2.0",
     "@jangaroo/runtime": "^1.5.0"
   },
   "devDependencies": {

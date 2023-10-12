@@ -69,8 +69,8 @@
     <skip-hybris-tests>true</skip-hybris-tests>
 
     <!-- Version for Spring Boot Apps embedded Tomcat. Tomcat 9 is supported -->
-    <tomcat.version>9.0.75</tomcat.version>
-    <cm.solr.core.version>2307.1</cm.solr.core.version>
+    <tomcat.version>9.0.80</tomcat.version>
+    <cm.solr.core.version>2307.2</cm.solr.core.version>
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
 
     <showDeprecation>true</showDeprecation>

@@ -38,6 +38,7 @@ import com.coremedia.image.ImageDimensionsExtractor;
 import com.coremedia.mimetype.MimeTypeService;
 import com.coremedia.objectserver.web.UserVariantHelper;
 import com.coremedia.objectserver.web.taglib.MetadataTagSupport;
+import com.coremedia.transform.TransformedBlob;
 import com.coremedia.xml.Markup;
 import com.coremedia.xml.MarkupUtil;
 import edu.umd.cs.findbugs.annotations.NonNull;
@@ -69,6 +70,7 @@ public class BlueprintFreemarkerFacade extends MetadataTagSupport {
 
   private static final Logger LOG = LoggerFactory.getLogger(BlueprintFreemarkerFacade.class);
   private static final String RESPONSIVE_SETTINGS_KEY = "responsiveImageSettings";
+  private static final String LINK_MIME_TYPE_MAPPING_KEY = "linkMimeTypeMapping";
   private static final String FRAGMENT_PREVIEW_KEY = "fragmentPreview";
 
   public static final String DEFAULT_DIRECTION = "ltr";
@@ -197,15 +199,15 @@ public class BlueprintFreemarkerFacade extends MetadataTagSupport {
    * @param page         the root page
    * @param aspectRatios list of aspect ratios to use for this image
    * @return Json Object with a list of aspect ratios with image links for different sizes
-   * @throws IOException
    */
-  public List<TransformationLinks> responsiveImageLinksData(CMPicture picture, Page page, List<String> aspectRatios) throws IOException {
+  public List<TransformationLinks> responsiveImageLinksData(CMPicture picture, Page page, List<String> aspectRatios) {
     if (picture == null) {
       throw new IllegalArgumentException("Error creating responsive image links: picture must not be null");
     }
 
-    // get responsive image settings
     Map<String, Map> responsiveImageSettings = getResponsiveImageSettings(page);
+    Map<String, String> linkMimeTypeMappingSettings = getLinkMimeTypeMapping(page);
+
     List<String> aspectRatiosToUse = aspectRatios;
     // use list of given aspect ratios if set, otherwise use all
     if (isEmpty(aspectRatiosToUse)) {
@@ -220,7 +222,9 @@ public class BlueprintFreemarkerFacade extends MetadataTagSupport {
       Map<String, Map> aspectRatioSizes = responsiveImageSettings.get(aspectRatioName);
       if (aspectRatioSizes != null) {
         Blob blob = picture.getTransformedData(aspectRatioName);
-        Map<Integer, String> links = ImageFunctions.getImageLinksForAspectRatios(blob, aspectRatioName, aspectRatioSizes, false, currentRequest, currentResponse);
+        String targetMimeType = getMappedMimeType(blob, linkMimeTypeMappingSettings);
+        Map<Integer, String> links = ImageFunctions.getImageLinksForAspectRatios(blob, aspectRatioName, aspectRatioSizes,
+                false, targetMimeType, currentRequest, currentResponse);
 
         if (!isEmpty(links)) {
           // only the "TransformImageService" holds the actual crop ratio in proper values
@@ -260,6 +264,7 @@ public class BlueprintFreemarkerFacade extends MetadataTagSupport {
       LOG.warn("Transformation not applicable: {} -> {}, width {}, height {}", picture, aspectRatio, width, height);
       return "";
     }
+
     String link = ImageFunctions.getImageLinkForAspectRatio(blob,
             aspectRatio,
             Map.of(ImageFunctions.WIDTH, width, ImageFunctions.HEIGHT, height),
@@ -288,9 +293,11 @@ public class BlueprintFreemarkerFacade extends MetadataTagSupport {
     if (biggestSize != null) {
       Blob transformedData = picture.getTransformedData(aspectRatio);
       if (transformedData != null) {
+        String targetMimeType = getMappedMimeType(transformedData, getLinkMimeTypeMapping(page));
         return ImageFunctions.getImageLinkForAspectRatio(transformedData,
                 aspectRatio, biggestSize,
                 false,
+                targetMimeType,
                 FreemarkerEnvironment.getCurrentRequest(),
                 FreemarkerEnvironment.getCurrentResponse());
       }
@@ -299,16 +306,37 @@ public class BlueprintFreemarkerFacade extends MetadataTagSupport {
   }
 
   private Map<String, Map> getResponsiveImageSettings(Page page) {
-    if (page == null) {
-      throw new IllegalArgumentException("Error creating responsive image links: page must not be null");
-    }
-    CMTheme theme = findThemeFor(page.getContext());
+    CMTheme theme = getTheme(page);
     // get responsive image settings
     Map<String, Map> responsiveImageSettings = settingsService.settingAsMap(RESPONSIVE_SETTINGS_KEY, String.class, Map.class, page, theme);
     if (isEmpty(responsiveImageSettings)) {
       throw new IllegalArgumentException("Error creating responsive image links: No responsive image settings found");
     }
     return responsiveImageSettings;
+  }
+
+  private Map<String, String> getLinkMimeTypeMapping(Page page) {
+    CMTheme theme = getTheme(page);
+    return settingsService.settingAsMap(LINK_MIME_TYPE_MAPPING_KEY, String.class, String.class, page, theme);
+  }
+
+  // Return the mapped MimeType if it is configured in linkMimeTypeMapping setting, else null.
+  private String getMappedMimeType(Blob blob, Map<String, String> linkMimeTypeMapping) {
+    String originalMimeType = ((blob instanceof TransformedBlob)
+            ? ((TransformedBlob) blob).getOriginal().getContentType()
+            : blob.getContentType()).toString();
+    String targetMimeType = linkMimeTypeMapping.get(originalMimeType);
+    if (LOG.isDebugEnabled() && targetMimeType != null) {
+      LOG.debug("Using MimeType '{}' instead of '{}' (mapping configured in setting '{}')", targetMimeType, originalMimeType, LINK_MIME_TYPE_MAPPING_KEY);
+    }
+    return targetMimeType;
+  }
+
+  private CMTheme getTheme(Page page) {
+    if (page == null) {
+      throw new IllegalArgumentException("Error creating responsive image links: page must not be null");
+    }
+   return findThemeFor(page.getContext());
   }
 
   /**

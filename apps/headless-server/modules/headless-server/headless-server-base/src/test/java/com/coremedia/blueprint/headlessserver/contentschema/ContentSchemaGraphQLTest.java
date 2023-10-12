@@ -1,6 +1,7 @@
 package com.coremedia.blueprint.headlessserver.contentschema;
 
 import com.coremedia.blueprint.base.caas.web.BlueprintBaseMediaConfig;
+import com.coremedia.blueprint.caas.p13n.P13nConfig;
 import com.coremedia.blueprint.coderesources.ThemeServiceConfiguration;
 import com.coremedia.blueprint.headlessserver.CaasConfig;
 import com.coremedia.caas.media.TransformationServiceConfiguration;
@@ -53,6 +54,8 @@ import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConst
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.ROOT_CHANNEL_REPO_PATH;
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.ROOT_CHANNEL_SEGMENT;
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.ROOT_CHANNEL_UUID;
+import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.SELECTION_RULES_ID;
+import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.SELECTION_RULES_UUID;
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.SETTINGS_KEY;
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.SETTINGS_VALUE;
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.SUB_SETTINGS_KEY;
@@ -63,6 +66,7 @@ import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConst
 @SpringBootTest(classes = {
         CaasConfig.class,
         BlueprintBaseMediaConfig.class,
+        P13nConfig.class,
         GraphQLController.class,
         TransformationServiceConfiguration.class,
         ThemeServiceConfiguration.class,
@@ -336,6 +340,25 @@ class ContentSchemaGraphQLTest {
             .execute()
             .path("content.page.settings." + SETTINGS_KEY).entity(Integer.class).isEqualTo(SETTINGS_VALUE)
             .path("content.page.settings." + SUB_SETTINGS_KEY).entity(String.class).isEqualTo(SUB_SETTINGS_VALUE);
+  }
+
+  @ParameterizedTest
+  @CsvSource(delimiter = ';', value = {
+          "111128",
+          "257e360c-865c-47cd-a3d1-3279640142f5",
+  })
+  void testGetCMSelectionRulesById(String idOrUuid) {
+    webGraphQlTester.documentName("selectionRulesById")
+            .variable("id", idOrUuid)
+            .execute()
+            .path("content.content.id").entity(Integer.class).isEqualTo(SELECTION_RULES_ID)
+            .path("content.content.uuid").entity(String.class).isEqualTo(SELECTION_RULES_UUID)
+            .path("content.content.type").entity(String.class).isEqualTo("CMSelectionRules")
+            .path("content.content.name").entity(String.class).isEqualTo("Personalized Teaser")
+            .path("content.content.rules[*].rule").entityList(String.class).hasSize(2)
+            .path("content.content.rules[*].target.id").entityList(Integer.class).hasSize(2)
+            .path("content.content.rules[*].target.id").entityList(Integer.class).contains(111116)
+            .path("content.content.defaultContent").entityList(Object.class);
   }
 
   @Configuration(proxyBeanMethods = false)

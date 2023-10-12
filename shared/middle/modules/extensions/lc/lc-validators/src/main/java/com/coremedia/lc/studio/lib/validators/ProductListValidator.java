@@ -6,10 +6,15 @@ import com.coremedia.cap.content.Content;
 import com.coremedia.cap.content.ContentType;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cap.struct.Struct;
+import com.coremedia.livecontext.ecommerce.catalog.CatalogAlias;
 import com.coremedia.livecontext.ecommerce.catalog.CatalogService;
 import com.coremedia.livecontext.ecommerce.catalog.Category;
 import com.coremedia.livecontext.ecommerce.common.BaseCommerceBeanType;
 import com.coremedia.livecontext.ecommerce.common.CommerceConnection;
+import com.coremedia.livecontext.ecommerce.common.CommerceException;
+import com.coremedia.livecontext.ecommerce.common.InvalidCatalogException;
+import com.coremedia.livecontext.ecommerce.common.InvalidContextException;
+import com.coremedia.livecontext.ecommerce.common.InvalidIdException;
 import com.coremedia.livecontext.ecommerce.common.StoreContext;
 import com.coremedia.livecontext.ecommerce.search.SearchQuery;
 import com.coremedia.livecontext.ecommerce.search.SearchResult;
@@ -17,25 +22,36 @@ import com.coremedia.rest.cap.validation.AbstractContentTypeValidator;
 import com.coremedia.rest.validation.Issues;
 import com.coremedia.rest.validation.Severity;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import static com.coremedia.rest.validation.Severity.INFO;
+import static com.coremedia.rest.validation.Severity.WARN;
+import static java.lang.invoke.MethodHandles.lookup;
+
 /**
  * Checks the validity of the stored search facet of product lists.
  */
 public class ProductListValidator extends AbstractContentTypeValidator {
+
+  private static final Logger LOG = LoggerFactory.getLogger(lookup().lookupClass());
 
   private final CommerceConnectionSupplier commerceConnectionSupplier;
   private final SitesService sitesService;
   private final String structPropertyName;
   private final String externalIdPropertyName;
 
-  private static final String ISSUE_LEGACY_VALUE = "legacy_value";
-  private static final String ISSUE_INVALID_MULTI_FACET = "invalid_multi_facet";
-  private static final String ISSUE_INVALID_MULTI_FACET_QUERY = "invalid_multi_facet_query";
+  private static final String CODE_ISSUE_LEGACY_VALUE = "legacy_value";
+  private static final String CODE_ISSUE_INVALID_MULTI_FACET = "invalid_multi_facet";
+  private static final String CODE_ISSUE_INVALID_MULTI_FACET_QUERY = "invalid_multi_facet_query";
+  private static final String CODE_ISSUE_ID_INVALID = "InvalidId";
+  private static final String CODE_ISSUE_CONTEXT_INVALID = "InvalidStoreContext";
+  private static final String CODE_ISSUE_CATALOG_NOT_FOUND = "CatalogNotFoundError";
 
   private static final String PROPERTY_PRODUCT_LIST = "productList";
   private static final String PROPERTY_FILTER_FACETS = "filterFacets";
@@ -77,9 +93,22 @@ public class ProductListValidator extends AbstractContentTypeValidator {
   private void validate(Issues issues, String categoryId, Struct localSettings, CommerceConnection connection) {
     CatalogService catalogService = connection.getCatalogService();
     StoreContext storeContext = connection.getInitialStoreContext();
-    CommerceIdParserHelper.parseCommerceId(categoryId)
-            .map(id -> catalogService.findCategoryById(id, storeContext))
-            .ifPresent(category -> validate(issues, localSettings, catalogService, storeContext, category));
+    try {
+      CommerceIdParserHelper.parseCommerceId(categoryId)
+              .map(id -> catalogService.findCategoryById(id, storeContext))
+              .ifPresent(category -> validate(issues, localSettings, catalogService, storeContext, category));
+    } catch (InvalidContextException e) {
+      issues.addIssue(getCategories(), INFO, null, CODE_ISSUE_CONTEXT_INVALID, categoryId);
+    } catch (InvalidIdException e) {
+      String storeName = storeContext.getStoreName();
+      issues.addIssue(getCategories(), WARN, null, CODE_ISSUE_ID_INVALID, categoryId, storeName);
+    } catch (InvalidCatalogException e) {
+      CatalogAlias catalogAlias = storeContext.getCatalogAlias();
+      issues.addIssue(getCategories(), WARN, null, CODE_ISSUE_CATALOG_NOT_FOUND, catalogAlias.toString(), categoryId);
+    } catch (CommerceException e) {
+      // do not add an issue for general commerce connectivity errors, just log
+      LOG.debug("Catalog could not be accessed: {}", categoryId, e);
+    }
   }
 
   private void validate(Issues issues, Struct localSettings, CatalogService catalogService, StoreContext storeContext, Category category) {
@@ -111,7 +140,7 @@ public class ProductListValidator extends AbstractContentTypeValidator {
       String facetName = (String) properties.get(PROPERTY_SELECTED_LEGACY_FACET_NAME);
       String facetValue = (String) properties.get(PROPERTY_SELECTED_LEGACY_FACET_VALUE);
       if (!StringUtils.isEmpty(facetValue)) {
-        issues.addIssue(getCategories(), Severity.ERROR, structPropertyName + "." + PROPERTY_PRODUCT_LIST + "." + PROPERTY_SELECTED_LEGACY_FACET_VALUE, getContentType() + '_' + ISSUE_LEGACY_VALUE, facetValue, facetName);
+        issues.addIssue(getCategories(), Severity.ERROR, structPropertyName + "." + PROPERTY_PRODUCT_LIST + "." + PROPERTY_SELECTED_LEGACY_FACET_VALUE, getContentType() + '_' + CODE_ISSUE_LEGACY_VALUE, facetValue, facetName);
       }
     }
   }
@@ -138,7 +167,7 @@ public class ProductListValidator extends AbstractContentTypeValidator {
       //validate if the struct itself has a valid facet id
       Optional<SearchResult.Facet> facetValue = resultFacets.stream().filter(f -> f.getKey().replaceAll("\\.", "_").equals(facetId)).findFirst();
       if (facetValue.isEmpty()) {
-        issues.addIssue(getCategories(), Severity.ERROR, structPropertyName + "." + PROPERTY_PRODUCT_LIST, getContentType() + '_' + ISSUE_INVALID_MULTI_FACET, facetId);
+        issues.addIssue(getCategories(), Severity.ERROR, structPropertyName + "." + PROPERTY_PRODUCT_LIST, getContentType() + '_' + CODE_ISSUE_INVALID_MULTI_FACET, facetId);
         continue;
       }
 
@@ -156,7 +185,7 @@ public class ProductListValidator extends AbstractContentTypeValidator {
                 .filter(f -> f.getQuery().equals(query))
                 .findFirst();
         if (result.isEmpty()) {
-          issues.addIssue(getCategories(), Severity.ERROR, structPropertyName + "." + PROPERTY_PRODUCT_LIST + "." + PROPERTY_FILTER_FACETS + "." + facetId, getContentType() + '_' + ISSUE_INVALID_MULTI_FACET_QUERY, query, facet.getLabel());
+          issues.addIssue(getCategories(), Severity.ERROR, structPropertyName + "." + PROPERTY_PRODUCT_LIST + "." + PROPERTY_FILTER_FACETS + "." + facetId, getContentType() + '_' + CODE_ISSUE_INVALID_MULTI_FACET_QUERY, query, facet.getLabel());
         }
       }
     }

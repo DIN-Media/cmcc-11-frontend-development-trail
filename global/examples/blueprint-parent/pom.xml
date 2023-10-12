@@ -16,9 +16,9 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.release>11</maven.compiler.release>
     <application-plugin.version>3.0.1</application-plugin.version>
-    <cm.common.core.version>2307.1</cm.common.core.version>
+    <cm.common.core.version>2307.2</cm.common.core.version>
     <cm.common.bp.version>1-SNAPSHOT</cm.common.bp.version>
-    <cm.middle.core.version>2307.1</cm.middle.core.version>
+    <cm.middle.core.version>2307.2</cm.middle.core.version>
     <cm.middle.bp.version>1-SNAPSHOT</cm.middle.bp.version>
   </properties>
 

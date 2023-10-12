@@ -5,8 +5,6 @@ import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpr
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
 import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
 import EventUtil from "@coremedia/studio-client.client-core/util/EventUtil";
-import StudioConfigurationUtil
-  from "@coremedia/studio-client.ext.cap-base-components/util/config/StudioConfigurationUtil";
 import BeanRecord from "@coremedia/studio-client.ext.ui-components/store/BeanRecord";
 import EditorMainView from "@coremedia/studio-client.main.editor-components/sdk/desktop/EditorMainView";
 import WorkArea from "@coremedia/studio-client.main.editor-components/sdk/desktop/WorkArea";
@@ -111,19 +109,6 @@ class TaxonomyUtil {
         });
       });
     }
-  }
-
-  /**
-   * Loads the settings structs and extracts the list of
-   * administration group names.
-   * @param callback The callback the group names are passed to.
-   */
-  static loadSettings(callback: AnyFunction): void {
-    ValueExpressionFactory.createFromFunction((): Array<any> =>
-      StudioConfigurationUtil.getConfiguration(TaxonomyUtil.#TAXONOMY_SETTINGS, "administrationGroups", editorContext._.getSitesService().getPreferredSite(), true),
-    ).loadValue((groups: Array<any>): void => {
-      callback.call(null, groups || []);
-    });
   }
 
   /**

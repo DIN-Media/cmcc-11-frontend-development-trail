@@ -20,8 +20,8 @@ import SetPropertyLabelPlugin from "@coremedia/studio-client.main.editor-compone
 import PropertyEditorUtil from "@coremedia/studio-client.main.editor-components/sdk/util/PropertyEditorUtil";
 import ShowIssuesPlugin from "@coremedia/studio-client.main.editor-components/sdk/validation/ShowIssuesPlugin";
 import ActionRef from "@jangaroo/ext-ts/ActionRef";
+import AnchorLayout from "@jangaroo/ext-ts/layout/container/Anchor";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
-import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
 import Item from "@jangaroo/ext-ts/menu/Item";
 import Menu from "@jangaroo/ext-ts/menu/Menu";
 import ext_menu_Separator from "@jangaroo/ext-ts/menu/Separator";
@@ -62,7 +62,10 @@ class TaxonomyLinkListPropertyField extends TaxonomyLinkListPropertyFieldBase {
     super(ConfigUtils.apply(Config(TaxonomyLinkListPropertyField, {
       labelAlign: "top",
       labelSeparator: "",
-      layout: Config(VBoxLayout, { align: "stretch" }),
+      layout: Config(AnchorLayout, {
+        anchor: "100%",
+        manageOverflow: false,
+      }),
       ...ConfigUtils.append({
         actionList: [
           new LinkListCutAction({

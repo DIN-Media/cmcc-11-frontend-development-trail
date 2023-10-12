@@ -177,12 +177,16 @@ public class FragmentParameters {
   public String getDecodedValue(@NonNull String key) {
     String value = getParameter(key);
     try {
-      //The parameter is 2x encoded, otherwise the path param would not work properly
+      //The parameter may be 2x encoded if the connected commerce system uses lc-connector and the commerce system
+      //supports external IDs with slashes
       if (value != null) {
         value = URLDecoder.decode(value, "UTF-8");
       }
+    } catch(java.lang.IllegalArgumentException e) {
+      // the value wasn't encoded twice
+      LOG.trace("Ignoring exception while decoding fragment parameter '{}' with value '{}'.", key, value, e);
     } catch (UnsupportedEncodingException e) {
-      LOG.error("Error decoding fragment parameter '" + key + "' with value '" + value + "': " + e.getMessage(), e);
+      LOG.error("Error decoding fragment parameter '{}' with value '{}'.", key, value, e);
     }
     return value;
   }

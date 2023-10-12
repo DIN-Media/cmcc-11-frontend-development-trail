@@ -11,6 +11,7 @@ import { CKEditorPluginConfig, CreateCKEditorFunction } from "@coremedia/studio-
 import '../theme/custom.css';
 import { Autosave } from "@ckeditor/ckeditor5-autosave";
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
+import { ckeditor5License } from "./ckeditor5License";
 
 /**
  * Localization the editor configuration
@@ -34,9 +35,9 @@ export const createSlimCKEditor: CreateCKEditorFunction = (domElement:(string | 
     'redo',
     ];
   const language = LocaleUtil.getLocale();
+  // @ts-expect-error - CoreMedia Configuration Types (Augmentation) needs to be fixed.
   return ClassicEditor.create(domElement, {
-    // Add License Key retrieved via CKEditor for Premium Features Support.
-    licenseKey: '',
+    ...ckeditor5License,
     placeholder: localize('Type your text here...', language),
     plugins: [
       Autosave,

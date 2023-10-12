@@ -1,4 +1,4 @@
-package com.coremedia.ecommerce.studio.rest;
+package com.coremedia.lc.studio.lib.augmentation;
 
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.MappedCatalogsProvider;
 import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGridService;
@@ -8,6 +8,7 @@ import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.multisite.Site;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cap.struct.Struct;
+import com.coremedia.ecommerce.studio.rest.CommerceAugmentationException;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
 import com.coremedia.livecontext.ecommerce.catalog.Category;
 import com.coremedia.livecontext.ecommerce.common.CommerceBean;

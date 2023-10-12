@@ -89,7 +89,7 @@ public class GuidCookieHandler {
    * @param response    httpServletReqponse
    */
   @GetMapping(URI_PATTERN)
-  public void handleRequest(@PathVariable(SEGMENT_ID) CMNavigation channel,
+  public void handleRequest(@Nullable @PathVariable(SEGMENT_ID) CMNavigation channel,
                                     @NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response) {
 

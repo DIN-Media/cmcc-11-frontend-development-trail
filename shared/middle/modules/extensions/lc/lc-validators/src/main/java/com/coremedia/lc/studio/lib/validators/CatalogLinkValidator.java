@@ -45,8 +45,6 @@ public class CatalogLinkValidator extends AbstractContentTypeValidator {
 
   private static final String CODE_ISSUE_ID_EMPTY = "EmptyExternalId";
   private static final String CODE_ISSUE_ID_INVALID = "InvalidId";
-  private static final String CODE_ISSUE_ID_VALID_ONLY_IN_A_WORKSPACE = "ValidInAWorkspace";
-  private static final String CODE_ISSUE_CATALOG_ERROR = "catalogError";
   private static final String CODE_ISSUE_CONTEXT_INVALID = "InvalidStoreContext";
   private static final String CODE_ISSUE_CONTEXT_NOT_FOUND = "StoreContextNotFound";
   private static final String CODE_ISSUE_CATALOG_NOT_FOUND = "CatalogNotFoundError";
@@ -98,22 +96,12 @@ public class CatalogLinkValidator extends AbstractContentTypeValidator {
     addIssue(issues, WARN, CODE_ISSUE_ID_INVALID, arguments);
   }
 
-  protected void validOnlyInWorkspace(Issues issues, Object... arguments) {
-    addIssue(issues, WARN, CODE_ISSUE_ID_VALID_ONLY_IN_A_WORKSPACE, arguments);
-  }
-
   protected void catalogNotFound(Issues issues, Object... arguments) {
     addIssue(issues, WARN, CODE_ISSUE_CATALOG_NOT_FOUND, arguments);
   }
 
-  protected void catalogNotAvailable(Issues issues, Object... arguments) {
-    addIssue(issues, INFO, CODE_ISSUE_CATALOG_ERROR, arguments);
-  }
-
   @Override
   public void validate(Content content, Issues issues) {
-
-    // Todo lc-ibm: check if workspace removal has any impact
 
     if (content == null || !content.isInProduction()) {
       return;
@@ -145,41 +133,21 @@ public class CatalogLinkValidator extends AbstractContentTypeValidator {
     }
 
     StoreContext storeContext = commerceConnection.getInitialStoreContext();
-
     Optional<CommerceId> commerceIdOptional = CommerceIdParserHelper.parseCommerceId(commerceBeanId);
-    if (!commerceIdOptional.isPresent()) {
+    if (commerceIdOptional.isEmpty()) {
       invalidExternalId(issues, commerceBeanId, storeContext.getStoreName());
       return;
     }
 
-    CommerceId commerceId = commerceIdOptional.get();
-
     try {
       CommerceBeanFactory commerceBeanFactory = commerceConnection.getCommerceBeanFactory();
-
-      // Clear workspace ID before validating.
-      StoreContext storeContextWithoutWorkspaceId = commerceConnection
-              .getStoreContextProvider()
-              .buildContext(storeContext)
-              .build();
-
-      boolean commerceBeanWithoutWorkspaceExists = hasCommerceBean(commerceBeanFactory, commerceId,
-              storeContextWithoutWorkspaceId);
-      if (commerceBeanWithoutWorkspaceExists) {
-        // catalog bean is found in the main catalog
+      if (hasCommerceBean(commerceBeanFactory, commerceIdOptional.get(), storeContext)) {
+        // commerce bean is found and can be loaded
         return;
       }
-
-      Optional<String> externalIdOptional = commerceId.getExternalId();
-      if (!externalIdOptional.isPresent()) {
-        invalidExternalId(issues, commerceBeanId, storeContext.getStoreName());
-        return;
-      }
-
-      String externalId = externalIdOptional.get();
-      // commerce bean not found even in workspaces
       LOG.debug("id: {} not found in the store {}", commerceBeanId, storeContext.getStoreName());
-      invalidExternalId(issues, externalId, storeContext.getStoreName());
+      invalidExternalId(issues, commerceBeanId, storeContext.getStoreName());
+
     } catch (InvalidContextException e) {
       LOG.debug("StoreContext not found for content: {}", content.getPath(), e);
       invalidStoreContext(issues, commerceBeanId);
@@ -192,8 +160,8 @@ public class CatalogLinkValidator extends AbstractContentTypeValidator {
       CatalogAlias catalogAlias = storeContext.getCatalogAlias();
       catalogNotFound(issues, catalogAlias.toString(), commerceBeanId);
     } catch (CommerceException e) {
+      // do not add an issue for general commerce connectivity errors, just log
       LOG.debug("Catalog could not be accessed: {}", commerceBeanId, e);
-      catalogNotAvailable(issues, commerceBeanId);
     }
   }
 

@@ -8,13 +8,11 @@ import com.coremedia.lc.studio.lib.interceptor.ChangeCategoryWriteInterceptor;
 import com.coremedia.lc.studio.lib.interceptor.ChangeProductWriteInterceptor;
 import com.coremedia.lc.studio.lib.validators.LcStudioValidatorsConfiguration;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
-import com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
 
 @AutoConfiguration
 @ComponentScan
@@ -38,10 +36,10 @@ public class LcStudioLibComponentAutoConfiguration {
 
   @Bean
   ChangeProductWriteInterceptor changeProductWriteInterceptor(@Value("CMExternalProduct") ContentType contentType,
-                                                               CommerceConnectionSupplier commerceConnectionSupplier,
-                                                               AugmentationService categoryAugmentationService,
-                                                               SitesService sitesService,
-                                                               ContentRepository contentRepository) {
+                                                              CommerceConnectionSupplier commerceConnectionSupplier,
+                                                              AugmentationService categoryAugmentationService,
+                                                              SitesService sitesService,
+                                                              ContentRepository contentRepository) {
 
     var externalProductInterceptor = new ChangeProductWriteInterceptor(contentType,
             commerceConnectionSupplier, categoryAugmentationService,

@@ -23,6 +23,7 @@ import java.util.Map;
 import static com.coremedia.blueprint.base.links.UriConstants.Segments.SEGMENTS_NAVIGATION;
 import static com.coremedia.blueprint.base.links.UriConstants.Segments.SEGMENT_ACTION;
 import static com.coremedia.blueprint.base.links.UriConstants.Segments.SEGMENT_ID;
+import static com.coremedia.objectserver.web.HandlerHelper.notFound;
 
 /**
  * Handler and Linkscheme for {@link com.coremedia.blueprint.common.contentbeans.CMAction} beans that are contained in a
@@ -44,11 +45,15 @@ public class PageActionHandler extends DefaultPageActionHandler {
    */
   @SuppressWarnings("squid:S3752") // multiple request methods allowed by intention as part of the fix for CMS-13974
   @RequestMapping(value = URI_PATTERN, method = {RequestMethod.GET, RequestMethod.POST})
-  public ModelAndView handleRequest(@PathVariable(SEGMENT_ID) ContentBean contentBean,
+  public ModelAndView handleRequest(@Nullable @PathVariable(SEGMENT_ID) ContentBean contentBean,
                                     @PathVariable(SEGMENTS_NAVIGATION) List<String> navigationPath,
                                     @PathVariable(SEGMENT_ACTION) String action,
                                     HttpServletRequest request,
                                     HttpServletResponse response) {
+    if (contentBean == null) {
+      return notFound();
+    }
+
     Navigation navigationFromLink = getNavigation(navigationPath);
 
     //find navigation context from the _folderProperties of the Action

@@ -40,7 +40,7 @@
     <studio.version>${project.version}</studio.version>
     <livecontext.version>${project.version}</livecontext.version>
 
-    <spring-boot.version>2.7.12</spring-boot.version>
+    <spring-boot.version>2.7.16</spring-boot.version>
 
     <!--
     | the following *.host properties are defined here for convenience, so that they can be overridden
@@ -74,12 +74,12 @@
     <skip-hybris-tests>true</skip-hybris-tests>
 
     <!-- Version for Spring Boot Apps embedded Tomcat. Tomcat 9 is supported -->
-    <tomcat.version>9.0.75</tomcat.version>
-    <cm.headless-server.core.version>2307.1</cm.headless-server.core.version>
+    <tomcat.version>9.0.80</tomcat.version>
+    <cm.headless-server.core.version>2307.2</cm.headless-server.core.version>
     <cm.common.bp.version>1-SNAPSHOT</cm.common.bp.version>
     <cm.middle.bp.version>1-SNAPSHOT</cm.middle.bp.version>
-    <cm.common.core.version>2307.1</cm.common.core.version>
-    <cm.middle.core.version>2307.1</cm.middle.core.version>
+    <cm.common.core.version>2307.2</cm.common.core.version>
+    <cm.middle.core.version>2307.2</cm.middle.core.version>
 
     <!-- headless-server-base -->
     <caffeine.version>2.9.3</caffeine.version>
@@ -306,6 +306,13 @@
         <groupId>com.coremedia.blueprint</groupId>
         <artifactId>common-blueprint-bom</artifactId>
         <version>${cm.common.bp.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.coremedia.blueprint</groupId>
+        <artifactId>headless-server-extensions-bom</artifactId>
+        <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

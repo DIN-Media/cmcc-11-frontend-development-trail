@@ -38,28 +38,6 @@ class TaxonomyStudioPluginBase extends StudioPlugin {
       );
     });
   }
-
-  /**
-   * Returns true if the current user can administrate the taxonomies.
-   * @return
-   */
-  static isAdministrationEnabled(callback: AnyFunction): void {
-    //initially requesting if the admin tab is enabled
-    TaxonomyUtil.loadSettings((adminGroups: Array<any>): void => {
-      if (session._.getUser().isAdministrative()) {
-        callback.call(null, true);
-      } else {
-        for (let i = 0; i < adminGroups.length; i++) {
-          const groupName = StringHelper.trim(adminGroups[i], "");
-          if (UserUtil.isInGroup(groupName)) {
-            callback.call(null, true);
-            return;
-          }
-        }
-        callback.call(null, false);
-      }
-    });
-  }
 }
 
 export default TaxonomyStudioPluginBase;

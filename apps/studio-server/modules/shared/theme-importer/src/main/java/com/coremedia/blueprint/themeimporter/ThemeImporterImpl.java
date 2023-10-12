@@ -682,31 +682,29 @@ public class ThemeImporterImpl implements ThemeImporter {
 
   private String toRichtextInternalLink(String path, String targetDocumentPath, String suffix, ThemeImporterContentHelper contentHelper) {
     try {
-      boolean isSuitablePath = !StringUtils.isEmpty(path) && !path.startsWith("/");
-      String linkPath = isSuitablePath ? PathUtil.concatPath(targetDocumentPath, path) : null;
-      Content referencedContent = linkPath!=null ? contentHelper.fetchContent(linkPath) : null;
-      if (referencedContent != null) {
-        URI linkImportId = new URI("coremedia", "", "/cap/resources/" + contentHelper.id(referencedContent), null);
-        if (!StringUtils.isEmpty(suffix)) {
-          LOGGER.info("Ignoring link suffix {} of {}, no reasonable way to deal with.", suffix, path);
-        }
-        String linkExtension = extension(linkPath);
-        if ("css".equals(linkExtension) || "js".equals(linkExtension)) {
-          return toRichtextHref(linkImportId.toString(), path);
-        } else {
-          return toRichtextImg(linkImportId);
-        }
+      boolean isRelativePath = StringUtils.hasLength(path) && !path.startsWith("/");
+      if (!isRelativePath) {
+        LOGGER.debug("URL path '{}' is no relative path. Cannot resolve to a content. Assuming that the URL is a pattern or expression, and preserving it as is.", path);
+        return null;
+      }
+      String linkPath = PathUtil.concatPath(targetDocumentPath, path);
+      Content referencedContent = contentHelper.fetchContent(linkPath);
+      if (referencedContent == null) {
+        LOGGER.debug("URL path '{}' has no corresponding content '{}'. Assuming that the URL is a pattern or expression, and preserving it as is.", path, linkPath);
+        return null;
+      }
+      URI linkImportId = new URI("coremedia", "", "/cap/resources/" + contentHelper.id(referencedContent), null);
+      if (StringUtils.hasLength(suffix)) {
+        LOGGER.debug("Ignoring link suffix {} of {}, no reasonable way to deal with.", suffix, path);
+      }
+      String linkExtension = extension(linkPath);
+      if ("css".equals(linkExtension) || "js".equals(linkExtension)) {
+        return toRichtextHref(linkImportId.toString(), path);
       } else {
-        if (linkPath == null) {
-          LOGGER.warn("Cannot handle invalid path '{}'", path);
-        } else if (linkPath.contains("+") || linkPath.contains("...")) {
-          LOGGER.debug("Cannot resolve {}, looks like a pattern or expression", linkPath);
-        } else {
-          LOGGER.warn("Cannot resolve {}", linkPath);
-        }
+        return toRichtextImg(linkImportId);
       }
     } catch (Exception e) {
-      LOGGER.error("Cannot handle {}, {}", path, targetDocumentPath, e);
+      LOGGER.warn("Cannot handle {}, {}", path, targetDocumentPath, e);
     }
     return null;
   }

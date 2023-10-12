@@ -9,6 +9,7 @@
 <StringProperty Name="defaultContentType">CMDownload</StringProperty>
 <StringProperty Name="defaultBlobPropertyName">data</StringProperty>
 <IntProperty Name="timeout">300000</IntProperty>
+<IntProperty Name="maxFileSize">67108864</IntProperty>
 <IntProperty Name="previewMaxFileSizeMB">32</IntProperty>
 <BooleanProperty Name="previewDisabled">false</BooleanProperty>
 <BooleanProperty Name="autoCheckin">true</BooleanProperty>

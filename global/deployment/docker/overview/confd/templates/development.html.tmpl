@@ -22,8 +22,7 @@
     {{ if eq (getv "/headless/client/enabled" "true") "true" }}
     <li>Headless Commerce Server <code>https://headless-server-commerce.{{ getv "/environment/fqdn" }}/graphql</code></li>
     <li><a href="https://headless-server-commerce.{{ getv "/environment/fqdn" }}/graphiql" target="_blank" data-cm-test="">Headless Commerce Server (graphiql)</a></li>
-    <li>Headless Stitching Server Preview <code>https://headless-server-stitching-preview.{{ getv "/environment/fqdn" }}/graphql</code></li>
-    <li><a href="https://headless-server-stitching-preview.{{ getv "/environment/fqdn" }}/graphiql" target="_blank" data-cm-test="">Headless Stitching Server Preview (graphiql)</a></li>
+    <li><a href="https://headless-server-stitching-preview.{{ getv "/environment/fqdn" }}/graphql" target="_blank" data-cm-test="">Headless Stitching Server Preview</a> <code>https://headless-server-stitching-preview.{{ getv "/environment/fqdn" }}/graphql</code></li>
     {{end}}
     <li><a href="https://headless-server-preview.{{ getv "/environment/fqdn" }}/swagger-ui/index.html" target="_blank" data-cm-test="">Headless Server Preview Swagger UI</a></li>
   </ul>

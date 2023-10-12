@@ -16,6 +16,7 @@ import com.coremedia.objectserver.view.substitution.SubstitutionRegistry;
 import com.coremedia.objectserver.web.HandlerHelper;
 import com.coremedia.objectserver.web.UserVariantHelper;
 import com.coremedia.objectserver.web.links.Link;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -176,10 +177,14 @@ public class PageSearchActionHandler extends PageHandlerBase {
    */
   @ResponseBody
   @GetMapping(value = URI_PATTERN, params = {PARAMETER_ROOT_NAVIGATION_ID, PARAMETER_QUERY}, produces = CONTENT_TYPE_JSON)
-  public List<Suggestion> handleSearchSuggestionAction(@PathVariable(SEGMENT_ID) CMAction action,
+  public List<Suggestion> handleSearchSuggestionAction(@Nullable @PathVariable(SEGMENT_ID) CMAction action,
                                                @PathVariable(SEGMENT_ROOT) String context,
                                                @RequestParam(value = PARAMETER_ROOT_NAVIGATION_ID) String rootNavigationId,
                                                @RequestParam(value = PARAMETER_QUERY) String term) {
+    if (action == null) {
+      throw new IllegalArgumentException("Could not resolve search action content.");
+    }
+
     Navigation navigation = getValidNavigation(action, context, ACTION_NAME);
      if (navigation != null) {
        //regular search result filtered by doctypes given in the Search Settings document
@@ -220,7 +225,8 @@ public class PageSearchActionHandler extends PageHandlerBase {
    * @return The navigation or null, if the bean and/or the segment name are invalid. This means that it is
    *  an invalid request
    */
-  protected Navigation getValidNavigation(ContentBean bean, String rootSegmentName, String actionName) {
+  @edu.umd.cs.findbugs.annotations.Nullable
+  protected Navigation getValidNavigation(@NonNull ContentBean bean, String rootSegmentName, String actionName) {
     if( !(bean instanceof CMAction) ) {
       // not an action
       return null;

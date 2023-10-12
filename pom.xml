@@ -14,7 +14,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <owasp-dependency-check-maven-plugin.version>8.1.2</owasp-dependency-check-maven-plugin.version>
+    <owasp-dependency-check-maven-plugin.version>8.4.0</owasp-dependency-check-maven-plugin.version>
     <nvdFeedsMirror>https://nvd.nist.gov/feeds</nvdFeedsMirror>
   </properties>
 

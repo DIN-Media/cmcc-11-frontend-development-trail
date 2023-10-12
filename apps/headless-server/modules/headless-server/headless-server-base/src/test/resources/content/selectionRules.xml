@@ -1,0 +1,4 @@
+<rules version="1.0" xmlns="http://www.coremedia.com/2010/selectionrules" xmlns:xlink="http://www.w3.org/1999/xlink">
+  select <content xlink:href="coremedia:///cap/content/111116"/> if socialuser.gender=female;
+  select <content xlink:href="coremedia:///cap/content/111116"/> if socialuser.gender=male and socialuser.age&gt;40;
+</rules>

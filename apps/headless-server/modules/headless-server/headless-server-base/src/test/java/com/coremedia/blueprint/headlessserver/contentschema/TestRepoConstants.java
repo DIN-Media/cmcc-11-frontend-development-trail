@@ -54,4 +54,6 @@ public final class TestRepoConstants {
 
   public static final Integer CLANDESTINE_SETTINGS_ID = 111124;
   public static final String SETTINGS_REPO_PATH = MASTER_SITE_REPO_PATH + "/Content/Settings";
+  public static final Integer SELECTION_RULES_ID = 111128;
+  public static final String SELECTION_RULES_UUID = "257e360c-865c-47cd-a3d1-3279640142f5";
 }

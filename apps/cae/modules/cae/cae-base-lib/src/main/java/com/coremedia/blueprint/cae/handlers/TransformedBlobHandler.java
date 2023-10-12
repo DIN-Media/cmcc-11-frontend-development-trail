@@ -26,6 +26,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.activation.MimeType;
+import javax.activation.MimeTypeParseException;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.HashMap;
@@ -54,6 +55,8 @@ public class TransformedBlobHandler extends HandlerBase {
   private static final String SECHASH_SEGMENT = "secHash";
   public static final String WIDTH_SEGMENT = "width";
   public static final String HEIGHT_SEGMENT = "height";
+  public static final String TARGET_MIME_TYPE = "targetMimeType";
+
 
   /**
    * URI Pattern for transformed blobs.
@@ -184,17 +187,15 @@ public class TransformedBlobHandler extends HandlerBase {
     CapBlobRef original = (CapBlobRef) bean.getOriginal();
     int contentId = IdHelper.parseContentId(original.getCapObject().getId());
 
-    int height = Integer.valueOf(linkParameters.get(HEIGHT_SEGMENT));
-    int width = Integer.valueOf(linkParameters.get(WIDTH_SEGMENT));
+    int height = Integer.parseInt(linkParameters.get(HEIGHT_SEGMENT));
+    int width = Integer.parseInt(linkParameters.get(WIDTH_SEGMENT));
+    // Use targetMimeType if available in parameters (determined via setting "linkMimeTypeMapping" in BlueprintFreemarkerFacade)
+    String targetMimeType = linkParameters.get(TARGET_MIME_TYPE);
 
     /*
      * create parameters map. This is more flexible than calling URI_TEMPLATE#expand with the parameters
      * since this way the parameter's sequence is not relevant and the URI_PATTERN can be changed easier
      */
-    // Use content type of original blob, not of the transformed blob which may be different.
-    // Requesting the transformed blob's content type forces the transformation to be performed, which is too
-    // costly for link generation.
-    MimeType contentType = original.getContentType();
     Map<String, Object> parameters = Map.of(
             SEGMENT_ID, contentId,
             TRANSFORMATION_SEGMENT, bean.getTransformName(),
@@ -202,7 +203,7 @@ public class TransformedBlobHandler extends HandlerBase {
             HEIGHT_SEGMENT, height,
             DIGEST_SEGMENT, bean.getETag(),
             SEGMENT_NAME, getName(original),
-            SEGMENT_EXTENSION, getExtension(contentType, CapBlobHandler.BLOB_DEFAULT_EXTENSION));
+            SEGMENT_EXTENSION, getExtension(getMimeType(targetMimeType, original), CapBlobHandler.BLOB_DEFAULT_EXTENSION));
 
     //generate secure hash from all parameters and add to map
     String secHash = secureHashCodeGeneratorStrategy.generateSecureHashCode(parameters);
@@ -227,8 +228,8 @@ public class TransformedBlobHandler extends HandlerBase {
     return data.orElse(null);
   }
 
-  // === internal ======================================================================================================
 
+  // === internal ======================================================================================================
   /**
    * Returns the transformed "data" blob of the media bean.
    *
@@ -257,5 +258,32 @@ public class TransformedBlobHandler extends HandlerBase {
       return removeSpecialCharacters(contentName);
     }
     throw new IllegalArgumentException("Not a Content Blob: " + o);
+  }
+
+  /**
+   * Determines the MimeType to be used for creating links.
+   * <p>
+   * Use targetMimeType if it is a valid MimeType, otherwise use contentType of given original blob.
+   * @param targetMimeType the target MIME type
+   * @param original the original blob
+   * @return the MimeType to be used
+   */
+  private static MimeType getMimeType(String targetMimeType, CapBlobRef original) {
+    MimeType contentType = null;
+    if (targetMimeType != null) {
+      try {
+        contentType = new MimeType(targetMimeType);
+      } catch (MimeTypeParseException e) {
+        LOG.warn("Invalid MimeType: {} (using original Blob MimeType '{}', please check configured MimeType mapping in setting 'linkMimeTypeMapping')",
+                targetMimeType, original.getContentType());
+      }
+    }
+    // If targetMimeType is not set, use content type of original blob, not of the transformed blob which may be different.
+    // Requesting the transformed blob's content type forces the transformation to be performed, which is too
+    // costly for link generation.
+    if (contentType == null) {
+      contentType = original.getContentType();
+    }
+    return contentType;
   }
 }

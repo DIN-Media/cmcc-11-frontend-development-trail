@@ -122,6 +122,16 @@
                   </version>
                 </document>
               </folder>
+              <folder id="111119" name="Personalization">
+                <document id="111128" uuid="257e360c-865c-47cd-a3d1-3279640142f5" name="Personalized Teaser" type="CMSelectionRules" creationDate="1967-01-10T20:59:42.000+01:00">
+                  <version number="1">
+                    <markupProperty name="rules" url="selectionRules.xml" grammar="coremedia-richtext-1.0"/>
+                    <linkProperty name="defaultContent">
+                      <link id="111116"/>
+                    </linkProperty>
+                  </version>
+                </document>
+              </folder>
             </folder>
           </folder>
           <folder id="1113" name="TestSiteDE">

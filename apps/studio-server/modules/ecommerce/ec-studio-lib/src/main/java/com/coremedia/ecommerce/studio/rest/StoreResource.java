@@ -2,16 +2,12 @@ package com.coremedia.ecommerce.studio.rest;
 
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.CatalogAliasTranslationService;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.MappedCatalogsProvider;
-import com.coremedia.cap.content.Content;
 import com.coremedia.ecommerce.studio.rest.model.Store;
 import com.coremedia.livecontext.ecommerce.catalog.Catalog;
-import com.coremedia.livecontext.ecommerce.catalog.Category;
-import com.coremedia.livecontext.ecommerce.catalog.Product;
 import com.coremedia.livecontext.ecommerce.common.CommerceConnection;
 import com.coremedia.livecontext.ecommerce.common.CommerceException;
 import com.coremedia.livecontext.ecommerce.common.StoreContext;
 import com.coremedia.livecontext.ecommerce.p13n.MarketingSpot;
-import com.coremedia.rest.linking.ResponseLocationHeaderLinker;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import org.slf4j.Logger;
@@ -51,12 +47,6 @@ public class StoreResource extends AbstractCatalogResource<Store> {
   private List<PbeShopUrlTargetResolver> pbeShopUrlTargetResolvers = emptyList();
 
   @Autowired
-  private CategoryAugmentationHelper categoryAugmentationHelper;
-
-  @Autowired
-  private ProductAugmentationHelper productAugmentationHelper;
-
-  @Autowired
   private MappedCatalogsProvider mappedCatalogsProvider;
 
   @Autowired
@@ -89,20 +79,6 @@ public class StoreResource extends AbstractCatalogResource<Store> {
             .map(resolver -> resolver.resolveUrl(shopUrlStr, siteId))
             .filter(Objects::nonNull)
             .findFirst();
-  }
-
-  @PostMapping("augment")
-  @ResponseLocationHeaderLinker
-  @Nullable
-  public Content augment(@RequestBody @NonNull Object catalogObject) {
-    if (catalogObject instanceof Category) {
-      return categoryAugmentationHelper.augment((Category) catalogObject);
-    } else if (catalogObject instanceof Product) {
-      return productAugmentationHelper.augment((Product) catalogObject);
-    } else {
-      LOG.debug("Cannot augment object {}: only categories and products are supported. JSON parameters: {}", catalogObject, catalogObject);
-      return null;
-    }
   }
 
   @GetMapping

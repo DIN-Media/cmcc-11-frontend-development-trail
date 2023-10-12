@@ -1,9 +1,6 @@
 import TopicsHelper from "@coremedia-blueprint/studio-client.main.taxonomy-studio/TopicsHelper";
-import UserUtil from "@coremedia/studio-client.cap-base-models/util/UserUtil";
-import session from "@coremedia/studio-client.cap-rest-client/common/session";
 import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
 import Bean from "@coremedia/studio-client.client-core/data/Bean";
-import StringHelper from "@coremedia/studio-client.ext.ui-components/util/StringHelper";
 import Editor_properties from "@coremedia/studio-client.main.editor-components/Editor_properties";
 import WorkArea from "@coremedia/studio-client.main.editor-components/sdk/desktop/WorkArea";
 import editorContext from "@coremedia/studio-client.main.editor-components/sdk/editorContext";
@@ -14,7 +11,6 @@ import Button from "@jangaroo/ext-ts/button/Button";
 import Panel from "@jangaroo/ext-ts/panel/Panel";
 import { as, bind } from "@jangaroo/runtime";
 import Config from "@jangaroo/runtime/Config";
-import trace from "@jangaroo/runtime/trace";
 import { AnyFunction } from "@jangaroo/runtime/types";
 import TopicPages_properties from "../TopicPages_properties";
 import OpenTopicPagesEditorAction from "./OpenTopicPagesEditorAction";
@@ -95,22 +91,11 @@ class OpenTopicPagesEditorActionBase extends Action {
     TopicsHelper.loadSettings((settingsRemoteBean: Bean): void => {
       const topicPageChannel: Content = settingsRemoteBean.get("topicPageChannel");
       if (!topicPageChannel) {
-        trace("[INFO]", "Topic Pages: could not find root channel for topic pages, please check the TopicPages settings document of the preferred site.");
+        console.log("[INFO]", "Topic Pages: could not find root channel for topic pages, please check the TopicPages settings document of the preferred site.");
         callback.call(null, false);
-      } else {
-        const adminGroups: Array<any> = settingsRemoteBean.get("adminGroups");
-        if (session._.getUser().isAdministrative()) {
-          callback.call(null, true);
-        } else {
-          for (let i = 0; i < adminGroups.length; i++) {
-            const groupName = StringHelper.trim(adminGroups[i], "");
-            if (UserUtil.isInGroup(groupName)) {
-              callback.call(null, true);
-              return;
-            }
-          }
-          callback.call(null, false);
-        }
+      }
+      else {
+        callback.call(null, true);
       }
     });
   }

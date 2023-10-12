@@ -2,7 +2,7 @@ import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpr
 import VerticalSpacingPlugin from "@coremedia/studio-client.ext.ui-components/plugins/VerticalSpacingPlugin";
 import PropertyField from "@coremedia/studio-client.main.editor-components/sdk/premular/PropertyField";
 import Container from "@jangaroo/ext-ts/container/Container";
-import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
+import AnchorLayout from "@jangaroo/ext-ts/layout/container/Anchor";
 import Config from "@jangaroo/runtime/Config";
 import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import TaxonomyLinkListPropertyField from "./TaxonomyLinkListPropertyField";
@@ -33,6 +33,7 @@ class TaxonomyPropertyField extends TaxonomyPropertyFieldBase {
       defaultType: PropertyField.xtype,
 
       defaults: Config<PropertyField>({
+        anchor: "100%",
         bindTo: config.bindTo,
         ...{
           propertyName: config.propertyName,
@@ -51,6 +52,7 @@ class TaxonomyPropertyField extends TaxonomyPropertyFieldBase {
           itemId: "suggestionsPanel",
           defaultType: PropertyField.xtype,
           defaults: Config<PropertyField>({
+            anchor: "100%",
             bindTo: config.bindTo,
             ...{
               propertyName: config.propertyName,
@@ -68,9 +70,10 @@ class TaxonomyPropertyField extends TaxonomyPropertyFieldBase {
           plugins: [
             Config(VerticalSpacingPlugin),
           ],
+          layout: Config(AnchorLayout, { manageOverflow: false }),
         }),
       ],
-      layout: Config(VBoxLayout, { align: "stretch" }),
+      layout: Config(AnchorLayout, { manageOverflow: false }),
     }), config));
   }
 
@@ -85,7 +88,7 @@ class TaxonomyPropertyField extends TaxonomyPropertyFieldBase {
   forceReadOnlyValueExpression: ValueExpression = null;
 
   /**
-   * The property name of the content that should contains the taxonomy to display.
+   * The property name of the content that should contain the taxonomy to display.
    */
   propertyName: string = null;
 

@@ -1,9 +1,10 @@
-package com.coremedia.ecommerce.studio.rest;
+package com.coremedia.lc.studio.lib.augmentation;
 
 import com.coremedia.cap.content.Content;
 import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cap.struct.Struct;
+import com.coremedia.ecommerce.studio.rest.CommerceAugmentationException;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
 import com.coremedia.livecontext.ecommerce.catalog.Category;
 import com.coremedia.livecontext.ecommerce.catalog.Product;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.coremedia.blueprint.base.livecontext.ecommerce.id.CommerceIdFormatterHelper.format;
-import static com.coremedia.ecommerce.studio.rest.CategoryAugmentationHelper.CATEGORY_PRODUCT_PAGEGRID_STRUCT_PROPERTY;
+import static com.coremedia.lc.studio.lib.augmentation.CategoryAugmentationHelper.CATEGORY_PRODUCT_PAGEGRID_STRUCT_PROPERTY;
 import static java.lang.invoke.MethodHandles.lookup;
 
 /**

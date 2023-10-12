@@ -1,4 +1,4 @@
-package com.coremedia.ecommerce.studio.rest;
+package com.coremedia.lc.studio.lib.augmentation;
 
 import com.coremedia.blueprint.base.livecontext.augmentation.config.AugmentationPageGridServiceConfiguration;
 import com.coremedia.blueprint.base.livecontext.ecommerce.id.CommerceIdParserHelper;
@@ -6,6 +6,7 @@ import com.coremedia.blueprint.base.pagegrid.PageGridContentKeywords;
 import com.coremedia.cap.content.Content;
 import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.struct.Struct;
+import com.coremedia.ecommerce.studio.rest.CommerceAugmentationException;
 import com.coremedia.livecontext.ecommerce.augmentation.AugmentationService;
 import com.coremedia.livecontext.ecommerce.catalog.Catalog;
 import com.coremedia.livecontext.ecommerce.catalog.Category;
@@ -27,10 +28,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static com.coremedia.ecommerce.studio.rest.AugmentationHelperBase.DEFAULT_BASE_FOLDER_NAME;
-import static com.coremedia.ecommerce.studio.rest.AugmentationHelperBase.EXTERNAL_ID;
-import static com.coremedia.ecommerce.studio.rest.CategoryAugmentationHelper.CATEGORY_PRODUCT_PAGEGRID_STRUCT_PROPERTY;
-import static com.coremedia.ecommerce.studio.rest.CategoryAugmentationHelper.TITLE;
+import static com.coremedia.lc.studio.lib.augmentation.AugmentationHelperBase.DEFAULT_BASE_FOLDER_NAME;
+import static com.coremedia.lc.studio.lib.augmentation.AugmentationHelperBase.EXTERNAL_ID;
+import static com.coremedia.lc.studio.lib.augmentation.CategoryAugmentationHelper.CATEGORY_PRODUCT_PAGEGRID_STRUCT_PROPERTY;
+import static com.coremedia.lc.studio.lib.augmentation.ProductAugmentationHelper.TITLE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.doReturn;
@@ -42,7 +43,7 @@ import static org.mockito.Mockito.when;
         ProductAugmentationHelper.class,
 }, properties = {
         "repository.factoryClassName=com.coremedia.cap.xmlrepo.XmlCapConnectionFactory",
-        "repository.params.contentxml=classpath:/com/coremedia/ecommerce/studio/rest/ec-studio-lib-test-content.xml",
+        "repository.params.contentxml=classpath:/com/coremedia/lc/studio/lib/augmentation/contenttest.xml",
         "repository.params.userxml=classpath:/com/coremedia/cap/common/xml/users-default.xml",
 })
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

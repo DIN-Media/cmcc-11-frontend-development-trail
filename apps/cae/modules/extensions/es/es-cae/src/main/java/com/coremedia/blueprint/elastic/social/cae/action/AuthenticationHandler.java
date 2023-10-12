@@ -14,6 +14,7 @@ import com.coremedia.objectserver.web.UserVariantHelper;
 import com.coremedia.objectserver.web.links.Link;
 import com.coremedia.objectserver.web.links.LinkFormatter;
 import edu.umd.cs.findbugs.annotations.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,7 @@ import static com.coremedia.blueprint.base.links.UriConstants.Segments.SEGMENTS_
 import static com.coremedia.blueprint.base.links.UriConstants.Segments.SEGMENTS_NAVIGATION;
 import static com.coremedia.blueprint.base.links.UriConstants.Segments.SEGMENT_ACTION;
 import static com.coremedia.blueprint.base.links.UriConstants.Segments.SEGMENT_ID;
+import static com.coremedia.objectserver.web.HandlerHelper.notFound;
 
 /**
  * Handles authentication (login/logout) actions. This handler is currently used for rendering the initial form only.
@@ -140,7 +142,7 @@ public class AuthenticationHandler extends WebflowHandlerBase {
 
   @SuppressWarnings("squid:S3752") // multiple request methods allowed by intention as part of the fix for CMS-13646
   @RequestMapping(value = URI_PATTERN, method = {RequestMethod.GET, RequestMethod.POST})
-  public ModelAndView handleRequest(@PathVariable(SEGMENT_ID) CMAction action,
+  public ModelAndView handleRequest(@Nullable @PathVariable(SEGMENT_ID) CMAction action,
                                     @PathVariable(SEGMENTS_NAVIGATION) List<String> navigationPath,
                                     @PathVariable(SEGMENTS_FRAGMENT) String fragment,
                                     @PathVariable(SEGMENT_ACTION) String actionName,
@@ -148,6 +150,10 @@ public class AuthenticationHandler extends WebflowHandlerBase {
                                     @RequestParam(value = "webflow", required = false) String webflow,
                                     @NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response) {
+    if (action == null) {
+      return notFound();
+    }
+
     Navigation navigationContext = getNavigation(navigationPath);
     ModelAndView result;
     if (StringUtils.hasText(fragment) && !fragment.equals(FRAGMENT_DEFAULT_VALUE)) {
@@ -158,7 +164,7 @@ public class AuthenticationHandler extends WebflowHandlerBase {
       }
 
       if (navigationContext == null) {
-        return HandlerHelper.notFound();
+        return notFound();
       }
       AuthenticationState bean = createLoginActionStateBean(action);
       // add navigationContext as navigationContext request param

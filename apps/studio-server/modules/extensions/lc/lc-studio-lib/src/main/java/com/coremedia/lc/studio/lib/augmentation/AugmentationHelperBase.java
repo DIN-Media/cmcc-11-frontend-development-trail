@@ -1,4 +1,4 @@
-package com.coremedia.ecommerce.studio.rest;
+package com.coremedia.lc.studio.lib.augmentation;
 
 import com.coremedia.blueprint.base.livecontext.util.CommerceBeanUtils;
 import com.coremedia.blueprint.base.pagegrid.PageGridContentKeywords;
@@ -68,10 +68,6 @@ abstract class AugmentationHelperBase<T> {
     return contentRepository;
   }
 
-  protected InterceptService getInterceptService() {
-    return interceptService;
-  }
-
   protected SitesService getSitesService() {
     return sitesService;
   }
@@ -96,10 +92,8 @@ abstract class AugmentationHelperBase<T> {
 
     Map<String, Object> shortenedProperties = shortenPropertyValuesIfNeeded(properties, contentType, List.of(EXTERNAL_ID));
 
-    if (interceptService != null) {
-      writeRequest = interceptService.interceptCreate(parent, name, contentType, shortenedProperties);
-      interceptService.handleErrorIssues(writeRequest);
-    }
+    writeRequest = interceptService.interceptCreate(parent, name, contentType, shortenedProperties);
+    interceptService.handleErrorIssues(writeRequest);
 
     Content content = parent.getChild(name);
     if (content != null) {
@@ -122,9 +116,7 @@ abstract class AugmentationHelperBase<T> {
       return null;
     }
 
-    if (interceptService != null) {
-      interceptService.postProcess(content, null);
-    }
+    interceptService.postProcess(content, null);
 
     return content;
   }

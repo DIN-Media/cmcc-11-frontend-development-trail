@@ -17,7 +17,7 @@ class MiscSettingsForm extends PropertyFieldGroup {
   constructor(config: Config<MiscSettingsForm> = null) {
     super(ConfigUtils.apply(Config(MiscSettingsForm, {
       title: CustomLabels_properties.PropertyGroup_MiscSettings_label,
-      itemId: "localSettingsForm",
+      itemId: "miscSettingsForm",
 
       items: [
         Config(StructPropertyField, {

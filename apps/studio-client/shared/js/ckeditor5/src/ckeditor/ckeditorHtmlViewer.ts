@@ -6,6 +6,7 @@ import {
   CreateCKEditorFunction
 } from "@coremedia/studio-client.ckeditor-common/CKEditorCreateFunctionType";
 import '../theme/custom.css';
+import { ckeditor5License } from "./ckeditor5License";
 
 /**
  * This is an HTML viewer configuration for the CKEditor 5 in CoreMedia Studio.
@@ -27,9 +28,9 @@ import '../theme/custom.css';
  * Please see the `htmlSupport` configuration below.
  */
 export const createHtmlViewerCKEditor: CreateCKEditorFunction = (domElement:(string | HTMLElement), pluginConfig: CKEditorPluginConfig): Promise<ClassicEditor> => {
+  // @ts-expect-error - CoreMedia Configuration Types (Augmentation) needs to be fixed.
   return ClassicEditor.create(domElement, {
-    // Add License Key retrieved via CKEditor for Premium Features Support.
-    licenseKey: '',
+    ...ckeditor5License,
     plugins: [
       GeneralHtmlSupport,
     ],

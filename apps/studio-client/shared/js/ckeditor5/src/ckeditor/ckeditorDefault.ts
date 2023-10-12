@@ -37,6 +37,7 @@ import { PasteContentPlugin } from "@coremedia/ckeditor5-coremedia-content-clipb
 import { DocumentList } from "@ckeditor/ckeditor5-list";
 import { FontMapper as CoreMediaFontMapper} from "@coremedia/ckeditor5-font-mapper";
 import { ClassicEditor } from "@ckeditor/ckeditor5-editor-classic";
+import { ckeditor5License } from "./ckeditor5License";
 
 const {
   objectInline: withinTextIcon,
@@ -117,8 +118,7 @@ export const createDefaultCKEditor: CreateCKEditorFunction = (domElement:(string
     defaultToolbarItems.push("|", "sourceEditing");
   }
   return ClassicEditor.create(domElement, {
-    // Add License Key retrieved via CKEditor for Premium Features Support.
-    licenseKey: '',
+    ...ckeditor5License,
     placeholder: localize('Type your text here...', language),
     plugins: [
       Alignment,

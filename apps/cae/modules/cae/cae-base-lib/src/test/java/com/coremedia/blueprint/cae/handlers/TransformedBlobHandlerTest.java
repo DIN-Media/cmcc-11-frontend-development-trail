@@ -200,8 +200,27 @@ public class TransformedBlobHandlerTest {
   }
 
   /**
+   * Test URL generation with target MIME type:
+   * {@link TransformedBlobHandler#buildLink(com.coremedia.transform.TransformedBeanBlob, java.util.Map)}
+   */
+  @Test
+  public void testGenerateLinkWithTargetMimeType() {
+    CMPicture picture = contentTestHelper.getContentBean(16);
+    Blob transformedData = picture.getTransformedData(TRANSFORM_NAME);
+    when(transformedBlob.getBean()).thenReturn(picture);
+    when(transformedBlob.getOriginal()).thenReturn(picture.getContent().getBlobRef("data"));
+
+    String link = formatLink(transformedData, null, false, Map.of(
+            TransformedBlobHandler.WIDTH_SEGMENT, WIDTH,
+            TransformedBlobHandler.HEIGHT_SEGMENT, HEIGHT,
+            TransformedBlobHandler.TARGET_MIME_TYPE, "image/png"
+    ));
+    assertThat(link).isEqualTo("/resource/image/16/transformName/100/100/4d1b8ae7b7c0102fbdd80b5ea41b45c5/FQ/nae-me-jpg.png");
+  }
+
+  /**
    * BARBUDA-2590: to fix this bug, the link generator will use the original extension instead of the
-   * correct extension of the transformed blob, because generating the link should not actually require the tranformation
+   * correct extension of the transformed blob, because generating the link should not actually require the transformation
    * to be executed.
    */
   @Test

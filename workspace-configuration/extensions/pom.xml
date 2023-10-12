@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <extensions-maven-plugin.version>4.5.1</extensions-maven-plugin.version>
+    <extensions-maven-plugin.version>4.5.3</extensions-maven-plugin.version>
   </properties>
 
   <pluginRepositories>

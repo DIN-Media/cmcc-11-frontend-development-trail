@@ -595,12 +595,6 @@ public class DefaultTaxonomy extends TaxonomyBase { // NOSONAR  cyclomatic compl
 
   private List<Content> getPath(Content content) {
     List<Content> path = new ArrayList<>();
-
-    if (taxonomyCycleValidator.isCyclic(content, taxonomyContentType)) {
-      LOG.warn("Taxonomy cycle found for {}", content.getPath());
-      return path;
-    }
-
     Content parent = content;
     while (parent != null) {
       path.add(0, parent);
