@@ -6,7 +6,7 @@
 <link href="../../../../../United%20Kingdom/English/Editorial/Content/Perso/Snowboard%20Interest%20Collection.xml" path="/Sites/Hybris%20Apparel/United%20Kingdom/English/Editorial/Content/Perso/Snowboard%20Interest%20Collection"/>
 </master>
 <viewtype>
-<link href="../../../Options/Viewtypes/CMChannel/hero.xml" path="/Sites/Hybris%20Apparel/Germany/German/Options/Viewtypes/CMChannel/hero"/>
+<link href="../../../Options/Viewtypes/Container/hero.xml" path="/Sites/Hybris%20Apparel/Germany/German/Options/Viewtypes/Container/hero"/>
 </viewtype>
 <localSettings>
 <Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">

@@ -96,7 +96,13 @@ class CMALXEventListForm extends DocumentTabPanel {
                 Config(AnalyticsProviderComboBox, { propertyName: "analyticsProvider" }),
               ],
             }),
-            Config(ContainerViewTypeSelectorForm, { collapsed: false }),
+            Config(ContainerViewTypeSelectorForm, {
+              collapsed: false,
+              paths: [
+                "/Settings/Options/Viewtypes/CMALXEventList/",
+                "Options/Viewtypes/CMALXEventList/",
+              ]
+            }),
             Config(ValidityDocumentForm),
           ],
         }),

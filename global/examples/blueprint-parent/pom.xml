@@ -15,10 +15,13 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.release>11</maven.compiler.release>
+    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
     <application-plugin.version>3.0.1</application-plugin.version>
-    <cm.common.core.version>2307.2</cm.common.core.version>
+    <awaitility.version>4.2.0</awaitility.version>
+    <cm.cae.core.version>2310.1</cm.cae.core.version>
+    <cm.common.core.version>2310.1</cm.common.core.version>
     <cm.common.bp.version>1-SNAPSHOT</cm.common.bp.version>
-    <cm.middle.core.version>2307.2</cm.middle.core.version>
+    <cm.middle.core.version>2310.1</cm.middle.core.version>
     <cm.middle.bp.version>1-SNAPSHOT</cm.middle.bp.version>
   </properties>
 
@@ -26,7 +29,21 @@
     <dependencies>
       <dependency>
         <groupId>com.coremedia.cms</groupId>
+        <artifactId>cae-core-bom</artifactId>
+        <version>${cm.cae.core.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.coremedia.cms</groupId>
         <artifactId>common-thirdparty-bom</artifactId>
+        <version>${cm.common.core.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.coremedia.cms</groupId>
+        <artifactId>common-thirdparty-for-plugins-bom</artifactId>
         <version>${cm.common.core.version}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -53,6 +70,13 @@
         <scope>import</scope>
       </dependency>
       <dependency>
+        <groupId>com.coremedia.blueprint</groupId>
+        <artifactId>content-server-blueprint-bom</artifactId>
+        <version>${cm.common.bp.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>com.coremedia.cms</groupId>
         <artifactId>middle-core-bom</artifactId>
         <version>${cm.middle.core.version}</version>
@@ -66,6 +90,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.awaitility</groupId>
+        <artifactId>awaitility</artifactId>
+        <version>${awaitility.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -76,6 +105,14 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
+          <configuration>
+            <trimStackTrace>false</trimStackTrace>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>com.coremedia.maven</groupId>

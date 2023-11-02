@@ -75,7 +75,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/CMTeasable" xlink:href="coremedia:///cap/resources/../../../Navigation/Fragments/Aurora%20Categories/Apparel/Men/Men%20Suits%20Teaser.xml" cmexport:path="/Sites/Calista/Germany/German/Navigation/Fragments/Aurora%20Categories/Apparel/Men/Men%20Suits%20Teaser"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../../Options/Viewtypes/CMChannel/hero.xml" cmexport:path="/Sites/Calista/Germany/German/Options/Viewtypes/CMChannel/hero"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../../Options/Viewtypes/Container/hero.xml" cmexport:path="/Sites/Calista/Germany/German/Options/Viewtypes/Container/hero"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../../../Options/Settings/Pagegrid/Placements/main.xml" cmexport:path="/Sites/Calista/Germany/German/Options/Settings/Pagegrid/Placements/main"/>
 </Struct>
 <Struct>

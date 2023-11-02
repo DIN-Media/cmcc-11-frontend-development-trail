@@ -6,7 +6,7 @@
 <link href="../../../../../United%20States/English/Editorial/Content/Startpage/Our%20Latest%20Products.xml" path="/Sites/Aurora%20Augmentation/United%20States/English/Editorial/Content/Startpage/Our%20Latest%20Products"/>
 </master>
 <viewtype>
-<link href="../../../Options/Viewtypes/CMChannel/portrait.xml" path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/CMChannel/portrait"/>
+<link href="../../../Options/Viewtypes/Container/portrait.xml" path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/Container/portrait"/>
 </viewtype>
 <linkedSettings>
 </linkedSettings>

@@ -54,6 +54,7 @@ class CommerceCategoryWorkAreaTab extends CommerceWorkAreaTab {
               bindTo: this$.#augmentedCategoryExpression,
               pageGridPropertyName: "pdpPagegrid",
               fallbackPageGridPropertyName: "placement",
+              virtual: true,
             }),
           ],
         }),

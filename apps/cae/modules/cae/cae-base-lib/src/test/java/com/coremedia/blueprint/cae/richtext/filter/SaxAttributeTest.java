@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -128,6 +129,24 @@ class SaxAttributeTest {
       Attributes overriddenAttributes = actual.withRemovedOnMatch("VALUE2"::equals);
       SaxAttribute overriddenAttribute = SaxAttribute.optionalOf(overriddenAttributes, "class").orElseThrow();
       assertThat(overriddenAttribute.getValue()).isEqualTo("VALUE1");
+    }
+  }
+
+  /**
+   * Should be able to remove attributes.
+   */
+  @Nested
+  class RemoveAttributeUseCase {
+    @Test
+    void shouldBeAbleToRemoveAttribute() {
+      String attributeValue = Locale.US.toLanguageTag();
+      AttributesImpl attributes = new AttributesImpl();
+      attributes.addAttribute("", "lang", "lang", "CDATA", attributeValue);
+      SaxAttribute actual = SaxAttribute.optionalOf(attributes, "lang").orElseThrow();
+      Attributes removed = actual.remove();
+      assertThat(removed.getIndex("lang"))
+              .as("Lang attribute should have been removed.")
+              .isLessThan(0);
     }
   }
 

@@ -6,7 +6,7 @@
 <link href="../../../../../United%20Kingdom/English/Editorial/Content/Homepage/Styles%20to%20Love%20List.xml" path="/Sites/SFRA/United%20Kingdom/English/Editorial/Content/Homepage/Styles%20to%20Love%20List"/>
 </master>
 <viewtype>
-<link href="../../../Options/Viewtypes/CMChannel/carousel.xml" path="/Sites/SFRA/United%20States/English/Options/Viewtypes/CMChannel/carousel"/>
+<link href="../../../Options/Viewtypes/Container/carousel.xml" path="/Sites/SFRA/United%20States/English/Options/Viewtypes/Container/carousel"/>
 </viewtype>
 <localSettings>
 <Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">

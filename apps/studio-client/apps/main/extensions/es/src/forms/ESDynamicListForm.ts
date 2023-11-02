@@ -124,7 +124,13 @@ class ESDynamicListForm extends DocumentTabPanel {
                 }),
               ],
             }),
-            Config(ContainerViewTypeSelectorForm, { collapsed: false }),
+            Config(ContainerViewTypeSelectorForm, {
+              collapsed: false,
+              paths: [
+                "/Settings/Options/Viewtypes/ESDynamicList/",
+                "Options/Viewtypes/ESDynamicList/",
+              ]
+            }),
             Config(ValidityDocumentForm),
           ],
         }),

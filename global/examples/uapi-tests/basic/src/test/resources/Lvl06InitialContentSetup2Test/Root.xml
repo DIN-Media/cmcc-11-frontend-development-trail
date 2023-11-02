@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SimpleSiteContent folder="/Sites/Example/en-US" name="Root" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+  <link>
+    <link href="Child.xml" path="/Sites/Example/en-US/Child"/>
+  </link>
+  <string></string>
+  <extendedString></extendedString>
+  <locale>en-US</locale>
+</SimpleSiteContent>

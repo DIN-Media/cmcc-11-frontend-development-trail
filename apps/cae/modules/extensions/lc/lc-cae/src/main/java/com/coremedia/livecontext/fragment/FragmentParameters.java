@@ -177,8 +177,7 @@ public class FragmentParameters {
   public String getDecodedValue(@NonNull String key) {
     String value = getParameter(key);
     try {
-      //The parameter may be 2x encoded if the connected commerce system uses lc-connector and the commerce system
-      //supports external IDs with slashes
+      //The parameter may be 2x encoded to support external IDs and custom parameters containing slashes.
       if (value != null) {
         value = URLDecoder.decode(value, "UTF-8");
       }

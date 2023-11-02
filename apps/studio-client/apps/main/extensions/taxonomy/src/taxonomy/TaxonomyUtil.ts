@@ -187,9 +187,16 @@ class TaxonomyUtil {
     }, (result: any): void => {
       Ext.getCmp(EditorMainView.ID).getEl().setStyle("cursor", "default");
       let message = TaxonomyStudioPlugin_properties.TaxonomyEditor_deletion_failed_text;
-      message = StringUtil.format(message, result.getResponseJSON());
+      const json = result.getResponseJSON();
+      if (json && json.message) {
+        message = StringUtil.format(message, json.message);
+      } else {
+        message = StringUtil.format(message, json);
+      }
+
       const title = TaxonomyStudioPlugin_properties.TaxonomyEditor_deletion_failed_title;
-      MessageBoxUtil.showInfo(title, message);
+      MessageBoxUtil.showInfo(title, message, null, false);
+      callback.call(null, null);
     });
   }
 

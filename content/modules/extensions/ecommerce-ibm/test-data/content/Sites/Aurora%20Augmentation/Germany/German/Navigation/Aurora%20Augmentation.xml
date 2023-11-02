@@ -102,7 +102,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../Editorial/Content/Fashion/Women%27s%20Dresses%20Image%20Map.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Editorial/Content/Fashion/Women%27s%20Dresses%20Image%20Map"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/hero.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/CMChannel/hero"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/hero.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/Container/hero"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/hero.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Settings/Pagegrid/Placements/hero"/>
 </Struct>
 <Struct>
@@ -114,7 +114,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/CMTeasable" xlink:href="coremedia:///cap/resources/../Editorial/Content/Startpage/Men%27s%20Category.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Editorial/Content/Startpage/Men%27s%20Category"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/square.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/CMChannel/square"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/square.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/Container/square"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/placement1.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Settings/Pagegrid/Placements/placement1"/>
 </Struct>
 <Struct>
@@ -123,7 +123,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../Editorial/Content/Fashion%20Week/Fashion%20Show%20Shoppable%20Video.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Editorial/Content/Fashion%20Week/Fashion%20Show%20Shoppable%20Video"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/hero.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/CMChannel/hero"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/hero.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/Container/hero"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/placement2.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Settings/Pagegrid/Placements/placement2"/>
 </Struct>
 <Struct>
@@ -132,7 +132,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/CMTeasable" xlink:href="coremedia:///cap/resources/../Editorial/Content/Fashion%20Week/Black%20is%20the%20new%20Black%20Dresses.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Editorial/Content/Fashion%20Week/Black%20is%20the%20new%20Black%20Dresses"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/square.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/CMChannel/square"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/square.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/Container/square"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/placement3.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Settings/Pagegrid/Placements/placement3"/>
 </Struct>
 <Struct>
@@ -156,7 +156,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../Editorial/Content/Eveningwear/Hermitage%20Pencil%20Cocktail%20Dress.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Editorial/Content/Eveningwear/Hermitage%20Pencil%20Cocktail%20Dress"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/carousel.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/CMChannel/carousel"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/carousel.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Viewtypes/Container/carousel"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/placement4.xml" cmexport:path="/Sites/Aurora%20Augmentation/Germany/German/Options/Settings/Pagegrid/Placements/placement4"/>
 </Struct>
 </StructListProperty>

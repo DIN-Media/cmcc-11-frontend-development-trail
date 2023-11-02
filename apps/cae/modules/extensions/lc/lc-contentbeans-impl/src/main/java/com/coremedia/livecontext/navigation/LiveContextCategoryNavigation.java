@@ -4,6 +4,7 @@ import com.coremedia.blueprint.base.tree.TreeRelation;
 import com.coremedia.blueprint.common.contentbeans.CMContext;
 import com.coremedia.blueprint.common.contentbeans.CMNavigation;
 import com.coremedia.blueprint.common.contentbeans.CMTheme;
+import com.coremedia.blueprint.common.contentbeans.VirtualEntity;
 import com.coremedia.blueprint.common.navigation.Linkable;
 import com.coremedia.blueprint.common.navigation.Navigation;
 import com.coremedia.cae.aspect.provider.AspectsProvider;
@@ -29,10 +30,9 @@ import static org.springframework.util.Assert.notNull;
  * Not persisted in the CMS repository.
  */
 public class LiveContextCategoryNavigation implements LiveContextNavigation {
-  private LiveContextNavigationTreeRelation treeRelation;
-  private Category category;
-  private Site site;
-
+  private final LiveContextNavigationTreeRelation treeRelation;
+  private final Category category;
+  private final Site site;
 
   // --- Construction -----------------------------------------------
 
@@ -99,19 +99,23 @@ public class LiveContextCategoryNavigation implements LiveContextNavigation {
   public CMContext getContext() {
     CMExternalChannel externalChannel = treeRelation.getNearestExternalChannelForCategory(getCategory(), getSite());
     if (externalChannel != null) {
-      return externalChannel;
+      return wrap(externalChannel);
     }
     // after no adequate external page could be found (not even recursively along the category path)...
     // return the catalog root page, whose position is the second in the navigation path list. Or...
     List<? extends Linkable> pathToRoot = getNavigationPathList();
     if (pathToRoot.size() > 1 && pathToRoot.get(1) instanceof CMContext) {
-      return (CMContext) pathToRoot.get(1);
+      return wrap((CMContext) pathToRoot.get(1));
     }
     // after no catalog root page is found take the site root node
     if (!pathToRoot.isEmpty() && pathToRoot.get(0) instanceof CMContext) {
-      return (CMContext) pathToRoot.get(0);
+      return wrap((CMContext) pathToRoot.get(0));
     }
     return null;
+  }
+
+  CMContext wrap(CMContext context) {
+    return VirtualEntity.ofBean(context);
   }
 
   @Override

@@ -112,6 +112,22 @@ final class SaxAttribute {
   }
 
   /**
+   * <p>
+   * Provides a clone of the attributes instance, this attribute belongs to,
+   * by removing the attribute itself.
+   * </p>
+   *
+   * @return new attribute instance
+   * @since 2310.1
+   */
+  @NonNull
+  Attributes remove() {
+    AttributesImpl newAttributes = new AttributesImpl(attributes);
+    newAttributes.removeAttribute(attributeIndex);
+    return newAttributes;
+  }
+
+  /**
    * Provides a clone of the attributes instance, this attribute belongs to,
    * replacing its value with the given set of values. Values will be
    * joined with space characters between.

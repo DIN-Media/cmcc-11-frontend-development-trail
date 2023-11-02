@@ -37,7 +37,7 @@ x-logging:
 
 services:
   commerce-adapter-sfcc:
-    image: ${COMMERCE_REPOSITORY_PREFIX:-coremedia}/commerce-adapter-sfcc:${COMMERCE_ADAPTER_SFCC_VERSION:-2.1.9}
+    image: ${COMMERCE_REPOSITORY_PREFIX:-coremedia}/commerce-adapter-sfcc:${COMMERCE_ADAPTER_SFCC_VERSION:-2.2.2}
     container_name: commerce-adapter-sfcc
     restart: always
     logging: *default-logging

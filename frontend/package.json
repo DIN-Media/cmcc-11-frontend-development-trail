@@ -24,6 +24,14 @@
     "overrides": {
       "glob-parent@<5.1.2": ">=5.1.2",
       "loader-utils@<1.4.2": ">=2.0.4"
+    },
+    "auditConfig": {
+      "ignoreCves": [
+        "CVE-2019-8331",
+        "CVE-2023-26136",
+        "CVE-2023-28155",
+        "CVE-2023-44270"
+      ]
     }
   }
 }

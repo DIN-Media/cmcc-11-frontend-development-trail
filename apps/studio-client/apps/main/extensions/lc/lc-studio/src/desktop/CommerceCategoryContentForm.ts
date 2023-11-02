@@ -44,6 +44,7 @@ class CommerceCategoryContentForm extends DocumentForm {
           forceReadOnlyValueExpression: ValueExpressionFactory.createFromValue(true),
           bindTo: this$.#augmentedCategoryExpression,
           pageGridPropertyName: "placement",
+          virtual: true,
         }),
         Config(PropertyFieldGroup, {
           title: LivecontextStudioPlugin_properties.Commerce_PropertyGroup_thumbnail_title,

@@ -6,7 +6,7 @@
 <link href="../../../../United%20Kingdom/English/Editorial/Content/Most%20Viewed.xml" path="/Sites/SFRA/United%20Kingdom/English/Editorial/Content/Most%20Viewed"/>
 </master>
 <viewtype>
-<link href="../../Options/Viewtypes/CMChannel/landscape.xml" path="/Sites/SFRA/France/French/Options/Viewtypes/CMChannel/landscape"/>
+<link href="../../Options/Viewtypes/Container/landscape.xml" path="/Sites/SFRA/France/French/Options/Viewtypes/Container/landscape"/>
 </viewtype>
 <linkedSettings>
 </linkedSettings>

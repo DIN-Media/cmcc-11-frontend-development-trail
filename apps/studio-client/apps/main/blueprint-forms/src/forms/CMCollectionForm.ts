@@ -29,7 +29,13 @@ class CMCollectionForm extends DocumentTabPanel {
           items: [
             Config(TeaserDocumentForm),
             Config(ItemsForm),
-            Config(ContainerViewTypeSelectorForm, { collapsed: false }),
+            Config(ContainerViewTypeSelectorForm, {
+              collapsed: false,
+              paths: [
+                "/Settings/Options/Viewtypes/CMCollection/",
+                "Options/Viewtypes/CMCollection/",
+              ]
+            }),
             Config(ValidityDocumentForm),
           ],
         }),

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SimpleSiteContent folder="/Sites/Example/en-US" name="Child" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+  <blob href="Child.blob.png" mimetype="image/png"/>
+  <date format="dd.MM.yyyy HH:mm:ss Z VV">07.06.2023 01:23:45 +0200 Europe/Berlin</date>
+  <image href="Child.image.png" mimetype="image/png"/>
+  <int>42</int>
+  <link>
+    <link href="Child.xml" path="/Sites/Example/en-US/Child"/>
+    <link href="Child.xml" path="/Sites/Example/en-US/Child"/>
+  </link>
+  <richtext grammarName="coremedia-richtext-1.0">
+    <div xmlns="http://www.coremedia.com/2003/richtext-1.0">
+      <p>Example</p>
+    </div>
+  </richtext>
+  <string>forty-two!</string>
+  <struct>
+    <Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <StringProperty Name="lorem">ipsum</StringProperty>
+    </Struct>
+  </struct>
+  <extendedString></extendedString>
+  <locale>en-US</locale>
+</SimpleSiteContent>

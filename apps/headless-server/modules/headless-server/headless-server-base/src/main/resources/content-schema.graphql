@@ -241,6 +241,7 @@ interface CMLinkable @inherit(from: ["CMLocalized", "CollectionItem"]) {
   Retrieves settings as JSON by a list of list with path segments, e.g. settings(path: [["path1-segment1", "path1-segment2"], ["path2-segment1", "path2-segment2"]]. Supports "\*" as a wildcard to retrieve all settings at once: settings(path: "\*")
   """
   settings(paths: [[String!]!]!): JSON
+  linkedSettings: [CMSettings]
   contentInSetting(paths: [[String!]!]!): [LinkedContentEntry]
   contentInSettingPaged(paths: [[String!]!]!, offset: Int, limit: Int): LinkedContentEntryPaginationResult
   contentInStruct(paths: [[String!]!]!): [LinkedContentEntry]
@@ -282,9 +283,10 @@ interface CMLocTaxonomy @inherit(from: ["CMTaxonomy"]) {
 
 interface CMMedia @inherit(from: ["CMTeasable"]) {
   alt: String
-  caption(view: String, suppressRootTag: Boolean): String
-  captionAsTree(view: String): RichTextTree
-  captionReferencedContent(view: String): [Content_!]
+  caption: RichText
+  captionLegacy(view: String, suppressRootTag: Boolean): String  @deprecated(reason: "Replaced by new RichText type")
+  captionAsTree(view: String): RichTextTree @deprecated(reason: "Included in the RichText-Type of the caption field.")
+  captionReferencedContent(view: String): [Content_!] @deprecated(reason: "Included in the RichText-Type of the caption field.")
   copyright: String
   data: Blob
   fullyQualifiedUrl: String
@@ -512,6 +514,7 @@ type LinkedContentEntry {
 
 type CMLinkableImpl implements CMLinkable @inherit(from: ["CMLocalizedImpl"]) {
   settings(paths: [[String!]!]!): JSON @fetch(from: "@settingsAdapter.to(#root).getWrappedInMap(#paths)")
+  linkedSettings: [CMSettings] @fetch(from: "@structAdapter.to(#root).getStructValue('linkedSettings',{}, null)")
   contentInSetting(paths: [[String!]!]!): [LinkedContentEntry] @fetch(from: "@settingsAdapter.to(#root).getList(#paths)")
   contentInSettingPaged(paths: [[String!]!]!, offset: Int, limit:Int): LinkedContentEntryPaginationResult @fetch(from: "@pagingHelper.apply(#offset, #limit, @settingsAdapter.to(#root).getList(#paths))")
   contentInStruct(paths: [[String!]!]!): [LinkedContentEntry] @fetch(from: "@structAdapter.to(#root).getList(#paths)")
@@ -554,9 +557,10 @@ type CMLocTaxonomyImpl implements CMLocTaxonomy @inherit(from: ["CMTaxonomyImpl"
 
 type CMMediaImpl implements CMMedia @inherit(from: ["CMTeasableImpl"]) {
   alt: String
-  caption(view: String, suppressRootTag: Boolean): String @fetch(from: "caption?.view(#view?:'default', #suppressRootTag)")
-  captionAsTree(view: String): RichTextTree @fetch(from: "caption?.view(#view?:'default')")
-  captionReferencedContent(view: String): [Content_!] @fetch(from: "caption?.view(#view?:'default')?.getReferencedContent()")
+  caption: RichText @fetch(from: "caption")
+  captionLegacy(view: String, suppressRootTag: Boolean): String @fetch(from: "caption?.view(#view?:'default', #suppressRootTag)")  @deprecated(reason: "Replaced by new RichText type")
+  captionAsTree(view: String): RichTextTree @fetch(from: "caption?.view(#view?:'default')") @deprecated(reason: "Included in the RichText-Type of the caption field.")
+  captionReferencedContent(view: String): [Content_!] @fetch(from: "caption?.view(#view?:'default')?.getReferencedContent()") @deprecated(reason: "Included in the RichText-Type of the caption field.")
   copyright: String
   data: Blob @fetch(from: "@contentBlobAdapter.to(#root, 'data')")
   fullyQualifiedUrl: String @fetch(from: "#this.data == null ? null : @uriLinkComposer.apply(@filenameBlobAdapter.to(@contentBlobAdapter.to(#root, 'data')))")

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CMViewtype folder="/Sites/Commercetools Sunrise/United States/English/Options/Viewtypes/Container" name="hero" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+<externalRefId></externalRefId>
+<locale>en-US</locale>
+<master>
+</master>
+<description>Displays content as a hero banner.</description>
+<icon md5="11f531e39c248912f187578f0f65e52c" size="1456" href="../../../../../../../__blob/11f531e39c248912f187578f0f65e52c.blob" mimetype="image/svg+xml"/>
+<layout>hero</layout>
+</CMViewtype>

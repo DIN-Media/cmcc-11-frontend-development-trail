@@ -6,7 +6,7 @@
 <link href="../../../../United%20Kingdom/English/Editorial/Personalization/Personalized%20Hero%20Banner.xml" path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Editorial/Personalization/Personalized%20Hero%20Banner"/>
 </master>
 <viewtype>
-<link href="../../Options/Viewtypes/CMChannel/hero.xml" path="/Sites/SiteGenesis%20Global/France/French/Options/Viewtypes/CMChannel/hero"/>
+<link href="../../Options/Viewtypes/Container/hero.xml" path="/Sites/SiteGenesis%20Global/France/French/Options/Viewtypes/Container/hero"/>
 </viewtype>
 <linkedSettings>
 </linkedSettings>

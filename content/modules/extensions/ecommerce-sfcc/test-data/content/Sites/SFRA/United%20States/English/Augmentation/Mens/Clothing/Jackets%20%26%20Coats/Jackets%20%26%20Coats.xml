@@ -70,7 +70,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../../../../Editorial/Content/Banners/Men%20Category%20Teaser.xml" cmexport:path="/Sites/SFRA/United%20States/English/Editorial/Content/Banners/Men%20Category%20Teaser"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../../../Options/Viewtypes/CMChannel/hero.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Viewtypes/CMChannel/hero"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../../../Options/Viewtypes/Container/hero.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Viewtypes/Container/hero"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../../../../Options/Settings/Pagegrid/Placements/banner.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Settings/Pagegrid/Placements/banner"/>
 </Struct>
 </StructListProperty>

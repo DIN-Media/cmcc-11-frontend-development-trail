@@ -6,7 +6,7 @@
 <link href="../../../../../../United%20Kingdom/English/Editorial/Slots/Homepage/home-main/home-slideshow2.xml" path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Editorial/Slots/Homepage/home-main/home-slideshow2"/>
 </master>
 <viewtype>
-<link href="../../../../Options/Viewtypes/CMChannel/hero.xml" path="/Sites/SiteGenesis%20Global/France/French/Options/Viewtypes/CMChannel/hero"/>
+<link href="../../../../Options/Viewtypes/Container/hero.xml" path="/Sites/SiteGenesis%20Global/France/French/Options/Viewtypes/Container/hero"/>
 </viewtype>
 <linkedSettings>
 </linkedSettings>

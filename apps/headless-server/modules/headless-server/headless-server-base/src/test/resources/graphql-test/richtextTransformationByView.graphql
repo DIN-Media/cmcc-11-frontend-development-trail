@@ -13,7 +13,9 @@ query getTransformedRichtext($aid: String!, $pid: String! $view: String, $suppre
     picture(id: $pid) {
       id
       type
-      caption(view: $view, suppressRootTag: $suppressRootTag)
+      caption {
+        text(view: $view, suppressRootTag: $suppressRootTag)
+      }
     }
   }
 }

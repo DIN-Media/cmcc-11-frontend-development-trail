@@ -6,7 +6,7 @@
 <link href="../../../../../United%20Kingdom/English/Editorial/Content/Snow/Snow%20Hero%20Collection%203col.xml" path="/Sites/Hybris%20Apparel/United%20Kingdom/English/Editorial/Content/Snow/Snow%20Hero%20Collection%203col"/>
 </master>
 <viewtype>
-<link href="../../../Options/Viewtypes/CMChannel/portrait.xml" path="/Sites/Hybris%20Apparel/Germany/German/Options/Viewtypes/CMChannel/portrait"/>
+<link href="../../../Options/Viewtypes/Container/portrait.xml" path="/Sites/Hybris%20Apparel/Germany/German/Options/Viewtypes/Container/portrait"/>
 </viewtype>
 <linkedSettings>
 </linkedSettings>

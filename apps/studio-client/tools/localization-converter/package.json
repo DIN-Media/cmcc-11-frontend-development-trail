@@ -12,7 +12,7 @@
   "dependencies": {
     "@babel/core": "^7.22.9",
     "@babel/types": "^7.22.5",
-    "@coremedia/studio-client.tools.svg-icon-merger": "2307.2.0",
+    "@coremedia/studio-client.tools.svg-icon-merger": "2310.1.0",
     "find-up": "^5.0.0",
     "fs-extra": "^9.1.0",
     "js-yaml": "^4.1.0",

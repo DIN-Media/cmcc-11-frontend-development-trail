@@ -6,7 +6,7 @@
 <link href="../../../../United%20Kingdom/English/Editorial/Authors/Charlotte%27s%20Articles%20Query%20List.xml" path="/Sites/SFRA/United%20Kingdom/English/Editorial/Authors/Charlotte%27s%20Articles%20Query%20List"/>
 </master>
 <viewtype>
-<link href="../../Options/Viewtypes/CMChannel/landscape.xml" path="/Sites/SFRA/United%20States/English/Options/Viewtypes/CMChannel/landscape"/>
+<link href="../../Options/Viewtypes/Container/landscape.xml" path="/Sites/SFRA/United%20States/English/Options/Viewtypes/Container/landscape"/>
 </viewtype>
 <localSettings>
 <Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">

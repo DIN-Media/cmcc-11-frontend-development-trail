@@ -204,7 +204,13 @@ class CMSelectionRulesForm extends DocumentTabPanel {
                 }),
               ],
             }),
-            Config(ContainerViewTypeSelectorForm, { collapsed: false }),
+            Config(ContainerViewTypeSelectorForm, {
+              collapsed: false,
+              paths: [
+                "/Settings/Options/Viewtypes/CMSelectionRules/",
+                "Options/Viewtypes/CMSelectionRules/",
+              ]
+            }),
             Config(ValidityDocumentForm),
           ],
         }),

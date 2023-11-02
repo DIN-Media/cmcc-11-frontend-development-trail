@@ -6,6 +6,7 @@ import com.coremedia.blueprint.cae.contentbeans.PageImpl;
 import com.coremedia.blueprint.cae.web.links.NavigationLinkSupport;
 import com.coremedia.blueprint.common.contentbeans.CMChannel;
 import com.coremedia.blueprint.common.contentbeans.Page;
+import com.coremedia.blueprint.common.contentbeans.VirtualEntity;
 import com.coremedia.blueprint.common.layout.PageGridPlacement;
 import com.coremedia.blueprint.common.navigation.Linkable;
 import com.coremedia.blueprint.common.navigation.Navigation;
@@ -30,6 +31,7 @@ import com.coremedia.livecontext.ecommerce.common.CommerceConnection;
 import com.coremedia.livecontext.ecommerce.common.CommerceId;
 import com.coremedia.livecontext.ecommerce.common.CommerceIdProvider;
 import com.coremedia.livecontext.ecommerce.common.StoreContext;
+import com.coremedia.objectserver.dataviews.AssumesIdentity;
 import com.coremedia.objectserver.web.HandlerHelper;
 import com.coremedia.objectserver.web.UserVariantHelper;
 import com.google.common.base.Splitter;
@@ -157,7 +159,13 @@ public class ProductFragmentHandler extends FragmentHandler {
     Product product = getProductFromId(productId, request);
     Content externalProductContent = getAugmentedProductContent(product);
     if (externalProductContent == null) {
-      return createFragmentModelAndViewForPlacementAndView(navigation, placement, view, rootChannel, developer);
+      // product is not augmented we need to wrap the context of the navigation
+      Navigation virtualNavigation = navigation;
+      if (navigation instanceof AssumesIdentity) {
+        virtualNavigation = VirtualEntity.ofBean((AssumesIdentity & Navigation) navigation);
+      }
+      return createFragmentModelAndViewForPlacementAndView(virtualNavigation,
+              placement, view, rootChannel, developer);
     }
 
     LiveContextExternalProduct externalProduct = getContentBeanFactory().createBeanFor(externalProductContent,

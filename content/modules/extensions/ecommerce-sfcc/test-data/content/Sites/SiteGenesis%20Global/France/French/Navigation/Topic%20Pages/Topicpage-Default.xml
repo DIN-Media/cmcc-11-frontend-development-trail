@@ -6,7 +6,7 @@
 <link href="../../../../United%20Kingdom/English/Navigation/Topic%20Pages/Topicpage-Default.xml" path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Navigation/Topic%20Pages/Topicpage-Default"/>
 </master>
 <viewtype>
-<link href="../../Options/Viewtypes/CMChannel/square.xml" path="/Sites/SiteGenesis%20Global/France/French/Options/Viewtypes/CMChannel/square"/>
+<link href="../../Options/Viewtypes/Container/square.xml" path="/Sites/SiteGenesis%20Global/France/French/Options/Viewtypes/Container/square"/>
 </viewtype>
 <localSettings>
 <Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">

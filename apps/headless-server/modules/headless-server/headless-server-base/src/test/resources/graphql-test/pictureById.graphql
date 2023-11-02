@@ -6,9 +6,11 @@ query getPictureById($id: String!) {
       repositoryPath
       locale
       name
-      caption
-      captionReferencedContent {
-        id
+      caption {
+        text
+        textReferencedContent {
+          id
+        }
       }
       type
       uriTemplate

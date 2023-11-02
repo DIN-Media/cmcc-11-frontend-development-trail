@@ -6,7 +6,7 @@
 <link href="../../../../../../../United%20States/English/Editorial/Homepage/Company/Press/Events/All%20Events%20Query%20List.xml" path="/Sites/Chef%20Corp%2E/United%20States/English/Editorial/Homepage/Company/Press/Events/All%20Events%20Query%20List"/>
 </master>
 <viewtype>
-<link href="../../../../../Options/Viewtypes/CMChannel/landscape.xml" path="/Sites/Chef%20Corp%2E/Germany/German/Options/Viewtypes/CMChannel/landscape"/>
+<link href="../../../../../Options/Viewtypes/Container/landscape.xml" path="/Sites/Chef%20Corp%2E/Germany/German/Options/Viewtypes/Container/landscape"/>
 </viewtype>
 <localSettings>
 <Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">

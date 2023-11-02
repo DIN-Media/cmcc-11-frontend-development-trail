@@ -6,7 +6,7 @@
 <link href="../../../../United%20Kingdom/English/Editorial/Content/Editorial%20Blog.xml" path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Editorial/Content/Editorial%20Blog"/>
 </master>
 <viewtype>
-<link href="../../Options/Viewtypes/CMChannel/left-right.xml" path="/Sites/SiteGenesis%20Global/France/French/Options/Viewtypes/CMChannel/left-right"/>
+<link href="../../Options/Viewtypes/Container/left-right.xml" path="/Sites/SiteGenesis%20Global/France/French/Options/Viewtypes/Container/left-right"/>
 </viewtype>
 <localSettings>
 <Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">

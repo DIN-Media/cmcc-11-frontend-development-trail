@@ -6,7 +6,7 @@
 <link href="../../../../../United%20States/English/Editorial/Content/Startpage/New%20Arrivals%20Collection.xml" path="/Sites/Calista/United%20States/English/Editorial/Content/Startpage/New%20Arrivals%20Collection"/>
 </master>
 <viewtype>
-<link href="../../../Options/Viewtypes/CMChannel/carousel.xml" path="/Sites/Calista/Germany/German/Options/Viewtypes/CMChannel/carousel"/>
+<link href="../../../Options/Viewtypes/Container/carousel.xml" path="/Sites/Calista/Germany/German/Options/Viewtypes/Container/carousel"/>
 </viewtype>
 <linkedSettings>
 </linkedSettings>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema>
+
+  <type name="Custom" abstract="true"/>
+
+  <type name="CustomEmpty" parent="Custom"/>
+
+  <type name="CustomAll" parent="Custom">
+    <property name="blob" type="blob"/>
+    <property name="date" type="date"/>
+    <property name="image" type="blob" contentType="image/*"/>
+    <property name="int" type="int"/>
+    <property name="link" type="link" linkType="Custom"/>
+    <property name="contentLink" type="link" linkType="Content_"/>
+    <property name="documentLink" type="link" linkType="Document_"/>
+    <property name="folderLink" type="link" linkType="Folder_"/>
+    <property name="richtext" type="markup" grammar="coremedia-richtext-1.0"/>
+    <property name="string" type="string"/>
+    <property name="struct" type="markup" grammar="coremedia-struct-2008"/>
+  </type>
+
+  <grammar name="coremedia-richtext-1.0" root="div" systemId="classpath:xml/coremedia-richtext-1.0.dtd"/>
+  <grammar name="coremedia-struct-2008" root="div" systemId="classpath:xml/coremedia-struct-2008.xsd"/>
+
+</schema>

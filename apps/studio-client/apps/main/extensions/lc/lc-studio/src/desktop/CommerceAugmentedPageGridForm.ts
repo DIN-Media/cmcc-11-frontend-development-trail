@@ -20,7 +20,8 @@ interface CommerceAugmentedPageGridFormConfig extends Config<PropertyFieldGroup>
   "showLocal" |
   "pageGridPropertyName" |
   "fallbackPageGridPropertyName" |
-  "layoutPaths"
+  "layoutPaths" |
+  "virtual"
 >> {
 }
 
@@ -47,6 +48,7 @@ class CommerceAugmentedPageGridForm extends PropertyFieldGroup {
           showLocal: config.showLocal,
           layoutPaths: config.layoutPaths,
           pageTreeRelation: augmentedCategoryTreeRelation,
+          virtual: config.virtual,
           fields: [
             Config(DataField, {
               name: ValidityColumn.STATUS_ID,
@@ -93,6 +95,11 @@ class CommerceAugmentedPageGridForm extends PropertyFieldGroup {
   fallbackPageGridPropertyName: string = null;
 
   layoutPaths: Array<string> = null;
+
+  /**
+   * Set true when the pagegrid is for non-augmented entity which inherits the pagegrid from an augmented one. Default: false.
+   */
+  virtual: boolean = false;
 }
 
 export default CommerceAugmentedPageGridForm;

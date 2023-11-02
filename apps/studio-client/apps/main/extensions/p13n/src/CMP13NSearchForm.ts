@@ -115,7 +115,13 @@ class CMP13NSearchForm extends DocumentTabPanel {
                 }),
               ],
             }),
-            Config(ContainerViewTypeSelectorForm, { collapsed: false }),
+            Config(ContainerViewTypeSelectorForm, {
+              collapsed: false,
+              paths: [
+                "/Settings/Options/Viewtypes/CMP13NSearch/",
+                "Options/Viewtypes/CMP13NSearch/",
+              ]
+            }),
             Config(ValidityDocumentForm),
           ],
         }),

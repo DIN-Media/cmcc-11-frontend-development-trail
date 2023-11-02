@@ -56,7 +56,7 @@
 <Link xlink:href="coremedia:///cap/resources/Clothing/Clothing.xml" cmexport:path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Augmentation/Womens/Clothing/Clothing"/>
 <Link xlink:href="coremedia:///cap/resources/Jewelry/Jewelry.xml" cmexport:path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Augmentation/Womens/Jewelry/Jewelry"/>
 </LinkListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/CMChannel/portrait.xml" cmexport:path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Options/Viewtypes/CMChannel/portrait"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/Container/portrait.xml" cmexport:path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Options/Viewtypes/Container/portrait"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../../Options/Settings/Pagegrid/Placements/main.xml" cmexport:path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Options/Settings/Pagegrid/Placements/main"/>
 </Struct>
 <Struct>
@@ -65,7 +65,7 @@
 <Link xlink:href="coremedia:///cap/resources/../../Editorial/Content/Articles/The%20Difference%20between%20Style%20and%20Fashion.xml" cmexport:path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Editorial/Content/Articles/The%20Difference%20between%20Style%20and%20Fashion"/>
 <Link xlink:href="coremedia:///cap/resources/../../Editorial/Content/ImageMaps/Women%20Image%20Map.xml" cmexport:path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Editorial/Content/ImageMaps/Women%20Image%20Map"/>
 </LinkListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/CMChannel/hero.xml" cmexport:path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Options/Viewtypes/CMChannel/hero"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/Container/hero.xml" cmexport:path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Options/Viewtypes/Container/hero"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../../Options/Settings/Pagegrid/Placements/banner.xml" cmexport:path="/Sites/SiteGenesis%20Global/United%20Kingdom/English/Options/Settings/Pagegrid/Placements/banner"/>
 </Struct>
 </StructListProperty>

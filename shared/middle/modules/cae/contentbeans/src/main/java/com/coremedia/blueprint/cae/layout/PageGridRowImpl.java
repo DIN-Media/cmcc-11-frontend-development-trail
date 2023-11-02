@@ -4,6 +4,7 @@ import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGrid;
 import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGridService;
 import com.coremedia.blueprint.base.pagegrid.ContentBackedStyle;
 import com.coremedia.blueprint.base.pagegrid.ContentBackedStyleGrid;
+import com.coremedia.blueprint.common.contentbeans.VirtualEntity;
 import com.coremedia.blueprint.common.datevalidation.ValidityPeriodValidator;
 import com.coremedia.blueprint.common.layout.HasPageGrid;
 import com.coremedia.blueprint.common.layout.PageGridPlacement;
@@ -30,7 +31,6 @@ public class PageGridRowImpl implements PageGridRow, AssumesIdentity {
 
   private HasPageGrid bean;
   private int row;
-
 
   // --- construction -----------------------------------------------
 
@@ -65,7 +65,6 @@ public class PageGridRowImpl implements PageGridRow, AssumesIdentity {
   public PageGridRowImpl() {
     // This constructor needs to be available, since it is used during dataview generation.
   }
-
 
   // --- PageGridRow ------------------------------------------------
 
@@ -150,10 +149,9 @@ public class PageGridRowImpl implements PageGridRow, AssumesIdentity {
     row = other.row;
   }
 
-
   // --- internal ---------------------------------------------------
 
   private ContentBackedPageGrid getContentBackedPageGrid() {
-    return contentBackedPageGridService.getContentBackedPageGrid(bean.getContent());
+    return contentBackedPageGridService.getContentBackedPageGrid(bean.getContent(), bean instanceof VirtualEntity);
   }
 }

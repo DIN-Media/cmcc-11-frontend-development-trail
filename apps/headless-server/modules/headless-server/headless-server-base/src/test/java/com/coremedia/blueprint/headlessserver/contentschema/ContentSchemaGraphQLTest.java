@@ -42,6 +42,7 @@ import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConst
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.DOWNLOAD_UUID;
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.HTML_ID;
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.HTML_UUID;
+import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.LINKED_SETTING_ID;
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.MASTER_SITE_ID;
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.MASTER_SITE_LOCALE;
 import static com.coremedia.blueprint.headlessserver.contentschema.TestRepoConstants.MASTER_SITE_NAME;
@@ -231,6 +232,7 @@ class ContentSchemaGraphQLTest {
             .path("content.article.type").entity(String.class).isEqualTo("CMArticle")
             .path("content.article.locale").entity(String.class).isEqualTo(MASTER_SITE_LOCALE)
             .path("content.article.repositoryPath").entity(String.class).isEqualTo(ARTICLE_REPO_PATH)
+            .path("content.article.linkedSettings.[0].id").entity(Integer.class).isEqualTo(LINKED_SETTING_ID)
             .path("content.article.mainNavigation").valueIsNull()
             .path("content.article.detailText.text").entity(String.class).matches(html -> html.contains("foo bar"))
             .path("content.article.detailText.textAsTree").valueIsNull() // element tree
@@ -275,8 +277,8 @@ class ContentSchemaGraphQLTest {
             .path("content.picture.name").entity(String.class).isEqualTo("pic16")
             .path("content.picture.locale").entity(String.class).isEqualTo(MASTER_SITE_LOCALE)
             .path("content.picture.repositoryPath").entity(String.class).isEqualTo(MEDIA_REPO_PATH)
-            .path("content.picture.caption").entity(String.class).matches(html -> html.contains("foo bar"))
-            .path("content.picture.captionReferencedContent").entityList(String.class).hasSize(0)
+            .path("content.picture.caption.text").entity(String.class).matches(html -> html.contains("foo bar"))
+            .path("content.picture.caption.textReferencedContent").entityList(String.class).hasSize(0)
             .path("content.picture.uriTemplate").entity(String.class).matches(uriTemplate -> uriTemplate.startsWith(MEDIA_DELIVERY_PATH + PICTURE_ID + "/data"));
   }
 

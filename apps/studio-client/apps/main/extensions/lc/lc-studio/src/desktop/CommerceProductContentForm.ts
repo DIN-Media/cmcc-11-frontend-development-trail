@@ -47,6 +47,7 @@ class CommerceProductContentForm extends DocumentForm {
           bindTo: this$.#augmentedCategoryExpression,
           pageGridPropertyName: "pdpPagegrid",
           fallbackPageGridPropertyName: "placement",
+          virtual: true,
         }),
 
         Config(CommercePricesPropertyFieldGroup, {

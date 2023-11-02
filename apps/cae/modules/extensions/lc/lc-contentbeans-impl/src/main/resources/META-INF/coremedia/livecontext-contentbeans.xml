@@ -12,7 +12,6 @@
   <import resource="classpath:/META-INF/coremedia/livecontext-navigation.xml"/>
 
   <bean class="com.coremedia.blueprint.viewtype.configuration.ViewtypeServiceConfiguration"/>
-  <bean class="com.coremedia.blueprint.base.livecontext.augmentation.config.AugmentationPageGridServiceConfiguration"/>
 
   <bean name="contentBeanFactory:CMMarketingSpot" parent="abstractTeasable-blueprint-doctypes"
         class="com.coremedia.livecontext.contentbeans.CMMarketingSpotImpl" scope="prototype">
@@ -44,7 +43,11 @@
         class="com.coremedia.livecontext.contentbeans.LiveContextExternalChannelImpl" scope="prototype">
     <property name="treeRelation" ref="liveContextNavigationTreeRelation"/>
     <property name="codeResourcesTreeRelation" ref="externalChannelContentTreeRelation"/>
+    <property name="liveContextNavigationFactory" ref="liveContextNavigationFactory"/>
     <property name="pageGridService" ref="extCategoryPageGridService"/>
+    <property name="pdpPageGridService" ref="pdpPageGridService"/>
+    <property name="commerceConnectionSupplier" ref="commerceConnectionSupplier"/>
+
   </bean>
 
   <bean name="contentBeanFactory:CMExternalProduct"

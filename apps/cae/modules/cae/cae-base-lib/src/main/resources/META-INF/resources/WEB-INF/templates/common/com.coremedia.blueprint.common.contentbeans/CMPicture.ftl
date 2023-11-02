@@ -7,7 +7,7 @@
 -->
 
 <#if self.data?has_content>
-  <img class="cm-picture" src="${cm.getLink(self.data)}" width="100%" alt="${self.title!""}">
+  <img class="cm-picture" src="${cm.getLink(self.data)}" loading="lazy" width="100%" alt="${self.title!""}">
 </#if>
 
 

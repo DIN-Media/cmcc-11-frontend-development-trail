@@ -9,6 +9,7 @@ import com.coremedia.blueprint.base.pagegrid.PageGridConstants;
 import com.coremedia.blueprint.base.pagegrid.PageGridContentKeywords;
 import com.coremedia.blueprint.base.pagegrid.TableLayoutData;
 import com.coremedia.blueprint.common.contentbeans.CMNavigation;
+import com.coremedia.blueprint.common.contentbeans.VirtualEntity;
 import com.coremedia.blueprint.common.datevalidation.ValidityPeriod;
 import com.coremedia.blueprint.common.datevalidation.ValidityPeriodValidator;
 import com.coremedia.blueprint.common.layout.HasPageGrid;
@@ -250,7 +251,7 @@ public class ContentBeanBackedPageGridPlacement implements PageGridPlacement, As
   }
 
   private ContentBackedPageGrid getContentBackedPageGrid() {
-    return contentBackedPageGridService.getContentBackedPageGrid(bean.getContent());
+    return contentBackedPageGridService.getContentBackedPageGrid(bean.getContent(), getStructPropertyName(), bean instanceof VirtualEntity);
   }
 
   private ContentBeanFactory getContentBeanFactory() {

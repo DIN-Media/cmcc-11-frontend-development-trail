@@ -1,0 +1,53 @@
+<rules>
+  <rule resourceId="1" group="0" doctype="Folder_">
+    <right value="ALL"/>
+  </rule>
+  <rule resourceId="1" group="0" doctype="Document_">
+    <right value="ALL"/>
+  </rule>
+
+  <!-- Rights for `editor`. -->
+
+  <rule resourceId="1" group="1" doctype="Folder_">
+    <right value="DELETE"/>
+    <right value="READ"/>
+    <right value="WRITE"/>
+  </rule>
+
+  <rule resourceId="1" group="1" doctype="Document_">
+    <right value="DELETE"/>
+    <right value="READ"/>
+    <right value="WRITE"/>
+  </rule>
+
+  <!-- Rights for `read-only`. -->
+
+  <rule resourceId="1" group="2" doctype="Folder_">
+    <right value="READ"/>
+  </rule>
+
+  <rule resourceId="1" group="2" doctype="Document_">
+    <right value="READ"/>
+  </rule>
+
+  <!-- Rights for `approver-role`. -->
+
+  <rule resourceId="1" group="3" doctype="Folder_">
+    <right value="APPROVE"/>
+  </rule>
+
+  <rule resourceId="1" group="3" doctype="Document_">
+    <right value="APPROVE"/>
+  </rule>
+
+  <!-- Rights for `publisher-role`. -->
+
+  <rule resourceId="1" group="5" doctype="Folder_">
+    <right value="PUBLISH"/>
+  </rule>
+
+  <rule resourceId="1" group="5" doctype="Document_">
+    <right value="PUBLISH"/>
+  </rule>
+
+</rules>

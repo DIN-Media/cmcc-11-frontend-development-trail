@@ -77,7 +77,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/CMTeasable" xlink:href="coremedia:///cap/resources/../../../Products/Blenders%20and%20Food%20Processors/Blenders%20and%20Food%20Processors.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Products/Blenders%20and%20Food%20Processors/Blenders%20and%20Food%20Processors"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../../Options/Viewtypes/CMChannel/portrait.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/CMChannel/portrait"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../../Options/Viewtypes/Container/portrait.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/Container/portrait"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../../../Options/Settings/Pagegrid/Placements/main.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Settings/Pagegrid/Placements/main"/>
 </Struct>
 </StructListProperty>

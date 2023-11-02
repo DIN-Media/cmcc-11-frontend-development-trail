@@ -33,7 +33,7 @@
     <google.api.services.youtube.version>v3-rev152-1.19.0</google.api.services.youtube.version>
 
     <customer>Blueprint</customer>
-    <cm.management-tools.core.version>2307.2</cm.management-tools.core.version>
+    <cm.management-tools.core.version>2310.1</cm.management-tools.core.version>
 
     <application-plugin.version>3.0.1</application-plugin.version>
 
@@ -69,19 +69,19 @@
     <skip-hybris-tests>true</skip-hybris-tests>
 
     <!-- Version for Spring Boot Apps embedded Tomcat. Tomcat 9 is supported -->
-    <tomcat.version>9.0.80</tomcat.version>
-    <cm.management-tools.core.version>2307.2</cm.management-tools.core.version>
-    <cm.common.core.version>2307.2</cm.common.core.version>
+    <tomcat.version>9.0.82</tomcat.version>
+    <cm.management-tools.core.version>2310.1</cm.management-tools.core.version>
+    <cm.common.core.version>2310.1</cm.common.core.version>
     <cm.common.bp.version>1-SNAPSHOT</cm.common.bp.version>
-    <cm.middle.core.version>2307.2</cm.middle.core.version>
+    <cm.middle.core.version>2310.1</cm.middle.core.version>
     <cm.middle.bp.version>1-SNAPSHOT</cm.middle.bp.version>
-    <cm.cae-feeder.core.version>2307.2</cm.cae-feeder.core.version>
+    <cm.cae-feeder.core.version>2310.1</cm.cae-feeder.core.version>
     <cm.cae-feeder.bp.version>1-SNAPSHOT</cm.cae-feeder.bp.version>
-    <cm.content-server.core.version>2307.2</cm.content-server.core.version>
+    <cm.content-server.core.version>2310.1</cm.content-server.core.version>
     <cm.content-server.bp.version>1-SNAPSHOT</cm.content-server.bp.version>
-    <cm.workflow-server.core.version>2307.2</cm.workflow-server.core.version>
+    <cm.workflow-server.core.version>2310.1</cm.workflow-server.core.version>
     <cm.workflow-server.bp.version>1-SNAPSHOT</cm.workflow-server.bp.version>
-    <cm.studio-server.core.version>2307.2</cm.studio-server.core.version>
+    <cm.studio-server.core.version>2310.1</cm.studio-server.core.version>
     <cm.studio-server.bp.version>1-SNAPSHOT</cm.studio-server.bp.version>
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
 

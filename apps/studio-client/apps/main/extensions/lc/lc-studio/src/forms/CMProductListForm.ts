@@ -117,7 +117,13 @@ class CMProductListForm extends CMProductListFormBase {
           items: [
             Config(TeaserDocumentForm),
             Config(FixedIndexItemsForm),
-            Config(ContainerViewTypeSelectorForm, { collapsed: false }),
+            Config(ContainerViewTypeSelectorForm, {
+              collapsed: false,
+              paths: [
+                "/Settings/Options/Viewtypes/CMProductList/",
+                "Options/Viewtypes/CMProductList/",
+              ]
+            }),
             Config(ValidityDocumentForm),
           ],
         }),

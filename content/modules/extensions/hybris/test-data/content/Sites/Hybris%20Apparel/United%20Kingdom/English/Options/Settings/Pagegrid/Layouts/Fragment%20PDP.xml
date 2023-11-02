@@ -13,6 +13,7 @@
 <Struct>
 <BooleanProperty Name="editable">true</BooleanProperty>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Placements/header.xml" cmexport:path="/Sites/Hybris%20Apparel/United%20Kingdom/English/Options/Settings/Pagegrid/Placements/header"/>
+<BooleanProperty Name="defaultInheritance">false</BooleanProperty>
 <IntProperty Name="row">1</IntProperty>
 <IntProperty Name="col">1</IntProperty>
 <IntProperty Name="height">20</IntProperty>
@@ -21,6 +22,7 @@
 </Struct>
 <Struct>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Placements/banner.xml" cmexport:path="/Sites/Hybris%20Apparel/United%20Kingdom/English/Options/Settings/Pagegrid/Placements/banner"/>
+<BooleanProperty Name="disableInheritance">true</BooleanProperty>
 <IntProperty Name="row">2</IntProperty>
 <IntProperty Name="col">2</IntProperty>
 <IntProperty Name="height">25</IntProperty>

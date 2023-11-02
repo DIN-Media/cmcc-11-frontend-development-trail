@@ -229,6 +229,9 @@ class TaxonomyExplorerPanelBase extends Panel {
               this.setBusy(false);
               const msg = TaxonomyStudioPlugin_properties.TaxonomyEditor_deletion_failed_text;
               MessageBoxWindow.getInstance().alert(TaxonomyStudioPlugin_properties.TaxonomyEditor_deletion_failed_title, msg);
+
+              const taxonomyExplorer = as(Ext.getCmp("taxonomyExplorerPanel"), TaxonomyExplorerPanel);
+              taxonomyExplorer.reload();
             }
 
             this.setBusy(false);

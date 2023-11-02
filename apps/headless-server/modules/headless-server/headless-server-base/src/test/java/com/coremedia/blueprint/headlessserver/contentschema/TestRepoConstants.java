@@ -38,6 +38,7 @@ public final class TestRepoConstants {
   public static final String MEDIA_DELIVERY_PATH = "/caas/v1/media/";
 
   public static final Integer ARTICLE_ID = 111116;
+  public static final Integer LINKED_SETTING_ID = 111124;
   public static final String ARTICLE_UUID = "a3eef115-05f6-4d62-a784-37218575ff79";
   public static final Integer TIME_TRAVEL_ARTICLE_ID = 111126;
   public static final String ARTICLE_REPO_PATH = MASTER_SITE_REPO_PATH + "/Content/Articles";

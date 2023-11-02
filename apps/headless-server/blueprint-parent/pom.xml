@@ -74,12 +74,12 @@
     <skip-hybris-tests>true</skip-hybris-tests>
 
     <!-- Version for Spring Boot Apps embedded Tomcat. Tomcat 9 is supported -->
-    <tomcat.version>9.0.80</tomcat.version>
-    <cm.headless-server.core.version>2307.2</cm.headless-server.core.version>
+    <tomcat.version>9.0.82</tomcat.version>
+    <cm.headless-server.core.version>2310.1</cm.headless-server.core.version>
     <cm.common.bp.version>1-SNAPSHOT</cm.common.bp.version>
     <cm.middle.bp.version>1-SNAPSHOT</cm.middle.bp.version>
-    <cm.common.core.version>2307.2</cm.common.core.version>
-    <cm.middle.core.version>2307.2</cm.middle.core.version>
+    <cm.common.core.version>2310.1</cm.common.core.version>
+    <cm.middle.core.version>2310.1</cm.middle.core.version>
 
     <!-- headless-server-base -->
     <caffeine.version>2.9.3</caffeine.version>

@@ -32,6 +32,7 @@
     <module>blueprint-parent</module>
     <module>importer-template</module>
     <module>uapi-client</module>
+    <module>uapi-tests</module>
   </modules>
 
   <scm>

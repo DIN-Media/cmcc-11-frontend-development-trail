@@ -5,7 +5,7 @@
 <master>
 </master>
 <viewtype>
-<link href="../../Options/Viewtypes/CMChannel/landscape.xml" path="/Sites/Hybris%20Apparel/United%20Kingdom/English/Options/Viewtypes/CMChannel/landscape"/>
+<link href="../../Options/Viewtypes/Container/landscape.xml" path="/Sites/Hybris%20Apparel/United%20Kingdom/English/Options/Viewtypes/Container/landscape"/>
 </viewtype>
 <linkedSettings>
 </linkedSettings>

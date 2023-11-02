@@ -71,9 +71,9 @@
     <skip-hybris-tests>true</skip-hybris-tests>
 
     <!-- Version for Spring Boot Apps embedded Tomcat. Tomcat 9 is supported -->
-    <tomcat.version>9.0.80</tomcat.version>
-    <cm.workflow-server.core.version>2307.2</cm.workflow-server.core.version>
-    <cm.common.core.version>2307.2</cm.common.core.version>
+    <tomcat.version>9.0.82</tomcat.version>
+    <cm.workflow-server.core.version>2310.1</cm.workflow-server.core.version>
+    <cm.common.core.version>2310.1</cm.common.core.version>
     <cm.common.bp.version>1-SNAPSHOT</cm.common.bp.version>
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
 

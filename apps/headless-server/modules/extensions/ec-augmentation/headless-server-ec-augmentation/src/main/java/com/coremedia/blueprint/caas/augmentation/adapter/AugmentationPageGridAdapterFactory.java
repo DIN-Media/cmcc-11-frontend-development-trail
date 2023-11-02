@@ -62,16 +62,18 @@ public class AugmentationPageGridAdapterFactory extends PageGridAdapterFactory {
    */
   @Deprecated(forRemoval = true, since = "2107")
   public PageGridAdapter to(CommerceBean commerceBean, DataFetchingEnvironment dataFetchingEnvironment) {
-    return to(getContent(commerceBean), propertyName, dataFetchingEnvironment);
+    return to(getContent(commerceBean), propertyName, isVirtual(commerceBean), dataFetchingEnvironment);
   }
 
   public PageGridAdapter to(CommerceRef commerceRef, DataFetchingEnvironment dataFetchingEnvironment) {
-    return to(getContent(getCommerceBean(commerceRef)), propertyName, dataFetchingEnvironment);
+    CommerceBean commerceBean = getCommerceBean(commerceRef);
+    return to(getContent(commerceBean), propertyName, isVirtual(commerceBean), dataFetchingEnvironment);
   }
 
   public PageGridAdapter to(Augmentation augmentation, DataFetchingEnvironment dataFetchingEnvironment) {
     CommerceRef commerceRef = augmentation.getCommerceRef();
-    return to(getContent(getCommerceBean(commerceRef)), propertyName, dataFetchingEnvironment);
+    CommerceBean commerceBean = getCommerceBean(commerceRef);
+    return to(getContent(commerceBean), propertyName, isVirtual(commerceBean), dataFetchingEnvironment);
   }
 
   private CommerceBean getCommerceBean(CommerceRef commerceRef) {
@@ -93,6 +95,11 @@ public class AugmentationPageGridAdapterFactory extends PageGridAdapterFactory {
 
   private Site getSite(CommerceBean commerceBean) {
     return sitesService.getSite(getSiteId(commerceBean));
+  }
+
+  private boolean isVirtual(CommerceBean commerceBean) {
+    Content content = augmentationService.getContent(commerceBean);
+    return content == null;
   }
 
   @SuppressWarnings("OverlyComplexMethod")

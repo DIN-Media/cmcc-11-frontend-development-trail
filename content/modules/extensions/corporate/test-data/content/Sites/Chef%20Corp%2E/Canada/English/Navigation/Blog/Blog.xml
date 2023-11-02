@@ -55,7 +55,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../../Editorial/Homepage/Kitchen%20Dreams/Meet%20Sally.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Editorial/Homepage/Kitchen%20Dreams/Meet%20Sally"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/CMChannel/hero.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/CMChannel/hero"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/Container/hero.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/Container/hero"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../../Options/Settings/Pagegrid/Placements/hero.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Settings/Pagegrid/Placements/hero"/>
 </Struct>
 <Struct>
@@ -76,7 +76,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../../Editorial/Authors/Michelle%27s%20Articles%20Query%20List.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Editorial/Authors/Michelle%27s%20Articles%20Query%20List"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/CMChannel/left-right.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/CMChannel/left-right"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/Container/left-right.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/Container/left-right"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../../Options/Settings/Pagegrid/Placements/placement1.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Settings/Pagegrid/Placements/placement1"/>
 </Struct>
 <Struct>
@@ -87,7 +87,7 @@
 <Struct>
 <StructListProperty Name="extendedItems">
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/CMChannel/carousel.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/CMChannel/carousel"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/Container/carousel.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/Container/carousel"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../../Options/Settings/Pagegrid/Placements/placement3.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Settings/Pagegrid/Placements/placement3"/>
 </Struct>
 </StructListProperty>

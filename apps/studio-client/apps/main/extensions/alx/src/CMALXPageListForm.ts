@@ -113,7 +113,13 @@ class CMALXPageListForm extends DocumentTabPanel {
                 Config(AnalyticsProviderComboBox, { propertyName: "analyticsProvider" }),
               ],
             }),
-            Config(ContainerViewTypeSelectorForm, { collapsed: false }),
+            Config(ContainerViewTypeSelectorForm, {
+              collapsed: false,
+              paths: [
+                "/Settings/Options/Viewtypes/CMALXPageList/",
+                "Options/Viewtypes/CMALXPageList/",
+              ]
+            }),
             Config(ValidityDocumentForm),
           ],
         }),

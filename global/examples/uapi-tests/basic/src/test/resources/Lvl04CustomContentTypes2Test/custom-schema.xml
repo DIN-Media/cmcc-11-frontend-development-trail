@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DocumentTypeModel xmlns="http://www.coremedia.com/2009/documenttypes"
+                   Root="Custom"
+                   Name="custom-content-types"
+                   Title="Custom-Content-Types in Standard CMS Syntax">
+
+  <ImportDocType Name="Content_"/>
+  <ImportDocType Name="Document_"/>
+  <ImportDocType Name="Folder_"/>
+
+  <ImportGrammar Name="coremedia-struct-2008"/>
+
+  <XmlGrammar Name="coremedia-richtext-1.0"
+              Root="div"
+              PublicId="-//CoreMedia//DTD Rich Text 1.0//EN"
+              SystemId="classpath:xml/coremedia-richtext-1.0.dtd"/>
+
+
+  <DocType Name="Custom" Abstract="true"/>
+
+  <DocType Name="CustomEmpty" Parent="Custom"/>
+
+  <DocType Name="CustomAll" Parent="Custom">
+    <BlobProperty Name="blob" MimeType="*/*"/>
+    <DateProperty Name="date"/>
+    <BlobProperty Name="image" MimeType="image/*"/>
+    <IntProperty Name="int"/>
+    <LinkListProperty Name="link" LinkType="Custom"/>
+    <LinkListProperty Name="contentLink" LinkType="Content_"/>
+    <LinkListProperty Name="documentLink" LinkType="Document_"/>
+    <LinkListProperty Name="folderLink" LinkType="Folder_"/>
+    <XmlProperty Name="richtext" Grammar="coremedia-richtext-1.0"/>
+    <StringProperty Name="string" Length="1024"/>
+    <XmlProperty Name="struct" Grammar="coremedia-struct-2008"/>
+  </DocType>
+
+</DocumentTypeModel>

@@ -62,7 +62,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/About/About%20Page.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Navigation/Company/About/About%20Page"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/CMChannel/hero.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/CMChannel/hero"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/Container/hero.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/Container/hero"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../../Options/Settings/Pagegrid/Placements/hero.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Settings/Pagegrid/Placements/hero"/>
 </Struct>
 <Struct>
@@ -77,7 +77,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/Investor%20Relations/Investor%20Relations%20Page.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Navigation/Company/Investor%20Relations/Investor%20Relations%20Page"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/CMChannel/landscape.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/CMChannel/landscape"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../Options/Viewtypes/Container/landscape.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Viewtypes/Container/landscape"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../../Options/Settings/Pagegrid/Placements/placement1.xml" cmexport:path="/Sites/Chef%20Corp%2E/Canada/English/Options/Settings/Pagegrid/Placements/placement1"/>
 </Struct>
 <Struct>

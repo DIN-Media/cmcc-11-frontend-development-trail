@@ -4,6 +4,8 @@ import com.coremedia.blueprint.base.caas.search.HeadlessSearchAutoConfiguration;
 import com.coremedia.blueprint.base.caas.web.BlueprintBaseMediaConfig;
 import com.coremedia.blueprint.base.livecontext.augmentation.AugmentationAutoConfiguration;
 import com.coremedia.blueprint.base.livecontext.ecommerce.common.BaseCommerceServicesConfiguration;
+import com.coremedia.blueprint.base.multisite.BlueprintMultisiteConfiguration;
+import com.coremedia.blueprint.base.tree.TreeRelationServicesConfiguration;
 import com.coremedia.blueprint.coderesources.ThemeServiceConfiguration;
 import com.coremedia.blueprint.headlessserver.CaasConfig;
 import com.coremedia.caas.media.TransformationServiceConfiguration;
@@ -66,9 +68,11 @@ import static org.mockito.Mockito.when;
         HeadlessSearchAutoConfiguration.class,
         CaasConfig.class,
         BlueprintBaseMediaConfig.class,
+        BlueprintMultisiteConfiguration.class,
         GraphQLController.class,
         TransformationServiceConfiguration.class,
         ThemeServiceConfiguration.class,
+        TreeRelationServicesConfiguration.class,
         CommerceSchemaGraphQLTest.LocalTestConfiguration.class,
 }, properties = {
         "repository.factoryClassName=com.coremedia.cap.xmlrepo.XmlCapConnectionFactory",

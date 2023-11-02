@@ -4,6 +4,7 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import org.xml.sax.Attributes;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 /**
@@ -31,4 +32,24 @@ final class SaxAttributes {
     return SaxAttribute.optionalOf(attributes, ATTR_CLASS);
   }
 
+  /**
+   * If existing, removes the attribute given by its qualified name and invokes
+   * the given consumer with its value.
+   *
+   * @param attributes attributes to possibly remove attribute from
+   * @param qName qualified name of attribute
+   * @param valueConsumer consumer for original value of attribute, if existing
+   * @return new attributes without given attribute
+   * @since 2310.1
+   */
+  @NonNull
+  static Attributes remove(@NonNull Attributes attributes, @NonNull String qName, @NonNull Consumer<? super String> valueConsumer) {
+    Optional<SaxAttribute> optional = SaxAttribute.optionalOf(attributes, qName);
+    if (optional.isEmpty()) {
+      return attributes;
+    }
+    SaxAttribute attribute = optional.get();
+    valueConsumer.accept(attribute.getValue());
+    return attribute.remove();
+  }
 }

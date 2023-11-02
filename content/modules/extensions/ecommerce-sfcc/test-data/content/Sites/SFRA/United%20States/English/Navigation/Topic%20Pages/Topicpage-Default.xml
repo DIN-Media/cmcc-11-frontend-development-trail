@@ -6,7 +6,7 @@
 <link href="../../../../United%20Kingdom/English/Navigation/Topic%20Pages/Topicpage-Default.xml" path="/Sites/SFRA/United%20Kingdom/English/Navigation/Topic%20Pages/Topicpage-Default"/>
 </master>
 <viewtype>
-<link href="../../Options/Viewtypes/CMChannel/landscape.xml" path="/Sites/SFRA/United%20States/English/Options/Viewtypes/CMChannel/landscape"/>
+<link href="../../Options/Viewtypes/Container/landscape.xml" path="/Sites/SFRA/United%20States/English/Options/Viewtypes/Container/landscape"/>
 </viewtype>
 <localSettings>
 <Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">

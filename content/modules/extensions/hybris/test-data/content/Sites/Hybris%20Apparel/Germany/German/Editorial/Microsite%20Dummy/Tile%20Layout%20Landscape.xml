@@ -6,7 +6,7 @@
 <link href="../../../../United%20Kingdom/English/Editorial/Microsite%20Dummy/Tile%20Layout%20Landscape.xml" path="/Sites/Hybris%20Apparel/United%20Kingdom/English/Editorial/Microsite%20Dummy/Tile%20Layout%20Landscape"/>
 </master>
 <viewtype>
-<link href="../../Options/Viewtypes/CMChannel/landscape.xml" path="/Sites/Hybris%20Apparel/Germany/German/Options/Viewtypes/CMChannel/landscape"/>
+<link href="../../Options/Viewtypes/Container/landscape.xml" path="/Sites/Hybris%20Apparel/Germany/German/Options/Viewtypes/Container/landscape"/>
 </viewtype>
 <linkedSettings>
 </linkedSettings>

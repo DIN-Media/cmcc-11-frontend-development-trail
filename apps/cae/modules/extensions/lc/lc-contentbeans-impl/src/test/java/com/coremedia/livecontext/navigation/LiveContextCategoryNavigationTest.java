@@ -3,6 +3,7 @@ package com.coremedia.livecontext.navigation;
 import com.coremedia.blueprint.base.livecontext.ecommerce.id.CommerceIdParserHelper;
 import com.coremedia.blueprint.common.contentbeans.CMContext;
 import com.coremedia.blueprint.common.contentbeans.CMNavigation;
+import com.coremedia.blueprint.common.contentbeans.VirtualEntity;
 import com.coremedia.blueprint.common.navigation.Linkable;
 import com.coremedia.blueprint.common.navigation.Navigation;
 import com.coremedia.cap.multisite.Site;
@@ -96,7 +97,7 @@ public class LiveContextCategoryNavigationTest {
     CMExternalChannel contextCalculatedByTreeRelation = mock(CMExternalChannel.class);
     when(treeRelation.getNearestExternalChannelForCategory(category, site)).thenReturn(contextCalculatedByTreeRelation);
     CMContext context = testling.getContext();
-    assertThat(context).isSameAs(contextCalculatedByTreeRelation);
+    assertThat(context).isInstanceOf(VirtualEntity.class);
   }
 
   @Test

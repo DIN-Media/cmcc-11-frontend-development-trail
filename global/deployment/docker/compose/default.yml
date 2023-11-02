@@ -23,7 +23,7 @@ x-default-boot-healthcheck:
 
 services:
   mysql:
-    image: mysql:8.0.33
+    image: mysql:8.2.0
     container_name: mysql
     volumes:
       - db-data:/var/lib/mysql
@@ -327,7 +327,7 @@ services:
       CAAS_PREVIEW: "true"
       CAAS_GRAPHQL_INTROSPECTION_ENABLED: "true"
       GRAPHIQL_ENABLED: "true"
-      CAAS_SWAGGER_ENABLED: "true"
+      SPRINGDOC_SWAGGER_UI_ENABLED: "true"
       CAAS_SOLR_COLLECTION: preview
       CAAS_REMOTE_BASEURL: http://cae-preview:8081/internal/service/url
       LINK_URLPREFIXTYPE: preview

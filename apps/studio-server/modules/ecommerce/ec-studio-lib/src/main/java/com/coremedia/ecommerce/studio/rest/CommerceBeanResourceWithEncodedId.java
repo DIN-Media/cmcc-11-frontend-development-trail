@@ -5,6 +5,7 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,7 @@ import static com.coremedia.ecommerce.studio.rest.AbstractCatalogResource.QUERY_
  */
 @RestController
 @DefaultAnnotation(NonNull.class)
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class CommerceBeanResourceWithEncodedId {
   private static final String PATH_RESOURCE_TYPE = "resourceType";
   static final String URI_PATH
@@ -40,7 +42,7 @@ public class CommerceBeanResourceWithEncodedId {
     );
   }
 
-  @GetMapping(value = CommerceBeanResourceWithEncodedId.URI_PATH, produces = MediaType.APPLICATION_JSON_VALUE, params = QUERY_ID)
+  @GetMapping(value = CommerceBeanResourceWithEncodedId.URI_PATH, params = QUERY_ID)
   public AbstractCatalogRepresentation get(@PathVariable(PATH_RESOURCE_TYPE) String resourceType,
                                            @PathVariable(PATH_SITE_ID) String siteId,
                                            @PathVariable(PATH_CATALOG_ALIAS) String catalogAlias,

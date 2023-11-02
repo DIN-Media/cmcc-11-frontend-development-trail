@@ -6,7 +6,7 @@
 <link href="../../../../../../../United%20States/English/Navigation/Fragments/Aurora%20Categories/Apparel/Women/Women%20Main%20Collection.xml" path="/Sites/Calista/United%20States/English/Navigation/Fragments/Aurora%20Categories/Apparel/Women/Women%20Main%20Collection"/>
 </master>
 <viewtype>
-<link href="../../../../../Options/Viewtypes/CMChannel/hero.xml" path="/Sites/Calista/Germany/German/Options/Viewtypes/CMChannel/hero"/>
+<link href="../../../../../Options/Viewtypes/Container/hero.xml" path="/Sites/Calista/Germany/German/Options/Viewtypes/Container/hero"/>
 </viewtype>
 <linkedSettings>
 </linkedSettings>

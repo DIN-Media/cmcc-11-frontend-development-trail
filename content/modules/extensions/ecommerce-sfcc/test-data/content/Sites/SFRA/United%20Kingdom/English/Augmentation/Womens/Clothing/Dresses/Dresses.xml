@@ -78,7 +78,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../../../../Navigation/Homepage%20UK.xml" cmexport:path="/Sites/SFRA/United%20Kingdom/English/Navigation/Homepage%20UK"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../../../Options/Viewtypes/CMChannel/hero.xml" cmexport:path="/Sites/SFRA/United%20Kingdom/English/Options/Viewtypes/CMChannel/hero"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../../../../Options/Viewtypes/Container/hero.xml" cmexport:path="/Sites/SFRA/United%20Kingdom/English/Options/Viewtypes/Container/hero"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../../../../Options/Settings/Pagegrid/Placements/banner.xml" cmexport:path="/Sites/SFRA/United%20Kingdom/English/Options/Settings/Pagegrid/Placements/banner"/>
 </Struct>
 </StructListProperty>

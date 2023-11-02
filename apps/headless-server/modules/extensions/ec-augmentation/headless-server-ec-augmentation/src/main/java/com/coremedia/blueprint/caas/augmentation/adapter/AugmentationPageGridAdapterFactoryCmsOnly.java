@@ -72,8 +72,10 @@ public class AugmentationPageGridAdapterFactoryCmsOnly {
     var extendBreadcrumb = extendBreadcrumb(breadcrumb, vendor, commerceRef);
     var treeRelation = externalBreadcrumbContentTreeRelationFactory.create(extendBreadcrumb);
     var commerceId = CommerceRefHelper.toCommerceId(commerceRef, vendor);
+    Content augmentingContent = augmentationService.getContentByExternalId(CommerceIdFormatterHelper.format(commerceId), site);
+    boolean virtual = augmentingContent == null;
     Content content = getContent(commerceId, breadcrumb, site, treeRelation);
-    return contentBackedPageGridService.getContentBackedPageGrid(content, propertyName, treeRelation);
+    return contentBackedPageGridService.getContentBackedPageGrid(content, propertyName, treeRelation, virtual);
   }
 
   @SuppressWarnings("OverlyComplexMethod")

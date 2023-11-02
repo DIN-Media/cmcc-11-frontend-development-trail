@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content>
+  <!--
+    Folders must have odd IDs.
+
+    Documents must have even IDs.
+
+    The root folder should always have ID '1' and an empty name.
+
+    To prevent ID collisions, think of some scheme to apply (note that there is
+    no need for using strictly incrementing IDs). Suggestion here is, to "re-use"
+    the path of a content item. So, document 13572 is a child of folder 1357,
+    which is a child of folder 135, which is a child of folder 13 and this again
+    child of root folder 1.
+  -->
+  <folder id="1" name="">
+    <!-- ===================================[Folder_: /Sites/Example (#135)] -->
+    <folder id="13" name="Sites">
+      <!-- =================================[Folder_: /Sites/Example (#135)] -->
+      <folder id="135" name="Example">
+        <!-- ========================[Folder_: /Sites/Example/en-US (#1357)] -->
+        <folder id="1357" name="en-US">
+          <!-- ===[SimpleSite: /Sites/Example/en-US/Site Indicator (#13572)] -->
+          <document id="13572" type="SimpleSite" name="Site Indicator">
+            <version number="1">
+              <stringProperty name="name" value="Example Site"/>
+              <stringProperty name="locale" value="en-US"/>
+              <stringProperty name="id" value="example-site-en-US"/>
+              <linkProperty name="master"/>
+              <linkProperty name="root">
+                <link id="13574"/>
+              </linkProperty>
+            </version>
+          </document>
+          <!-- =====[SimpleSiteContent: /Sites/Example/en-US/Root (#13574)]= -->
+          <document id="13574" type="SimpleSiteContent" name="Root">
+            <!--
+              Versions: Unlike other XML formats to represent content items,
+              like from `serverexport`, the XML format dedicated to XML
+              repository allows expressing a history of items.
+            -->
+            <version number="1">
+              <stringProperty name="locale" value="en-US"/>
+            </version>
+            <version number="2">
+              <stringProperty name="locale" value="en-US"/>
+              <linkProperty name="link">
+                <link id="13576"/>
+              </linkProperty>
+            </version>
+          </document>
+          <!-- ====[SimpleSiteContent: /Sites/Example/en-US/Child (#13576)]= -->
+          <!-- We may also hard-wire the UUID of a content. -->
+          <document id="13576" type="SimpleSiteContent" name="Child" uuid="6c5e6560-9b92-48df-83c4-e604613782c0">
+            <!--
+              Demonstrates, how properties may be filled with values.
+            -->
+            <version number="1">
+              <stringProperty name="locale" value="en-US"/>
+              <!-- Blob property values may be provided as Base64 encoded string. -->
+              <blobProperty name="blob" type="image/png" base64="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII"/>
+              <!-- As an alternative, blob property values may be provided by a sidecar referenced by URL attribute. -->
+              <blobProperty name="image" type="image/png" url="1x1-transparent.png"/>
+              <!-- Dates are parsed via java.time.ZonedDateTime.parse(String). -->
+              <dateProperty name="date" value="2023-06-07T01:23:45.123+02:00[Europe/Berlin]"/>
+              <intProperty name="int" value="42"/>
+              <!-- Some self-references as example. -->
+              <linkProperty name="link">
+                <link id="13576"/>
+                <link id="13576"/>
+              </linkProperty>
+              <stringProperty name="string" value="forty-two!"/>
+              <!-- Markups are provided as sidecars, that may be referenced by relative URLs. -->
+              <markupProperty name="richtext" grammar="coremedia-richtext-1.0" url="simpleRichText.xml"/>
+              <!-- Sidecars can also be referenced by full classpath. -->
+              <markupProperty name="struct" grammar="coremedia-struct-2008" url="classpath:/Lvl06InitialContentSetup1Test/simpleStruct.xml"/>
+            </version>
+          </document>
+        </folder>
+      </folder>
+    </folder>
+  </folder>
+</content>

@@ -6,6 +6,7 @@ import com.coremedia.blueprint.cae.richtext.filter.ConfigurableRichtextToHtmlFil
 import com.coremedia.blueprint.cae.richtext.filter.FilterFactory;
 import com.coremedia.blueprint.cae.richtext.filter.ImageFilter;
 import com.coremedia.blueprint.cae.richtext.filter.ImgCompletionFilter;
+import com.coremedia.blueprint.cae.richtext.filter.LangAttributeFilter;
 import com.coremedia.blueprint.cae.richtext.filter.LinkEmbedFilter;
 import com.coremedia.blueprint.cae.richtext.filter.LinkValidationFilter;
 import com.coremedia.blueprint.cae.richtext.filter.ReservedClassToElementConfig;
@@ -51,7 +52,8 @@ public class BlueprintRichtextFiltersConfiguration {
                                                                                   FilterFactory imageFilter,
                                                                                   FilterFactory reservedClassToElementFilter,
                                                                                   FilterFactory appendClassToElementFilter,
-                                                                                  FilterFactory unsurroundFilter) {
+                                                                                  FilterFactory unsurroundFilter,
+                                                                                  FilterFactory langAttributeFilter) {
     ConfigurableRichtextToHtmlFilterFactory factory = new ConfigurableRichtextToHtmlFilterFactory();
     factory.setIdProvider(idProvider);
     factory.setLinkFormatter(linkFormatter);
@@ -65,6 +67,7 @@ public class BlueprintRichtextFiltersConfiguration {
     factory.setXmlFilters(List.of(
             reservedClassToElementFilter,
             appendClassToElementFilter,
+            langAttributeFilter,
             unsurroundFilter
     ));
     return factory;
@@ -193,6 +196,23 @@ public class BlueprintRichtextFiltersConfiguration {
             // should be obsolete as CoreMedia Rich Text supports <pre> but mapping exists since ages.
             ReservedClassToElementConfig.of("p", "p--pre", "pre")
     ));
+  }
+
+  /**
+   * <p>
+   * Filter instance for mapping {@code lang} and {@code xml:lang} attributes
+   * to their preferred representation as {@code lang}.
+   * </p>
+   * <p>
+   * Filter also applies normalization to the language tags, as, for example,
+   * replacing so-called "grandfathered" language tags.
+   * </p>
+   *
+   * @return filter
+   */
+  @Bean
+  LangAttributeFilter langAttributeFilter() {
+    return new LangAttributeFilter();
   }
 
   /**

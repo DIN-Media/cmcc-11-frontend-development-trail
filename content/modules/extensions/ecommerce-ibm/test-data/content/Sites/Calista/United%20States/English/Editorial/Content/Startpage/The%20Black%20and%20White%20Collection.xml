@@ -5,7 +5,7 @@
 <master>
 </master>
 <viewtype>
-<link href="../../../Options/Viewtypes/CMChannel/portrait.xml" path="/Sites/Calista/United%20States/English/Options/Viewtypes/CMChannel/portrait"/>
+<link href="../../../Options/Viewtypes/Container/portrait.xml" path="/Sites/Calista/United%20States/English/Options/Viewtypes/Container/portrait"/>
 </viewtype>
 <linkedSettings>
 </linkedSettings>

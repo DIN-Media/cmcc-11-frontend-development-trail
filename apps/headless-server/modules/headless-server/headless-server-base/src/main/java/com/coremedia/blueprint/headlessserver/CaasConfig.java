@@ -21,6 +21,7 @@ import com.coremedia.blueprint.base.tree.TreeRelation;
 import com.coremedia.blueprint.image.transformation.ImageTransformationConfiguration;
 import com.coremedia.blueprint.localization.configuration.TaxonomyLocalizationStrategyConfiguration;
 import com.coremedia.caas.config.CaasGraphqlConfigurationProperties;
+import com.coremedia.caas.config.DoctypeConfigurationProperties;
 import com.coremedia.caas.config.RemoteServiceConfigurationProperties;
 import com.coremedia.caas.config.StaxContextConfigurationProperties;
 import com.coremedia.caas.filter.InProductionFilterPredicate;
@@ -246,6 +247,7 @@ import static java.lang.invoke.MethodHandles.lookup;
         StaxContextConfigurationProperties.class,
         MetadataConfigurationProperties.class,
         ContentConfigurationProperties.class,
+        DoctypeConfigurationProperties.class,
 })
 @EnableWebMvc
 @ImportResource(value = {
@@ -482,8 +484,10 @@ public class CaasConfig implements WebMvcConfigurer {
   }
 
   @Bean
-  public NavigationAdapterFactory navigationAdapter(@Qualifier("contentContextStrategy") ContextStrategy<Content, Content> contextStrategy, Map<String, TreeRelation<Content>> treeRelations) {
-    return new NavigationAdapterFactory(contextStrategy, treeRelations);
+  public NavigationAdapterFactory navigationAdapter(@Qualifier("contentContextStrategy") ContextStrategy<Content, Content> contextStrategy,
+                                                    Map<String, TreeRelation<Content>> treeRelations,
+                                                    DoctypeConfigurationProperties doctypeConfigurationProperties) {
+    return new NavigationAdapterFactory(contextStrategy, treeRelations, doctypeConfigurationProperties);
   }
 
   @Bean
@@ -721,8 +725,8 @@ public class CaasConfig implements WebMvcConfigurer {
 
   @Bean
   @Qualifier(QUALIFIER_CAAS_FILTER_PREDICATE)
-  public FilterPredicate<Object> validityDateFilterPredicate() {
-    return new ValidityDateFilterPredicate();
+  public FilterPredicate<Object> validityDateFilterPredicate(DoctypeConfigurationProperties doctypeConfigurationProperties) {
+    return new ValidityDateFilterPredicate(doctypeConfigurationProperties);
   }
 
   @Bean

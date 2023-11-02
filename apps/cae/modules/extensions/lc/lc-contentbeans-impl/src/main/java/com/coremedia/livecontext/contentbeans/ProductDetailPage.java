@@ -3,6 +3,7 @@ package com.coremedia.livecontext.contentbeans;
 import com.coremedia.blueprint.base.tree.TreeRelation;
 import com.coremedia.blueprint.cae.contentbeans.PageImpl;
 import com.coremedia.blueprint.common.contentbeans.CMContext;
+import com.coremedia.blueprint.common.contentbeans.VirtualEntity;
 import com.coremedia.blueprint.common.layout.PageGrid;
 import com.coremedia.blueprint.common.navigation.Navigation;
 import com.coremedia.cache.Cache;
@@ -55,8 +56,9 @@ public class ProductDetailPage extends PageImpl {
     // If the product is not augmented ask the category for the PDP pagegrid.
     Navigation navigation = getNavigation();
     if (navigation instanceof LiveContextExternalChannel) {
-      // The category is augmented.
-      return ((LiveContextExternalChannel)navigation).getPdpPagegrid();
+      // The category is augmented but not the product, so we have to wrap the navigation
+      LiveContextExternalChannel externalChannel = VirtualEntity.ofBean((LiveContextExternalChannel) navigation);
+      return externalChannel.getPdpPagegrid();
     }
     if (navigation instanceof LiveContextCategoryNavigation) {
       // The category is not augmented.

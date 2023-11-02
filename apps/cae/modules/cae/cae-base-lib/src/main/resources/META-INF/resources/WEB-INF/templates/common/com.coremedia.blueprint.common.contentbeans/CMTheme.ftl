@@ -24,7 +24,7 @@
     <h1 class="cm-theme__title">${self.content.name!""}</h1>
     <#-- theme preview image -->
     <#if self.icon?has_content>
-      <img class="cm-theme__screenshot" src="${cm.getLink(self.icon)}"<@preview.metadata "properties.icon" />>
+      <img class="cm-theme__screenshot" src="${cm.getLink(self.icon)}" loading="lazy" <@preview.metadata "properties.icon" />>
     </#if>
     <#-- theme description-->
     <div class="cm-theme__description"<@preview.metadata "properties.detailText" />>

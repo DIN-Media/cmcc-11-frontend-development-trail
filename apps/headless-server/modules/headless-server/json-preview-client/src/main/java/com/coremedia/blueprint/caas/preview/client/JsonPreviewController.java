@@ -5,7 +5,6 @@ import com.coremedia.cap.multisite.SitesService;
 import edu.umd.cs.findbugs.annotations.DefaultAnnotation;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import io.micrometer.core.annotation.Timed;
-import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -53,8 +52,8 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toMap;
 
 @RestController
-@OpenAPIDefinition(tags = @Tag(name = "Json Preview Client"))
-@Api(tags = "Json Preview Client")
+@OpenAPIDefinition(tags = {@Tag(name = "Json Preview Client", description = "Json Preview Controller")})
+@Tag(name = "Json Preview Client", description = "Json Preview Controller")
 @DefaultAnnotation(NonNull.class)
 public class JsonPreviewController {
   static final String ERROR_MSG_NO_QUERY_DEFINITION = "No json preview query definition available for selected document type.";

@@ -95,7 +95,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../Editorial/Homepage/Kitchen%20Dreams/Meet%20Sally.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Editorial/Homepage/Kitchen%20Dreams/Meet%20Sally"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/hero.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Options/Viewtypes/CMChannel/hero"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/hero.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Options/Viewtypes/Container/hero"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/hero.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Options/Settings/Pagegrid/Placements/hero"/>
 </Struct>
 <Struct>
@@ -110,7 +110,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/Company/Company%20Page.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Navigation/Company/Company%20Page"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/square.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Options/Viewtypes/CMChannel/square"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/square.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Options/Viewtypes/Container/square"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/placement1.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Options/Settings/Pagegrid/Placements/placement1"/>
 </Struct>
 <Struct>
@@ -151,7 +151,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../Products/Blenders%20and%20Food%20Processors/Browne%20BL700%20Blender%20Product.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Products/Blenders%20and%20Food%20Processors/Browne%20BL700%20Blender%20Product"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/carousel.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Options/Viewtypes/CMChannel/carousel"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/carousel.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Options/Viewtypes/Container/carousel"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/placement3.xml" cmexport:path="/Sites/Chef%20Corp%2E/United%20Kingdom/English/Options/Settings/Pagegrid/Placements/placement3"/>
 </Struct>
 <Struct>

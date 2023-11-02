@@ -101,7 +101,7 @@
 <DateProperty Name="visibleFrom"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/hero.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Viewtypes/CMChannel/hero"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/hero.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Viewtypes/Container/hero"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/main.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Settings/Pagegrid/Placements/main"/>
 </Struct>
 <Struct>
@@ -113,7 +113,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../Augmentation/Mens/Clothing/Jackets%20%26%20Coats/Jackets%20%26%20Coats.xml" cmexport:path="/Sites/SFRA/United%20States/English/Augmentation/Mens/Clothing/Jackets%20%26%20Coats/Jackets%20%26%20Coats"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/square.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Viewtypes/CMChannel/square"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/square.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Viewtypes/Container/square"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/placement1.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Settings/Pagegrid/Placements/placement1"/>
 </Struct>
 <Struct>
@@ -128,7 +128,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../Jewelry%20Teaser.xml" cmexport:path="/Sites/SFRA/United%20States/English/Jewelry%20Teaser"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/square.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Viewtypes/CMChannel/square"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/square.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Viewtypes/Container/square"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/placement2.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Settings/Pagegrid/Placements/placement2"/>
 </Struct>
 <Struct>
@@ -152,7 +152,7 @@
 <LinkProperty Name="target" LinkType="coremedia:///cap/contenttype/Content_" xlink:href="coremedia:///cap/resources/../Editorial/Content/Videos/Shoppable%20Summer%20Video/Products/Striped%20Dress.xml" cmexport:path="/Sites/SFRA/United%20States/English/Editorial/Content/Videos/Shoppable%20Summer%20Video/Products/Striped%20Dress"/>
 </Struct>
 </StructListProperty>
-<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/CMChannel/carousel.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Viewtypes/CMChannel/carousel"/>
+<LinkProperty Name="viewtype" LinkType="coremedia:///cap/contenttype/CMViewtype" xlink:href="coremedia:///cap/resources/../Options/Viewtypes/Container/carousel.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Viewtypes/Container/carousel"/>
 <LinkProperty Name="section" LinkType="coremedia:///cap/contenttype/CMSymbol" xlink:href="coremedia:///cap/resources/../Options/Settings/Pagegrid/Placements/placement3.xml" cmexport:path="/Sites/SFRA/United%20States/English/Options/Settings/Pagegrid/Placements/placement3"/>
 </Struct>
 </StructListProperty>

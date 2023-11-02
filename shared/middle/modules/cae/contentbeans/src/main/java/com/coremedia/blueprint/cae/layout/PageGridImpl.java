@@ -4,6 +4,7 @@ import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGrid;
 import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGridPlacement;
 import com.coremedia.blueprint.base.pagegrid.ContentBackedPageGridService;
 import com.coremedia.blueprint.base.pagegrid.PageGridConstants;
+import com.coremedia.blueprint.common.contentbeans.VirtualEntity;
 import com.coremedia.blueprint.common.datevalidation.ValidityPeriodValidator;
 import com.coremedia.blueprint.common.layout.HasPageGrid;
 import com.coremedia.blueprint.common.layout.PageGrid;
@@ -153,6 +154,6 @@ public class PageGridImpl implements PageGrid, AssumesIdentity {
   // --- internal ---------------------------------------------------
 
   protected ContentBackedPageGrid getContentBackedPageGrid() {
-    return contentBackedPageGridService.getContentBackedPageGrid(bean.getContent());
+    return contentBackedPageGridService.getContentBackedPageGrid(bean.getContent(), bean instanceof VirtualEntity);
   }
 }

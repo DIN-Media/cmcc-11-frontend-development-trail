@@ -6,7 +6,7 @@
 <link href="../../../../../../United%20States/English/Editorial/Content/Blog/Eveningwear/Blog%20Evening%20Wear%20Query%20List.xml" path="/Sites/Calista/United%20States/English/Editorial/Content/Blog/Eveningwear/Blog%20Evening%20Wear%20Query%20List"/>
 </master>
 <viewtype>
-<link href="../../../../Options/Viewtypes/CMChannel/left-right.xml" path="/Sites/Calista/Germany/German/Options/Viewtypes/CMChannel/left-right"/>
+<link href="../../../../Options/Viewtypes/Container/left-right.xml" path="/Sites/Calista/Germany/German/Options/Viewtypes/Container/left-right"/>
 </viewtype>
 <localSettings>
 <Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">

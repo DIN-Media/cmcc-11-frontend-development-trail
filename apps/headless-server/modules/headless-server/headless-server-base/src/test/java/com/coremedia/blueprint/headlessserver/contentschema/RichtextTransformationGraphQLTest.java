@@ -227,7 +227,7 @@ class RichtextTransformationGraphQLTest {
             .path("content.article.teaserText.text").entity(String.class).matches(html -> html.equals(richTextResult))
             .path("content.picture.id").entity(Integer.class).isEqualTo(PICTURE_ID)
             .path("content.picture.type").entity(String.class).isEqualTo("CMPicture")
-            .path("content.picture.caption").entity(String.class).matches(html -> html.equals(richTextResult));
+            .path("content.picture.caption.text").entity(String.class).matches(html -> html.equals(richTextResult));
   }
 
   @Test
@@ -242,7 +242,7 @@ class RichtextTransformationGraphQLTest {
             .path("content.article.teaserText.text").entity(String.class).matches(html -> html.equals(RICH_TEXT_RESULT_NO_ROOT))
             .path("content.picture.id").entity(Integer.class).isEqualTo(PICTURE_ID)
             .path("content.picture.type").entity(String.class).isEqualTo("CMPicture")
-            .path("content.picture.caption").entity(String.class).matches(html -> html.equals(RICH_TEXT_RESULT_NO_ROOT));
+            .path("content.picture.caption.text").entity(String.class).matches(html -> html.equals(RICH_TEXT_RESULT_NO_ROOT));
   }
 
   @ParameterizedTest
@@ -261,7 +261,7 @@ class RichtextTransformationGraphQLTest {
             .path("content.article.teaserText.text").entity(String.class).matches(html -> html.equals(richTextResult))
             .path("content.picture.id").entity(Integer.class).isEqualTo(PICTURE_ID)
             .path("content.picture.type").entity(String.class).isEqualTo("CMPicture")
-            .path("content.picture.caption").entity(String.class).matches(html -> html.equals(richTextResult));
+            .path("content.picture.caption.text").entity(String.class).matches(html -> html.equals(richTextResult));
   }
 
   @NonNull

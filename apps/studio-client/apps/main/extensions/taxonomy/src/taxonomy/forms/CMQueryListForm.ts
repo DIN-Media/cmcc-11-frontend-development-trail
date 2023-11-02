@@ -131,7 +131,13 @@ class CMQueryListForm extends DocumentTabPanel {
           items: [
             Config(TeaserDocumentForm),
             Config(FixedIndexItemsForm),
-            Config(ContainerViewTypeSelectorForm, { collapsed: false }),
+            Config(ContainerViewTypeSelectorForm, {
+              collapsed: false,
+              paths: [
+                "/Settings/Options/Viewtypes/CMQueryList/",
+                "Options/Viewtypes/CMQueryList/",
+              ]
+            }),
             Config(ValidityDocumentForm),
           ],
         }),

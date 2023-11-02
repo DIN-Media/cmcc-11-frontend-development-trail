@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userRepository xmlns="http://www.coremedia.com/2010/user">
+  <!--
+    admin/administratoren: This is the recommended default, that ships
+    with `users-default.xml', the default, when not having a custom user
+    setup using `XmlUapiConfig`.
+  -->
+
+  <group id="0"
+         name="administratoren"
+         domain=""
+         distinguishedName=""
+         ttl="180"
+         administrative="true"
+         live="false"
+         content="true"
+         uuid="bytes:group.administratoren@"/>
+
+  <user id="0"
+        name="admin"
+        domain=""
+        distinguishedName=""
+        ttl="180"
+        active="true"
+        homeFolder="coremedia:///cap/content/1"
+        uuid="bytes:user.admin@">
+    <group id="0"/>
+  </user>
+
+  <!--
+    Some custom group.
+  -->
+
+  <group id="1"
+         name="editor"
+         domain=""
+         distinguishedName=""
+         administrative="false"
+         ttl="180"
+         live="false"
+         content="true"/>
+
+  <group id="2"
+         name="read-only"
+         domain=""
+         distinguishedName=""
+         administrative="false"
+         ttl="180"
+         live="false"
+         content="true"/>
+
+  <!--
+    *-role: Groups, that are related to workflow-permissions end with `*-role`
+    often. So, for example, for roles required for running publication
+    workflows.
+  -->
+
+  <group id="3"
+         name="approver-role"
+         domain=""
+         distinguishedName=""
+         administrative="false"
+         ttl="180"
+         live="false"
+         content="true"/>
+
+  <group id="4"
+         name="composer-role"
+         domain=""
+         distinguishedName=""
+         administrative="false"
+         ttl="180"
+         live="false"
+         content="true"/>
+
+  <group id="5"
+         name="publisher-role"
+         domain=""
+         distinguishedName=""
+         administrative="false"
+         ttl="180"
+         live="false"
+         content="true"/>
+
+  <!--
+    Now, we define a user who is a member within these groups.
+  -->
+
+  <!-- Note that passwords default to username == password if unset. -->
+
+  <user id="1"
+        name="editor"
+        domain=""
+        distinguishedName=""
+        ttl="180"
+        active="true"
+        homeFolder="coremedia:///cap/content/1">
+    <group id="1"/>
+    <group id="3"/>
+    <group id="4"/>
+    <group id="5"/>
+  </user>
+
+  <!--
+    And a restricted user that just can read.
+  -->
+
+  <user id="2"
+        name="read-only"
+        domain=""
+        distinguishedName=""
+        ttl="180"
+        active="true"
+        homeFolder="coremedia:///cap/content/1">
+    <group id="2"/>
+  </user>
+
+</userRepository>

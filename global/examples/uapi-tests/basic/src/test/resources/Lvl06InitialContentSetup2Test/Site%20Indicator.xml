@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SimpleSite folder="/Sites/Example/en-US" name="Site Indicator" xmlns:cmexport="http://www.coremedia.com/2012/cmexport">
+  <string></string>
+  <extendedString></extendedString>
+  <locale>en-US</locale>
+  <master>
+  </master>
+  <id>example-site-en-US</id>
+  <name>Example Site</name>
+  <root>
+    <link href="Root.xml" path="/Sites/Example/en-US/Root"/>
+  </root>
+  <siteManagerGroup></siteManagerGroup>
+</SimpleSite>
