@@ -1,0 +1,11 @@
+{
+  "image": "docker.io/mbuse/coremedia-development-container:11",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "dcortes92.FreeMarker"
+      ]
+    }
+  }
+}
