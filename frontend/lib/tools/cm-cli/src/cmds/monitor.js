@@ -9,7 +9,7 @@ const cmLogger = require("@coremedia/cm-logger");
 
 const { PACKAGE_MANAGER_EXECUTABLE } = require("../lib/paths");
 const args = require("../lib/args");
-const { PKG_NAME } = require("../lib/constants");
+const { PKG_NAME, IS_WINDOWS } = require("../lib/constants");
 
 let monitorConfig;
 try {
@@ -64,6 +64,7 @@ const handler = (argv) => {
       cwd: process.cwd(),
       env: process.env,
       stdio: "inherit",
+      shell: IS_WINDOWS,
     });
     if (result.status !== 0) {
       log.error(
@@ -79,6 +80,7 @@ const handler = (argv) => {
       cwd: process.cwd(),
       env: Object.assign(process.env, { NODE_ENV: "development" }),
       stdio: "inherit",
+      shell: IS_WINDOWS,
     });
     if (result.status !== 0) {
       process.exit(1);

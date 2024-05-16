@@ -9,7 +9,7 @@ const {
 } = require("@coremedia/tool-utils");
 
 const args = require("../../lib/args");
-const { PKG_NAME } = require("../../lib/constants");
+const { PKG_NAME, IS_WINDOWS } = require("../../lib/constants");
 const { PACKAGE_MANAGER_EXECUTABLE } = require("../../lib/paths");
 
 const command = "deploy-theme";
@@ -28,6 +28,7 @@ const handler = () => {
       cwd: process.cwd(),
       env: Object.assign(process.env, { NODE_ENV: "production" }),
       stdio: "inherit",
+      shell: IS_WINDOWS,
     });
     if (result.status !== 0) {
       process.exit(1);
@@ -42,6 +43,7 @@ const handler = () => {
       cwd: process.cwd(),
       env: Object.assign(process.env, { NODE_ENV: "production" }),
       stdio: "inherit",
+      shell: IS_WINDOWS,
     });
     if (result.status !== 0) {
       log.error(
